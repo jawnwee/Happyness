@@ -1,0 +1,10 @@
+PODS:
+  - CalendarIOS7 (0.0.4)
+
+DEPENDENCIES:
+  - CalendarIOS7 (~> 0.0)
+
+SPEC CHECKSUMS:
+  CalendarIOS7: 69132d0570a2f070bd6ec9a82f1b20288c3023f8
+
+COCOAPODS: 0.33.1
