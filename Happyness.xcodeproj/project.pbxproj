@@ -11,6 +11,7 @@
 		C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */; };
 		C4669CD0194F823200F82109 /* ODDHappynessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappynessObject.m */; };
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
+		C4669CD6194F980D00F82109 /* ODDNoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNoteObject.m */; };
 		D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5B194F6A68003873B0 /* Foundation.framework */; };
 		D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */; };
 		D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 		C4669CCF194F823200F82109 /* ODDHappynessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessObject.m; sourceTree = "<group>"; };
 		C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryStore.h; sourceTree = "<group>"; };
 		C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryStore.m; sourceTree = "<group>"; };
+		C4669CD4194F980D00F82109 /* ODDNoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDNoteObject.h; sourceTree = "<group>"; };
+		C4669CD5194F980D00F82109 /* ODDNoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNoteObject.m; sourceTree = "<group>"; };
 		D13F4C58194F6A68003873B0 /* Happyness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happyness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13F4C5B194F6A68003873B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -94,6 +97,8 @@
 				C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */,
 				C4669CCE194F823200F82109 /* ODDHappynessObject.h */,
 				C4669CCF194F823200F82109 /* ODDHappynessObject.m */,
+				C4669CD4194F980D00F82109 /* ODDNoteObject.h */,
+				C4669CD5194F980D00F82109 /* ODDNoteObject.m */,
 				C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
 				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
 			);
@@ -320,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4669CD6194F980D00F82109 /* ODDNoteObject.m in Sources */,
 				C4669CD0194F823200F82109 /* ODDHappynessObject.m in Sources */,
 				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
