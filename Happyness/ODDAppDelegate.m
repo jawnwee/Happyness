@@ -7,6 +7,11 @@
 //
 
 #import "ODDAppDelegate.h"
+#import "ODDCustomTabBarController.h"
+#import "ODDTodayViewController.h"
+#import "ODDCalendarViewController.h"
+#import "ODDAnalysisViewController.h"
+#import "ODDSettingsViewController.h"
 
 @implementation ODDAppDelegate
 
@@ -14,6 +19,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+
+    // All temporary inits, may or may not need changing later, these are the base views for the tab
+    NSBundle *appBundle = [NSBundle mainBundle];
+    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] initWithNibName:@"ODDCalendarViewController" bundle:appBundle];
+    ODDAnalysisViewController *analysis = [[ODDAnalysisViewController alloc] initWithNibName:@"ODDAnalysisViewController" bundle:appBundle];
+    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
+
+    ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
+    tbvc.viewControllers = @[today, calendar, analysis, settings];
+
+    self.window.rootViewController = tbvc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

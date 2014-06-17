@@ -47,7 +47,6 @@
     UIColor *happynessColor = [colorDictionary objectForKey:key];
 
     _color = happynessColor;
-    
 }
 
 /* Set rating based on face; Temporarily putting face value as the rating */
