@@ -10,6 +10,8 @@
 
 @interface ODDSettingsViewController ()
 
+@property (weak, nonatomic) IBOutlet UIDatePicker *reminder;
+
 @end
 
 @implementation ODDSettingsViewController
@@ -34,6 +36,8 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (IBAction)eraseData:(id)sender {
 }
 
 @end
