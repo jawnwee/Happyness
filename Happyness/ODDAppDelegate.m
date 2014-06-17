@@ -13,6 +13,8 @@
 #import "ODDAnalysisViewController.h"
 #import "ODDSettingsViewController.h"
 
+#import "ODDLandscapeAnalysisViewController.h"
+
 @implementation ODDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -26,11 +28,11 @@
     ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] initWithNibName:@"ODDCalendarViewController" bundle:appBundle];
     ODDAnalysisViewController *analysis = [[ODDAnalysisViewController alloc] initWithNibName:@"ODDAnalysisViewController" bundle:appBundle];
     ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
-
+    
     ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
     tbvc.viewControllers = @[today, calendar, analysis, settings];
 
-    self.window.rootViewController = analysis;
+    self.window.rootViewController = tbvc;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
