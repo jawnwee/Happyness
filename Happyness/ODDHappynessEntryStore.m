@@ -20,9 +20,11 @@
 + (instancetype)sharedStore {
     static ODDHappynessEntryStore *sharedStore = nil;
 
-    if (!sharedStore) {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         sharedStore = [[self alloc] initPrivate];
-    }
+    });
+    
     return sharedStore;
 }
 

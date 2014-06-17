@@ -30,7 +30,7 @@
     ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
     tbvc.viewControllers = @[today, calendar, analysis, settings];
 
-    self.window.rootViewController = tbvc;
+    self.window.rootViewController = analysis;
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
