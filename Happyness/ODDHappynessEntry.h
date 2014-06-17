@@ -7,18 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ODDHappynessObject.h"
-#import "ODDNoteObject.h"
+
+@class ODDHappyness, ODDNote;
 
 @interface ODDHappynessEntry : NSObject
 
-@property(nonatomic) ODDHappynessObject *happynessObject;
-@property(nonatomic) ODDNoteObject *note;
-@property(nonatomic) NSString *dateAndTimeString;
+@property (strong, nonatomic) ODDHappyness *happynessObject;
+@property (strong, nonatomic) ODDNote *note;
+@property (strong, nonatomic) NSString *dateAndTimeString;
 
-- (instancetype)initWithHappynessObjectAndNoteAndDateTime:(ODDHappynessObject *)happynessObject 
-                                                     note:(ODDNoteObject *)note 
-                                                 dateTime:(NSString *)dateTime;
-
+- (instancetype)initWithHappyness:(ODDHappyness *)happyness
+                             note:(ODDNote *)note
+                         dateTime:(NSString *)dateTime;
 
 @end

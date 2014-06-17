@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ODDNoteObject : NSObject
+@interface ODDNote : NSObject
 
-@property(nonatomic) NSMutableString *noteString;
+@property (strong, nonatomic) NSMutableString *noteString;
 
 - (instancetype)initWithNote:(NSMutableString *)note;
 

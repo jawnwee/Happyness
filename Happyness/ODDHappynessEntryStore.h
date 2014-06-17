@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ODDHappynessEntry.h"
+
+@class ODDHappynessEntry;
 
 @interface ODDHappynessEntryStore : NSObject
 
-@property(nonatomic, readonly) NSArray *entries;
+@property (strong, nonatomic, readonly) NSArray *entries;
 
 + (instancetype)sharedStore;
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDNoteObject.h"
+#import "ODDNote.h"
 
-@implementation ODDNoteObject
+@implementation ODDNote
 
 - (instancetype)initWithNote:(NSMutableString *)note {
     self = [super init];

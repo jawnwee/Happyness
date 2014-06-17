@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		0B965EC9DBBC4996B5B5256B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DC1B69D0EB48DE9F6257FF /* libPods.a */; };
 		C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */; };
-		C4669CD0194F823200F82109 /* ODDHappynessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappynessObject.m */; };
+		C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappyness.m */; };
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
-		C4669CD6194F980D00F82109 /* ODDNoteObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNoteObject.m */; };
+		C4669CD6194F980D00F82109 /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNote.m */; };
 		D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5B194F6A68003873B0 /* Foundation.framework */; };
 		D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */; };
 		D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
@@ -24,6 +24,7 @@
 		D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
 		D13F4C7F194F6A69003873B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C7D194F6A69003873B0 /* InfoPlist.strings */; };
 		D13F4C81194F6A69003873B0 /* HappynessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C80194F6A69003873B0 /* HappynessTests.m */; };
+		EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,12 +41,12 @@
 		12333AFD44A64D3197FEF77F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntry.h; sourceTree = "<group>"; };
 		C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntry.m; sourceTree = "<group>"; };
-		C4669CCE194F823200F82109 /* ODDHappynessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessObject.h; sourceTree = "<group>"; };
-		C4669CCF194F823200F82109 /* ODDHappynessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessObject.m; sourceTree = "<group>"; };
+		C4669CCE194F823200F82109 /* ODDHappyness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappyness.h; sourceTree = "<group>"; };
+		C4669CCF194F823200F82109 /* ODDHappyness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappyness.m; sourceTree = "<group>"; };
 		C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryStore.h; sourceTree = "<group>"; };
 		C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryStore.m; sourceTree = "<group>"; };
-		C4669CD4194F980D00F82109 /* ODDNoteObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDNoteObject.h; sourceTree = "<group>"; };
-		C4669CD5194F980D00F82109 /* ODDNoteObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNoteObject.m; sourceTree = "<group>"; };
+		C4669CD4194F980D00F82109 /* ODDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDNote.h; sourceTree = "<group>"; };
+		C4669CD5194F980D00F82109 /* ODDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNote.m; sourceTree = "<group>"; };
 		D13F4C58194F6A68003873B0 /* Happyness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happyness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13F4C5B194F6A68003873B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -62,6 +63,8 @@
 		D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
 		D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
+		EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
+		EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomColor.m; sourceTree = "<group>"; };
 		F4DC1B69D0EB48DE9F6257FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -95,10 +98,10 @@
 			children = (
 				C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */,
 				C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */,
-				C4669CCE194F823200F82109 /* ODDHappynessObject.h */,
-				C4669CCF194F823200F82109 /* ODDHappynessObject.m */,
-				C4669CD4194F980D00F82109 /* ODDNoteObject.h */,
-				C4669CD5194F980D00F82109 /* ODDNoteObject.m */,
+				C4669CCE194F823200F82109 /* ODDHappyness.h */,
+				C4669CCF194F823200F82109 /* ODDHappyness.m */,
+				C4669CD4194F980D00F82109 /* ODDNote.h */,
+				C4669CD5194F980D00F82109 /* ODDNote.m */,
 				C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
 				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
 			);
@@ -157,9 +160,10 @@
 				D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */,
 				D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */,
 				D13F4C6D194F6A68003873B0 /* Images.xcassets */,
-				C4669CCA194F817900F82109 /* Controllers */,
-				C4669CC9194F815500F82109 /* Views */,
 				C4669CC8194F814D00F82109 /* Models */,
+				C4669CC9194F815500F82109 /* Views */,
+				C4669CCA194F817900F82109 /* Controllers */,
+				EBE2BD4E194FB99E0023E9F4 /* Misc */,
 				D13F4C62194F6A68003873B0 /* Supporting Files */,
 			);
 			path = Happyness;
@@ -192,6 +196,15 @@
 				D13F4C7D194F6A69003873B0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */,
+				EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,10 +338,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4669CD6194F980D00F82109 /* ODDNoteObject.m in Sources */,
-				C4669CD0194F823200F82109 /* ODDHappynessObject.m in Sources */,
+				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
+				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
 				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
+				EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */,
 				D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */,
 				D13F4C68194F6A68003873B0 /* main.m in Sources */,
 			);

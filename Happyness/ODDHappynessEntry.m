@@ -10,12 +10,12 @@
 
 @implementation ODDHappynessEntry
 
-- (instancetype)initWithHappynessObjectAndNoteAndDateTime:(ODDHappynessObject *)happynessObject
-                                                     note:(ODDNoteObject *)note
-                                                 dateTime:(NSString *)dateTime {
+- (instancetype)initWithHappyness:(ODDHappyness *)happyness 
+                             note:(ODDNote *)note
+                         dateTime:(NSString *)dateTime {
     self = [super init];
     if (self) {
-        _happynessObject = happynessObject;
+        _happynessObject = happyness;
         _note = note;
         _dateAndTimeString = dateTime;
     }
