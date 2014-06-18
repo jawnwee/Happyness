@@ -1,14 +1,14 @@
 //
-//  ODDCustomCalendarView.m
+//  ODDHappynessEntryView.m
 //  Happyness
 //
 //  Created by John Lee on 6/17/14.
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDCustomCalendarView.h"
+#import "ODDHappynessEntryView.h"
 
-@implementation ODDCustomCalendarView
+@implementation ODDHappynessEntryView
 
 - (id)initWithFrame:(CGRect)frame
 {

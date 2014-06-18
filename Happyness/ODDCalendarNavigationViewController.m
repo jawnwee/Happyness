@@ -1,27 +1,23 @@
 //
-//  ODDCalendarViewController.m
+//  ODDCalendarNavigationViewController.m
 //  Happyness
 //
 //  Created by John Lee on 6/17/14.
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDCalendarViewController.h"
-#import "CalendarKit.h"
+#import "ODDCalendarNavigationViewController.h"
 
-@interface ODDCalendarViewController ()
-@property (weak, nonatomic) IBOutlet CKCalendarView *testing;
-@property (weak, nonatomic) IBOutlet UIView *test2;
+@interface ODDCalendarNavigationViewController ()
 
 @end
 
-@implementation ODDCalendarViewController
+@implementation ODDCalendarNavigationViewController
 
-- (instancetype)init {
-    self = [super init];
+- (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
+    self = [super initWithRootViewController:rootViewController];
     if (self) {
-        self.automaticallyAdjustsScrollViewInsets = YES;
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.tabBarItem.title = @"Calendar";
     }
     return self;
 }
@@ -31,7 +27,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
     }
     return self;
 }

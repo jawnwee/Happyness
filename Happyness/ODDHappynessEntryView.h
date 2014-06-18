@@ -1,5 +1,5 @@
 //
-//  ODDCustomCalendarView.h
+//  ODDHappynessEntryView.h
 //  Happyness
 //
 //  Created by John Lee on 6/17/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ODDCustomCalendarView : UIView
+@interface ODDHappynessEntryView : UIView
 
 @end
