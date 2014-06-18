@@ -1,5 +1,5 @@
 //
-//  ODDCalendarViewController.h
+//  ODDCalendarNavigationViewController.h
 //  Happyness
 //
 //  Created by John Lee on 6/17/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ODDCalendarViewController : UIViewController
+@interface ODDCalendarNavigationViewController : UINavigationController
 
 @end

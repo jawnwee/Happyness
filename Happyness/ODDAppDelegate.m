@@ -9,6 +9,7 @@
 #import "ODDAppDelegate.h"
 #import "ODDCustomTabBarController.h"
 #import "ODDTodayViewController.h"
+#import "ODDCalendarNavigationViewController.h"
 #import "ODDCalendarViewController.h"
 #import "ODDAnalysisViewController.h"
 #import "ODDSettingsViewController.h"
@@ -23,12 +24,13 @@
     // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] initWithNibName:@"ODDCalendarViewController" bundle:appBundle];
+    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
     ODDAnalysisViewController *analysis = [[ODDAnalysisViewController alloc] initWithNibName:@"ODDAnalysisViewController" bundle:appBundle];
     ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 
+    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
     ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
-    tbvc.viewControllers = @[today, calendar, analysis, settings];
+    tbvc.viewControllers = @[today, calendarNav, analysis, settings];
 
     self.window.rootViewController = tbvc;
     self.window.backgroundColor = [UIColor whiteColor];

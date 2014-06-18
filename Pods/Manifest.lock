@@ -1,13 +1,17 @@
 PODS:
-  - CalendarIOS7 (0.0.4)
   - JBChartView (2.5.5)
+  - MBCalendarKit (2.1.0)
 
 DEPENDENCIES:
-  - CalendarIOS7 (~> 0.0)
   - JBChartView (~> 2.5.5)
+  - MBCalendarKit (from `https://github.com/MosheBerman/MBCalendarKit.git`)
+
+EXTERNAL SOURCES:
+  MBCalendarKit:
+    :git: https://github.com/MosheBerman/MBCalendarKit.git
 
 SPEC CHECKSUMS:
-  CalendarIOS7: 69132d0570a2f070bd6ec9a82f1b20288c3023f8
   JBChartView: 666486d81dd16fa0cfac7bc32b4b70d6c52e7162
+  MBCalendarKit: caaa6db428f16af300c33447af4f6827bc9e4dca
 
 COCOAPODS: 0.33.1

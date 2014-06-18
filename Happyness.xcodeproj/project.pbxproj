@@ -24,13 +24,14 @@
 		D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
 		D13F4C7F194F6A69003873B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C7D194F6A69003873B0 /* InfoPlist.strings */; };
 		D13F4C81194F6A69003873B0 /* HappynessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C80194F6A69003873B0 /* HappynessTests.m */; };
-		EB79DCB21950B3E7008336E4 /* ODDCustomCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB79DCB11950B3E7008336E4 /* ODDCustomCalendarView.m */; };
+		EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB658FA91951385A00A13987 /* ODDCalendarViewController.m */; };
+		EB6D6F8619515BE100A1A164 /* ODDCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */; };
+		EB6D6F891951695C00A1A164 /* ODDHappynessEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */; };
+		EBD13C3019513F71007EF6D0 /* ODDCalendarNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */; };
 		EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */; };
 		EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */; };
 		EBE2BD67194FFFDB0023E9F4 /* ODDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */; };
 		EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */; };
-		EBE2BD6F194FFFFB0023E9F4 /* ODDCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD6D194FFFFB0023E9F4 /* ODDCalendarViewController.m */; };
-		EBE2BD70194FFFFB0023E9F4 /* ODDCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD6E194FFFFB0023E9F4 /* ODDCalendarViewController.xib */; };
 		EBE2BD74195000060023E9F4 /* ODDAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */; };
 		EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */; };
 		EBE2BD79195000150023E9F4 /* ODDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */; };
@@ -73,8 +74,13 @@
 		D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
 		D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
-		EB79DCB01950B3E7008336E4 /* ODDCustomCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomCalendarView.h; sourceTree = "<group>"; };
-		EB79DCB11950B3E7008336E4 /* ODDCustomCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomCalendarView.m; sourceTree = "<group>"; };
+		EB658FA81951385A00A13987 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
+		EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
+		EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
+		EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryView.h; sourceTree = "<group>"; };
+		EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryView.m; sourceTree = "<group>"; };
+		EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
+		EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
 		EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
 		EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomColor.m; sourceTree = "<group>"; };
 		EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomTabBarController.h; sourceTree = "<group>"; };
@@ -82,9 +88,6 @@
 		EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDTodayViewController.h; sourceTree = "<group>"; };
 		EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDTodayViewController.m; sourceTree = "<group>"; };
 		EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDTodayViewController.xib; sourceTree = "<group>"; };
-		EBE2BD6C194FFFFB0023E9F4 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
-		EBE2BD6D194FFFFB0023E9F4 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
-		EBE2BD6E194FFFFB0023E9F4 /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
 		EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisViewController.h; sourceTree = "<group>"; };
 		EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisViewController.m; sourceTree = "<group>"; };
 		EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDAnalysisViewController.xib; sourceTree = "<group>"; };
@@ -142,9 +145,11 @@
 				EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */,
 				EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */,
 				EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */,
-				EBE2BD6C194FFFFB0023E9F4 /* ODDCalendarViewController.h */,
-				EBE2BD6D194FFFFB0023E9F4 /* ODDCalendarViewController.m */,
-				EBE2BD6E194FFFFB0023E9F4 /* ODDCalendarViewController.xib */,
+				EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */,
+				EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */,
+				EB658FA81951385A00A13987 /* ODDCalendarViewController.h */,
+				EB658FA91951385A00A13987 /* ODDCalendarViewController.m */,
+				EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */,
 				EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
 				EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
 				EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
@@ -243,8 +248,8 @@
 		EBE2BD7B195009E20023E9F4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				EB79DCB01950B3E7008336E4 /* ODDCustomCalendarView.h */,
-				EB79DCB11950B3E7008336E4 /* ODDCustomCalendarView.m */,
+				EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */,
+				EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -299,6 +304,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
+					D13F4C57194F6A68003873B0 = {
+						DevelopmentTeam = 6UN3N9H6B4;
+					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;
 					};
@@ -329,9 +337,9 @@
 			files = (
 				D13F4C66194F6A68003873B0 /* InfoPlist.strings in Resources */,
 				EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */,
-				EBE2BD70194FFFFB0023E9F4 /* ODDCalendarViewController.xib in Resources */,
 				EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */,
 				D13F4C6E194F6A68003873B0 /* Images.xcassets in Resources */,
+				EB6D6F8619515BE100A1A164 /* ODDCalendarViewController.xib in Resources */,
 				EBE2BD7A195000150023E9F4 /* ODDSettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,14 +392,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBE2BD6F194FFFFB0023E9F4 /* ODDCalendarViewController.m in Sources */,
+				EBD13C3019513F71007EF6D0 /* ODDCalendarNavigationViewController.m in Sources */,
+				EB6D6F891951695C00A1A164 /* ODDHappynessEntryView.m in Sources */,
 				EBE2BD79195000150023E9F4 /* ODDSettingsViewController.m in Sources */,
 				EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */,
 				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
 				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
-				EB79DCB21950B3E7008336E4 /* ODDCustomCalendarView.m in Sources */,
 				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
 				EBE2BD74195000060023E9F4 /* ODDAnalysisViewController.m in Sources */,
+				EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
 				EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */,
 				D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */,
@@ -514,10 +523,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9B5D7AAA-51EB-4172-91B0-C7CE2017C6E6";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -528,10 +541,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9B5D7AAA-51EB-4172-91B0-C7CE2017C6E6";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
