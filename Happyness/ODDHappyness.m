@@ -23,7 +23,7 @@
 - (instancetype)initWithFace:(NSInteger)faceValue{
     self = [super init];
     if (self) {
-        [self setFaceImage:faceValue];
+        // commented out for testing purposes [self setFaceImage:faceValue];
         [self setColor: faceValue];
         [self setRating:faceValue];
     }
@@ -44,7 +44,7 @@
 
     NSDictionary *colorDictionary = [ODDCustomColor customColorDictionary];
     NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", faceValue];
-    UIColor *happynessColor = [colorDictionary objectForKey:key];
+    UIColor *happynessColor = (UIColor *)[colorDictionary objectForKey:key];
 
     _color = happynessColor;
 }

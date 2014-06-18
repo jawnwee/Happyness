@@ -33,11 +33,11 @@
 
 + (NSDictionary *)customColorDictionary {
     NSDictionary *oddLookColors = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                   @"oddLook_color_1", [self customYellowColor],
-                                   @"oddLook_color_2", [self customGreenColor],
-                                   @"oddLook_color_3", [self customBlueColor],
-                                   @"oddLook_color_4", [self customMagentaColor],
-                                   @"oddLook_color_5", [self customPurpleColor],
+                                   [self customYellowColor], @"oddLook_color_1",
+                                   [self customGreenColor], @"oddLook_color_2",
+                                   [self customBlueColor], @"oddLook_color_3",
+                                   [self customMagentaColor], @"oddLook_color_4",
+                                   [self customPurpleColor], @"oddLook_color_5",
                                    nil];
     return oddLookColors;
 }

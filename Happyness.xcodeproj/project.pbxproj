@@ -12,6 +12,7 @@
 		C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappyness.m */; };
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
 		C4669CD6194F980D00F82109 /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNote.m */; };
+		C4854D7E19523395006F34FF /* ODDHappynessView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4854D7D19523395006F34FF /* ODDHappynessView.m */; };
 		D122C1E71950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */; };
 		D139EEC31950CAAF003A44DF /* ODDStatisticsGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */; };
 		D139EEC61950D148003A44DF /* ODDLandscapeAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */; };
@@ -61,208 +62,212 @@
 		C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryStore.m; sourceTree = "<group>"; };
 		C4669CD4194F980D00F82109 /* ODDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDNote.h; sourceTree = "<group>"; };
 		C4669CD5194F980D00F82109 /* ODDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNote.m; sourceTree = "<group>"; };
+		C4854D7C19523395006F34FF /* ODDHappynessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessView.h; sourceTree = "<group>"; };
+		C4854D7D19523395006F34FF /* ODDHappynessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessView.m; sourceTree = "<group>"; };
 		D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDLandscapeAnalysisViewController.xib; sourceTree = "<group>"; };
 		D139EEC11950CAAF003A44DF /* ODDStatisticsGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDStatisticsGraphView.h; sourceTree = "<group>"; };
 		D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDStatisticsGraphView.m; sourceTree = "<group>"; };
 		D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDLandscapeAnalysisViewController.h; sourceTree = "<group>"; };
 		D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDLandscapeAnalysisViewController.m; sourceTree = "<group>"; };
-      D13F4C58194F6A68003873B0 /* Happyness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happyness.app; sourceTree = BUILT_PRODUCTS_DIR; };
-      D13F4C5B194F6A68003873B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-      D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-      D13F4C5F194F6A68003873B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-      D13F4C63194F6A68003873B0 /* Happyness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Happyness-Info.plist"; sourceTree = "<group>"; };
-      D13F4C65194F6A68003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-      D13F4C67194F6A68003873B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-      D13F4C69194F6A68003873B0 /* Happyness-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Happyness-Prefix.pch"; sourceTree = "<group>"; };
-      D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ODDAppDelegate.h; sourceTree = "<group>"; };
-      D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODDAppDelegate.m; sourceTree = "<group>"; };
-      D13F4C6D194F6A68003873B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-      D13F4C73194F6A69003873B0 /* HappynessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappynessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-      D13F4C74194F6A69003873B0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-      D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
-      D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-      D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
-      EB658FA81951385A00A13987 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
-      EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
-      EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
-      EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryView.h; sourceTree = "<group>"; };
-      EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryView.m; sourceTree = "<group>"; };
-      EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
-      EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
-      EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
-      EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomColor.m; sourceTree = "<group>"; };
-      EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomTabBarController.h; sourceTree = "<group>"; };
-      EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomTabBarController.m; sourceTree = "<group>"; };
-      EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDTodayViewController.h; sourceTree = "<group>"; };
-      EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDTodayViewController.m; sourceTree = "<group>"; };
-      EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDTodayViewController.xib; sourceTree = "<group>"; };
-      EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisViewController.h; sourceTree = "<group>"; };
-      EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisViewController.m; sourceTree = "<group>"; };
-      EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDAnalysisViewController.xib; sourceTree = "<group>"; };
-      EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDSettingsViewController.h; sourceTree = "<group>"; };
-      EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDSettingsViewController.m; sourceTree = "<group>"; };
-      EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDSettingsViewController.xib; sourceTree = "<group>"; };
-      F4DC1B69D0EB48DE9F6257FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-  /* End PBXFileReference section */
+		D13F4C58194F6A68003873B0 /* Happyness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happyness.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D13F4C5B194F6A68003873B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D13F4C5F194F6A68003873B0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D13F4C63194F6A68003873B0 /* Happyness-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Happyness-Info.plist"; sourceTree = "<group>"; };
+		D13F4C65194F6A68003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D13F4C67194F6A68003873B0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D13F4C69194F6A68003873B0 /* Happyness-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Happyness-Prefix.pch"; sourceTree = "<group>"; };
+		D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ODDAppDelegate.h; sourceTree = "<group>"; };
+		D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODDAppDelegate.m; sourceTree = "<group>"; };
+		D13F4C6D194F6A68003873B0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D13F4C73194F6A69003873B0 /* HappynessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HappynessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D13F4C74194F6A69003873B0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
+		D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
+		EB658FA81951385A00A13987 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
+		EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
+		EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
+		EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryView.h; sourceTree = "<group>"; };
+		EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryView.m; sourceTree = "<group>"; };
+		EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
+		EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
+		EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
+		EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomColor.m; sourceTree = "<group>"; };
+		EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomTabBarController.h; sourceTree = "<group>"; };
+		EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomTabBarController.m; sourceTree = "<group>"; };
+		EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDTodayViewController.h; sourceTree = "<group>"; };
+		EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDTodayViewController.m; sourceTree = "<group>"; };
+		EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDTodayViewController.xib; sourceTree = "<group>"; };
+		EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisViewController.h; sourceTree = "<group>"; };
+		EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisViewController.m; sourceTree = "<group>"; };
+		EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDAnalysisViewController.xib; sourceTree = "<group>"; };
+		EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDSettingsViewController.h; sourceTree = "<group>"; };
+		EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDSettingsViewController.m; sourceTree = "<group>"; };
+		EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDSettingsViewController.xib; sourceTree = "<group>"; };
+		F4DC1B69D0EB48DE9F6257FF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
 
-  /* Begin PBXFrameworksBuildPhase section */
-      D13F4C55194F6A68003873B0 /* Frameworks */ = {
-        isa = PBXFrameworksBuildPhase;
-        buildActionMask = 2147483647;
-        files = (
-          D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */,
-          D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */,
-          D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */,
-          0B965EC9DBBC4996B5B5256B /* libPods.a in Frameworks */,
-        );
-        runOnlyForDeploymentPostprocessing = 0;
-      };
-      D13F4C70194F6A69003873B0 /* Frameworks */ = {
-        isa = PBXFrameworksBuildPhase;
-        buildActionMask = 2147483647;
-        files = (
-          D13F4C75194F6A69003873B0 /* XCTest.framework in Frameworks */,
-          D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */,
-          D13F4C76194F6A69003873B0 /* Foundation.framework in Frameworks */,
-        );
-        runOnlyForDeploymentPostprocessing = 0;
-      };
-  /* End PBXFrameworksBuildPhase section */
+/* Begin PBXFrameworksBuildPhase section */
+		D13F4C55194F6A68003873B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */,
+				D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */,
+				D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */,
+				0B965EC9DBBC4996B5B5256B /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D13F4C70194F6A69003873B0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D13F4C75194F6A69003873B0 /* XCTest.framework in Frameworks */,
+				D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */,
+				D13F4C76194F6A69003873B0 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
 
-  /* Begin PBXGroup section */
-      C4669CC8194F814D00F82109 /* Models */ = {
-        isa = PBXGroup;
-        children = (
-          C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */,
-          C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */,
-          C4669CCE194F823200F82109 /* ODDHappyness.h */,
-          C4669CCF194F823200F82109 /* ODDHappyness.m */,
-          C4669CD4194F980D00F82109 /* ODDNote.h */,
-          C4669CD5194F980D00F82109 /* ODDNote.m */,
-          C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
-          C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
-        );
-        name = Models;
-        sourceTree = "<group>";
-      };
-      C4669CCA194F817900F82109 /* Controllers */ = {
-        isa = PBXGroup;
-        children = (
-          EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */,
-          EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */,
-          EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */,
-          EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */,
-          EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */,
-          EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */,
-          EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */,
-          EB658FA81951385A00A13987 /* ODDCalendarViewController.h */,
-          EB658FA91951385A00A13987 /* ODDCalendarViewController.m */,
-          EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */,
-          EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
-          EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
-          EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
-          D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */,
-          D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */,
-          D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */,
-          EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */,
-          EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */,
-          EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */,
-        );
-        name = Controllers;
-        sourceTree = "<group>";
-      };
-      D13F4C4F194F6A68003873B0 = {
-        isa = PBXGroup;
-        children = (
-          D13F4C61194F6A68003873B0 /* Happyness */,
-          D13F4C7A194F6A69003873B0 /* HappynessTests */,
-          D13F4C5A194F6A68003873B0 /* Frameworks */,
-          D13F4C59194F6A68003873B0 /* Products */,
-          12333AFD44A64D3197FEF77F /* Pods.xcconfig */,
-        );
-        sourceTree = "<group>";
-      };
-      D13F4C59194F6A68003873B0 /* Products */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C58194F6A68003873B0 /* Happyness.app */,
-          D13F4C73194F6A69003873B0 /* HappynessTests.xctest */,
-        );
-        name = Products;
-        sourceTree = "<group>";
-      };
-      D13F4C5A194F6A68003873B0 /* Frameworks */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C5B194F6A68003873B0 /* Foundation.framework */,
-          D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */,
-          D13F4C5F194F6A68003873B0 /* UIKit.framework */,
-          D13F4C74194F6A69003873B0 /* XCTest.framework */,
-          F4DC1B69D0EB48DE9F6257FF /* libPods.a */,
-        );
-        name = Frameworks;
-        sourceTree = "<group>";
-      };
-      D13F4C61194F6A68003873B0 /* Happyness */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */,
-          D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */,
-          D13F4C6D194F6A68003873B0 /* Images.xcassets */,
-          C4669CC8194F814D00F82109 /* Models */,
-          EBE2BD7B195009E20023E9F4 /* Views */,
-          C4669CCA194F817900F82109 /* Controllers */,
-          EBE2BD4E194FB99E0023E9F4 /* Misc */,
-          D13F4C62194F6A68003873B0 /* Supporting Files */,
-        );
-        path = Happyness;
-        sourceTree = "<group>";
-      };
-      D13F4C62194F6A68003873B0 /* Supporting Files */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C63194F6A68003873B0 /* Happyness-Info.plist */,
-          D13F4C64194F6A68003873B0 /* InfoPlist.strings */,
-          D13F4C67194F6A68003873B0 /* main.m */,
-          D13F4C69194F6A68003873B0 /* Happyness-Prefix.pch */,
-        );
-        name = "Supporting Files";
-        sourceTree = "<group>";
-      };
-      D13F4C7A194F6A69003873B0 /* HappynessTests */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C80194F6A69003873B0 /* HappynessTests.m */,
-          D13F4C7B194F6A69003873B0 /* Supporting Files */,
-        );
-        path = HappynessTests;
-        sourceTree = "<group>";
-      };
-      D13F4C7B194F6A69003873B0 /* Supporting Files */ = {
-        isa = PBXGroup;
-        children = (
-          D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */,
-          D13F4C7D194F6A69003873B0 /* InfoPlist.strings */,
-        );
-        name = "Supporting Files";
-        sourceTree = "<group>";
-      };
-      EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
-        isa = PBXGroup;
-        children = (
-          EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */,
-          EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */,
-        );
-        name = Misc;
-        sourceTree = "<group>";
-      };
-      EBE2BD7B195009E20023E9F4 /* Views */ = {
-        isa = PBXGroup;
-        children = (
-          D139EEC11950CAAF003A44DF /* ODDStatisticsGraphView.h */,
-          D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */,
-          EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */,
-          EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */,
+/* Begin PBXGroup section */
+		C4669CC8194F814D00F82109 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */,
+				C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */,
+				C4669CCE194F823200F82109 /* ODDHappyness.h */,
+				C4669CCF194F823200F82109 /* ODDHappyness.m */,
+				C4669CD4194F980D00F82109 /* ODDNote.h */,
+				C4669CD5194F980D00F82109 /* ODDNote.m */,
+				C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
+				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C4669CCA194F817900F82109 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */,
+				EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */,
+				EBE2BD64194FFFDB0023E9F4 /* ODDTodayViewController.h */,
+				EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */,
+				EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */,
+				EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */,
+				EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */,
+				EB658FA81951385A00A13987 /* ODDCalendarViewController.h */,
+				EB658FA91951385A00A13987 /* ODDCalendarViewController.m */,
+				EB6D6F8519515BE100A1A164 /* ODDCalendarViewController.xib */,
+				EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
+				EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
+				EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
+				D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */,
+				D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */,
+				D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */,
+				EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */,
+				EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */,
+				EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D13F4C4F194F6A68003873B0 = {
+			isa = PBXGroup;
+			children = (
+				D13F4C61194F6A68003873B0 /* Happyness */,
+				D13F4C7A194F6A69003873B0 /* HappynessTests */,
+				D13F4C5A194F6A68003873B0 /* Frameworks */,
+				D13F4C59194F6A68003873B0 /* Products */,
+				12333AFD44A64D3197FEF77F /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		D13F4C59194F6A68003873B0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C58194F6A68003873B0 /* Happyness.app */,
+				D13F4C73194F6A69003873B0 /* HappynessTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D13F4C5A194F6A68003873B0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C5B194F6A68003873B0 /* Foundation.framework */,
+				D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */,
+				D13F4C5F194F6A68003873B0 /* UIKit.framework */,
+				D13F4C74194F6A69003873B0 /* XCTest.framework */,
+				F4DC1B69D0EB48DE9F6257FF /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D13F4C61194F6A68003873B0 /* Happyness */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */,
+				D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */,
+				D13F4C6D194F6A68003873B0 /* Images.xcassets */,
+				C4669CC8194F814D00F82109 /* Models */,
+				EBE2BD7B195009E20023E9F4 /* Views */,
+				C4669CCA194F817900F82109 /* Controllers */,
+				EBE2BD4E194FB99E0023E9F4 /* Misc */,
+				D13F4C62194F6A68003873B0 /* Supporting Files */,
+			);
+			path = Happyness;
+			sourceTree = "<group>";
+		};
+		D13F4C62194F6A68003873B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C63194F6A68003873B0 /* Happyness-Info.plist */,
+				D13F4C64194F6A68003873B0 /* InfoPlist.strings */,
+				D13F4C67194F6A68003873B0 /* main.m */,
+				D13F4C69194F6A68003873B0 /* Happyness-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D13F4C7A194F6A69003873B0 /* HappynessTests */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C80194F6A69003873B0 /* HappynessTests.m */,
+				D13F4C7B194F6A69003873B0 /* Supporting Files */,
+			);
+			path = HappynessTests;
+			sourceTree = "<group>";
+		};
+		D13F4C7B194F6A69003873B0 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */,
+				D13F4C7D194F6A69003873B0 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */,
+				EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */,
+			);
+			name = Misc;
+			sourceTree = "<group>";
+		};
+		EBE2BD7B195009E20023E9F4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D139EEC11950CAAF003A44DF /* ODDStatisticsGraphView.h */,
+				D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */,
+				EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */,
+				EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */,
+				C4854D7C19523395006F34FF /* ODDHappynessView.h */,
+				C4854D7D19523395006F34FF /* ODDHappynessView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -318,7 +323,7 @@
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
 					D13F4C57194F6A68003873B0 = {
-						DevelopmentTeam = 6UN3N9H6B4;
+						DevelopmentTeam = BJAYWJUEC7;
 					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;
@@ -421,6 +426,7 @@
 				EBE2BD67194FFFDB0023E9F4 /* ODDTodayViewController.m in Sources */,
 				D139EEC61950D148003A44DF /* ODDLandscapeAnalysisViewController.m in Sources */,
 				D139EEC31950CAAF003A44DF /* ODDStatisticsGraphView.m in Sources */,
+				C4854D7E19523395006F34FF /* ODDHappynessView.m in Sources */,
 				D13F4C68194F6A68003873B0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,12 +546,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9B5D7AAA-51EB-4172-91B0-C7CE2017C6E6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -558,12 +565,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9B5D7AAA-51EB-4172-91B0-C7CE2017C6E6";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
