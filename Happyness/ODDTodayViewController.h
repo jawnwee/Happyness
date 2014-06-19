@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HPGrowingTextView.h"
 
-@interface ODDTodayViewController : UIViewController
+@interface ODDTodayViewController : UIViewController <HPGrowingTextViewDelegate>
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UIPageControl *pageControl;
