@@ -1,20 +1,20 @@
 //
-//  ODDCustomTabBarController.m
+//  ODDStatisticsGraphViewController.m
 //  Happyness
 //
-//  Created by John Lee on 6/16/14.
+//  Created by Yujun Cho on 6/18/14.
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDCustomTabBarController.h"
+#import "ODDStatisticsGraphViewController.h"
 
-@interface ODDCustomTabBarController ()
+@interface ODDStatisticsGraphViewController ()
 
 @end
 
-@implementation ODDCustomTabBarController
+@implementation ODDStatisticsGraphViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -33,10 +33,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)shouldAutorotate {
-    return NO;
 }
 
 /*

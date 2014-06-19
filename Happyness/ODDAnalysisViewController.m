@@ -19,7 +19,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem.title = @"Analysis";
     }
     return self;
 }
@@ -28,10 +27,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
     UILabel *testLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width / 2,
                                                                    self.view.frame.size.height / 2,
-                                                                   50, 50)];
+                                                                   200,
+                                                                   200)];
     testLabel.text = @"PORTRAIT";
     [self.view addSubview:testLabel];
 }
@@ -40,10 +39,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

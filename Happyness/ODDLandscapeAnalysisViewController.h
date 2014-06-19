@@ -10,4 +10,6 @@
 
 @interface ODDLandscapeAnalysisViewController : UIViewController
 
+@property (nonatomic,strong) UIPageControl *pageControl;
+
 @end

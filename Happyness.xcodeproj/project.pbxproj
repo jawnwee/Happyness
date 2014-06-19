@@ -13,7 +13,6 @@
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
 		C4669CD6194F980D00F82109 /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNote.m */; };
 		C4854D7E19523395006F34FF /* ODDHappynessView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4854D7D19523395006F34FF /* ODDHappynessView.m */; };
-		D122C1E71950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */; };
 		D139EEC31950CAAF003A44DF /* ODDStatisticsGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */; };
 		D139EEC61950D148003A44DF /* ODDLandscapeAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */; };
 		D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5B194F6A68003873B0 /* Foundation.framework */; };
@@ -33,6 +32,10 @@
 		EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB658FA91951385A00A13987 /* ODDCalendarViewController.m */; };
 		EB6D6F891951695C00A1A164 /* ODDHappynessEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */; };
 		EBD13C3019513F71007EF6D0 /* ODDCalendarNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */; };
+		D1D0074B19517BB300ED9A66 /* ODDAnalysisScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D0074A19517BB300ED9A66 /* ODDAnalysisScrollViewController.m */; };
+		D1D0074E1951924500ED9A66 /* ODDStatisticsGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D0074D1951924500ED9A66 /* ODDStatisticsGraphViewController.m */; };
+		D1D00753195211C400ED9A66 /* ODDLandscapeAnalysisView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D00752195211C400ED9A66 /* ODDLandscapeAnalysisView.m */; };
+		D1D007561952175300ED9A66 /* ODDAnalysisScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */; };
 		EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */; };
 		EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD56194FF0BD0023E9F4 /* ODDCustomTabBarController.m */; };
 		EBE2BD67194FFFDB0023E9F4 /* ODDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */; };
@@ -65,7 +68,6 @@
 		C4669CD5194F980D00F82109 /* ODDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNote.m; sourceTree = "<group>"; };
 		C4854D7C19523395006F34FF /* ODDHappynessView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessView.h; sourceTree = "<group>"; };
 		C4854D7D19523395006F34FF /* ODDHappynessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessView.m; sourceTree = "<group>"; };
-		D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDLandscapeAnalysisViewController.xib; sourceTree = "<group>"; };
 		D139EEC11950CAAF003A44DF /* ODDStatisticsGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDStatisticsGraphView.h; sourceTree = "<group>"; };
 		D139EEC21950CAAF003A44DF /* ODDStatisticsGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDStatisticsGraphView.m; sourceTree = "<group>"; };
 		D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDLandscapeAnalysisViewController.h; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 		EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryView.m; sourceTree = "<group>"; };
 		EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
 		EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
+		D1D0074919517BB300ED9A66 /* ODDAnalysisScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisScrollViewController.h; sourceTree = "<group>"; };
+		D1D0074A19517BB300ED9A66 /* ODDAnalysisScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisScrollViewController.m; sourceTree = "<group>"; };
+		D1D0074C1951924500ED9A66 /* ODDStatisticsGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDStatisticsGraphViewController.h; sourceTree = "<group>"; };
+		D1D0074D1951924500ED9A66 /* ODDStatisticsGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDStatisticsGraphViewController.m; sourceTree = "<group>"; };
+		D1D00751195211C400ED9A66 /* ODDLandscapeAnalysisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDLandscapeAnalysisView.h; sourceTree = "<group>"; };
+		D1D00752195211C400ED9A66 /* ODDLandscapeAnalysisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDLandscapeAnalysisView.m; sourceTree = "<group>"; };
+		D1D007541952175300ED9A66 /* ODDAnalysisScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisScrollView.h; sourceTree = "<group>"; };
+		D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisScrollView.m; sourceTree = "<group>"; };
 		EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
 		EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomColor.m; sourceTree = "<group>"; };
 		EBE2BD55194FF0BD0023E9F4 /* ODDCustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomTabBarController.h; sourceTree = "<group>"; };
@@ -163,12 +173,15 @@
 				EB658FA81951385A00A13987 /* ODDCalendarViewController.h */,
 				EB658FA91951385A00A13987 /* ODDCalendarViewController.m */,
 				EB12A46A19535941001F47B6 /* ODDCalendarViewController.xib */,
+				D1D0074919517BB300ED9A66 /* ODDAnalysisScrollViewController.h */,
+				D1D0074A19517BB300ED9A66 /* ODDAnalysisScrollViewController.m */,
 				EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
 				EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
 				EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
 				D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */,
 				D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */,
-				D122C1E61950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib */,
+				D1D0074C1951924500ED9A66 /* ODDStatisticsGraphViewController.h */,
+				D1D0074D1951924500ED9A66 /* ODDStatisticsGraphViewController.m */,
 				EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */,
 				EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */,
 				EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */,
@@ -271,6 +284,10 @@
 				EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */,
 				C4854D7C19523395006F34FF /* ODDHappynessView.h */,
 				C4854D7D19523395006F34FF /* ODDHappynessView.m */,
+				D1D00751195211C400ED9A66 /* ODDLandscapeAnalysisView.h */,
+				D1D00752195211C400ED9A66 /* ODDLandscapeAnalysisView.m */,
+				D1D007541952175300ED9A66 /* ODDAnalysisScrollView.h */,
+				D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -358,7 +375,6 @@
 			files = (
 				D13F4C66194F6A68003873B0 /* InfoPlist.strings in Resources */,
 				EB12A46D19535948001F47B6 /* ODDHappynessEntryView.xib in Resources */,
-				D122C1E71950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib in Resources */,
 				EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */,
 				EB12A46B19535941001F47B6 /* ODDCalendarViewController.xib in Resources */,
 				EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */,
@@ -421,17 +437,21 @@
 				EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */,
 				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
 				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
+				D1D00753195211C400ED9A66 /* ODDLandscapeAnalysisView.m in Sources */,
 				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
+				D1D007561952175300ED9A66 /* ODDAnalysisScrollView.m in Sources */,
 				EBE2BD74195000060023E9F4 /* ODDAnalysisViewController.m in Sources */,
 				EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
 				EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */,
 				D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */,
+				D1D0074E1951924500ED9A66 /* ODDStatisticsGraphViewController.m in Sources */,
 				EBE2BD67194FFFDB0023E9F4 /* ODDTodayViewController.m in Sources */,
 				D139EEC61950D148003A44DF /* ODDLandscapeAnalysisViewController.m in Sources */,
 				D139EEC31950CAAF003A44DF /* ODDStatisticsGraphView.m in Sources */,
 				C4854D7E19523395006F34FF /* ODDHappynessView.m in Sources */,
 				D13F4C68194F6A68003873B0 /* main.m in Sources */,
+				D1D0074B19517BB300ED9A66 /* ODDAnalysisScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

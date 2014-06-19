@@ -11,9 +11,10 @@
 #import "ODDTodayViewController.h"
 #import "ODDCalendarNavigationViewController.h"
 #import "ODDCalendarViewController.h"
-#import "ODDAnalysisViewController.h"
+#import "ODDAnalysisScrollViewController.h"
 #import "ODDSettingsViewController.h"
 
+#import "ODDAnalysisViewController.h"
 #import "ODDLandscapeAnalysisViewController.h"
 
 @implementation ODDAppDelegate
@@ -27,12 +28,11 @@
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
-    ODDAnalysisViewController *analysis = [[ODDAnalysisViewController alloc] initWithNibName:@"ODDAnalysisViewController" bundle:appBundle];
+    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
     ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
-
     ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
     ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
-    tbvc.viewControllers = @[today, calendarNav, analysis, settings];
+    tbvc.viewControllers = @[today, calendarNav, analysisScroll, settings];
 
     self.window.rootViewController = tbvc;
     self.window.backgroundColor = [UIColor whiteColor];
