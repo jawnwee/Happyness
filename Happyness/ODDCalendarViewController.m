@@ -7,11 +7,11 @@
 //
 
 #import "ODDCalendarViewController.h"
+#import "ODDHappynessEntryView.h"
 #import "CalendarKit.h"
 
 @interface ODDCalendarViewController ()
-@property (weak, nonatomic) IBOutlet CKCalendarView *testing;
-@property (weak, nonatomic) IBOutlet UIView *test2;
+@property (weak, nonatomic) IBOutlet CKCalendarView *calendar;
 
 @end
 
@@ -20,7 +20,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.automaticallyAdjustsScrollViewInsets = YES;
         self.edgesForExtendedLayout = UIRectEdgeNone;
     }
     return self;
@@ -39,6 +38,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    ODDHappynessEntryView *happynessEntryView = [ODDHappynessEntryView createHappynessEntryView];
+
+    CGRect adjustedFrame = CGRectMake(0.0, self.view.bounds.size.height - self.calendar.bounds.size.height, happynessEntryView.bounds.size.width, happynessEntryView.bounds.size.height);
+
+    happynessEntryView.frame = adjustedFrame;
+    
+    [self.view addSubview:happynessEntryView];
     // Do any additional setup after loading the view.
 }
 

@@ -10,6 +10,16 @@
 
 @implementation ODDHappynessEntryView
 
++ (instancetype)createHappynessEntryView {
+    ODDHappynessEntryView *happynessEntry = [[[NSBundle mainBundle]
+                                              loadNibNamed:@"ODDHappynessEntryView"
+                                              owner:nil options:nil] lastObject];
+    if (happynessEntry) {
+        return happynessEntry;
+    }
+    return nil;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

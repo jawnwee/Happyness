@@ -4,11 +4,11 @@ PODS:
 
 DEPENDENCIES:
   - JBChartView (~> 2.5.5)
-  - MBCalendarKit (from `https://github.com/MosheBerman/MBCalendarKit.git`)
+  - MBCalendarKit (from `https://github.com/jjojohjohn/MBCalendarKit.git`)
 
 EXTERNAL SOURCES:
   MBCalendarKit:
-    :git: https://github.com/MosheBerman/MBCalendarKit.git
+    :git: https://github.com/jjojohjohn/MBCalendarKit.git
 
 SPEC CHECKSUMS:
   JBChartView: 666486d81dd16fa0cfac7bc32b4b70d6c52e7162

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ODDHappynessEntryView : UIView
+@interface ODDHappynessEntryView : UITableViewCell
+
++ (instancetype)createHappynessEntryView;
 
 @end

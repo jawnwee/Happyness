@@ -6,8 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ODDCalendarViewController">
             <connections>
-                <outlet property="test2" destination="lh8-8H-i69" id="Lq0-HM-7QR"/>
-                <outlet property="testing" destination="ffr-gL-l7x" id="3Pq-g0-Yef"/>
+                <outlet property="calendar" destination="ffr-gL-l7x" id="mOA-RN-HUz"/>
                 <outlet property="view" destination="unF-rW-zmr" id="v31-r8-KIq"/>
             </connections>
         </placeholder>
@@ -20,11 +19,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="277"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lh8-8H-i69">
-                    <rect key="frame" x="0.0" y="301" width="320" height="148"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" red="0.94158712359022223" green="0.42159148434863414" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
