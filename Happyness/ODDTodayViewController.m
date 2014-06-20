@@ -11,7 +11,6 @@
 #import "ODDHappyness.h"
 
 @interface ODDTodayViewController () <UIScrollViewDelegate>
-
 @property (nonatomic) BOOL hasBeenClickedToday;
 @property (nonatomic, strong) ODDTodayNoteView *noteView;
 @property (nonatomic, strong) UIView *noteContainerView;
@@ -113,15 +112,16 @@
     [_noteView becomeFirstResponder];
 }
 
+// Still need to make sure note view slides down every new day
 - (void)setUpNoteView {
     _noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                   -self.view.frame.size.height, 
                                                                   320,
                                                                   self.view.frame.size.height)];
-    _noteContainerView.backgroundColor = [UIColor redColor];
+    _noteContainerView.backgroundColor = [UIColor clearColor];
     _noteView = [[ODDTodayNoteView alloc] initWithFrame:CGRectMake(0, 
                                                                    self.view.frame.size.height - 34,
-                                                                   280, 
+                                                                   270,
                                                                    40)];
     _noteView.delegate = self;
 
@@ -170,8 +170,7 @@
     _noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
 
-//Code from Brett Schumann
--(void) keyboardWillShow:(NSNotification *)note{
+- (void)keyboardWillShow:(NSNotification *)note {
     // get keyboard size and location
 	CGRect keyboardBounds;
     [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
@@ -200,7 +199,7 @@
 	[UIView commitAnimations];
 }
 
--(void) keyboardWillHide:(NSNotification *)note{
+- (void)keyboardWillHide:(NSNotification *)note {
     NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
 
@@ -221,14 +220,22 @@
 	[UIView commitAnimations];
 }
 
-- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height
-{
+- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
     float diff = (growingTextView.frame.size.height - height);
 
 	CGRect r = _noteContainerView.frame;
     r.size.height -= diff;
     r.origin.y += diff;
 	_noteContainerView.frame = r;
+}
+
+// Dismiss keyboard upon pressing "Done" and impose 140 character limit
+- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+
+    if ([text isEqualToString:@"\n"]) {
+            [_noteView resignFirstResponder];
+    }
+    return growingTextView.text.length + (text.length - range.length) <= 140;
 }
 
 -(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
