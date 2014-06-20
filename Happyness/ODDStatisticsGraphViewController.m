@@ -7,8 +7,9 @@
 //
 
 #import "ODDStatisticsGraphViewController.h"
+#import "JBLineChartView.h"
 
-@interface ODDStatisticsGraphViewController ()
+@interface ODDStatisticsGraphViewController () <JBLineChartViewDelegate, JBLineChartViewDataSource>
 
 @end
 
@@ -23,27 +24,44 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)viewDidLoad
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [super viewDidLoad];
+
+    CGRect landscapeFrame = CGRectMake(0, 0, 568, 320);
+    self.view.frame = landscapeFrame;
+    
+    JBLineChartView *lineChartView = [[JBLineChartView alloc] init];
+    lineChartView.delegate = self;
+    lineChartView.dataSource = self;
+    lineChartView.frame = CGRectMake(25, 0, 518, 270);
+    lineChartView.minimumValue = 0;
+    lineChartView.maximumValue = 10;
+    [lineChartView reloadData];
+    [self.view addSubview:lineChartView];
 }
-*/
+
+#pragma mark - LineChart setup
+
+- (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
+    return 1;
+}
+
+- (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
+  numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
+    return 7;
+}
+
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView
+  verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
+                      atLineIndex:(NSUInteger)lineIndex {
+    return 5;
+}
 
 @end

@@ -28,8 +28,4 @@
 }
 */
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"Touches Began Analysis Scroll View");
-//}
-
 @end

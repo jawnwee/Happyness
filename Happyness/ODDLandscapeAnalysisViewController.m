@@ -9,10 +9,14 @@
 #import "ODDLandscapeAnalysisViewController.h"
 #import "ODDStatisticsGraphViewController.h"
 #import "ODDLandscapeAnalysisView.h"
+#import "ODDLineGraphViewController.h"
+#import "ODDBarGraphViewController.h"
 
 @interface ODDLandscapeAnalysisViewController () <UIScrollViewDelegate>
 
 @property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) ODDLineGraphViewController *firstGraph;
+@property (nonatomic,strong) ODDBarGraphViewController *secondGraph;
 
 @end
 
@@ -28,12 +32,22 @@
     return self;
 }
 
-#pragma mark - Scroll View Logic
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Scroll View Setup
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
+    CGRect landscapeFrame = CGRectMake(0, 0, 568, 320);
+    self.view.frame = landscapeFrame;
+    self.view.transform = CGAffineTransformMakeRotation( ( 180 * M_PI ) / 360 );
+    
     // Initialize and add custom scroll view
     CGRect scrollFrame = CGRectMake(0, 0, 568, 320);
     self.scrollView = [[ODDLandscapeAnalysisView alloc] initWithFrame:scrollFrame];
@@ -46,22 +60,20 @@
     [self.view addSubview:self.scrollView];
     
     // Initialize and add StatisticsGraphViews to scroll view
-    ODDStatisticsGraphViewController *firstGraph = [[ODDStatisticsGraphViewController alloc] init];
-    firstGraph.view.backgroundColor = [UIColor blackColor];
-    firstGraph.view.transform = CGAffineTransformMakeRotation( ( 180 * M_PI ) / 360 );
-    CGRect firstGraphFrame = firstGraph.view.frame;
+    self.firstGraph = [[ODDLineGraphViewController alloc] init];
+    self.firstGraph.view.backgroundColor = [UIColor whiteColor];
+    CGRect firstGraphFrame = self.firstGraph.view.frame;
     firstGraphFrame.origin.x = 0;
     firstGraphFrame.origin.y = 0;
-    firstGraph.view.frame = firstGraphFrame;
-    ODDStatisticsGraphViewController *secondGraph = [[ODDStatisticsGraphViewController alloc] init];
-    secondGraph.view.backgroundColor = [UIColor lightGrayColor];
-    secondGraph.view.transform = CGAffineTransformMakeRotation( ( 180 * M_PI ) / 360 );
-    CGRect secondGraphFrame = secondGraph.view.frame;
+    self.firstGraph.view.frame = firstGraphFrame;
+    self.secondGraph = [[ODDBarGraphViewController alloc] init];
+    self.secondGraph.view.backgroundColor = [UIColor lightGrayColor];
+    CGRect secondGraphFrame = self.secondGraph.view.frame;
     secondGraphFrame.origin.x = 568;
     secondGraphFrame.origin.y = 0;
-    secondGraph.view.frame = secondGraphFrame;
-    [self.scrollView addSubview:firstGraph.view];
-    [self.scrollView addSubview:secondGraph.view];
+    self.secondGraph.view.frame = secondGraphFrame;
+    [self.scrollView addSubview:self.firstGraph.view];
+    [self.scrollView addSubview:self.secondGraph.view];
 
     // Initialize and add page control
     self.pageControl = [[UIPageControl alloc] init];
@@ -80,12 +92,6 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

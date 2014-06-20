@@ -32,11 +32,17 @@
     return self;
 }
 
-#pragma mark - Scroll View logic
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Scroll View Setup
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+	
     // Initialize and add custom scroll view
     CGRect scrollFrame = CGRectMake(0, 0, 320, 568);
     self.scrollView = [[ODDAnalysisScrollView alloc] initWithFrame:scrollFrame];
@@ -50,7 +56,6 @@
     // Initialize and add AnalysisView and LandscapeAnalysisView to scroll view
     self.analysis = [[ODDAnalysisViewController alloc] init];
     self.landscapeAnalysis = [[ODDLandscapeAnalysisViewController alloc] init];
-    self.landscapeAnalysis.view.transform = CGAffineTransformMakeRotation( ( 180 * M_PI ) / 360 );
     CGRect landscapeFrame = self.landscapeAnalysis.view.frame;
     landscapeFrame.origin.x = 320;
     landscapeFrame.origin.y = 0;
@@ -75,12 +80,6 @@
                                                object:[UIDevice currentDevice]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    if (self.pageControl.currentPage == 0) {
-        self.landscapeAnalysis.pageControl.hidden = YES;
-    }
-}
-
 /*
  Handles page control logic such that the dots update with the correct current page
  */
@@ -101,39 +100,71 @@
     } else {
         self.tabBarController.tabBar.hidden = YES;
         if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+            [UIView transitionWithView:self.pageControl
+                              duration:0.17
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+                            completion:^(BOOL finished){
+                                if (finished) {
+                                    [UIView transitionWithView:self.landscapeAnalysis.pageControl
+                                                      duration:0.17
+                                                       options:UIViewAnimationOptionTransitionCrossDissolve
+                                                    animations:nil
+                                                    completion:nil];
+                                    self.landscapeAnalysis.pageControl.hidden = NO;
+                                }
+                            }];
             self.pageControl.hidden = YES;
-            self.landscapeAnalysis.pageControl.hidden = NO;
+
         }
     }
 }
 
-//- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-//    if (self.pageControl.currentPage == 0) {
-//        self.tabBarController.tabBar.hidden = NO;
-//    } else {
-//        self.tabBarController.tabBar.hidden = YES;
-//    }
-//}
-
 #pragma mark - Hide page control dots
+
+- (void)viewWillAppear:(BOOL)animated {
+    if (self.pageControl.currentPage == 0) {
+        self.landscapeAnalysis.pageControl.hidden = YES;
+    }
+}
 
 - (void)orientationChanged:(NSNotification *)notification {
     UIDeviceOrientation deviceOrientation = [UIDevice currentDevice].orientation;
     if (self.pageControl.currentPage == 1) {
-        if (UIInterfaceOrientationIsLandscape(deviceOrientation)) {
-            self.landscapeAnalysis.pageControl.hidden = NO;
+        if (UIInterfaceOrientationLandscapeRight == deviceOrientation) {
+            [UIView transitionWithView:self.pageControl
+                              duration:0.17
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+                            completion:^(BOOL finished){
+                                if (finished) {
+                                    [UIView transitionWithView:self.landscapeAnalysis.pageControl
+                                                      duration:0.17
+                                                       options:UIViewAnimationOptionTransitionCrossDissolve
+                                                    animations:nil
+                                                    completion:nil];
+                                    self.landscapeAnalysis.pageControl.hidden = NO;
+                                }
+                            }];
             self.pageControl.hidden = YES;
         } else if (UIInterfaceOrientationIsPortrait(deviceOrientation)) {
+            [UIView transitionWithView:self.landscapeAnalysis.pageControl
+                              duration:0.17
+                               options:UIViewAnimationOptionTransitionCrossDissolve
+                            animations:nil
+                            completion:^(BOOL finished){
+                                if (finished) {
+                                    [UIView transitionWithView:self.pageControl
+                                                      duration:0.17
+                                                       options:UIViewAnimationOptionTransitionCrossDissolve
+                                                    animations:nil
+                                                    completion:nil];
+                                    self.pageControl.hidden = NO;
+                                }
+                            }];
             self.landscapeAnalysis.pageControl.hidden = YES;
-            self.pageControl.hidden = NO;
         }
     }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
