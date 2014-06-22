@@ -14,6 +14,7 @@
 @property (nonatomic) BOOL hasBeenClickedToday;
 @property (nonatomic, strong) ODDTodayNoteView *noteView;
 @property (nonatomic, strong) UIView *noteContainerView;
+@property (nonatomic, strong) UIButton *clearAllButton;
 
 @end
 
@@ -125,6 +126,16 @@
                                                                    40)];
     _noteView.delegate = self;
 
+
+    _clearAllButton = [[UIButton alloc] initWithFrame:CGRectMake(270,
+                                                                self.view.frame.size.height - 34, 
+                                                                50, 
+                                                                 34)];
+    _clearAllButton.backgroundColor = [UIColor lightGrayColor];
+    _clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    [_clearAllButton setTitle:@"X" forState:UIControlStateNormal];
+    [_clearAllButton addTarget:self action:@selector(clearButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+
     /* entryBackground; edit these lines for back
      UIImage *rawEntryBackground = [UIImage imageNamed:@"MessageEntryInputField.png"];
      UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
@@ -144,6 +155,7 @@
     [self.view addSubview:_noteContainerView];
     //[containerView addSubview:imageView];
     [_noteContainerView addSubview:_noteView];
+    [_noteContainerView addSubview:_clearAllButton];
     //[containerView addSubview:entryImageView];
 
     /* Replace image with custom CLEAR ALL
@@ -227,6 +239,10 @@
     r.size.height -= diff;
     r.origin.y += diff;
 	_noteContainerView.frame = r;
+
+    CGRect clearR = _clearAllButton.frame;
+    clearR.size.height -= diff;
+    _clearAllButton.frame = clearR;
 }
 
 // Dismiss keyboard upon pressing "Done" and impose 140 character limit
@@ -238,9 +254,13 @@
     return growingTextView.text.length + (text.length - range.length) <= 140;
 }
 
--(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return NO;
+}
+
+- (void)clearButtonSelected {
+    _noteView.text = @"";
 }
 
 
