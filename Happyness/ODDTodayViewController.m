@@ -11,15 +11,15 @@
 #import "ODDHappyness.h"
 #import "ODDNote.h"
 #import "ODDHappynessEntry.h"
+#import "ODDHappynessEntryStore.h"
 
 @interface ODDTodayViewController () <UIScrollViewDelegate>
 @property (nonatomic) BOOL hasBeenClickedToday;
-@property (nonatomic, strong) ODDTodayNoteView *noteView;
-@property (nonatomic, strong) UIView *noteContainerView;
-@property (nonatomic, strong) UIButton *clearAllButton;
-// Happyness, note, and happynessEntry objects should be reset every 24 hours
-@property (nonatomic, strong) ODDNote *note;
-@property (nonatomic, strong) ODDHappynessEntry *entry;
+@property (strong, nonatomic) NSArray *happynessObjects;
+@property (strong, nonatomic) ODDTodayNoteView *noteView;
+@property (strong, nonatomic) UIView *noteContainerView;
+@property (strong, nonatomic) UIButton *clearAllButton;
+@property (strong, nonatomic) ODDNote *note;
 
 @end
 
@@ -63,9 +63,9 @@
     [self setUpNoteView];
 
     // If a happyness hasn't been added today, the screen will be gray
-    if (_hasBeenClickedToday == NO) {
+    if (self.hasBeenClickedToday == NO) {
         // every 24 hours, grayView should be back at the initial frame position
-        _grayView.backgroundColor = [UIColor grayColor];
+        self.grayView.backgroundColor = [UIColor grayColor];
     }
 }
 
@@ -77,38 +77,39 @@
     ODDHappyness *happyObject = [[ODDHappyness alloc] initWithFace:4];
     ODDHappyness *veryHappyObject = [[ODDHappyness alloc] initWithFace:5];
 
-    NSArray *happynessObjects = [NSArray arrayWithObjects:verySadObject, sadObject, soSoObject,
+    self.happynessObjects = [NSArray arrayWithObjects:verySadObject, sadObject, soSoObject,
                                  happyObject, veryHappyObject, nil];
 
-    for (int i = 0; i < happynessObjects.count; i++) {
+    for (int i = 0; i < self.happynessObjects.count; i++) {
         CGRect frame;
-        frame.origin.x = _scrollView.frame.size.width * i;
+        frame.origin.x = self.scrollView.frame.size.width * i;
         frame.origin.y = 0;
-        frame.size = _scrollView.frame.size;
+        frame.size = self.scrollView.frame.size;
 
         UIView *subview = [[UIView alloc] initWithFrame:frame];
-        ODDHappyness *temp = [happynessObjects objectAtIndex:i];
+        ODDHappyness *temp = [self.happynessObjects objectAtIndex:i];
         subview.backgroundColor = temp.color;
 
         [self.scrollView addSubview:subview];
     }
 
-    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width * happynessObjects.count,
-                                         _scrollView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.happynessObjects.count,
+                                         self.scrollView.frame.size.height);
 
     // Set up initial happyness view to show
     CGRect initialFrame;
-    initialFrame.size = CGSizeMake(_scrollView.frame.size.width, _scrollView.frame.size.height);
-    initialFrame.origin.x = _scrollView.frame.size.width * 2;
+    initialFrame.size = CGSizeMake(self.scrollView.frame.size.width, 
+                                   self.scrollView.frame.size.height);
+    initialFrame.origin.x = self.scrollView.frame.size.width * 2;
     initialFrame.origin.y = 0;
-    [_scrollView scrollRectToVisible:initialFrame animated:NO];
+    [self.scrollView scrollRectToVisible:initialFrame animated:NO];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // Update the page control to display correct view when scrolling
-    CGFloat pageWidth = _scrollView.frame.size.width;
-    int page = floor((_scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    _pageControl.currentPage = page;
+    CGFloat pageWidth = self.scrollView.frame.size.width;
+    int page = floor((self.scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    self.pageControl.currentPage = page;
 }
 
 - (void)didReceiveMemoryWarning
@@ -120,31 +121,31 @@
 # pragma mark - Note
 
 - (IBAction)addNote:(id)sender {
-    [_noteView becomeFirstResponder];
+    [self.noteView becomeFirstResponder];
 }
 
 /* Still need to make sure note view slides down every new day */
 - (void)setUpNoteView {
-    _noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 
+    self.noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                   -self.view.frame.size.height, 
                                                                   320,
                                                                   self.view.frame.size.height)];
-    _noteContainerView.backgroundColor = [UIColor clearColor];
-    _noteView = [[ODDTodayNoteView alloc] initWithFrame:CGRectMake(0, 
+    self.noteContainerView.backgroundColor = [UIColor clearColor];
+    self.noteView = [[ODDTodayNoteView alloc] initWithFrame:CGRectMake(0,
                                                                    self.view.frame.size.height - 34,
                                                                    270,
                                                                    40)];
-    _noteView.delegate = self;
+    self.noteView.delegate = self;
 
 
-    _clearAllButton = [[UIButton alloc] initWithFrame:CGRectMake(270,
+    self.clearAllButton = [[UIButton alloc] initWithFrame:CGRectMake(270,
                                                                 self.view.frame.size.height - 34, 
                                                                 50, 
                                                                  34)];
-    _clearAllButton.backgroundColor = [UIColor lightGrayColor];
-    _clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    [_clearAllButton setTitle:@"X" forState:UIControlStateNormal];
-    [_clearAllButton addTarget:self action:@selector(clearButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+    self.clearAllButton.backgroundColor = [UIColor lightGrayColor];
+    self.clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+    [self.clearAllButton setTitle:@"X" forState:UIControlStateNormal];
+    [self.clearAllButton addTarget:self action:@selector(clearButtonSelected) forControlEvents:UIControlEventTouchUpInside];
 
     /* entryBackground; edit these lines for back
      UIImage *rawEntryBackground = [UIImage imageNamed:@"MessageEntryInputField.png"];
@@ -162,10 +163,10 @@
      imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
      */
 
-    [self.view addSubview:_noteContainerView];
+    [self.view addSubview:self.noteContainerView];
     //[containerView addSubview:imageView];
-    [_noteContainerView addSubview:_noteView];
-    [_noteContainerView addSubview:_clearAllButton];
+    [self.noteContainerView addSubview:self.noteView];
+    [self.noteContainerView addSubview:self.clearAllButton];
     //[containerView addSubview:entryImageView];
 
     /* Replace image with custom CLEAR ALL
@@ -189,7 +190,7 @@
      [doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
      [containerView addSubview:doneBtn];
      */
-    _noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    self.noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)keyboardWillShow:(NSNotification *)note {
@@ -203,10 +204,10 @@
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
 
 	// get a rect for the textView frame
-	CGRect containerFrame = _noteContainerView.frame;
+	CGRect containerFrame = self.noteContainerView.frame;
     // Matt: play with height values to make textView move upon keyboard showing
     containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + 
-                                                              _noteContainerView.frame.size.height);
+                                                              self.noteContainerView.frame.size.height);
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationBeginsFromCurrentState:YES];
@@ -214,7 +215,7 @@
     [UIView setAnimationCurve:[curve intValue]];
 
 	// set views with new info
-	_noteContainerView.frame = containerFrame;
+	self.noteContainerView.frame = containerFrame;
 
 
 	// commit animations
@@ -226,7 +227,7 @@
     NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
 
 	// get a rect for the textView frame
-	CGRect containerFrame = _noteContainerView.frame;
+	CGRect containerFrame = self.noteContainerView.frame;
     containerFrame.origin.y = self.view.bounds.size.height + containerFrame.size.height;
 
 	// animations settings
@@ -236,7 +237,7 @@
     [UIView setAnimationCurve:[curve intValue]];
 
 	// set views with new info
-	_noteContainerView.frame = containerFrame;
+	self.noteContainerView.frame = containerFrame;
 
 	// commit animations
 	[UIView commitAnimations];
@@ -245,21 +246,21 @@
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
     float diff = (growingTextView.frame.size.height - height);
 
-	CGRect r = _noteContainerView.frame;
+	CGRect r = self.noteContainerView.frame;
     r.size.height -= diff;
     r.origin.y += diff;
-	_noteContainerView.frame = r;
+	self.noteContainerView.frame = r;
 
-    CGRect clearR = _clearAllButton.frame;
+    CGRect clearR = self.clearAllButton.frame;
     clearR.size.height -= diff;
-    _clearAllButton.frame = clearR;
+    self.clearAllButton.frame = clearR;
 }
 
 /* Dismiss keyboard upon pressing "Done" and impose 140 character limit */
 - (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
 
     if ([text isEqualToString:@"\n"]) {
-            [_noteView resignFirstResponder];
+            [self.noteView resignFirstResponder];
     }
     return growingTextView.text.length + (text.length - range.length) <= 140;
 }
@@ -270,39 +271,44 @@
 }
 
 - (void)clearButtonSelected {
-    _noteView.text = @"";
+    self.noteView.text = @"";
 }
 
 - (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
-    _note.noteString = growingTextView.text;
-    NSLog(@"Note contains string: %@", _note.noteString);
+    self.note.noteString = growingTextView.text;
+    NSLog(@"Note contains string: %@", self.note.noteString);
 }
 
 /************** Submit Test **************/
 - (IBAction)submit:(id)sender {
-
+    NSDate *date = [NSDate date];
+    ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
+    ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness 
+                                                                       note:self.note 
+                                                                   dateTime:date];
+    [[ODDHappynessEntryStore sharedStore] addEntry:entry];
 }
 
 
 # pragma mark - Screen Transitions
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (_hasBeenClickedToday == NO) {
-        CGRect slideUpFrame = _grayView.frame;
+    if (self.hasBeenClickedToday == NO) {
+        CGRect slideUpFrame = self.grayView.frame;
         slideUpFrame.origin.y -= slideUpFrame.size.height;
         [UIView animateWithDuration:0.2
                          animations:^{
-                                  _grayView.frame = slideUpFrame;
+                                  self.grayView.frame = slideUpFrame;
                               }
                          completion:^(BOOL finished) {
-                                     [_grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
+                                     [self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
-        _hasBeenClickedToday = YES;
+        self.hasBeenClickedToday = YES;
     }
 
     // Dismiss keyboard
-    if ([_noteView isFirstResponder]) {
-        [_noteView resignFirstResponder];
+    if ([self.noteView isFirstResponder]) {
+        [self.noteView resignFirstResponder];
     }
 }
 
