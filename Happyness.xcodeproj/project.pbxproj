@@ -28,7 +28,6 @@
 		D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
 		D13F4C7F194F6A69003873B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C7D194F6A69003873B0 /* InfoPlist.strings */; };
 		D13F4C81194F6A69003873B0 /* HappynessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C80194F6A69003873B0 /* HappynessTests.m */; };
-		EB12A46B19535941001F47B6 /* ODDCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB12A46A19535941001F47B6 /* ODDCalendarViewController.xib */; };
 		EB12A46D19535948001F47B6 /* ODDHappynessEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */; };
 		EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB658FA91951385A00A13987 /* ODDCalendarViewController.m */; };
 		EB6D6F891951695C00A1A164 /* ODDHappynessEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */; };
@@ -86,7 +85,6 @@
 		D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
 		D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
-		EB12A46A19535941001F47B6 /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
 		EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDHappynessEntryView.xib; sourceTree = "<group>"; };
 		EB658FA81951385A00A13987 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
 		EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
@@ -162,7 +160,6 @@
 				EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */,
 				EB658FA81951385A00A13987 /* ODDCalendarViewController.h */,
 				EB658FA91951385A00A13987 /* ODDCalendarViewController.m */,
-				EB12A46A19535941001F47B6 /* ODDCalendarViewController.xib */,
 				EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
 				EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
 				EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
@@ -326,7 +323,7 @@
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
 					D13F4C57194F6A68003873B0 = {
-						DevelopmentTeam = BJAYWJUEC7;
+						DevelopmentTeam = 6UN3N9H6B4;
 					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;
@@ -360,7 +357,6 @@
 				EB12A46D19535948001F47B6 /* ODDHappynessEntryView.xib in Resources */,
 				D122C1E71950DBC60027A9C0 /* ODDLandscapeAnalysisViewController.xib in Resources */,
 				EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */,
-				EB12A46B19535941001F47B6 /* ODDCalendarViewController.xib in Resources */,
 				EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */,
 				D13F4C6E194F6A68003873B0 /* Images.xcassets in Resources */,
 				EBE2BD7A195000150023E9F4 /* ODDSettingsViewController.xib in Resources */,

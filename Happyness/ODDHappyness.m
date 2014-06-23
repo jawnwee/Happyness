@@ -34,7 +34,7 @@
 /* Set the UIImage for the face */
 - (void)setFaceImage:(NSInteger)faceValue {
 
-    NSString *faceImageName = [NSString stringWithFormat:@"Happyness_%ld.png", faceValue];
+    NSString *faceImageName = [NSString stringWithFormat:@"Happyness_%ld.png", (long)faceValue];
     _face = [UIImage imageNamed:faceImageName];
 }
 
@@ -43,7 +43,7 @@
 - (void)setColor:(NSInteger)faceValue {
 
     NSDictionary *colorDictionary = [ODDCustomColor customColorDictionary];
-    NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", faceValue];
+    NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", (long)faceValue];
     UIColor *happynessColor = (UIColor *)[colorDictionary objectForKey:key];
 
     _color = happynessColor;

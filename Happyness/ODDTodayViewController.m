@@ -55,7 +55,8 @@
         [self.scrollView addSubview:subview];
     }
 
-    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width * happynessObjects.count, _scrollView.frame.size.height);
+    _scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width * happynessObjects.count,
+                                         _scrollView.frame.size.height);
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

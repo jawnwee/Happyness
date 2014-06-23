@@ -7,7 +7,20 @@
 //
 
 #import "ODDHappynessEntryView.h"
+#import "ODDHappynessEntry.h"
+#import "ODDHappyness.h"
+#import "ODDNote.h"
 
+@interface ODDHappynessEntryView ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *happynessImage;
+@property (weak, nonatomic) IBOutlet UILabel *happynessNote;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *date;
+@property (weak, nonatomic) IBOutlet UILabel *day;
+
+
+@end
 @implementation ODDHappynessEntryView
 
 + (instancetype)createHappynessEntryView {
@@ -20,13 +33,27 @@
     return nil;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+- (void)setHappynessEntry:(ODDHappynessEntry *)happynessEntry {
+    NSDate *entryDate = [happynessEntry date];
+    ODDNote *note = [happynessEntry note];
+    ODDHappyness *happyness = [happynessEntry happynessObject];
+
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:entryDate];
+
+    NSInteger day = [components day];
+    NSInteger month = [components month];
+    NSInteger year = [components year];
+
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE"];
+    self.day.text = [dateFormatter stringFromDate:entryDate];
+
+    self.happynessNote.text = note.noteString;
+    [self.happynessNote sizeToFit];
+
+    self.date.text = [NSString stringWithFormat:@"%ld", (long)day];
 }
 
 /*

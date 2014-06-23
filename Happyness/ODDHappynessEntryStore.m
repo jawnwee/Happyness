@@ -11,7 +11,7 @@
 
 @interface ODDHappynessEntryStore ()
 
-@property(nonatomic) NSMutableArray *privateEntries;
+@property(nonatomic) NSMutableDictionary *privateEntries;
 
 @end
 
@@ -39,17 +39,24 @@
 - (instancetype)initPrivate {
     self = [super init];
     if (self) {
-        _privateEntries = [[NSMutableArray alloc] init];
+        _privateEntries = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
+- (NSDictionary *)happynessEntries {
+    _entries = [self.privateEntries copy];
+    return self.entries;
+}
+
 - (void)addEntry:(ODDHappynessEntry *)entry {
-    [_privateEntries addObject:entry];
+    NSDate *key = [entry date];
+    [_privateEntries setObject:entry forKey:key];
 }
 
 - (void)removeEntry:(ODDHappynessEntry *)entry {
-    [_privateEntries removeObjectIdenticalTo:entry];
+    NSDate *key = [entry date];
+    [_privateEntries removeObjectForKey:key];
 }
 
 @end

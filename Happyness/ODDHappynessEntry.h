@@ -14,10 +14,10 @@
 
 @property (strong, nonatomic) ODDHappyness *happynessObject;
 @property (strong, nonatomic) ODDNote *note;
-@property (strong, nonatomic) NSString *dateAndTimeString;
+@property (strong, nonatomic) NSDate *date;
 
 - (instancetype)initWithHappyness:(ODDHappyness *)happyness
                              note:(ODDNote *)note
-                         dateTime:(NSString *)dateTime;
+                         dateTime:(NSDate *)date;
 
 @end
