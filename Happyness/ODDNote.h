@@ -10,8 +10,8 @@
 
 @interface ODDNote : NSObject
 
-@property (strong, nonatomic) NSMutableString *noteString;
+@property (strong, nonatomic) NSString *noteString;
 
-- (instancetype)initWithNote:(NSMutableString *)note;
+- (instancetype)initWithNote:(NSString *)note;
 
 @end

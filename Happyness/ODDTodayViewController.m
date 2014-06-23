@@ -9,12 +9,17 @@
 #import "ODDTodayViewController.h"
 #import "ODDTodayNoteView.h"
 #import "ODDHappyness.h"
+#import "ODDNote.h"
+#import "ODDHappynessEntry.h"
 
 @interface ODDTodayViewController () <UIScrollViewDelegate>
 @property (nonatomic) BOOL hasBeenClickedToday;
 @property (nonatomic, strong) ODDTodayNoteView *noteView;
 @property (nonatomic, strong) UIView *noteContainerView;
 @property (nonatomic, strong) UIButton *clearAllButton;
+// Happyness, note, and happynessEntry objects should be reset every 24 hours
+@property (nonatomic, strong) ODDNote *note;
+@property (nonatomic, strong) ODDHappynessEntry *entry;
 
 @end
 
@@ -32,6 +37,11 @@
         self.tabBarItem.title = @"Today";
          // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
         _hasBeenClickedToday = NO;
+
+        // 24 HOUR OBJECT CREATION METHOD
+        _note = [[ODDNote alloc] initWithNote:nil];
+        //
+
         [[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(keyboardWillShow:)
 													 name:UIKeyboardWillShowNotification
@@ -113,7 +123,7 @@
     [_noteView becomeFirstResponder];
 }
 
-// Still need to make sure note view slides down every new day
+/* Still need to make sure note view slides down every new day */
 - (void)setUpNoteView {
     _noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 
                                                                   -self.view.frame.size.height, 
@@ -245,7 +255,7 @@
     _clearAllButton.frame = clearR;
 }
 
-// Dismiss keyboard upon pressing "Done" and impose 140 character limit
+/* Dismiss keyboard upon pressing "Done" and impose 140 character limit */
 - (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
 
     if ([text isEqualToString:@"\n"]) {
@@ -263,6 +273,15 @@
     _noteView.text = @"";
 }
 
+- (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
+    _note.noteString = growingTextView.text;
+    NSLog(@"Note contains string: %@", _note.noteString);
+}
+
+/************** Submit Test **************/
+- (IBAction)submit:(id)sender {
+
+}
 
 
 # pragma mark - Screen Transitions

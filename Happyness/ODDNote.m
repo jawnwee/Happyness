@@ -10,7 +10,7 @@
 
 @implementation ODDNote
 
-- (instancetype)initWithNote:(NSMutableString *)note {
+- (instancetype)initWithNote:(NSString *)note {
     self = [super init];
     if (self) {
         _noteString = note;
