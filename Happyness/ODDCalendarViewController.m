@@ -27,15 +27,6 @@
     self = [super init];
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
-    }
-    return self;
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
         [self.calendar setDelegate:self];
     }
     return self;
@@ -64,7 +55,7 @@
     
     [self.view addSubview:self.happynessEntryView];
     NSDate *key = [self.calendar date];
-    ODDHappynessEntry *initialEntry = [[ODDHappynessEntryStore sharedStore] ]
+    // ODDHappynessEntry *initialEntry = [[ODDHappynessEntryStore sharedStore] ]
 }
 
 - (void)didReceiveMemoryWarning
