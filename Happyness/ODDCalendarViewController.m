@@ -8,10 +8,16 @@
 
 #import "ODDCalendarViewController.h"
 #import "ODDHappynessEntryView.h"
+#import "ODDHappynessEntry.h"
+#import "ODDHappynessEntryStore.h"
+#import "ODDHappyness.h"
+#import "ODDNote.h"
 #import "CalendarKit.h"
 
-@interface ODDCalendarViewController ()
-@property (weak, nonatomic) IBOutlet CKCalendarView *calendar;
+@interface ODDCalendarViewController () <CKCalendarViewDelegate>
+
+@property (strong, nonatomic) IBOutlet CKCalendarView *calendar;
+@property (strong, nonatomic) ODDHappynessEntryView *happynessEntryView;
 
 @end
 
@@ -30,22 +36,35 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        [self.calendar setDelegate:self];
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // [self.happynessEntryView setHappynessEntry:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    ODDHappynessEntryView *happynessEntryView = [ODDHappynessEntryView createHappynessEntryView];
+    _calendar = [CKCalendarView new];
+    [_calendar setDelegate:self];
+    [[self view] addSubview:self.calendar];
+    _happynessEntryView = [ODDHappynessEntryView createHappynessEntryView];
 
-    CGRect adjustedFrame = CGRectMake(0.0, self.view.bounds.size.height - self.calendar.bounds.size.height, happynessEntryView.bounds.size.width, happynessEntryView.bounds.size.height);
+    CGRect adjustedFrame = CGRectMake(0.0,
+                                self.view.bounds.size.height - self.calendar.bounds.size.height,
+                                self.happynessEntryView.bounds.size.width,
+                                self.happynessEntryView.bounds.size.height);
 
-    happynessEntryView.frame = adjustedFrame;
+    self.happynessEntryView.frame = adjustedFrame;
     
-    [self.view addSubview:happynessEntryView];
-    // Do any additional setup after loading the view.
+    [self.view addSubview:self.happynessEntryView];
+    NSDate *key = [self.calendar date];
+    ODDHappynessEntry *initialEntry = [[ODDHappynessEntryStore sharedStore] ]
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,15 +73,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+// Take HappynessEntry from HappynessEntryStore's dictionary and set the entry to its view
+- (void)calendarView:(CKCalendarView *)calendarView didSelectDate:(NSDate *)date {
+    ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:2];
+    ODDNote *testNote = [[ODDNote alloc] init];
+    testNote.noteString = [NSMutableString stringWithFormat:@"testing123"];
+    ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
+                                                                           note:testNote
+                                                                       dateTime:date];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    [self.happynessEntryView setHappynessEntry:testEntry];
 }
-*/
+
+- (void)calendarView:(CKCalendarView *)CalendarView willSelectDate:(NSDate *)date {
+}
+
 
 @end
