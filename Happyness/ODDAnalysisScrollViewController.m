@@ -68,7 +68,6 @@
     self.pageControl.frame = CGRectMake(0, 500, 320, 25);
     self.pageControl.numberOfPages = 2;
     self.pageControl.currentPage = 0;
-    self.pageControl.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.pageControl];
     
     // Set up notification detection for when device rotates
@@ -78,6 +77,8 @@
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:[UIDevice currentDevice]];
+    
+//    NSLog(@"%@", NSStringFromCGRect(self.tabBarController.tabBar.frame));
 }
 
 /*
@@ -97,8 +98,12 @@
         self.tabBarController.tabBar.hidden = NO;
         self.pageControl.hidden = NO;
         self.landscapeAnalysis.pageControl.hidden = YES;
+        [[UIApplication sharedApplication] setStatusBarHidden:NO
+                                                withAnimation:UIStatusBarAnimationSlide];
     } else {
         self.tabBarController.tabBar.hidden = YES;
+        [[UIApplication sharedApplication] setStatusBarHidden:YES
+                                                withAnimation:UIStatusBarAnimationSlide];
         if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
             [UIView transitionWithView:self.pageControl
                               duration:0.17

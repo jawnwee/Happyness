@@ -7,7 +7,6 @@
 //
 
 #import "ODDLandscapeAnalysisViewController.h"
-#import "ODDStatisticsGraphViewController.h"
 #import "ODDLandscapeAnalysisView.h"
 #import "ODDLineGraphViewController.h"
 #import "ODDBarGraphViewController.h"
@@ -60,13 +59,15 @@
     [self.view addSubview:self.scrollView];
     
     // Initialize and add StatisticsGraphViews to scroll view
-    self.firstGraph = [[ODDLineGraphViewController alloc] init];
-    self.firstGraph.view.backgroundColor = [UIColor whiteColor];
+    self.firstGraph = [[ODDLineGraphViewController alloc] initWithNibName:@"ODDGraphViewController"
+                                                                   bundle:[NSBundle mainBundle]];
+    self.firstGraph.view.backgroundColor = [UIColor grayColor];
     CGRect firstGraphFrame = self.firstGraph.view.frame;
     firstGraphFrame.origin.x = 0;
     firstGraphFrame.origin.y = 0;
     self.firstGraph.view.frame = firstGraphFrame;
-    self.secondGraph = [[ODDBarGraphViewController alloc] init];
+    self.secondGraph = [[ODDBarGraphViewController alloc] initWithNibName:@"ODDGraphViewController"
+                                                                   bundle:[NSBundle mainBundle]];
     self.secondGraph.view.backgroundColor = [UIColor lightGrayColor];
     CGRect secondGraphFrame = self.secondGraph.view.frame;
     secondGraphFrame.origin.x = 568;
@@ -80,7 +81,6 @@
     self.pageControl.frame = CGRectMake(0, 295, 568, 25);
     self.pageControl.numberOfPages = 2;
     self.pageControl.currentPage = 0;
-    self.pageControl.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.pageControl];
 }
 

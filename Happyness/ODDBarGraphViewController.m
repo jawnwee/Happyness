@@ -7,8 +7,11 @@
 //
 
 #import "ODDBarGraphViewController.h"
+#import "JBBarChartView.h"
 
-@interface ODDBarGraphViewController ()
+@interface ODDBarGraphViewController () <JBBarChartViewDataSource, JBBarChartViewDelegate>
+
+@property (nonatomic,strong) JBBarChartView *barChartView;
 
 @end
 
@@ -19,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _barChartView = [[JBBarChartView alloc] init];
     }
     return self;
 }
@@ -29,20 +33,68 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+#pragma mark - Bar Graph Setup
 
-    CGRect landscapeFrame = CGRectMake(0, 0, 568, 320);
-    self.view.frame = landscapeFrame;
-    
-    UIView *tabBar = nil;
-    for (UIView *subview in self.tabBarController.view.subviews) {
-        if ([subview isKindOfClass:[UITabBar class]]) {
-            tabBar = subview;
-        }
+- (void)viewDidLoad {
+    [self initializeBarGraph];
+}
+
+- (void)initializeBarGraph {
+    self.barChartView.delegate = self;
+    self.barChartView.dataSource = self;
+    CGRect graphTitleFrame = self.graphTitle.frame;
+    self.barChartView.frame = CGRectMake(graphTitleFrame.origin.x + 25,
+                                         graphTitleFrame.origin.y + 25,
+                                         475,
+                                         200);
+    self.barChartView.minimumValue = 0;
+    self.barChartView.maximumValue = 5;
+    [self.view addSubview:self.barChartView];
+    [self.barChartView reloadData];
+}
+
+- (NSUInteger)numberOfBarsInBarChartView:(JBBarChartView *)barChartView {
+    return 7;
+}
+
+- (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtAtIndex:(NSUInteger)index {
+    switch (index) {
+        case 0:
+            return 2;
+        case 1:
+            return 5;
+        case 2:
+            return 5;
+        case 3:
+            return 4;
+        case 4:
+            return 3;
+        case 5:
+            return 2;
+        case 6:
+            return 3;
+        default:
+            return 0;
+            break;
     }
-    CGRect tabBarFrame = tabBar.frame;
+}
+
+#pragma mark - Amount of data to graph
+
+- (IBAction)graphAll:(id)sender{
+    
+}
+
+- (IBAction)graphOneMonth:(id)sender{
+    
+}
+
+- (IBAction)graphOneWeek:(id)sender{
+    
+}
+
+- (IBAction)graphOneYear:(id)sender{
+    
 }
 
 @end

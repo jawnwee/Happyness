@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDGraphViewController.h"
 
-@interface ODDLineGraphViewController : UIViewController
+@interface ODDLineGraphViewController : ODDGraphViewController
 
 @end

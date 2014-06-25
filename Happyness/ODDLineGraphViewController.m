@@ -7,8 +7,11 @@
 //
 
 #import "ODDLineGraphViewController.h"
+#import "JBLineChartView.h"
 
-@interface ODDLineGraphViewController ()
+@interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
+
+@property (nonatomic,strong) JBLineChartView *lineGraphView;
 
 @end
 
@@ -19,6 +22,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _lineGraphView = [[JBLineChartView alloc] init];
     }
     return self;
 }
@@ -29,20 +33,85 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+#pragma mark - Line Graph Setup
 
-    CGRect landscapeFrame = CGRectMake(0, 0, 568, 320);
-    self.view.frame = landscapeFrame;
-    
-    UIView *tabBar = nil;
-    for (UIView *subview in self.tabBarController.view.subviews) {
-        if ([subview isKindOfClass:[UITabBar class]]) {
-            tabBar = subview;
-        }
+- (void)viewDidLoad {
+    [self initializeLineGraph];
+}
+
+- (void)initializeLineGraph {
+    self.lineGraphView.delegate = self;
+    self.lineGraphView.dataSource = self;
+    CGRect graphTitleFrame = self.graphTitle.frame;
+    self.lineGraphView.frame = CGRectMake(graphTitleFrame.origin.x + 25,
+                                         graphTitleFrame.origin.y + 25,
+                                         475,
+                                         200);
+    self.lineGraphView.maximumValue = 100;
+    self.lineGraphView.minimumValue = 0;
+    [self.view addSubview:self.lineGraphView];
+    [self.lineGraphView reloadData];
+}
+
+- (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
+    return 2;
+}
+
+- (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
+    numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
+    return 7;
+}
+
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView
+    verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
+                        atLineIndex:(NSUInteger)lineIndex {
+    switch (lineIndex) {
+        case 0:
+            return 0;
+        case 1:
+            switch (horizontalIndex) {
+                case 0:
+                    return 20;
+                case 1:
+                    return 30;
+                case 2:
+                    return 40;
+                case 3:
+                    return 80;
+                case 4:
+                    return 100;
+                case 5:
+                    return 50;
+                case 6:
+                    return 25;
+                default:
+                    [NSException raise:@"Invalid horizontalIndex"
+                                format:@"Line chart tried to plot point at %lu", horizontalIndex];
+            }
+        default:
+            [NSException raise:@"Invalid lineIndex"
+                        format:@"Line chart tried to create line index %lu", lineIndex];
     }
-    CGRect tabBarFrame = tabBar.frame;
+    
+    return 0;
+}
+
+#pragma mark - Amount of data to graph
+
+- (IBAction)graphAll:(id)sender{
+    
+}
+
+- (IBAction)graphOneMonth:(id)sender{
+    
+}
+
+- (IBAction)graphOneWeek:(id)sender{
+    
+}
+
+- (IBAction)graphOneYear:(id)sender{
+    
 }
 
 @end

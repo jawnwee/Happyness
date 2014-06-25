@@ -1,20 +1,19 @@
 //
-//  ODDStatisticsGraphView.m
+//  ODDGraphFooterView.m
 //  Happyness
 //
-//  Created by Yujun Cho on 6/17/14.
+//  Created by Yujun Cho on 6/24/14.
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDStatisticsGraphView.h"
+#import "ODDGraphFooterView.h"
 
-@implementation ODDStatisticsGraphView
+@implementation ODDGraphFooterView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (id)initWithElements:(NSDictionary *)elements {
+    self = [super init];
     if (self) {
-        // Initialization code
+        
     }
     return self;
 }

@@ -34,15 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor blueColor];
-    
-    UIView *tabBar = nil;
-    for (UIView *subview in self.tabBarController.view.subviews) {
-        if ([subview isKindOfClass:[UITabBar class]]) {
-            tabBar = subview;
-        }
-    }
-    CGRect tabBarFrame = tabBar.frame;
-
 }
 
 @end
