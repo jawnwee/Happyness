@@ -45,12 +45,17 @@
 }
 
 - (NSDictionary *)happynessEntries {
-    _entries = [self.privateEntries copy];
-    return self.entries;
+    return self.privateEntries;
 }
 
+/* Convert date to a Year/Month/Day format and use it as a the key for the entry */
 - (void)addEntry:(ODDHappynessEntry *)entry {
-    NSDate *key = [entry date];
+    NSDate *date = [entry date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
     [_privateEntries setObject:entry forKey:key];
 }
 

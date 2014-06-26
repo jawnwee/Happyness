@@ -36,7 +36,7 @@
 - (void)setHappynessEntry:(ODDHappynessEntry *)happynessEntry {
     NSDate *entryDate = [happynessEntry date];
     ODDNote *note = [happynessEntry note];
-    ODDHappyness *happyness = [happynessEntry happynessObject];
+    ODDHappyness *happyness = [happynessEntry happyness];
 
     NSDateComponents *components = [[NSCalendar currentCalendar] components:
                                     NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear

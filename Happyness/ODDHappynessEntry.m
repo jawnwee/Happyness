@@ -15,7 +15,7 @@
                          dateTime:(NSDate *)date {
     self = [super init];
     if (self) {
-        _happynessObject = happyness;
+        _happyness = happyness;
         _note = note;
         _date = date;
     }

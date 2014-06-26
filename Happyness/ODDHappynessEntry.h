@@ -12,7 +12,7 @@
 
 @interface ODDHappynessEntry : NSObject
 
-@property (strong, nonatomic) ODDHappyness *happynessObject;
+@property (strong, nonatomic) ODDHappyness *happyness;
 @property (strong, nonatomic) ODDNote *note;
 @property (strong, nonatomic) NSDate *date;
 

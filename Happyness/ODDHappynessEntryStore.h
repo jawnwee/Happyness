@@ -12,7 +12,7 @@
 
 @interface ODDHappynessEntryStore : NSObject
 
-@property (strong, nonatomic, readonly) NSDictionary *entries;
+@property (strong, nonatomic, readonly) NSDictionary *happynessEntries;
 
 + (instancetype)sharedStore;
 
