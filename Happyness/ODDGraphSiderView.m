@@ -8,23 +8,56 @@
 
 #import "ODDGraphSiderView.h"
 
+@interface ODDGraphSiderView ()
+
+@property (nonatomic,strong) NSMutableArray *labels;
+
+@end
+
 @implementation ODDGraphSiderView
 
-- (id)initWithElements:(NSDictionary *)elements {
-    self = [super init];
+- (id)initWithElements:(NSArray *)elements withFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
-        
+        self.backgroundColor = [UIColor clearColor];
+        _labels = [[NSMutableArray alloc] initWithCapacity:elements.count];
+        for (NSString *labelTitle in elements) {
+            UILabel *newLabel = [[UILabel alloc] init];
+            newLabel.text = labelTitle;
+            newLabel.adjustsFontSizeToFitWidth = YES;
+            newLabel.textAlignment = NSTextAlignmentRight;
+            newLabel.shadowColor = [UIColor blackColor];
+            newLabel.shadowOffset = CGSizeMake(0, 1);
+            newLabel.backgroundColor = [UIColor clearColor];
+            newLabel.textAlignment = NSTextAlignmentCenter;
+            [self addSubview:newLabel];
+            [_labels addObject:newLabel];
+        }
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)drawRect:(CGRect)rect {
+    [super drawRect:rect];
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextSetLineWidth(context, 2.0f);
+    CGContextMoveToPoint(context, self.bounds.size.width, 0.0f);
+    CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
+    CGContextStrokePath(context);
 }
-*/
+
+- (void)layoutSubviews {
+    CGFloat height = ceil(self.bounds.size.height / self.labels.count);
+    CGRect lastFrame = CGRectMake(0, 0, 0, 0);
+    NSUInteger count = 0;
+    for (UILabel *label in self.labels) {
+        label.frame = CGRectMake(0, CGRectGetMaxY(lastFrame), self.bounds.size.width, height);
+        lastFrame = label.frame;
+        count++;
+    }
+}
+
 
 @end

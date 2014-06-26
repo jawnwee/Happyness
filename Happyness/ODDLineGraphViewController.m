@@ -8,6 +8,8 @@
 
 #import "ODDLineGraphViewController.h"
 #import "JBLineChartView.h"
+#import "ODDGraphFooterView.h"
+#import "ODDGraphSiderView.h"
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -44,17 +46,40 @@
     self.lineGraphView.dataSource = self;
     CGRect graphTitleFrame = self.graphTitle.frame;
     self.lineGraphView.frame = CGRectMake(graphTitleFrame.origin.x + 25,
-                                         graphTitleFrame.origin.y + 25,
+                                         graphTitleFrame.origin.y + 30,
                                          475,
-                                         200);
+                                         225);
     self.lineGraphView.maximumValue = 100;
     self.lineGraphView.minimumValue = 0;
+    ODDGraphFooterView *footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Mon",
+                                                                                @"Tues",
+                                                                                @"Wed",
+                                                                                @"Thurs",
+                                                                                @"Fri",
+                                                                                @"Sat",
+                                                                                @"Sun"]
+                                                                    withFrame:CGRectMake(0,
+                                                                                         0,
+                                                                                         self.lineGraphView.frame.size.width,
+                                                                                         20)];
+    ODDGraphSiderView *sider = [[ODDGraphSiderView alloc] initWithElements:@[@"100",
+                                                                             @"80",
+                                                                             @"60",
+                                                                             @"40",
+                                                                             @"20",
+                                                                             @"0"]
+                                                                 withFrame:CGRectMake(self.lineGraphView.frame.origin.x - 20,
+                                                                                      self.lineGraphView.frame.origin.y,
+                                                                                      30,
+                                                                                      self.lineGraphView.frame.size.height)];
+    [self.view addSubview:sider];
+    self.lineGraphView.footerView = footer;
     [self.view addSubview:self.lineGraphView];
     [self.lineGraphView reloadData];
 }
 
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
-    return 2;
+    return 1;
 }
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
@@ -65,32 +90,24 @@
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView
     verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
                         atLineIndex:(NSUInteger)lineIndex {
-    switch (lineIndex) {
+    switch (horizontalIndex) {
         case 0:
             return 0;
         case 1:
-            switch (horizontalIndex) {
-                case 0:
-                    return 20;
-                case 1:
-                    return 30;
-                case 2:
-                    return 40;
-                case 3:
-                    return 80;
-                case 4:
-                    return 100;
-                case 5:
-                    return 50;
-                case 6:
-                    return 25;
-                default:
-                    [NSException raise:@"Invalid horizontalIndex"
-                                format:@"Line chart tried to plot point at %lu", horizontalIndex];
-            }
+            return 30;
+        case 2:
+            return 40;
+        case 3:
+            return 80;
+        case 4:
+            return 100;
+        case 5:
+            return 50;
+        case 6:
+            return 25;
         default:
-            [NSException raise:@"Invalid lineIndex"
-                        format:@"Line chart tried to create line index %lu", lineIndex];
+            [NSException raise:@"Invalid horizontalIndex"
+                        format:@"Line chart tried to plot point at %lu", (unsigned long)horizontalIndex];
     }
     
     return 0;

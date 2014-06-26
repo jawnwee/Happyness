@@ -11,6 +11,6 @@
 @interface ODDGraphSiderView : UIView
 
 // Designated initializer
-- (instancetype)initWithElements:(NSDictionary *)elements;
+- (instancetype)initWithElements:(NSArray *)elements withFrame:(CGRect)frame;
 
 @end
