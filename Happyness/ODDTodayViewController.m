@@ -42,10 +42,13 @@
         self.tabBarItem = todayTabBarItem;
          // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
         _hasBeenClickedToday = NO;
-
-        // 24 HOUR OBJECT CREATION METHOD
         _note = [[ODDNote alloc] initWithNote:nil];
-        //
+
+        // Change testing 'submit' method
+        [[NSNotificationCenter defaultCenter] addObserver:self 
+                                                 selector:@selector(submit) 
+                                                     name:UIApplicationSignificantTimeChangeNotification 
+                                                   object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(keyboardWillShow:)
@@ -67,7 +70,6 @@
     [self setUpTodayView];
     [self setUpNoteView];
 
-    // If a happyness hasn't been added today, the screen will be gray
     if (self.hasBeenClickedToday == NO) {
         // every 24 hours, grayView should be back at the initial frame position
         self.grayView.backgroundColor = [UIColor grayColor];
@@ -82,8 +84,8 @@
     ODDHappyness *happyObject = [[ODDHappyness alloc] initWithFace:2];
     ODDHappyness *veryHappyObject = [[ODDHappyness alloc] initWithFace:1];
 
-    self.happynessObjects = [NSArray arrayWithObjects:verySadObject, sadObject, soSoObject,
-                                 happyObject, veryHappyObject, nil];
+    self.happynessObjects = [NSArray arrayWithObjects:veryHappyObject, happyObject, soSoObject,
+                                 sadObject, verySadObject, nil];
 
     for (int i = 0; i < self.happynessObjects.count; i++) {
         CGRect frame;
@@ -290,6 +292,7 @@
 }
 
 /************** Submit Test **************/
+/* Called every midnight by UIApplicationSignificantTimeChangeNotification */
 - (IBAction)submit:(id)sender {
     NSDate *date = [NSDate date];
     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
@@ -297,6 +300,15 @@
                                                                        note:self.note 
                                                                    dateTime:date];
     [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+
+    // Reset note, grayView, and hasBeenClickedToday for the new day
+    if (self.hasBeenClickedToday == YES) {
+        CGRect grayViewStartFrame = self.grayView.frame;
+        grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
+        self.grayView.frame = grayViewStartFrame;
+        self.hasBeenClickedToday = NO;
+    }
+    self.note = [[ODDNote alloc] initWithNote:nil];
 }
 
 
@@ -311,11 +323,9 @@
                                   self.grayView.frame = slideUpFrame;
                               }
                          completion:^(BOOL finished) {
-                                     [self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
+                                     //[self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
         self.hasBeenClickedToday = YES;
-
-
     }
 
     // Dismiss keyboard
