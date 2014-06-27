@@ -13,13 +13,6 @@
 
 @interface ODDHappynessEntryView ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *happynessImage;
-@property (weak, nonatomic) IBOutlet UILabel *happynessNote;
-@property (weak, nonatomic) IBOutlet UILabel *time;
-@property (weak, nonatomic) IBOutlet UILabel *date;
-@property (weak, nonatomic) IBOutlet UILabel *day;
-
-
 @end
 @implementation ODDHappynessEntryView
 

@@ -12,14 +12,15 @@
 #import "ODDHappynessEntryStore.h"
 #import "ODDHappyness.h"
 #import "ODDNote.h"
-#import "CalendarKit.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarRowCell.h"
+#import "ODDTimelineTableViewController.h"
 
-@interface ODDCalendarViewController () <CKCalendarViewDelegate>
+@interface ODDCalendarViewController ()
 
 @property (strong, nonatomic) IBOutlet ODDCalendarView *calendar;
 @property (strong, nonatomic) IBOutlet ODDHappynessEntryView *happynessEntryView;
+@property (strong, nonatomic) ODDTimelineTableViewController *timeline;
 
 @end
 
@@ -36,18 +37,24 @@
         self.tabBarItem = calendarTabBarItem;
 
         self.edgesForExtendedLayout = UIRectEdgeNone;
+
+        [[UINavigationBar appearance] setTitleTextAttributes: @{
+            NSForegroundColorAttributeName: [UIColor darkGrayColor],
+                       NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:18.0f],
+                                                                }];
+
         UIBarButtonItem *today = [[UIBarButtonItem alloc] init];
         today.title = @"Today";
         today.target = self;
         today.action = @selector(moveToToday);
-        UIBarButtonItem *timeLine = [[UIBarButtonItem alloc] init];
-        timeLine.title = @"Timeline";
-        timeLine.target = self;
         self.navigationItem.leftBarButtonItem = today;
-        [[UINavigationBar appearance] setTitleTextAttributes: @{
-            NSForegroundColorAttributeName: [UIColor darkGrayColor],
-                       NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:24.0f],
-                                                                }];
+
+        UIBarButtonItem *timeline = [[UIBarButtonItem alloc] init];
+        timeline.title = @"Timeline";
+        timeline.target = self;
+        timeline.action = @selector(segueToTimeline);
+        self.navigationItem.rightBarButtonItem = timeline;
+
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(updateTitle)
                        name:@"changeYear" object:nil];
@@ -76,9 +83,9 @@
     [super viewDidLoad];
 
     // Basic sanity test //
-    for (int i = 1 ; i <= 30; i++) {
+    for (int i = 1 ; i <= 500; i++) {
         int test = arc4random_uniform(5) + 1;
-        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(86400 * i)];
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
         ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
         ODDNote *testNote = [[ODDNote alloc] init];
         testNote.noteString = [NSMutableString stringWithFormat:@"testing123"];
@@ -91,29 +98,15 @@
 
     ODDCalendarView *calendarView = [[ODDCalendarView alloc] init];
     calendarView.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    // calendarView.rowCellClass = [TSQTACalendarRowCell class];
     calendarView.firstDate = [NSDate dateWithTimeIntervalSinceNow:-200 * 60 * 24 * 365 * 5];
     calendarView.lastDate = [NSDate dateWithTimeIntervalSinceNow:200 * 60 * 24 * 365 * 5];
     calendarView.rowCellClass = [ODDCalendarRowCell class];
-    calendarView.backgroundColor = [UIColor whiteColor];
+    calendarView.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 green:247.0 / 255.0 blue:249.0 / 255.0 alpha:1.0];
     calendarView.pagingEnabled = YES;
     CGFloat onePixel = 1.0f / [UIScreen mainScreen].scale;
     calendarView.contentInset = UIEdgeInsetsMake(0.0f, onePixel, 0.0f, onePixel);
     self.view = calendarView;
-
-//    _calendar = [ODDCalendarView new];
-//    [_calendar setDelegate:self];
-//    [[self view] addSubview:self.calendar];
-//    _happynessEntryView = [ODDHappynessEntryView createHappynessEntryView];
-//
-//    CGRect adjustedFrame = CGRectMake(0.0,
-//                                self.view.bounds.size.height - self.calendar.bounds.size.height,
-//                                self.happynessEntryView.bounds.size.width,
-//                                self.happynessEntryView.bounds.size.height);
-//
-//    self.happynessEntryView.frame = adjustedFrame;
-//    
-//    [self.view addSubview:self.happynessEntryView];
+    _timeline = [[ODDTimelineTableViewController alloc] initWithStyle:UITableViewStylePlain];
 
     // TODO: when view initally loads, must set the entryView to reflect current selected
     // NSDate *key = [self.calendar date];
@@ -141,19 +134,8 @@
     [(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:YES];
 }
 
-// Take HappynessEntry from HappynessEntryStore's dictionary and set the entry to its view
-- (void)calendarView:(CKCalendarView *)calendarView didSelectDate:(NSDate *)date {
-    ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:2];
-    ODDNote *testNote = [[ODDNote alloc] init];
-    testNote.noteString = [NSMutableString stringWithFormat:@"testing123"];
-    ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
-                                                                           note:testNote
-                                                                       dateTime:date];
-
-    [self.happynessEntryView setHappynessEntry:testEntry];
-}
-
-- (void)calendarView:(CKCalendarView *)CalendarView willSelectDate:(NSDate *)date {
+- (void)segueToTimeline {
+    [self.navigationController pushViewController:self.timeline animated:YES];
 }
 
 @end

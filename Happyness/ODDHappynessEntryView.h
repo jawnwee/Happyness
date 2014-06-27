@@ -14,6 +14,13 @@
 
 + (instancetype)createHappynessEntryView;
 
+@property (weak, nonatomic) IBOutlet UIImageView *happynessImage;
+@property (weak, nonatomic) IBOutlet UILabel *happynessNote;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+@property (weak, nonatomic) IBOutlet UILabel *date;
+@property (weak, nonatomic) IBOutlet UILabel *day;
+
+
 - (void)setHappynessEntry:(ODDHappynessEntry *)happyness;
 
 @end
