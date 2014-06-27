@@ -27,7 +27,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem.title = @"Analysis";
+        UIImage *analysisScrollSelected = [UIImage imageNamed:@"GraphTabSelected60.png"];
+        UIImage *analysisScrollUnselected = [UIImage imageNamed:@"GraphTabUnselected60.png"];
+        analysisScrollSelected = [analysisScrollSelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        analysisScrollUnselected = [analysisScrollUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *analysisScrollTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:analysisScrollUnselected selectedImage:analysisScrollSelected];
+        self.tabBarItem = analysisScrollTabBarItem;
     }
     return self;
 }

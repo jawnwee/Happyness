@@ -34,7 +34,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem.title = @"Today";
+        UIImage *todaySelected = [UIImage imageNamed:@"TodayTabSelected60.png"];
+        UIImage *todayUnselected = [UIImage imageNamed:@"TodayTabUnselected60.png"];
+        todaySelected = [todaySelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        todayUnselected = [todayUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *todayTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:todayUnselected selectedImage:todaySelected];
+        self.tabBarItem = todayTabBarItem;
          // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
         _hasBeenClickedToday = NO;
 
@@ -71,11 +76,11 @@
 
 // Helper method for setting up Today
 - (void)setUpTodayView {
-    ODDHappyness *verySadObject = [[ODDHappyness alloc] initWithFace:1];
-    ODDHappyness *sadObject = [[ODDHappyness alloc] initWithFace:2];
+    ODDHappyness *verySadObject = [[ODDHappyness alloc] initWithFace:5];
+    ODDHappyness *sadObject = [[ODDHappyness alloc] initWithFace:4];
     ODDHappyness *soSoObject = [[ODDHappyness alloc] initWithFace:3];
-    ODDHappyness *happyObject = [[ODDHappyness alloc] initWithFace:4];
-    ODDHappyness *veryHappyObject = [[ODDHappyness alloc] initWithFace:5];
+    ODDHappyness *happyObject = [[ODDHappyness alloc] initWithFace:2];
+    ODDHappyness *veryHappyObject = [[ODDHappyness alloc] initWithFace:1];
 
     self.happynessObjects = [NSArray arrayWithObjects:verySadObject, sadObject, soSoObject,
                                  happyObject, veryHappyObject, nil];
@@ -86,11 +91,16 @@
         frame.origin.y = 0;
         frame.size = self.scrollView.frame.size;
 
-        UIView *subview = [[UIView alloc] initWithFrame:frame];
         ODDHappyness *temp = [self.happynessObjects objectAtIndex:i];
+        UIView *subview = [[UIView alloc] initWithFrame:frame];
         subview.backgroundColor = temp.color;
 
+        UIImageView *imageSubView = [[UIImageView alloc] initWithImage:temp.face];
+        CGPoint newCenter = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2 - 49);
+        imageSubView.center = newCenter;
+
         [self.scrollView addSubview:subview];
+        [subview addSubview:imageSubView];
     }
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.happynessObjects.count,
@@ -304,6 +314,8 @@
                                      [self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
         self.hasBeenClickedToday = YES;
+
+
     }
 
     // Dismiss keyboard

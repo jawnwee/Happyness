@@ -21,7 +21,12 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.tabBarItem.title = @"Settings";
+        UIImage *settingsSelected = [UIImage imageNamed:@"SettingsTabSelected60.png"];
+        UIImage *settingsUnselected = [UIImage imageNamed:@"SettingsTabUnselected60.png"];
+        settingsSelected = [settingsSelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        settingsUnselected = [settingsUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *settingsTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:settingsUnselected selectedImage:settingsSelected];
+        self.tabBarItem = settingsTabBarItem;
     }
     return self;
 }

@@ -28,6 +28,13 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
+        UIImage *calendarSelected = [UIImage imageNamed:@"CalendarTabSelected60.png"];
+        UIImage *calendarUnselected = [UIImage imageNamed:@"CalendarTabUnselected60.png"];
+        calendarSelected = [calendarSelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        calendarUnselected = [calendarUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *calendarTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:calendarUnselected selectedImage:calendarSelected];
+        self.tabBarItem = calendarTabBarItem;
+
         self.edgesForExtendedLayout = UIRectEdgeNone;
         UIBarButtonItem *today = [[UIBarButtonItem alloc] init];
         today.title = @"Today";

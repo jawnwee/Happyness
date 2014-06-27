@@ -30,10 +30,14 @@
     ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
     ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
     ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
-    
     ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
     ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
     tbvc.viewControllers = @[today, calendarNav, analysisScroll, settings];
+
+    // Push tab bar icons down
+    for (UITabBarItem *item in tbvc.tabBar.items) {
+        item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
+    }
 
     self.window.rootViewController = tbvc;
     self.window.backgroundColor = [UIColor whiteColor];

@@ -16,7 +16,11 @@
 }
 
 + (UIColor *)customGreenColor {
-    return [UIColor colorWithRed:78.0 /255.0 green:215.0 / 255.0 blue:92.0 / 255.0 alpha:1.0];
+    // old green
+    // return [UIColor colorWithRed:78.0 /255.0 green:215.0 / 255.0 blue:92.0 / 255.0 alpha:1.0];
+
+    // Groupon green
+    return [UIColor colorWithRed:142.0 / 255.0 green:208.0 / 255.0 blue:60.0 / 255.0 alpha:1.0];
 }
 
 + (UIColor *)customBlueColor {
