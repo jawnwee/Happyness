@@ -38,19 +38,24 @@
 #pragma mark - Line Graph Setup
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     [self initializeLineGraph];
 }
 
 - (void)initializeLineGraph {
     self.lineGraphView.delegate = self;
     self.lineGraphView.dataSource = self;
+    CGRect rootFrame = self.view.frame;
     CGRect graphTitleFrame = self.graphTitle.frame;
-    self.lineGraphView.frame = CGRectMake(graphTitleFrame.origin.x + 25,
-                                         graphTitleFrame.origin.y + 30,
-                                         475,
-                                         225);
+    CGFloat heighPadding = CGRectGetMaxY(graphTitleFrame);
+    self.lineGraphView.frame = CGRectMake(graphTitleFrame.origin.x,
+                                         heighPadding,
+                                         rootFrame.size.width - (graphTitleFrame.origin.x * 2),
+                                         rootFrame.size.height - (heighPadding * 2));
     self.lineGraphView.maximumValue = 100;
     self.lineGraphView.minimumValue = 0;
+    self.lineGraphView.backgroundColor = [UIColor lightGrayColor];
     ODDGraphFooterView *footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Mon",
                                                                                 @"Tues",
                                                                                 @"Wed",
@@ -58,8 +63,8 @@
                                                                                 @"Fri",
                                                                                 @"Sat",
                                                                                 @"Sun"]
-                                                                    withFrame:CGRectMake(0,
-                                                                                         0,
+                                                                    withFrame:CGRectMake(graphTitleFrame.origin.x,
+                                                                                         CGRectGetMaxY(self.lineGraphView.frame),
                                                                                          self.lineGraphView.frame.size.width,
                                                                                          20)];
     ODDGraphSiderView *sider = [[ODDGraphSiderView alloc] initWithElements:@[@"100",
@@ -68,12 +73,12 @@
                                                                              @"40",
                                                                              @"20",
                                                                              @"0"]
-                                                                 withFrame:CGRectMake(self.lineGraphView.frame.origin.x - 20,
+                                                                 withFrame:CGRectMake(self.lineGraphView.frame.origin.x - 30,
                                                                                       self.lineGraphView.frame.origin.y,
                                                                                       30,
                                                                                       self.lineGraphView.frame.size.height)];
     [self.view addSubview:sider];
-    self.lineGraphView.footerView = footer;
+    [self.view addSubview:footer];
     [self.view addSubview:self.lineGraphView];
     [self.lineGraphView reloadData];
 }
@@ -113,21 +118,38 @@
     return 0;
 }
 
+#pragma mark - Touch Events
+
+- (UIColor *)verticalSelectionColorForLineChartView:(JBLineChartView *)lineChartView {
+    return [UIColor redColor];
+}
+
+- (CGFloat)verticalSelectionWidthForLineChartView:(JBLineChartView *)lineChartView {
+    return 3.0;
+}
+
+- (UIColor *)lineChartView:(JBLineChartView *)lineChartView
+    selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
+    return [UIColor lightGrayColor];
+}
+
+- (void)lineChartView:(JBLineChartView *)lineChartView
+    didSelectLineAtIndex:(NSUInteger)lineIndex
+         horizontalIndex:(NSUInteger)horizontalIndex {
+    NSLog(@"HI LINE");
+}
+
 #pragma mark - Amount of data to graph
 
-- (IBAction)graphAll:(id)sender{
+- (IBAction)graphAll:(id)sender {
     
 }
 
-- (IBAction)graphOneMonth:(id)sender{
+- (IBAction)graphShortTerm:(id)sender {
     
 }
 
-- (IBAction)graphOneWeek:(id)sender{
-    
-}
-
-- (IBAction)graphOneYear:(id)sender{
+- (IBAction)graphMedium:(id)sender {
     
 }
 

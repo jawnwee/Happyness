@@ -8,6 +8,8 @@
 
 #import "ODDBarGraphViewController.h"
 #import "JBBarChartView.h"
+#import "ODDGraphFooterView.h"
+#import "ODDGraphSiderView.h"
 
 @interface ODDBarGraphViewController () <JBBarChartViewDataSource, JBBarChartViewDelegate>
 
@@ -36,19 +38,48 @@
 #pragma mark - Bar Graph Setup
 
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    
     [self initializeBarGraph];
 }
 
 - (void)initializeBarGraph {
     self.barChartView.delegate = self;
     self.barChartView.dataSource = self;
+    CGRect rootFrame = self.view.frame;
     CGRect graphTitleFrame = self.graphTitle.frame;
-    self.barChartView.frame = CGRectMake(graphTitleFrame.origin.x + 25,
-                                         graphTitleFrame.origin.y + 25,
-                                         475,
-                                         200);
+    CGFloat heighPadding = CGRectGetMaxY(graphTitleFrame);
+    self.barChartView.frame = CGRectMake(graphTitleFrame.origin.x,
+                                          heighPadding,
+                                          rootFrame.size.width - (graphTitleFrame.origin.x * 2),
+                                          rootFrame.size.height - (heighPadding * 2));
+
     self.barChartView.minimumValue = 0;
-    self.barChartView.maximumValue = 5;
+    self.barChartView.maximumValue = 100;
+    self.barChartView.backgroundColor = [UIColor lightGrayColor];
+    ODDGraphFooterView *footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Mon",
+                                                                                @"Tues",
+                                                                                @"Wed",
+                                                                                @"Thurs",
+                                                                                @"Fri",
+                                                                                @"Sat",
+                                                                                @"Sun"]
+                                                                    withFrame:CGRectMake(graphTitleFrame.origin.x,
+                                                                                         CGRectGetMaxY(self.barChartView.frame),
+                                                                                         self.barChartView.frame.size.width,
+                                                                                         20)];
+    ODDGraphSiderView *sider = [[ODDGraphSiderView alloc] initWithElements:@[@"100",
+                                                                             @"80",
+                                                                             @"60",
+                                                                             @"40",
+                                                                             @"20",
+                                                                             @"0"]
+                                                                 withFrame:CGRectMake(self.barChartView.frame.origin.x - 30,
+                                                                                      self.barChartView.frame.origin.y,
+                                                                                      30,
+                                                                                      self.barChartView.frame.size.height)];
+    [self.view addSubview:sider];
+    [self.view addSubview:footer];
     [self.view addSubview:self.barChartView];
     [self.barChartView reloadData];
 }
@@ -81,19 +112,15 @@
 
 #pragma mark - Amount of data to graph
 
-- (IBAction)graphAll:(id)sender{
+- (IBAction)graphAll:(id)sender {
     
 }
 
-- (IBAction)graphOneMonth:(id)sender{
+- (IBAction)graphShortTerm:(id)sender {
     
 }
 
-- (IBAction)graphOneWeek:(id)sender{
-    
-}
-
-- (IBAction)graphOneYear:(id)sender{
+- (IBAction)graphMedium:(id)sender {
     
 }
 

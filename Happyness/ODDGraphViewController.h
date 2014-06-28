@@ -10,11 +10,14 @@
 
 @interface ODDGraphViewController : UIViewController
 
-@property (nonatomic,weak) IBOutlet UILabel *graphTitle;
+@property (nonatomic, strong) IBOutlet UILabel *graphTitle;
+@property (nonatomic, strong) IBOutlet UIButton *graphAll;
+@property (nonatomic, strong) IBOutlet UIButton *graphShortTerm;
+@property (nonatomic, strong) IBOutlet UIButton *graphMedium;
+@property (nonatomic, strong) UIView *topFrame;
 
-- (IBAction)graphOneWeek:(id)sender;
-- (IBAction)graphOneMonth:(id)sender;
-- (IBAction)graphOneYear:(id)sender;
+- (IBAction)graphShortTerm:(id)sender;
+- (IBAction)graphMedium:(id)sender;
 - (IBAction)graphAll:(id)sender;
 
 @end

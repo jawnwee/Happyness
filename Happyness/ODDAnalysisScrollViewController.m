@@ -47,11 +47,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Variables below used for autolayout.
+    // Everything should depend on the rootFrame and tabBarFrame
+    CGRect rootFrame = self.view.bounds;
+    CGSize rootSize = rootFrame.size;
+    CGRect tabBarFrame = self.tabBarController.tabBar.frame;
+    CGSize tabBarSize = tabBarFrame.size;
+    CGPoint tabBarPosition = tabBarFrame.origin;
+    NSUInteger numberOfScreens = 2;
 	
     // Initialize and add custom scroll view
-    CGRect scrollFrame = CGRectMake(0, 0, 320, 568);
+    CGRect scrollFrame = CGRectMake(0, 0, rootSize.width, rootSize.height);
     self.scrollView = [[ODDAnalysisScrollView alloc] initWithFrame:scrollFrame];
-    self.scrollView.contentSize = CGSizeMake(320 * 2, 568);
+    self.scrollView.contentSize = CGSizeMake(rootSize.width * numberOfScreens, rootSize.height);
     [self.scrollView setPagingEnabled:YES];
     self.scrollView.delegate = self;
     self.scrollView.showsHorizontalScrollIndicator = NO;
@@ -62,7 +70,7 @@
     self.analysis = [[ODDAnalysisViewController alloc] init];
     self.landscapeAnalysis = [[ODDLandscapeAnalysisViewController alloc] init];
     CGRect landscapeFrame = self.landscapeAnalysis.view.frame;
-    landscapeFrame.origin.x = 320;
+    landscapeFrame.origin.x = rootSize.width;
     landscapeFrame.origin.y = 0;
     self.landscapeAnalysis.view.frame = landscapeFrame;
     [self.scrollView addSubview:self.analysis.view];
@@ -70,9 +78,14 @@
     
     // Initialize and add page control
     self.pageControl = [[UIPageControl alloc] init];
-    self.pageControl.frame = CGRectMake(0, 500, 320, 25);
-    self.pageControl.numberOfPages = 2;
+    self.pageControl.frame = CGRectMake(tabBarPosition.x,
+                                        tabBarPosition.y - (tabBarSize.height / 3),
+                                        tabBarSize.width,
+                                        tabBarSize.height / 3);
+    self.pageControl.numberOfPages = numberOfScreens;
     self.pageControl.currentPage = 0;
+    self.pageControl.pageIndicatorTintColor = [UIColor darkGrayColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
     [self.view addSubview:self.pageControl];
     
     // Set up notification detection for when device rotates
@@ -82,8 +95,6 @@
                                              selector:@selector(orientationChanged:)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:[UIDevice currentDevice]];
-    
-//    NSLog(@"%@", NSStringFromCGRect(self.tabBarController.tabBar.frame));
 }
 
 /*
