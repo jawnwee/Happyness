@@ -40,14 +40,14 @@
         todayUnselected = [todayUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UITabBarItem *todayTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:todayUnselected selectedImage:todaySelected];
         self.tabBarItem = todayTabBarItem;
-         // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
+        // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
         _hasBeenClickedToday = NO;
         _note = [[ODDNote alloc] initWithNote:nil];
 
         // Change testing 'submit' method
-        [[NSNotificationCenter defaultCenter] addObserver:self 
-                                                 selector:@selector(submit) 
-                                                     name:UIApplicationSignificantTimeChangeNotification 
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(submit)
+                                                     name:UIApplicationSignificantTimeChangeNotification
                                                    object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -69,11 +69,7 @@
     // Do any additional setup after loading the view from its nib.
     [self setUpTodayView];
     [self setUpNoteView];
-
-    if (self.hasBeenClickedToday == NO) {
-        // every 24 hours, grayView should be back at the initial frame position
-        self.grayView.backgroundColor = [UIColor grayColor];
-    }
+    self.grayView.backgroundColor = [UIColor grayColor];
 }
 
 // Helper method for setting up Today
@@ -85,7 +81,7 @@
     ODDHappyness *veryHappyObject = [[ODDHappyness alloc] initWithFace:1];
 
     self.happynessObjects = [NSArray arrayWithObjects:veryHappyObject, happyObject, soSoObject,
-                                 sadObject, verySadObject, nil];
+                             sadObject, verySadObject, nil];
 
     for (int i = 0; i < self.happynessObjects.count; i++) {
         CGRect frame;
@@ -106,11 +102,11 @@
     }
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.happynessObjects.count,
-                                         self.scrollView.frame.size.height);
+                                             self.scrollView.frame.size.height);
 
     // Set up initial happyness view to show
     CGRect initialFrame;
-    initialFrame.size = CGSizeMake(self.scrollView.frame.size.width, 
+    initialFrame.size = CGSizeMake(self.scrollView.frame.size.width,
                                    self.scrollView.frame.size.height);
     initialFrame.origin.x = self.scrollView.frame.size.width * 2;
     initialFrame.origin.y = 0;
@@ -139,21 +135,21 @@
 /* Still need to make sure note view slides down every new day */
 - (void)setUpNoteView {
     self.noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                  -self.view.frame.size.height, 
-                                                                  320,
-                                                                  self.view.frame.size.height)];
+                                                                      -self.view.frame.size.height,
+                                                                      320,
+                                                                      self.view.frame.size.height)];
     self.noteContainerView.backgroundColor = [UIColor clearColor];
     self.noteView = [[ODDTodayNoteView alloc] initWithFrame:CGRectMake(0,
-                                                                   self.view.frame.size.height - 34,
-                                                                   270,
-                                                                   40)];
+                                                                       self.view.frame.size.height - 34,
+                                                                       270,
+                                                                       40)];
     self.noteView.delegate = self;
 
 
     self.clearAllButton = [[UIButton alloc] initWithFrame:CGRectMake(270,
-                                                                self.view.frame.size.height - 34, 
-                                                                50, 
-                                                                 34)];
+                                                                     self.view.frame.size.height - 34,
+                                                                     50,
+                                                                     34)];
     self.clearAllButton.backgroundColor = [UIColor lightGrayColor];
     self.clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
     [self.clearAllButton setTitle:@"X" forState:UIControlStateNormal];
@@ -218,7 +214,7 @@
 	// get a rect for the textView frame
 	CGRect containerFrame = self.noteContainerView.frame;
     // Matt: play with height values to make textView move upon keyboard showing
-    containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height + 
+    containerFrame.origin.y = self.view.bounds.size.height - (keyboardBounds.size.height +
                                                               self.noteContainerView.frame.size.height);
 	// animations settings
 	[UIView beginAnimations:nil context:NULL];
@@ -272,7 +268,7 @@
 - (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
 
     if ([text isEqualToString:@"\n"]) {
-            [self.noteView resignFirstResponder];
+        [self.noteView resignFirstResponder];
     }
     return growingTextView.text.length + (text.length - range.length) <= 140;
 }
@@ -293,23 +289,45 @@
 
 /************** Submit Test **************/
 /* Called every midnight by UIApplicationSignificantTimeChangeNotification */
-- (IBAction)submit:(id)sender {
+- (void)submit {
     NSDate *date = [NSDate date];
     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
-    ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness 
-                                                                       note:self.note 
+    ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
+                                                                       note:self.note
                                                                    dateTime:date];
     [[ODDHappynessEntryStore sharedStore] addEntry:entry];
 
     // Reset note, grayView, and hasBeenClickedToday for the new day
     if (self.hasBeenClickedToday == YES) {
-        CGRect grayViewStartFrame = self.grayView.frame;
-        grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
-        self.grayView.frame = grayViewStartFrame;
+        CGRect startFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        self.grayView.frame = startFrame;
         self.hasBeenClickedToday = NO;
+            NSLog(@"Testing midnight submit resetting hasBeenClickedToday");
     }
+    self.noteView.text = @"";
     self.note = [[ODDNote alloc] initWithNote:nil];
 }
+/*
+ - (IBAction)submit:(id)sender {
+ NSDate *date = [NSDate date];
+ ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
+ ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
+ note:self.note
+ dateTime:date];
+ [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+
+ // Reset note, grayView, and hasBeenClickedToday for the new day
+ if (self.hasBeenClickedToday == YES) {
+ CGRect grayViewStartFrame = self.grayView.frame;
+ grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
+ self.grayView.frame = grayViewStartFrame;
+ self.hasBeenClickedToday = NO;
+ }
+ self.noteView.text = @"";
+ self.note = [[ODDNote alloc] initWithNote:nil];
+ self.note = [[ODDNote alloc] initWithNote:nil];
+ }
+ */
 
 
 # pragma mark - Screen Transitions
@@ -320,10 +338,10 @@
         slideUpFrame.origin.y -= slideUpFrame.size.height;
         [UIView animateWithDuration:0.2
                          animations:^{
-                                  self.grayView.frame = slideUpFrame;
-                              }
+                             self.grayView.frame = slideUpFrame;
+                         }
                          completion:^(BOOL finished) {
-                                     //[self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
+                             //[self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
         self.hasBeenClickedToday = YES;
     }

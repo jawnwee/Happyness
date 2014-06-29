@@ -10,7 +10,8 @@
 
 @interface ODDSettingsViewController ()
 
-@property (weak, nonatomic) IBOutlet UIDatePicker *reminder;
+@property (weak, nonatomic) IBOutlet UIDatePicker *picker;
+@property (weak, nonatomic) IBOutlet UISwitch *reminderSwitch;
 
 @end
 
@@ -27,6 +28,8 @@
         settingsUnselected = [settingsUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UITabBarItem *settingsTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:settingsUnselected selectedImage:settingsSelected];
         self.tabBarItem = settingsTabBarItem;
+
+        //[_picker addTarget:self action:@selector(testPrint:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
@@ -44,5 +47,22 @@
 }
 - (IBAction)eraseData:(id)sender {
 }
+
+- (IBAction)testSwitch:(id)sender {
+    if (self.reminderSwitch.isOn) {
+        NSDate *date = self.picker.date;
+        UILocalNotification *reminder = [[UILocalNotification alloc] init];
+        reminder.alertBody = @"How was your day?";
+        reminder.fireDate = date;
+
+        [[UIApplication sharedApplication] scheduleLocalNotification:reminder];
+    }
+}
+
+/*
+- (IBAction)testPrint:(id)sender {
+    NSLog(@"Is picker working?");
+}
+*/
 
 @end
