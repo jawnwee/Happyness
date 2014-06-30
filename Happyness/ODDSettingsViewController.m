@@ -28,7 +28,7 @@
         settingsUnselected = [settingsUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UITabBarItem *settingsTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:settingsUnselected selectedImage:settingsSelected];
         self.tabBarItem = settingsTabBarItem;
-        //[_picker addTarget:self action:@selector(testPrint:) forControlEvents:UIControlEventValueChanged];
+        [_picker addTarget:self action:@selector(reminderSwitchToggled:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
 }
@@ -49,6 +49,7 @@
 }
 
 - (IBAction)reminderSwitchToggled:(id)sender {
+    NSLog(@"get called");
     if (self.reminderSwitch.isOn) {
         NSDate *date = self.picker.date;
         UILocalNotification *reminder = [[UILocalNotification alloc] init];
