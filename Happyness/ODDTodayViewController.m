@@ -298,33 +298,33 @@
         CGRect startFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         self.grayView.frame = startFrame;
         self.hasBeenClickedToday = NO;
-            NSLog(@"Testing midnight submit resetting hasBeenClickedToday");
+        NSLog(@"Testing midnight submit resetting hasBeenClickedToday");
         [self.view bringSubviewToFront:self.grayView];
     }
     self.noteView.text = @"";
     self.note = [[ODDNote alloc] initWithNote:nil];
 }
-/*
- - (IBAction)submit:(id)sender {
- NSDate *date = [NSDate date];
- ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
- ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
- note:self.note
- dateTime:date];
- [[ODDHappynessEntryStore sharedStore] addEntry:entry];
 
- // Reset note, grayView, and hasBeenClickedToday for the new day
- if (self.hasBeenClickedToday == YES) {
- CGRect grayViewStartFrame = self.grayView.frame;
- grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
- self.grayView.frame = grayViewStartFrame;
- self.hasBeenClickedToday = NO;
+ - (IBAction)submit:(id)sender {
+     NSDate *date = [NSDate date];
+     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
+     ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
+     note:self.note
+     dateTime:date];
+     [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+
+     // Reset note, grayView, and hasBeenClickedToday for the new day
+     if (self.hasBeenClickedToday == YES) {
+         CGRect grayViewStartFrame = self.grayView.frame;
+         grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
+         self.grayView.frame = grayViewStartFrame;
+         self.hasBeenClickedToday = NO;
+         [self.view bringSubviewToFront:self.grayView];
+     }
+     self.noteView.text = @"";
+     self.note = [[ODDNote alloc] initWithNote:nil];
+     self.note = [[ODDNote alloc] initWithNote:nil];
  }
- self.noteView.text = @"";
- self.note = [[ODDNote alloc] initWithNote:nil];
- self.note = [[ODDNote alloc] initWithNote:nil];
- }
- */
 
 
 # pragma mark - Screen Transitions
@@ -338,14 +338,14 @@
                              self.grayView.frame = slideUpFrame;
                          }
                          completion:^(BOOL finished) {
-                             //[self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
-                             [self.view sendSubviewToBack:self.grayView]; // Sending to back is current fix for iOS 8, test again later
+                             [self.view sendSubviewToBack:self.grayView];
+                             // [self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
         self.hasBeenClickedToday = YES;
     }
 
     // Dismiss keyboard
-    if ([self.noteView isFirstResponder]) {
+    else if ([self.noteView isFirstResponder]) {
         [self.noteView resignFirstResponder];
     }
 }

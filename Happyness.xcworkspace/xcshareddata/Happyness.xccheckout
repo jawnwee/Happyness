@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>8291F33D-A75C-4A04-9A40-447D5A8DC314</string>
+	<string>25C4DAA5-1790-42D8-8CFA-5CABF55069EF</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Happyness</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>9DC6C4CB-A44A-479C-94B2-590D5134E768</key>
+		<key>2CAD44A8-BC44-4EBF-8D34-53766DEE5D84</key>
 		<string>https://github.com/jjojohjohn/Happyness.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Happyness.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>9DC6C4CB-A44A-479C-94B2-590D5134E768</key>
+		<key>2CAD44A8-BC44-4EBF-8D34-53766DEE5D84</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>9DC6C4CB-A44A-479C-94B2-590D5134E768</string>
+	<string>2CAD44A8-BC44-4EBF-8D34-53766DEE5D84</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>9DC6C4CB-A44A-479C-94B2-590D5134E768</string>
+			<string>2CAD44A8-BC44-4EBF-8D34-53766DEE5D84</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Happyness</string>
 		</dict>

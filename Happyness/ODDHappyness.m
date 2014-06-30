@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         // commented out for testing purposes [self setFaceImage:faceValue];
+        _value = faceValue;
         [self setFaceImage:faceValue];
         [self setColor: faceValue];
         [self setRating:faceValue];

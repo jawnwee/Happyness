@@ -10,6 +10,7 @@
 
 @interface ODDHappyness : NSObject
 
+@property (nonatomic) NSInteger value;
 @property (strong, nonatomic, readonly) UIImage *face;
 @property (strong, nonatomic, readonly) UIColor *color;
 @property (nonatomic, readonly) NSInteger rating;
