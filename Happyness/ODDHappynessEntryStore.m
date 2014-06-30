@@ -28,11 +28,9 @@
     return sharedStore;
 }
 
-+ (NSMutableArray *)sortedStore {
-    NSMutableArray *entries =
-        [[NSMutableArray alloc] initWithArray:
-            [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues]];
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+- (NSMutableArray *)sortedStoreWithAscending:(BOOL)isAscending {
+    NSMutableArray *entries = [[NSMutableArray alloc] initWithArray:[self.privateEntries allValues]];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:isAscending];
     entries = [[NSMutableArray alloc] initWithArray:
                 [entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
     return entries;
