@@ -286,7 +286,7 @@
 /* Called every midnight by UIApplicationSignificantTimeChangeNotification */
 
 - (void)submit {
-    NSDate *date = [NSDate date];
+    NSDate *date = [[NSDate date] dateByAddingTimeInterval:-86400.0];
     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
     ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
                                                                        note:self.note
@@ -306,7 +306,7 @@
 }
 
  - (IBAction)submit:(id)sender {
-     NSDate *date = [NSDate date];
+     NSDate *date = [[NSDate date] dateByAddingTimeInterval:-86400.0];
      ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
      ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
      note:self.note
