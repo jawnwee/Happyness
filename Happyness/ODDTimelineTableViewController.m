@@ -32,13 +32,7 @@
         self.navigationItem.title = @"Timeline";
         _data = [[NSMutableDictionary alloc] init];
         _headers = [[NSMutableArray alloc] init];
-        _entries = [[NSMutableArray alloc] initWithArray:
-                            [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues]];
-
-        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-
-        _entries = [[NSMutableArray alloc] initWithArray:
-                        [_entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+        _entries = [ODDHappynessEntryStore sortedStore];
 
         NSDateFormatter *monthDateFormatter = [[NSDateFormatter alloc] init];
         NSString *dateComponents = @"MMMM YYYY";

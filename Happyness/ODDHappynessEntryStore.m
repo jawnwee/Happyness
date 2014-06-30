@@ -28,6 +28,16 @@
     return sharedStore;
 }
 
++ (NSMutableArray *)sortedStore {
+    NSMutableArray *entries =
+        [[NSMutableArray alloc] initWithArray:
+            [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues]];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
+    entries = [[NSMutableArray alloc] initWithArray:
+                [entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+    return entries;
+}
+
 // If a programmar calls [[ODDHappynessEntryStore alloc] init], throw an exception
 - (instancetype)init {
     @throw [NSException exceptionWithName:@"Singleton" 

@@ -15,6 +15,7 @@
 @property (strong, nonatomic, readonly) NSDictionary *happynessEntries;
 
 + (instancetype)sharedStore;
++ (NSMutableArray *)sortedStore;
 
 - (void)addEntry:(ODDHappynessEntry *)entry;
 - (void)removeEntry:(ODDHappynessEntry *)entry;
