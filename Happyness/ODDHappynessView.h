@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDHappyness.h"
 
-@interface ODDHappynessView : UIImageView
+@interface ODDHappynessView : UIView
+
+- (id)initWithFrame:(CGRect)frame happyness:(ODDHappyness *)happynessObject;
 
 @end
