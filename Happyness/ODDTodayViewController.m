@@ -7,6 +7,7 @@
 //
 
 #import "ODDTodayViewController.h"
+#import "ODDHappynessView.h"
 #import "ODDTodayNoteView.h"
 #import "ODDHappyness.h"
 #import "ODDNote.h"
@@ -90,15 +91,9 @@
         frame.size = self.scrollView.frame.size;
 
         ODDHappyness *temp = [self.happynessObjects objectAtIndex:i];
-        UIView *subview = [[UIView alloc] initWithFrame:frame];
-        subview.backgroundColor = temp.color;
+        ODDHappynessView *happynessView = [[ODDHappynessView alloc] initWithFrame:frame happyness:temp];
 
-        UIImageView *imageSubView = [[UIImageView alloc] initWithImage:temp.face];
-        CGPoint newCenter = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2 - 49);
-        imageSubView.center = newCenter;
-
-        [self.scrollView addSubview:subview];
-        [subview addSubview:imageSubView];
+        [self.scrollView addSubview:happynessView];
     }
 
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * self.happynessObjects.count,
@@ -289,6 +284,7 @@
 
 /************** Submit Test **************/
 /* Called every midnight by UIApplicationSignificantTimeChangeNotification */
+
 - (void)submit {
     NSDate *date = [NSDate date];
     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
@@ -303,6 +299,7 @@
         self.grayView.frame = startFrame;
         self.hasBeenClickedToday = NO;
             NSLog(@"Testing midnight submit resetting hasBeenClickedToday");
+        [self.view bringSubviewToFront:self.grayView];
     }
     self.noteView.text = @"";
     self.note = [[ODDNote alloc] initWithNote:nil];
@@ -342,6 +339,7 @@
                          }
                          completion:^(BOOL finished) {
                              //[self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
+                             [self.view sendSubviewToBack:self.grayView]; // Sending to back is current fix for iOS 8, test again later
                          }];
         self.hasBeenClickedToday = YES;
     }

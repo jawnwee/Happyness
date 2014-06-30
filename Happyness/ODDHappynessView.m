@@ -10,13 +10,24 @@
 
 @implementation ODDHappynessView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame happyness:(ODDHappyness *)happynessObject
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setUpColorAndFace:happynessObject];
     }
     return self;
+}
+
+- (void)setUpColorAndFace:(ODDHappyness *)happynessObject {
+    self.backgroundColor = happynessObject.color;
+
+    UIImageView *imageSubView = [[UIImageView alloc] initWithImage:happynessObject.face];
+    CGPoint imageCenter = CGPointMake(self.frame.size.width / 2, self.frame.size.height / 2 - 49);
+    imageSubView.center = imageCenter;
+
+    [self addSubview:imageSubView];
 }
 
 /*
