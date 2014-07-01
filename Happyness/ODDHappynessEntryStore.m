@@ -11,7 +11,8 @@
 
 @interface ODDHappynessEntryStore ()
 
-@property(nonatomic) NSMutableDictionary *privateEntries;
+@property (strong, nonatomic) NSMutableDictionary *privateEntries;
+@property (strong, nonatomic) NSMutableArray *entries;
 
 @end
 
@@ -28,12 +29,16 @@
     return sharedStore;
 }
 
-- (NSMutableArray *)sortedStoreWithAscending:(BOOL)isAscending {
-    NSMutableArray *entries = [[NSMutableArray alloc] initWithArray:[self.privateEntries allValues]];
+- (void)sortStore:(BOOL)isAscending {
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:isAscending];
-    entries = [[NSMutableArray alloc] initWithArray:
-                [entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
-    return entries;
+    _entries = [[NSMutableArray alloc] initWithArray:[self.privateEntries allValues]];
+    self.entries = [[NSMutableArray alloc] initWithArray:
+               [self.entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+
+}
+
+- (NSMutableArray *)sortedStore {
+    return self.entries;
 }
 
 // If a programmar calls [[ODDHappynessEntryStore alloc] init], throw an exception
@@ -48,6 +53,7 @@
     self = [super init];
     if (self) {
         _privateEntries = [[NSMutableDictionary alloc] init];
+        _entries = [[NSMutableArray alloc] initWithArray:[self.privateEntries allValues]];
     }
     return self;
 }

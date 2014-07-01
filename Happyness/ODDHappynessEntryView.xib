@@ -24,18 +24,13 @@
                         <color key="backgroundColor" red="0.41285852298887349" green="0.95343419012482367" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="27" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqd-06-HjE">
-                        <rect key="frame" x="265" y="18" width="42" height="36"/>
+                        <rect key="frame" x="265" y="19" width="42" height="36"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="36"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="12:57 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g8V-sG-P6H">
-                        <rect key="frame" x="257" y="4" width="50" height="16"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Friday" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ft3-uW-UjK">
-                        <rect key="frame" x="239" y="52" width="68" height="17"/>
+                        <rect key="frame" x="239" y="5" width="68" height="15"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -47,7 +42,6 @@
                 <outlet property="day" destination="Ft3-uW-UjK" id="UtB-Vk-bQr"/>
                 <outlet property="happynessImage" destination="ZcS-d8-vas" id="s3C-qx-d0Z"/>
                 <outlet property="happynessNote" destination="Krg-Xx-n8a" id="nls-1P-my0"/>
-                <outlet property="time" destination="g8V-sG-P6H" id="J3d-Gu-sOj"/>
             </connections>
             <point key="canvasLocation" x="139" y="147"/>
         </tableViewCell>

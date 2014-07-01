@@ -17,7 +17,6 @@
 @interface ODDTodayViewController () <UIScrollViewDelegate>
 @property (nonatomic) BOOL hasBeenClickedToday;
 @property (strong, nonatomic) NSArray *happynessObjects;
-@property (strong, nonatomic) ODDTodayNoteView *noteView;
 @property (strong, nonatomic) UIView *noteContainerView;
 @property (strong, nonatomic) UIButton *clearAllButton;
 @property (strong, nonatomic) ODDNote *note;
@@ -30,6 +29,9 @@
 @synthesize pageControl = _pageControl;
 @synthesize grayView = _grayView;
 
+
+#pragma mark - Initializations
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,10 +40,13 @@
         UIImage *todaySelected = [UIImage imageNamed:@"TodayTabSelected60.png"];
         UIImage *todayUnselected = [UIImage imageNamed:@"TodayTabUnselected60.png"];
         todaySelected = [todaySelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        todayUnselected = [todayUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        UITabBarItem *todayTabBarItem = [[UITabBarItem alloc] initWithTitle:nil image:todayUnselected selectedImage:todaySelected];
+        todayUnselected = [todayUnselected
+                                        imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        UITabBarItem *todayTabBarItem = [[UITabBarItem alloc]
+                                                            initWithTitle:nil image:todayUnselected
+                                                            selectedImage:todaySelected];
         self.tabBarItem = todayTabBarItem;
-        // I'm not sure if init/loading will incorrectly toggbecause things should only init once right? I'm declaring this explicity as a reminder to resolve this issue later
+
         _hasBeenClickedToday = NO;
         _note = [[ODDNote alloc] initWithNote:nil];
 
@@ -64,6 +69,8 @@
     return self;
 }
 
+#pragma mark - View Cycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -72,6 +79,15 @@
     [self setUpNoteView];
     self.grayView.backgroundColor = [UIColor grayColor];
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if (self.hasBeenClickedToday) {
+        [self submit];
+    }
+}
+
+#pragma mark - Today View Setup
 
 // Helper method for setting up Today
 - (void)setUpTodayView {
@@ -129,26 +145,24 @@
 
 /* Still need to make sure note view slides down every new day */
 - (void)setUpNoteView {
-    self.noteContainerView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                      -self.view.frame.size.height,
-                                                                      320,
+    self.noteContainerView = [[UIView alloc]
+                              initWithFrame:CGRectMake(0, -self.view.frame.size.height, 320,
                                                                       self.view.frame.size.height)];
     self.noteContainerView.backgroundColor = [UIColor clearColor];
-    self.noteView = [[ODDTodayNoteView alloc] initWithFrame:CGRectMake(0,
-                                                                       self.view.frame.size.height - 34,
-                                                                       270,
-                                                                       40)];
+
+    self.noteView = [[ODDTodayNoteView alloc]
+                            initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 270, 40)];
     self.noteView.delegate = self;
 
 
-    self.clearAllButton = [[UIButton alloc] initWithFrame:CGRectMake(270,
-                                                                     self.view.frame.size.height - 34,
-                                                                     50,
-                                                                     34)];
+    self.clearAllButton = [[UIButton alloc]
+                           initWithFrame:CGRectMake(270, self.view.frame.size.height - 34, 50, 34)];
+
     self.clearAllButton.backgroundColor = [UIColor lightGrayColor];
     self.clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
     [self.clearAllButton setTitle:@"X" forState:UIControlStateNormal];
-    [self.clearAllButton addTarget:self action:@selector(clearButtonSelected) forControlEvents:UIControlEventTouchUpInside];
+    [self.clearAllButton addTarget:self action:@selector(clearButtonSelected) 
+                  forControlEvents:UIControlEventTouchUpInside];
 
     /* entryBackground; edit these lines for back
      UIImage *rawEntryBackground = [UIImage imageNamed:@"MessageEntryInputField.png"];
@@ -279,50 +293,37 @@
 
 - (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
     self.note.noteString = growingTextView.text;
-    NSLog(@"Note contains string: %@", self.note.noteString);
 }
 
-/************** Submit Test **************/
-/* Called every midnight by UIApplicationSignificantTimeChangeNotification */
+#pragma mark - Submit Logic
 
+/* Submit after user leaves today view controller*/
 - (void)submit {
-    NSDate *date = [[NSDate date] dateByAddingTimeInterval:-86400.0];
     ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
     ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
                                                                        note:self.note
-                                                                   dateTime:date];
+                                                                   dateTime:[NSDate date]];
     [[ODDHappynessEntryStore sharedStore] addEntry:entry];
-
-    // Reset note, grayView, and hasBeenClickedToday for the new day
-    if (self.hasBeenClickedToday == YES) {
-        CGRect startFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        self.grayView.frame = startFrame;
-        self.hasBeenClickedToday = NO;
-        NSLog(@"Testing midnight submit resetting hasBeenClickedToday");
-        [self.view bringSubviewToFront:self.grayView];
-    }
-    self.noteView.text = @"";
-    self.note = [[ODDNote alloc] initWithNote:nil];
 }
 
- - (IBAction)submit:(id)sender {
+/* Called every midnight by UIApplicationSignificantTimeChangeNotification */
+ - (void)submitEndOfDay {
      NSDate *date = [[NSDate date] dateByAddingTimeInterval:-86400.0];
      ODDHappyness *happyness = [self.happynessObjects objectAtIndex:self.pageControl.currentPage];
      ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
-     note:self.note
-     dateTime:date];
+                                                                        note:self.note
+                                                                    dateTime:date];
      [[ODDHappynessEntryStore sharedStore] addEntry:entry];
-
+     [[NSNotificationCenter defaultCenter] postNotificationName:@"resortAndReload" object:self];
      // Reset note, grayView, and hasBeenClickedToday for the new day
      if (self.hasBeenClickedToday == YES) {
-         CGRect grayViewStartFrame = self.grayView.frame;
-         grayViewStartFrame.origin.y += grayViewStartFrame.size.height;
-         self.grayView.frame = grayViewStartFrame;
+         CGRect startFrame = CGRectMake(0, 0, self.view.frame.size.width,
+                                              self.view.frame.size.height);
+         self.grayView.frame = startFrame;
          self.hasBeenClickedToday = NO;
          [self.view bringSubviewToFront:self.grayView];
      }
      self.noteView.text = @"";
-     self.note = [[ODDNote alloc] initWithNote:nil];
      self.note = [[ODDNote alloc] initWithNote:nil];
  }
 
@@ -339,9 +340,18 @@
                          }
                          completion:^(BOOL finished) {
                              [self.view sendSubviewToBack:self.grayView];
-                             // [self.grayView removeFromSuperview]; // or use bringSubviewToFront: sendSubviewToBack for speed or hide it...so many options
                          }];
         self.hasBeenClickedToday = YES;
+
+        // Empty entry to send to entry store and sort properly
+        ODDHappyness *happyness = [self.happynessObjects
+                                        objectAtIndex:self.pageControl.currentPage];
+        
+        ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
+                                                                           note:self.note
+                                                                       dateTime:[NSDate date]];
+        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"resortAndReload" object:self];
     }
 
     // Dismiss keyboard

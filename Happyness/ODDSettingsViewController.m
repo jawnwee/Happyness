@@ -49,7 +49,6 @@
 }
 
 - (IBAction)reminderSwitchToggled:(id)sender {
-    NSLog(@"get called");
     if (self.reminderSwitch.isOn) {
         NSDate *date = self.picker.date;
         UILocalNotification *reminder = [[UILocalNotification alloc] init];

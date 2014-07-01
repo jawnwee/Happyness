@@ -16,7 +16,8 @@
 
 + (instancetype)sharedStore;
 
-- (NSMutableArray *)sortedStoreWithAscending:(BOOL)isAscending;
+- (NSMutableArray *)sortedStore;
+- (void)sortStore:(BOOL)isAscending;
 - (void)addEntry:(ODDHappynessEntry *)entry;
 - (void)removeEntry:(ODDHappynessEntry *)entry;
 

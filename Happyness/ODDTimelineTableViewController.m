@@ -21,6 +21,8 @@
 
 @implementation ODDTimelineTableViewController
 
+
+#pragma mark - Initialization
 - (instancetype)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -31,6 +33,10 @@
                                                                          size:18.0f],
                                                                 }];
         self.navigationItem.title = @"Timeline";
+
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self selector:@selector(resortAndReload)
+                       name:@"resortAndReload" object:nil];
 
     }
     return self;
@@ -47,15 +53,24 @@
 - (void)viewWillAppear:(BOOL)animated {
 
     [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table Data Logic
+
+/* This only ever needs to get called once in this application */
+
+- (void)resortAndReload {
     _data = [[NSMutableDictionary alloc] init];
     _headers = [[NSMutableArray alloc] init];
-    _entries = [[ODDHappynessEntryStore sharedStore] sortedStoreWithAscending:NO];
-
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO];
-
-    _entries = [[NSMutableArray alloc] initWithArray:
-                [_entries sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
-
+    [[ODDHappynessEntryStore sharedStore] sortStore:NO];
+    _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
     _monthDateFormatter = [[NSDateFormatter alloc] init];
     NSString *dateComponents = @"MMMM YYYY";
     [_monthDateFormatter setDateFormat:dateComponents];
@@ -70,15 +85,10 @@
             [[self.data objectForKey:header] addObject:entry];
         }
     }
+
+    // Reload table view data
     [self.tableView reloadData];
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark - Table view data source
 

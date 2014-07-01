@@ -38,7 +38,7 @@
         _graphMedium = [UIButton buttonWithType:UIButtonTypeCustom];
         _graphShortTerm = [UIButton buttonWithType:UIButtonTypeCustom];
         _topFrame = [[UIView alloc] init];
-        _entries = [[ODDHappynessEntryStore sharedStore] sortedStoreWithAscending:YES];
+        _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
         _currentAmountOfData = ODDGraphAmountAll;
     }
     return self;

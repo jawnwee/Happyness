@@ -7,16 +7,14 @@
 //
 
 #import "ODDCalendarViewController.h"
+#import "ODDHappynessHeader.h"
 #import "ODDHappynessEntryView.h"
-#import "ODDHappynessEntry.h"
-#import "ODDHappynessEntryStore.h"
-#import "ODDHappyness.h"
-#import "ODDNote.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarRowCell.h"
 #import "ODDTimelineTableViewController.h"
+#import "ODDPreviousDayViewController.h"
 
-@interface ODDCalendarViewController ()
+@interface ODDCalendarViewController () <TSQCalendarViewDelegate>
 
 @property (strong, nonatomic) IBOutlet ODDCalendarView *calendar;
 @property (strong, nonatomic) IBOutlet ODDHappynessEntryView *happynessEntryView;
@@ -57,10 +55,12 @@
                                                                                dateTime:date];
             [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
         }
+        [[ODDHappynessEntryStore sharedStore] sortStore:YES];
         /////////////////////////////////////////////////////////////////////////////////////
 
         ODDCalendarView *calendarView = [[ODDCalendarView alloc] init];
         calendarView.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        calendarView.delegate = self;
         calendarView.firstDate = [NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365 * 5];
         calendarView.lastDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 365 * 1];
         calendarView.rowCellClass = [ODDCalendarRowCell class];
@@ -140,8 +140,36 @@
     [(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:YES];
 }
 
+#pragma mark - Segue to different View Controllers
 - (void)segueToTimeline {
     [self.navigationController pushViewController:self.timeline animated:YES];
+}
+
+- (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSCalendar* calendar = [NSCalendar currentCalendar];
+    NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]];
+    NSDate *today = [calendar dateFromComponents:components];
+
+    NSComparisonResult result = [today compare:date];
+    if (result == NSOrderedSame) {
+        
+        self.tabBarController.selectedViewController =
+                                            [self.tabBarController.viewControllers objectAtIndex:0];
+
+    } else if (result == NSOrderedDescending) {
+        NSDictionary *entries = [[ODDHappynessEntryStore sharedStore] happynessEntries];
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                        NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                       fromDate:date];
+        NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                         (long)[components year], (long)[components month], (long)[components day]];
+        ODDHappynessEntry *entry = [entries objectForKey:key];
+        ODDPreviousDayViewController *previous = [[ODDPreviousDayViewController alloc]
+                                                        initWithHappynessEntry:entry
+                                                                       forDate:date];
+        [self.navigationController pushViewController:previous animated:YES];
+    }
 }
 
 @end

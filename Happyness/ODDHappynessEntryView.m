@@ -36,8 +36,6 @@
                                                                    fromDate:entryDate];
 
     NSInteger day = [components day];
-    NSInteger month = [components month];
-    NSInteger year = [components year];
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE"];
