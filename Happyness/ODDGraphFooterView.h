@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDGraphAxis.h"
 
-@interface ODDGraphFooterView : UIView
-
-// Designated initializer
-- (instancetype)initWithElements:(NSArray *)elements withFrame:(CGRect)frame;
+@interface ODDGraphFooterView : ODDGraphAxis
 
 @end

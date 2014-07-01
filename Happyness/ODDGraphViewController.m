@@ -27,6 +27,8 @@
 @synthesize entries = _entries;
 @synthesize currentAmountOfData = _currentAmountOfData;
 
+#pragma mark - Init/Alloc
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -53,6 +55,8 @@
     [self initializeLabels];
     [self initializeButtons];
 }
+
+#pragma mark - Subviews Init/Layout
 
 - (void)initializeLabels {
     CGRect rootFrame = self.view.frame;
@@ -147,6 +151,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Button IBActions
+
 - (IBAction)graphShortTerm:(id)sender {
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
@@ -173,6 +179,8 @@
     [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
+
+#pragma mark - Touch Events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"disableScroll" object:self];

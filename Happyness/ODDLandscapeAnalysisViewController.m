@@ -22,6 +22,8 @@
 @implementation ODDLandscapeAnalysisViewController
 @synthesize pageControl = _pageControl;
 
+#pragma mark - Init/Alloc
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -105,19 +107,6 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-
 }
 
 @end

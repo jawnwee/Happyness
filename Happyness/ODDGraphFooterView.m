@@ -17,23 +17,9 @@
 @implementation ODDGraphFooterView
 
 - (id)initWithElements:(NSArray *)elements withFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+    self = [super initWithElements:elements withFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
-        _labels = [[NSMutableArray alloc] initWithCapacity:elements.count];
-        for (NSString *labelTitle in elements) {
-            UILabel *newLabel = [[UILabel alloc] init];
-            newLabel.text = labelTitle;
-            newLabel.adjustsFontSizeToFitWidth = YES;
-            newLabel.textAlignment = NSTextAlignmentCenter;
-            newLabel.shadowColor = [UIColor blackColor];
-            newLabel.shadowOffset = CGSizeMake(0, 1);
-            newLabel.backgroundColor = [UIColor clearColor];
-            CGFloat fontSize = frame.size.height / 2;
-            [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize]];
-            [self addSubview:newLabel];
-            [_labels addObject:newLabel];
-        }
+        
     }
     return self;
 }

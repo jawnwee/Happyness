@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        // Notification used to disable scrolling when user is interacting with Graphs
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self
                    selector:@selector(handleTouchesBegan)

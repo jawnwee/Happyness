@@ -23,6 +23,8 @@
 @implementation ODDLineGraphViewController
 @synthesize lineGraphView = _lineGraphView;
 
+#pragma mark - Init/Alloc
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -39,13 +41,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Line Graph Setup
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initializeLineGraph];
 }
+
+#pragma mark - Subviews Init/Layout
 
 - (void)initializeLineGraph {
     self.shortTermCount = 20;
@@ -57,40 +59,51 @@
     self.lineGraphView.userInteractionEnabled = NO;
     CGRect rootFrame = self.view.frame;
     CGRect graphTitleFrame = self.graphTitle.frame;
-    CGFloat heighPadding = CGRectGetMaxY(graphTitleFrame);
-    self.lineGraphView.frame = CGRectMake(graphTitleFrame.origin.x,
-                                         heighPadding,
-                                         rootFrame.size.width - (graphTitleFrame.origin.x * 2),
-                                         rootFrame.size.height - (heighPadding * 2));
+    CGFloat heightPadding = CGRectGetMaxY(graphTitleFrame);
+    heightPadding += (heightPadding / 3);
+    CGFloat widthPadding = graphTitleFrame.origin.x;
+    widthPadding += (widthPadding / 3);
+    self.lineGraphView.frame = CGRectMake(widthPadding,
+                                         heightPadding,
+                                         rootFrame.size.width - (widthPadding * 2),
+                                         rootFrame.size.height - (heightPadding * 2));
 //    self.lineGraphView.maximumValue = 5;
     self.lineGraphView.minimumValue = 0;
-    CGFloat bordersFramePadding = self.topFrame.frame.size.height / 2;
+    
+    // Should initialize footer and sider in landscapeAnalysisViewController
+    CGRect lineGraphFrame = self.lineGraphView.frame;
+    CGSize lineGraphSize = lineGraphFrame.size;
+    CGPoint lineGraphPosition = lineGraphFrame.origin;
+    CGFloat footerHeight = (rootFrame.size.height - lineGraphSize.height) / 6;
     self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Mon",
-                                                                                @"Tues",
-                                                                                @"Wed",
-                                                                                @"Thurs",
-                                                                                @"Fri",
-                                                                                @"Sat",
-                                                                                @"Sun"]
-                                                                    withFrame:CGRectMake(graphTitleFrame.origin.x,
-                                                                                         CGRectGetMaxY(self.lineGraphView.frame),
-                                                                                         self.lineGraphView.frame.size.width,
-                                                                                         bordersFramePadding)];
+                                                                 @"Tues",
+                                                                 @"Wed",
+                                                                 @"Thurs",
+                                                                 @"Fri",
+                                                                 @"Sat",
+                                                                 @"Sun"]
+                                                     withFrame:CGRectMake(lineGraphPosition.x,
+                                                                          CGRectGetMaxY(lineGraphFrame),
+                                                                          lineGraphSize.width,
+                                                                          footerHeight)];
+    CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
     self.sider = [[ODDGraphSiderView alloc] initWithElements:@[@"100",
-                                                                             @"80",
-                                                                             @"60",
-                                                                             @"40",
-                                                                             @"20",
-                                                                             @"0"]
-                                                                 withFrame:CGRectMake(self.lineGraphView.frame.origin.x - bordersFramePadding,
-                                                                                      self.lineGraphView.frame.origin.y,
-                                                                                      bordersFramePadding,
-                                                                                      self.lineGraphView.frame.size.height)];
+                                                               @"80",
+                                                               @"60",
+                                                               @"40",
+                                                               @"20",
+                                                               @"0"]
+                                                   withFrame:CGRectMake(lineGraphPosition.x - siderWidth,
+                                                                        lineGraphPosition.y,
+                                                                        siderWidth,
+                                                                        lineGraphSize.height)];
     [self.view addSubview:self.lineGraphView];
     [self.view addSubview:self.lineGraphView];
     self.happynessEntrySum = 0;
     [self.lineGraphView reloadData];
 }
+
+#pragma mark - Graph Delegate Setup
 
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
     if (self.entries.count > 0) {
@@ -132,7 +145,7 @@
     return TRUE;
 }
 
-#pragma mark - Touch Events
+#pragma mark - Graph Selection
 
 - (UIColor *)verticalSelectionColorForLineChartView:(JBLineChartView *)lineChartView {
     return [UIColor redColor];
@@ -153,7 +166,7 @@
     
 }
 
-#pragma mark - Amount of data to graph
+#pragma mark - Button IBActions
 
 - (IBAction)graphAll:(id)sender {
     [super graphAll:sender];
@@ -175,6 +188,8 @@
     self.currentAmountOfData = ODDGraphAmountMedium;
     [self.lineGraphView reloadData];
 }
+
+#pragma mark - Touch Events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];
