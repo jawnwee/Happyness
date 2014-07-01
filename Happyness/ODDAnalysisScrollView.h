@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDCustomScroll.h"
 
-@interface ODDAnalysisScrollView : UIScrollView
+@interface ODDAnalysisScrollView : ODDCustomScroll
 
 @end

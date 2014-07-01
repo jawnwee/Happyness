@@ -22,34 +22,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-        [center addObserver:self
-                   selector:@selector(touchesBegan:withEvent:)
-                       name:@"graphTouchesBegan"
-                     object:nil];
-        [center addObserver:self
-                   selector:@selector(touchesCancelled:withEvent:)
-                       name:@"graphTouchesCancelled"
-                     object:nil];
-        [center addObserver:self
-                   selector:@selector(touchesEnded:withEvent:)
-                       name:@"graphTouchesEnded"
-                     object:nil];
     }
     return self;
 }
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.scrollEnabled = NO;
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.scrollEnabled = YES;
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    self.scrollEnabled = YES;
-}
-
 
 @end

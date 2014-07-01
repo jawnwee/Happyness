@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//@class ODDLineGraphViewController;
-//@class ODDBarGraphViewController;
+#import "ODDCustomScroll.h"
 
-@interface ODDLandscapeAnalysisView : UIScrollView
-
-//@property (nonatomic,strong) ODDLineGraphViewController *firstGraph;
-//@property (nonatomic,strong) ODDBarGraphViewController *secondGraph;
+@interface ODDLandscapeAnalysisView : ODDCustomScroll
 
 @end

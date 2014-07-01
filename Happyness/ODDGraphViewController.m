@@ -175,15 +175,15 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesBegan" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"disableScroll" object:self];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesCancelled" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"enableScroll" object:self];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesEnded" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"enableScroll" object:self];
 }
 
 @end

@@ -73,14 +73,12 @@
     firstGraphFrame.origin.y = 0;
     self.firstGraph.view.frame = firstGraphFrame;
     self.firstGraph.graphTitle.text = @"Trending Happyness";
-//    self.firstGraph.line.userInteractionEnabled = NO;
     self.secondGraph = [[ODDBarGraphViewController alloc] init];
     CGRect secondGraphFrame = self.secondGraph.view.frame;
     secondGraphFrame.origin.x = rootSize.width;
     secondGraphFrame.origin.y = 0;
     self.secondGraph.view.frame = secondGraphFrame;
     self.secondGraph.graphTitle.text = @"Daily Averages";
-//    self.secondGraph.view.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.firstGraph.view];
     [self.scrollView addSubview:self.secondGraph.view];
 
