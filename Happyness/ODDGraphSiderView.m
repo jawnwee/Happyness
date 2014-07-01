@@ -25,11 +25,12 @@
             UILabel *newLabel = [[UILabel alloc] init];
             newLabel.text = labelTitle;
             newLabel.adjustsFontSizeToFitWidth = YES;
-            newLabel.textAlignment = NSTextAlignmentRight;
             newLabel.shadowColor = [UIColor blackColor];
             newLabel.shadowOffset = CGSizeMake(0, 1);
             newLabel.backgroundColor = [UIColor clearColor];
             newLabel.textAlignment = NSTextAlignmentCenter;
+            CGFloat fontSize = frame.size.width / 2;
+            [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize]];
             [self addSubview:newLabel];
             [_labels addObject:newLabel];
         }

@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ODDGraphViewController.h"
+@class JBLineChartView;
 
 @interface ODDLineGraphViewController : ODDGraphViewController
+
+@property (nonatomic,strong) JBLineChartView *lineGraphView;
 
 @end

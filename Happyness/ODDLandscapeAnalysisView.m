@@ -7,6 +7,9 @@
 //
 
 #import "ODDLandscapeAnalysisView.h"
+#import "ODDLineGraphViewController.h"
+#import "ODDBarGraphViewController.h"
+#import "JBChartView.h"
 
 @interface ODDLandscapeAnalysisView ()
 
@@ -19,21 +22,34 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self
+                   selector:@selector(touchesBegan:withEvent:)
+                       name:@"graphTouchesBegan"
+                     object:nil];
+        [center addObserver:self
+                   selector:@selector(touchesCancelled:withEvent:)
+                       name:@"graphTouchesCancelled"
+                     object:nil];
+        [center addObserver:self
+                   selector:@selector(touchesEnded:withEvent:)
+                       name:@"graphTouchesEnded"
+                     object:nil];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.scrollEnabled = NO;
 }
-*/
 
-//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"Touches Began Landscape Scroll View");
-//}
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.scrollEnabled = YES;
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    self.scrollEnabled = YES;
+}
+
 
 @end

@@ -25,11 +25,12 @@
             UILabel *newLabel = [[UILabel alloc] init];
             newLabel.text = labelTitle;
             newLabel.adjustsFontSizeToFitWidth = YES;
-            newLabel.textAlignment = NSTextAlignmentRight;
+            newLabel.textAlignment = NSTextAlignmentCenter;
             newLabel.shadowColor = [UIColor blackColor];
             newLabel.shadowOffset = CGSizeMake(0, 1);
             newLabel.backgroundColor = [UIColor clearColor];
-            newLabel.textAlignment = NSTextAlignmentCenter;
+            CGFloat fontSize = frame.size.height / 2;
+            [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:fontSize]];
             [self addSubview:newLabel];
             [_labels addObject:newLabel];
         }
@@ -49,10 +50,15 @@
 }
 
 - (void)layoutSubviews {
+//    CGFloat xPositionPadding = ceil(self.bounds.size.width / self.labels.count);
     CGFloat width = ceil(self.bounds.size.width / self.labels.count);
+//    CGFloat width = ceil(self.bounds.size.width / (self.labels.count * 0.7));
     CGRect lastFrame = CGRectMake(0, 0, 0, 0);
     NSUInteger count = 0;
     for (UILabel *label in self.labels) {
+//        CGFloat xPosition = (xPositionPadding * count) - (xPositionPadding / 2);
+//        CGFloat xPosition = (xPositionPadding * count);
+//        label.frame = CGRectMake(xPosition, 0, width, self.bounds.size.height);
         label.frame = CGRectMake(CGRectGetMaxX(lastFrame), 0, width, self.bounds.size.height);
         lastFrame = label.frame;
         count++;

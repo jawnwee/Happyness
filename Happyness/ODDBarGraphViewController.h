@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ODDGraphViewController.h"
+@class JBBarChartView;
 
 @interface ODDBarGraphViewController : ODDGraphViewController
+
+@property (nonatomic,strong) JBBarChartView *barChartView;
 
 @end

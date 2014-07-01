@@ -46,7 +46,7 @@
                                                                 }];
 
         // Basic sanity test //
-        /* for (int i = 1 ; i <= 500; i++) {
+         for (int i = 1 ; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
             NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
             ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
@@ -56,7 +56,7 @@
                                                                                    note:testNote
                                                                                dateTime:date];
             [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
-        } */
+        }
         /////////////////////////////////////////////////////////////////////////////////////
 
         ODDCalendarView *calendarView = [[ODDCalendarView alloc] init];

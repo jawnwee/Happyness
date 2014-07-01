@@ -86,6 +86,7 @@
     self.pageControl.currentPage = 0;
     self.pageControl.pageIndicatorTintColor = [UIColor darkGrayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
+    self.pageControl.userInteractionEnabled = NO;
     [self.view addSubview:self.pageControl];
     
     // Set up notification detection for when device rotates

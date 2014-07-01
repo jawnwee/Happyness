@@ -13,7 +13,7 @@
 
 @interface ODDLandscapeAnalysisViewController () <UIScrollViewDelegate>
 
-@property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) ODDLandscapeAnalysisView *scrollView;
 @property (nonatomic,strong) ODDLineGraphViewController *firstGraph;
 @property (nonatomic,strong) ODDBarGraphViewController *secondGraph;
 
@@ -73,12 +73,14 @@
     firstGraphFrame.origin.y = 0;
     self.firstGraph.view.frame = firstGraphFrame;
     self.firstGraph.graphTitle.text = @"Trending Happyness";
+//    self.firstGraph.line.userInteractionEnabled = NO;
     self.secondGraph = [[ODDBarGraphViewController alloc] init];
     CGRect secondGraphFrame = self.secondGraph.view.frame;
     secondGraphFrame.origin.x = rootSize.width;
     secondGraphFrame.origin.y = 0;
     self.secondGraph.view.frame = secondGraphFrame;
     self.secondGraph.graphTitle.text = @"Daily Averages";
+//    self.secondGraph.view.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.firstGraph.view];
     [self.scrollView addSubview:self.secondGraph.view];
 
@@ -93,6 +95,7 @@
     self.pageControl.currentPage = 0;
     self.pageControl.pageIndicatorTintColor = [UIColor darkGrayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor lightGrayColor];
+    self.pageControl.userInteractionEnabled = NO;
     [self.view addSubview:self.pageControl];
 }
 
@@ -104,6 +107,19 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+
 }
 
 @end

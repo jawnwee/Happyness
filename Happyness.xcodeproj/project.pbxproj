@@ -43,7 +43,6 @@
 		D124B1411953A20E00A9F687 /* ODDLineGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1401953A20E00A9F687 /* ODDLineGraphViewController.m */; };
 		D124B1441953A21500A9F687 /* ODDBarGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1431953A21500A9F687 /* ODDBarGraphViewController.m */; };
 		D124B1471956518600A9F687 /* ODDGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1461956518600A9F687 /* ODDGraphViewController.m */; };
-		D124B14E195A351E00A9F687 /* ODDGraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D124B14D195A351E00A9F687 /* ODDGraphViewController.xib */; };
 		D124B156195A7E4700A9F687 /* ODDGraphFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B155195A7E4700A9F687 /* ODDGraphFooterView.m */; };
 		D124B159195A7E4F00A9F687 /* ODDGraphSiderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B158195A7E4F00A9F687 /* ODDGraphSiderView.m */; };
 		D139EEC61950D148003A44DF /* ODDLandscapeAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */; };
@@ -74,7 +73,6 @@
 		EB362C57195F490800F6BA76 /* oddLook_calendar_5.png in Resources */ = {isa = PBXBuildFile; fileRef = EB362C50195F490800F6BA76 /* oddLook_calendar_5.png */; };
 		EB658FAA1951385A00A13987 /* ODDCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB658FA91951385A00A13987 /* ODDCalendarViewController.m */; };
 		EB6D6F891951695C00A1A164 /* ODDHappynessEntryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */; };
-		EB994734195A77620095DA5B /* ODDCalendarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB994733195A77620095DA5B /* ODDCalendarViewController.xib */; };
 		EB99473A195AA99C0095DA5B /* ODDCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB994739195AA99C0095DA5B /* ODDCalendarView.m */; };
 		EBD13C3019513F71007EF6D0 /* ODDCalendarNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */; };
 		EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */; };
@@ -82,7 +80,6 @@
 		EBE2BD67194FFFDB0023E9F4 /* ODDTodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD65194FFFDB0023E9F4 /* ODDTodayViewController.m */; };
 		EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */; };
 		EBE2BD74195000060023E9F4 /* ODDAnalysisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */; };
-		EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */; };
 		EBE2BD79195000150023E9F4 /* ODDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */; };
 		EBE2BD7A195000150023E9F4 /* ODDSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */; };
 		EBF23208195C91C0003E29AC /* ODDTimelineTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF23207195C91C0003E29AC /* ODDTimelineTableViewController.m */; };
@@ -144,7 +141,6 @@
 		D124B1431953A21500A9F687 /* ODDBarGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDBarGraphViewController.m; sourceTree = "<group>"; };
 		D124B1451956518600A9F687 /* ODDGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphViewController.h; sourceTree = "<group>"; };
 		D124B1461956518600A9F687 /* ODDGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDGraphViewController.m; sourceTree = "<group>"; };
-		D124B14D195A351E00A9F687 /* ODDGraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDGraphViewController.xib; sourceTree = "<group>"; };
 		D124B154195A7E4700A9F687 /* ODDGraphFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphFooterView.h; sourceTree = "<group>"; };
 		D124B155195A7E4700A9F687 /* ODDGraphFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDGraphFooterView.m; sourceTree = "<group>"; };
 		D124B157195A7E4E00A9F687 /* ODDGraphSiderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphSiderView.h; sourceTree = "<group>"; };
@@ -189,10 +185,8 @@
 		EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
 		EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryView.h; sourceTree = "<group>"; };
 		EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryView.m; sourceTree = "<group>"; };
-		EB994733195A77620095DA5B /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
 		EB994738195AA99C0095DA5B /* ODDCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarView.h; sourceTree = "<group>"; };
 		EB994739195AA99C0095DA5B /* ODDCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarView.m; sourceTree = "<group>"; };
-		EB99473B195ABC600095DA5B /* ODDCalendarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDCalendarViewController.xib; sourceTree = "<group>"; };
 		EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
 		EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
 		EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomColor.h; sourceTree = "<group>"; };
@@ -204,7 +198,6 @@
 		EBE2BD66194FFFDB0023E9F4 /* ODDTodayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDTodayViewController.xib; sourceTree = "<group>"; };
 		EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDAnalysisViewController.h; sourceTree = "<group>"; };
 		EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDAnalysisViewController.m; sourceTree = "<group>"; };
-		EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDAnalysisViewController.xib; sourceTree = "<group>"; };
 		EBE2BD76195000150023E9F4 /* ODDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDSettingsViewController.h; sourceTree = "<group>"; };
 		EBE2BD77195000150023E9F4 /* ODDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDSettingsViewController.m; sourceTree = "<group>"; };
 		EBE2BD78195000150023E9F4 /* ODDSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDSettingsViewController.xib; sourceTree = "<group>"; };
@@ -313,13 +306,10 @@
 		D124B1351953934B00A9F687 /* Analysis */ = {
 			isa = PBXGroup;
 			children = (
-				EB99473B195ABC600095DA5B /* ODDCalendarViewController.xib */,
 				D1D0074919517BB300ED9A66 /* ODDAnalysisScrollViewController.h */,
 				D1D0074A19517BB300ED9A66 /* ODDAnalysisScrollViewController.m */,
-				EB994733195A77620095DA5B /* ODDCalendarViewController.xib */,
 				EBE2BD71195000060023E9F4 /* ODDAnalysisViewController.h */,
 				EBE2BD72195000060023E9F4 /* ODDAnalysisViewController.m */,
-				EBE2BD73195000060023E9F4 /* ODDAnalysisViewController.xib */,
 				D139EEC41950D148003A44DF /* ODDLandscapeAnalysisViewController.h */,
 				D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */,
 				D124B1481956518C00A9F687 /* Graphs */,
@@ -332,7 +322,6 @@
 			children = (
 				D124B1451956518600A9F687 /* ODDGraphViewController.h */,
 				D124B1461956518600A9F687 /* ODDGraphViewController.m */,
-				D124B14D195A351E00A9F687 /* ODDGraphViewController.xib */,
 				D124B13F1953A20E00A9F687 /* ODDLineGraphViewController.h */,
 				D124B1401953A20E00A9F687 /* ODDLineGraphViewController.m */,
 				D124B1421953A21500A9F687 /* ODDBarGraphViewController.h */,
@@ -619,8 +608,6 @@
 				C419C827195D89CD008AE325 /* TodayTabSelected60@2x.png in Resources */,
 				C419C83B195DA45D008AE325 /* Happyness_3.png in Resources */,
 				EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */,
-				EBE2BD75195000060023E9F4 /* ODDAnalysisViewController.xib in Resources */,
-				D124B14E195A351E00A9F687 /* ODDGraphViewController.xib in Resources */,
 				C419C821195D89CD008AE325 /* GraphTabUnselected60@2x.png in Resources */,
 				C419C837195DA45D008AE325 /* Happyness_1.png in Resources */,
 				EB362C56195F490800F6BA76 /* oddLook_calendar_4.png in Resources */,
@@ -633,7 +620,6 @@
 				EB362C52195F490800F6BA76 /* CalendarRowBottom@2x.png in Resources */,
 				C419C81D195D89CD008AE325 /* CalendarTabUnselected60@2x.png in Resources */,
 				C419C81A195D89CD008AE325 /* CalendarTabSelected60.png in Resources */,
-				EB994734195A77620095DA5B /* ODDCalendarViewController.xib in Resources */,
 				EB362C54195F490800F6BA76 /* oddLook_calendar_2.png in Resources */,
 				EBE2BD7A195000150023E9F4 /* ODDSettingsViewController.xib in Resources */,
 				C419C829195D89CD008AE325 /* TodayTabUnselected60@2x.png in Resources */,

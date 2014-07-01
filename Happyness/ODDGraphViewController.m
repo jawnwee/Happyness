@@ -7,9 +7,12 @@
 //
 
 #import "ODDGraphViewController.h"
+#import "ODDHappynessEntryStore.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ODDGraphViewController ()
+
+@property (nonatomic,strong) IBOutlet UILabel *notEnoughDataLabel;
 
 @end
 
@@ -19,6 +22,10 @@
 @synthesize graphShortTerm = _graphShortTerm;
 @synthesize graphTitle = _graphTitle;
 @synthesize topFrame = _topFrame;
+@synthesize shortTermCount = _shortTermCount;
+@synthesize mediumCount = _mediumCount;
+@synthesize entries = _entries;
+@synthesize currentAmountOfData = _currentAmountOfData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,10 +33,13 @@
     if (self) {
         // Custom initialization
         _graphTitle = [[UILabel alloc] init];
-        _graphAll = [[UIButton alloc] init];
-        _graphMedium = [[UIButton alloc] init];
-        _graphShortTerm = [[UIButton alloc] init];
+        _notEnoughDataLabel = [[UILabel alloc] init];
+        _graphAll = [UIButton buttonWithType:UIButtonTypeCustom];
+        _graphMedium = [UIButton buttonWithType:UIButtonTypeCustom];
+        _graphShortTerm = [UIButton buttonWithType:UIButtonTypeCustom];
         _topFrame = [[UIView alloc] init];
+        _entries = [[ODDHappynessEntryStore sharedStore] sortedStoreWithAscending:YES];
+        _currentAmountOfData = ODDGraphAmountAll;
     }
     return self;
 }
@@ -40,11 +50,11 @@
     
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width);
     [self initializeTopPortionOfFrame];
-    [self initializeGraphTitle];
+    [self initializeLabels];
     [self initializeButtons];
 }
 
-- (void)initializeGraphTitle {
+- (void)initializeLabels {
     CGRect rootFrame = self.view.frame;
     CGSize rootSize = rootFrame.size;
     self.graphTitle.frame = CGRectMake(rootSize.width / 10,
@@ -52,8 +62,22 @@
                                        rootSize.width / 2,
                                        rootSize.height / 8);
     self.graphTitle.text = @"Placeholder";
+    CGFloat graphTitleFontSize = self.graphTitle.frame.size.height / 1.8;
+    [self.graphTitle setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:graphTitleFontSize]];
     self.graphTitle.textColor = [UIColor whiteColor];
     [self.view addSubview:self.graphTitle];
+    
+    self.notEnoughDataLabel.text = @"Not Enough Data :(";
+    self.notEnoughDataLabel.frame = CGRectMake(rootSize.width / 4,
+                                       rootSize.height / 4,
+                                       rootSize.width / 2,
+                                       rootSize.height / 2);
+    [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:graphTitleFontSize]];
+    self.notEnoughDataLabel.textColor = [UIColor blackColor];
+    self.notEnoughDataLabel.textAlignment = NSTextAlignmentCenter;
+    if (self.entries.count == 0) {
+        [self.view addSubview:self.notEnoughDataLabel];
+    }
 }
 
 - (void)initializeButtons {
@@ -80,12 +104,31 @@
     self.graphAll.layer.cornerRadius = 8;
     self.graphMedium.layer.cornerRadius = 8;
     self.graphShortTerm.layer.cornerRadius = 8;
-    self.graphAll.backgroundColor = [UIColor grayColor];
-    self.graphMedium.backgroundColor = [UIColor grayColor];
-    self.graphShortTerm.backgroundColor = [UIColor grayColor];
+    self.graphAll.backgroundColor = [UIColor whiteColor];
+    self.graphMedium.backgroundColor = [UIColor clearColor];
+    self.graphShortTerm.backgroundColor = [UIColor clearColor];
+    CGFloat buttonFontSize = self.graphAll.frame.size.height / 3;
+    [self.graphAll.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
+                                                      size:buttonFontSize]];
+    [self.graphMedium.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
+                                                         size:buttonFontSize]];
+    [self.graphShortTerm.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
+                                                            size:buttonFontSize]];
+    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphAll setTitle:@"All" forState:UIControlStateNormal];
     [self.graphMedium setTitle:@"30 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
+    [self.graphAll addTarget:self
+                      action:@selector(graphAll:)
+            forControlEvents:UIControlEventTouchDown];
+    [self.graphMedium addTarget:self
+                         action:@selector(graphMedium:)
+               forControlEvents:UIControlEventTouchDown];
+    [self.graphShortTerm addTarget:self
+                            action:@selector(graphShortTerm:)
+                  forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.graphAll];
     [self.view addSubview:self.graphShortTerm];
     [self.view addSubview:self.graphMedium];
@@ -105,15 +148,42 @@
 }
 
 - (IBAction)graphShortTerm:(id)sender {
-    
+    self.graphAll.backgroundColor = [UIColor clearColor];
+    self.graphMedium.backgroundColor = [UIColor clearColor];
+    self.graphShortTerm.backgroundColor = [UIColor whiteColor];
+    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 - (IBAction)graphMedium:(id)sender {
-    
+    self.graphAll.backgroundColor = [UIColor clearColor];
+    self.graphMedium.backgroundColor = [UIColor whiteColor];
+    self.graphShortTerm.backgroundColor = [UIColor clearColor];
+    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (IBAction)graphAll:(id)sender {
-    
+    self.graphAll.backgroundColor = [UIColor whiteColor];
+    self.graphMedium.backgroundColor = [UIColor clearColor];
+    self.graphShortTerm.backgroundColor = [UIColor clearColor];
+    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesBegan" object:self];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesCancelled" object:self];
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"graphTouchesEnded" object:self];
 }
 
 @end
