@@ -7,9 +7,10 @@
 //
 
 #import "ODDTimelineTableViewController.h"
-#import "ODDHappynessEntryStore.h"
-#import "ODDHappynessEntry.h"
+#import "ODDHappynessHeader.h"
 #import "ODDHappynessEntryView.h"
+#import "ODDPreviousDayViewController.h"
+
 @interface ODDTimelineTableViewController ()
 
 @property (strong, nonatomic) NSMutableArray *entries;
@@ -153,6 +154,17 @@
     [cell setHappynessEntry:entry];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *header = [self.headers objectAtIndex:indexPath.section];
+    ODDHappynessEntry *entry = [[self.data objectForKey:header] objectAtIndex:indexPath.row];
+    NSDate *date = [entry date];
+
+    ODDPreviousDayViewController *previous = [[ODDPreviousDayViewController alloc]
+                                              initWithHappynessEntry:entry
+                                              forDate:date];
+    [self.navigationController pushViewController:previous animated:YES];
 }
 
 @end

@@ -44,7 +44,7 @@
                                                                 }];
 
         // Basic sanity test //
-         for (int i = 1 ; i <= 500; i++) {
+        for (int i = 1 ; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
             NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
             ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
@@ -64,7 +64,10 @@
         calendarView.firstDate = [NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365 * 5];
         calendarView.lastDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 365 * 1];
         calendarView.rowCellClass = [ODDCalendarRowCell class];
-        calendarView.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 green:247.0 / 255.0 blue:249.0 / 255.0 alpha:1.0];
+        calendarView.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 
+                                                       green:247.0 / 255.0 
+                                                        blue:249.0 / 255.0 
+                                                       alpha:1.0];
         calendarView.pagingEnabled = YES;
         CGFloat onePixel = 1.0f / [UIScreen mainScreen].scale;
         calendarView.contentInset = UIEdgeInsetsMake(0.0f, onePixel, 0.0f, onePixel);
