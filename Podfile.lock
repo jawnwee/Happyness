@@ -1,22 +1,18 @@
 PODS:
   - HPGrowingTextView (1.1)
   - JBChartView (2.5.5)
-  - ODDLibMathEval (0.1.0)
   - ODDPolynomial (0.1.0)
   - TimesSquare (1.0.1)
 
 DEPENDENCIES:
   - HPGrowingTextView (from `https://github.com/mattchiang777/GrowingTextView.git`)
   - JBChartView (~> 2.5.5)
-  - ODDLibMathEval (from `https://github.com/yujuncho7/ODDLibMathEval.git`)
   - ODDPolynomial (from `https://github.com/jjojohjohn/ODDPolynomial.git`)
   - TimesSquare (from `https://github.com/jjojohjohn/objc-TimesSquare.git`)
 
 EXTERNAL SOURCES:
   HPGrowingTextView:
     :git: https://github.com/mattchiang777/GrowingTextView.git
-  ODDLibMathEval:
-    :git: https://github.com/yujuncho7/ODDLibMathEval.git
   ODDPolynomial:
     :git: https://github.com/jjojohjohn/ODDPolynomial.git
   TimesSquare:
@@ -25,7 +21,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   HPGrowingTextView: 4318f557b33c19def1c53ec275d6e2a2d6589cd0
   JBChartView: 666486d81dd16fa0cfac7bc32b4b70d6c52e7162
-  ODDLibMathEval: 0a0c903f0fdf53a749015040efd686c202a7de55
   ODDPolynomial: f3c4053f1a626367d98f13fb9df41845e9d8e711
   TimesSquare: 5caa2f4b53e350d085adcfe560ab3a741b1c8934
 
