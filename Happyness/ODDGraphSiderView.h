@@ -11,4 +11,6 @@
 
 @interface ODDGraphSiderView : ODDGraphAxis
 
+@property BOOL isLeftSide;
+
 @end

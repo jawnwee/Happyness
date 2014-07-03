@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDPolynomialFit.h"
 @class ODDGraphFooterView;
 @class ODDGraphSiderView;
 
@@ -30,6 +31,7 @@ typedef enum:uint8_t {
 @property (nonatomic, strong) ODDGraphFooterView *footer;
 @property (nonatomic, strong) ODDGraphSiderView *sider;
 
+- (void)reloadDataStore;
 - (IBAction)graphShortTerm:(id)sender;
 - (IBAction)graphMedium:(id)sender;
 - (IBAction)graphAll:(id)sender;

@@ -15,11 +15,12 @@
 @end
 
 @implementation ODDGraphSiderView
+@synthesize isLeftSide = _isLeftSide;
 
 - (id)initWithElements:(NSArray *)elements withFrame:(CGRect)frame {
     self = [super initWithElements:elements withFrame:frame];
     if (self) {
-
+        _isLeftSide = YES;
     }
     return self;
 }
@@ -30,8 +31,13 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextSetLineWidth(context, 2.0f);
-    CGContextMoveToPoint(context, self.bounds.size.width, 0.0f);
-    CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
+    if (self.isLeftSide) {
+        CGContextMoveToPoint(context, self.bounds.size.width, 0.0f);
+        CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height);
+    } else {
+        CGContextMoveToPoint(context, 0.0f, 0.0f);
+        CGContextAddLineToPoint(context, 0.0f, self.bounds.size.height);
+    }
     CGContextStrokePath(context);
 }
 

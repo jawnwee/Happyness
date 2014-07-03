@@ -151,6 +151,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Setup Datastore
+
+- (void)reloadDataStore {
+    self.entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
+}
+
 #pragma mark - Button IBActions
 
 - (IBAction)graphShortTerm:(id)sender {

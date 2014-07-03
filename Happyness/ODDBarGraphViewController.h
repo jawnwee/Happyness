@@ -13,5 +13,7 @@
 @interface ODDBarGraphViewController : ODDGraphViewController
 
 @property (nonatomic,strong) JBBarChartView *barChartView;
+@property NSUInteger numberOfBars;
+@property BOOL isOrganizedByDays;
 
 @end

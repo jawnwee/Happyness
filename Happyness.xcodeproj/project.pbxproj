@@ -63,6 +63,7 @@
 		D1D007561952175300ED9A66 /* ODDAnalysisScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */; };
 		D1DBDE4E19623FD600003762 /* ODDCustomScroll.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DBDE4D19623FD600003762 /* ODDCustomScroll.m */; };
 		D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */; };
+		D1DBDE5419646B7300003762 /* ODDDoubleArrayHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DBDE5319646B7300003762 /* ODDDoubleArrayHolder.m */; };
 		EB12A46D19535948001F47B6 /* ODDHappynessEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */; };
 		EB1F9CA1195BFA8C00567A31 /* ODDCalendarRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */; };
 		EB362C48195F407A00F6BA76 /* ODDCalendarTabImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB362C47195F407A00F6BA76 /* ODDCalendarTabImageView.m */; };
@@ -176,6 +177,8 @@
 		D1DBDE4D19623FD600003762 /* ODDCustomScroll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomScroll.m; sourceTree = "<group>"; };
 		D1DBDE4F19631C4C00003762 /* ODDGraphAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphAxis.h; sourceTree = "<group>"; };
 		D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDGraphAxis.m; sourceTree = "<group>"; };
+		D1DBDE5219646B7300003762 /* ODDDoubleArrayHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDDoubleArrayHolder.h; sourceTree = "<group>"; };
+		D1DBDE5319646B7300003762 /* ODDDoubleArrayHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDDoubleArrayHolder.m; sourceTree = "<group>"; };
 		EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODDHappynessEntryView.xib; sourceTree = "<group>"; };
 		EB1F9C9F195BFA8C00567A31 /* ODDCalendarRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarRowCell.h; sourceTree = "<group>"; };
 		EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarRowCell.m; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 		EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				D1DBDE5219646B7300003762 /* ODDDoubleArrayHolder.h */,
+				D1DBDE5319646B7300003762 /* ODDDoubleArrayHolder.m */,
 				EBE2BD52194FDA0D0023E9F4 /* ODDCustomColor.h */,
 				EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */,
 				EB362C46195F407A00F6BA76 /* ODDCalendarTabImageView.h */,
@@ -713,6 +718,7 @@
 				D124B156195A7E4700A9F687 /* ODDGraphFooterView.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
 				EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */,
+				D1DBDE5419646B7300003762 /* ODDDoubleArrayHolder.m in Sources */,
 				D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */,
 				D124B1411953A20E00A9F687 /* ODDLineGraphViewController.m in Sources */,
 				D124B159195A7E4F00A9F687 /* ODDGraphSiderView.m in Sources */,

@@ -14,8 +14,8 @@
 @interface ODDLandscapeAnalysisViewController () <UIScrollViewDelegate>
 
 @property (nonatomic,strong) ODDLandscapeAnalysisView *scrollView;
-@property (nonatomic,strong) ODDLineGraphViewController *firstGraph;
-@property (nonatomic,strong) ODDBarGraphViewController *secondGraph;
+@property (nonatomic,strong) ODDLineGraphViewController *happynessTrends;
+@property (nonatomic,strong) ODDBarGraphViewController *dailyAverages;
 
 @end
 
@@ -69,20 +69,21 @@
     [self.view addSubview:self.scrollView];
     
     // Initialize and add graphViews
-    self.firstGraph = [[ODDLineGraphViewController alloc] init];
-    CGRect firstGraphFrame = self.firstGraph.view.frame;
-    firstGraphFrame.origin.x = 0;
-    firstGraphFrame.origin.y = 0;
-    self.firstGraph.view.frame = firstGraphFrame;
-    self.firstGraph.graphTitle.text = @"Trending Happyness";
-    self.secondGraph = [[ODDBarGraphViewController alloc] init];
-    CGRect secondGraphFrame = self.secondGraph.view.frame;
-    secondGraphFrame.origin.x = rootSize.width;
-    secondGraphFrame.origin.y = 0;
-    self.secondGraph.view.frame = secondGraphFrame;
-    self.secondGraph.graphTitle.text = @"Daily Averages";
-    [self.scrollView addSubview:self.firstGraph.view];
-    [self.scrollView addSubview:self.secondGraph.view];
+    self.happynessTrends = [[ODDLineGraphViewController alloc] init];
+    CGRect happynessTrendsFrame = self.happynessTrends.view.frame;
+    happynessTrendsFrame.origin.x = 0;
+    happynessTrendsFrame.origin.y = 0;
+    self.happynessTrends.view.frame = happynessTrendsFrame;
+    self.happynessTrends.graphTitle.text = @"Trending Happyness";
+    self.dailyAverages = [[ODDBarGraphViewController alloc] init];
+    CGRect dailyAveragesFrame = self.dailyAverages.view.frame;
+    dailyAveragesFrame.origin.x = rootSize.width;
+    dailyAveragesFrame.origin.y = 0;
+    self.dailyAverages.view.frame = dailyAveragesFrame;
+    self.dailyAverages.graphTitle.text = @"Daily Averages";
+    self.dailyAverages.numberOfBars = 7;
+    [self.scrollView addSubview:self.happynessTrends.view];
+    [self.scrollView addSubview:self.dailyAverages.view];
 
     // Initialize and add page control
     self.pageControl = [[UIPageControl alloc] init];

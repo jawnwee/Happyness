@@ -147,6 +147,9 @@
 #pragma mark - Hide page control dots
 
 - (void)viewWillAppear:(BOOL)animated {
+    // Used to update graph data
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadGraphData" object:self];
+    
     if (self.pageControl.currentPage == 0) {
         self.landscapeAnalysis.pageControl.hidden = YES;
     }
