@@ -39,6 +39,11 @@
 
 - (void)initializeLineGraph {
     [super initializeLineGraph];
+    
+    self.shortTermCount = 7;
+    self.mediumCount = (29 * 20);
+    self.lineGraphView.maximumValue = 6;
+    self.lineGraphView.minimumValue = 0;
 }
 
 #pragma mark - Setup Datastore
@@ -56,37 +61,41 @@
     }
     self.allData =
     [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
-                                     withValues:polynomailFitCoordinates((int)numberOfAllEntries,
+                                     withValues:polynomialFitCoordinates((int)numberOfAllEntries,
                                                                          [allEntriesRatings getValues],
                                                                          10)];
     
     // Initialize self.mediumEntries;
     NSUInteger numberOfMediumEntries = self.mediumCount;
-    if (numberOfAllEntries < numberOfMediumEntries) {
+    if (numberOfAllEntries < 30) {
         numberOfMediumEntries = numberOfAllEntries;
     }
     ODDDoubleArrayHolder *mediumEntriesRatings =
-    [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfMediumEntries,
-                                                     numberOfAllEntries)];
+        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (30),
+                                                         numberOfAllEntries)];
     self.mediumeData =
     [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
-                                     withValues:polynomailFitCoordinates((int)numberOfMediumEntries,
-                                                                         [mediumEntriesRatings getValues],
-                                                                         6)];
-    
+                                     withValues:polynomialFitCoordinatesExtraData((int)30,
+                                                                                  [mediumEntriesRatings getValues],
+                                                                                  10,
+                                                                                  20)];
+//    NSLog(@"MEDIUM DATA");
+//    for (NSUInteger i = 0; i < numberOfMediumEntries; i++) {
+//        NSLog(@"index:%lu\t value:%f", (unsigned long)i, [self.mediumeData getValueAtIndex:i]);
+//    }
     // Initialize self.shortTermEntries;
     NSUInteger numberOfShortTermEntries = self.shortTermCount;
     if (numberOfAllEntries < numberOfShortTermEntries) {
         numberOfShortTermEntries = numberOfAllEntries;
     }
     ODDDoubleArrayHolder *shortTermRatings =
-    [mediumEntriesRatings subarrayWithRange:NSMakeRange(numberOfMediumEntries - numberOfShortTermEntries,
-                                                        numberOfMediumEntries)];
+    [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfShortTermEntries,
+                                                     numberOfAllEntries)];
     self.shortData =
     [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
-                                     withValues:polynomailFitCoordinates((int)numberOfShortTermEntries,
+                                     withValues:polynomialFitCoordinates((int)numberOfShortTermEntries,
                                                                          [shortTermRatings getValues],
-                                                                         3)];
+                                                                         6)];
     
     [self.lineGraphView reloadData];
 }
@@ -111,7 +120,24 @@ verticalValueForHorizontalIndex:horizontalIndex
 }
 
 - (BOOL)lineChartView:(JBLineChartView *)lineChartView smoothLineAtLineIndex:(NSUInteger)lineIndex {
-    return [super lineChartView:lineChartView smoothLineAtLineIndex:lineIndex];
+//    return [super lineChartView:lineChartView smoothLineAtLineIndex:lineIndex];
+    return NO;
+}
+
+- (BOOL)lineChartView:(JBLineChartView *)lineChartView showsDotsForLineAtLineIndex:(NSUInteger)lineIndex{
+    if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+        return YES;
+    }
+    return NO;
+}
+
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView dotRadiusForLineAtLineIndex:(NSUInteger)lineIndex{
+    return 7;
+}
+
+- (CGFloat)lineChartView:(JBLineChartView *)lineChartView widthForLineAtLineIndex:(NSUInteger)lineIndex
+{
+    return 1.5;
 }
 
 #pragma mark - Graph Selection
@@ -135,6 +161,12 @@ selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
     [super lineChartView:lineChartView
     didSelectLineAtIndex:lineIndex
          horizontalIndex:horizontalIndex];
+}
+
+- (UIColor *)lineChartView:(JBLineChartView *)lineChartView
+selectionColorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex
+                          atLineIndex:(NSUInteger)lineIndex {
+    return [UIColor lightGrayColor];
 }
 
 #pragma mark - Button IBActions
