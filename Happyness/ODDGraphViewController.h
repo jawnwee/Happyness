@@ -8,10 +8,23 @@
 
 #import <UIKit/UIKit.h>
 #import "ODDPolynomialFit.h"
-@class ODDGraphFooterView;
-@class ODDGraphSiderView;
+#import "ODDGraphFooterView.h"
+#import "ODDGraphSiderView.h"
+#import "ODDHappynessEntryStore.h"
+#import "ODDHappynessEntry.h"
+#import "ODDHappyness.h"
+#import "ODDDoubleArrayHolder.h"
 
 @interface ODDGraphViewController : UIViewController
+
+/*** "Public methods and variables ***/
+
+@property (nonatomic, strong) ODDGraphFooterView *footer;
+@property (nonatomic, strong) ODDGraphSiderView *sider;
+
+/*** "Protected" methods and variables ***/
+// These should only be used within the class and its subclasses.
+// The proper way to make these protected is to create a seperate header.
 
 typedef enum:uint8_t {
     ODDGraphAmountAll = 0x1 << 0,
@@ -28,9 +41,11 @@ typedef enum:uint8_t {
 @property NSUInteger shortTermCount;
 @property NSUInteger mediumCount;
 @property NSUInteger currentAmountOfData;
-@property (nonatomic, strong) ODDGraphFooterView *footer;
-@property (nonatomic, strong) ODDGraphSiderView *sider;
+@property (nonatomic,strong) ODDDoubleArrayHolder *allData;
+@property (nonatomic,strong) ODDDoubleArrayHolder *mediumeData;
+@property (nonatomic,strong) ODDDoubleArrayHolder *shortData;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (void)reloadDataStore;
 - (IBAction)graphShortTerm:(id)sender;
 - (IBAction)graphMedium:(id)sender;

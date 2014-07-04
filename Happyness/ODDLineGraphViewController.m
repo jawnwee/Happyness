@@ -7,20 +7,8 @@
 //
 
 #import "ODDLineGraphViewController.h"
-#import "JBLineChartView.h"
-#import "ODDGraphFooterView.h"
-#import "ODDGraphSiderView.h"
-#import "ODDHappynessEntryStore.h"
-#import "ODDHappynessEntry.h"
-#import "ODDHappyness.h"
-#import "ODDDoubleArrayHolder.h"
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
-
-@property CGFloat happynessEntrySum;
-@property (nonatomic,strong) ODDDoubleArrayHolder *allEntries;
-@property (nonatomic,strong) ODDDoubleArrayHolder *mediumEntries;
-@property (nonatomic,strong) ODDDoubleArrayHolder *shortTermEntries;
 
 @end
 
@@ -35,9 +23,6 @@
     if (self) {
         // Custom initialization
         _lineGraphView = [[JBLineChartView alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reloadDataStore)
-                                                     name:@"reloadGraphData" object:nil];
     }
     return self;
 }
@@ -59,6 +44,8 @@
 - (void)initializeLineGraph {
     self.shortTermCount = 20;
     self.mediumCount = 50;
+    self.lineGraphView.maximumValue = 5;
+    self.lineGraphView.minimumValue = 0;
     
     self.lineGraphView.delegate = self;
     self.lineGraphView.dataSource = self;
@@ -70,11 +57,9 @@
     CGFloat widthPadding = graphTitleFrame.origin.x;
     widthPadding += (widthPadding / 3);
     self.lineGraphView.frame = CGRectMake(widthPadding,
-                                         heightPadding,
-                                         rootFrame.size.width - (widthPadding * 2),
-                                         rootFrame.size.height - (heightPadding * 2));
-    self.lineGraphView.maximumValue = 5;
-    self.lineGraphView.minimumValue = 0;
+                                          heightPadding,
+                                          rootFrame.size.width - (widthPadding * 2),
+                                          rootFrame.size.height - (heightPadding * 2));
     
     // Should initialize footer and sider in landscapeAnalysisViewController
     CGRect lineGraphFrame = self.lineGraphView.frame;
@@ -105,61 +90,17 @@
                                                                         lineGraphSize.height)];
     [self.view addSubview:self.lineGraphView];
     [self.view addSubview:self.lineGraphView];
-    self.happynessEntrySum = 0;
-    [self.lineGraphView reloadData];
 }
 
 #pragma mark - Setup Datastore
 
 - (void)reloadDataStore {
     [super reloadDataStore];
-    
-    // Initialize self.allEntries
-    NSUInteger numberOfAllEntries = self.entries.count;
-    ODDDoubleArrayHolder *allEntriesRatings = [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries];
-    NSUInteger index = 0;
-    for (ODDHappynessEntry *happynessItem in self.entries) {
-        [allEntriesRatings setValue:(double)happynessItem.happyness.rating atIndex:index];
-        index++;
-    }
-    self.allEntries =
-        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
-                                        withValues:polynomailFitCoordinates((int)numberOfAllEntries,
-                                                                            [allEntriesRatings getValues],
-                                                                            10)];
-    
-    // Initialize self.mediumEntries;
-    NSUInteger numberOfMediumEntries = self.mediumCount;
-    if (numberOfAllEntries < numberOfMediumEntries) {
-        numberOfMediumEntries = numberOfAllEntries;
-    }
-    ODDDoubleArrayHolder *mediumEntriesRatings =
-        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfMediumEntries,
-                                                         numberOfAllEntries)];
-    self.mediumEntries =
-        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
-                                        withValues:polynomailFitCoordinates((int)numberOfMediumEntries,
-                                                                            [mediumEntriesRatings getValues],
-                                                                            6)];
-
-    // Initialize self.shortTermEntries;
-    NSUInteger numberOfShortTermEntries = self.shortTermCount;
-    if (numberOfAllEntries < numberOfShortTermEntries) {
-        numberOfShortTermEntries = numberOfAllEntries;
-    }
-    ODDDoubleArrayHolder *shortTermRatings =
-        [mediumEntriesRatings subarrayWithRange:NSMakeRange(numberOfMediumEntries - numberOfShortTermEntries,
-                                                            numberOfMediumEntries)];
-    self.shortTermEntries =
-         [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
-                                         withValues:polynomailFitCoordinates((int)numberOfShortTermEntries,
-                                                                             [shortTermRatings getValues],
-                                                                             3)];
-    [self.lineGraphView reloadData];
 }
 
 #pragma mark - Graph Delegate Setup
 
+// TODO: Add property numberOfLines
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
     if (self.entries.count > 0) {
         [self.view addSubview:self.sider];
@@ -173,7 +114,7 @@
 }
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
-    numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
+numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
     if (self.currentAmountOfData == ODDGraphAmountAll) {
         return [[ODDHappynessEntryStore sharedStore].happynessEntries count];
     } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
@@ -184,14 +125,14 @@
 }
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView
-    verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
-                        atLineIndex:(NSUInteger)lineIndex {
+verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
+             atLineIndex:(NSUInteger)lineIndex {
     if (self.currentAmountOfData == ODDGraphAmountAll) {
-        return [self.allEntries getValueAtIndex:horizontalIndex];
+        return [self.allData getValueAtIndex:horizontalIndex];
     } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
-        return [self.mediumEntries getValueAtIndex:horizontalIndex];
+        return [self.mediumeData getValueAtIndex:horizontalIndex];
     } else {
-        return [self.shortTermEntries getValueAtIndex:horizontalIndex];
+        return [self.shortData getValueAtIndex:horizontalIndex];
     }
 }
 
@@ -210,13 +151,13 @@
 }
 
 - (UIColor *)lineChartView:(JBLineChartView *)lineChartView
-    selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
+selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
     return [UIColor lightGrayColor];
 }
 
 - (void)lineChartView:(JBLineChartView *)lineChartView
-    didSelectLineAtIndex:(NSUInteger)lineIndex
-         horizontalIndex:(NSUInteger)horizontalIndex {
+ didSelectLineAtIndex:(NSUInteger)lineIndex
+      horizontalIndex:(NSUInteger)horizontalIndex {
     
 }
 
@@ -224,21 +165,18 @@
 
 - (IBAction)graphAll:(id)sender {
     [super graphAll:sender];
-    self.happynessEntrySum = 0;
     self.currentAmountOfData = ODDGraphAmountAll;
     [self.lineGraphView reloadData];
 }
 
 - (IBAction)graphShortTerm:(id)sender {
     [super graphShortTerm:sender];
-    self.happynessEntrySum = 0;
     self.currentAmountOfData = ODDGraphAmountShortTerm;
     [self.lineGraphView reloadData];
 }
 
 - (IBAction)graphMedium:(id)sender {
     [super graphMedium:sender];
-    self.happynessEntrySum = 0;
     self.currentAmountOfData = ODDGraphAmountMedium;
     [self.lineGraphView reloadData];
 }

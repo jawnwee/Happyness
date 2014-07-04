@@ -8,12 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "ODDGraphViewController.h"
-@class JBBarChartView;
+#import "JBBarChartView.h"
 
-@interface ODDBarGraphViewController : ODDGraphViewController
+@interface ODDBarGraphViewController : ODDGraphViewController <JBBarChartViewDataSource, JBBarChartViewDelegate>
 
 @property (nonatomic,strong) JBBarChartView *barChartView;
 @property NSUInteger numberOfBars;
-@property BOOL isOrganizedByDays;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+- (void)initializeBarGraph;
+- (void)reloadDataStore;
+
+- (NSUInteger)numberOfBarsInBarChartView:(JBBarChartView *)barChartView;
+- (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtAtIndex:(NSUInteger)index;
+
+- (IBAction)graphShortTerm:(id)sender;
+- (IBAction)graphMedium:(id)sender;
+- (IBAction)graphAll:(id)sender;
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
 
 @end

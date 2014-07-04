@@ -41,7 +41,6 @@
     return self.entries;
 }
 
-// If a programmar calls [[ODDHappynessEntryStore alloc] init], throw an exception
 - (instancetype)init {
     @throw [NSException exceptionWithName:@"Singleton" 
                                    reason:@"Use +[ODDHappynessEntryStore sharedStore]"

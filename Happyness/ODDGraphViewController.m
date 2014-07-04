@@ -12,6 +12,7 @@
 
 @interface ODDGraphViewController ()
 
+// Need to implement this properly
 @property (nonatomic,strong) IBOutlet UILabel *notEnoughDataLabel;
 
 @end
@@ -26,6 +27,9 @@
 @synthesize mediumCount = _mediumCount;
 @synthesize entries = _entries;
 @synthesize currentAmountOfData = _currentAmountOfData;
+@synthesize allData = _allData;
+@synthesize mediumeData = _mediumData;
+@synthesize shortData = _shortData;
 
 #pragma mark - Init/Alloc
 
@@ -42,6 +46,9 @@
         _topFrame = [[UIView alloc] init];
         _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
         _currentAmountOfData = ODDGraphAmountAll;
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(reloadDataStore)
+                                                     name:@"reloadGraphData" object:nil];
     }
     return self;
 }
@@ -153,6 +160,7 @@
 
 #pragma mark - Setup Datastore
 
+// Need to re-sort?
 - (void)reloadDataStore {
     self.entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
 }

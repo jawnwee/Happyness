@@ -8,14 +8,14 @@
 
 #import "ODDLandscapeAnalysisViewController.h"
 #import "ODDLandscapeAnalysisView.h"
-#import "ODDLineGraphViewController.h"
-#import "ODDBarGraphViewController.h"
+#import "ODDCurveFittingViewController.h"
+#import "ODDDayAveragesViewController.h"
 
 @interface ODDLandscapeAnalysisViewController () <UIScrollViewDelegate>
 
 @property (nonatomic,strong) ODDLandscapeAnalysisView *scrollView;
-@property (nonatomic,strong) ODDLineGraphViewController *happynessTrends;
-@property (nonatomic,strong) ODDBarGraphViewController *dailyAverages;
+@property (nonatomic,strong) ODDCurveFittingViewController *happynessTrends;
+@property (nonatomic,strong) ODDDayAveragesViewController *dailyAverages;
 
 @end
 
@@ -69,13 +69,13 @@
     [self.view addSubview:self.scrollView];
     
     // Initialize and add graphViews
-    self.happynessTrends = [[ODDLineGraphViewController alloc] init];
+    self.happynessTrends = [[ODDCurveFittingViewController alloc] init];
     CGRect happynessTrendsFrame = self.happynessTrends.view.frame;
     happynessTrendsFrame.origin.x = 0;
     happynessTrendsFrame.origin.y = 0;
     self.happynessTrends.view.frame = happynessTrendsFrame;
     self.happynessTrends.graphTitle.text = @"Trending Happyness";
-    self.dailyAverages = [[ODDBarGraphViewController alloc] init];
+    self.dailyAverages = [[ODDDayAveragesViewController alloc] init];
     CGRect dailyAveragesFrame = self.dailyAverages.view.frame;
     dailyAveragesFrame.origin.x = rootSize.width;
     dailyAveragesFrame.origin.y = 0;
