@@ -20,6 +20,9 @@
 @property (strong, nonatomic) IBOutlet ODDHappynessEntryView *happynessEntryView;
 @property (strong, nonatomic) ODDTimelineTableViewController *timeline;
 
+@property (strong, nonatomic) NSDate *dayOneInCurrentMonth;
+@property (strong, nonatomic) NSDate *lastDayInCurrentMonth;
+
 @end
 
 @implementation ODDCalendarViewController
@@ -29,8 +32,10 @@
     if (self) {
         UIImage *calendarSelected = [UIImage imageNamed:@"CalendarTabSelected60.png"];
         UIImage *calendarUnselected = [UIImage imageNamed:@"CalendarTabUnselected60.png"];
-        calendarSelected = [calendarSelected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-        calendarUnselected = [calendarUnselected imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        calendarSelected = [calendarSelected
+                                    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+        calendarUnselected = [calendarUnselected
+                                    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
         UITabBarItem *calendarTabBarItem = [[UITabBarItem alloc] initWithTitle:nil 
                                                                          image:calendarUnselected 
                                                                  selectedImage:calendarSelected];
@@ -58,20 +63,37 @@
         [[ODDHappynessEntryStore sharedStore] sortStore:YES];
         /////////////////////////////////////////////////////////////////////////////////////
 
+        
         ODDCalendarView *calendarView = [[ODDCalendarView alloc] init];
-        calendarView.calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        CGRect frame = [self.view frame];
+        calendarView.frame = frame;
+        calendarView.calendar = [[NSCalendar alloc]
+                                        initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         calendarView.delegate = self;
-        calendarView.firstDate = [NSDate dateWithTimeIntervalSinceNow:-60 * 60 * 24 * 365 * 5];
-        calendarView.lastDate = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24 * 365 * 1];
+        NSDate *firstEntry = [[ODDHappynessEntryStore sharedStore] firstDate];
+//        calendarView.firstDate = [NSDate dateWithTimeInterval:-60 * 60 * 24 * 31 * 1
+//                                                    sinceDate:firstEntry];
+
+        // Still testing stuff
+        NSDate *todayDate = [NSDate date];
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+        NSDateComponents *components = [gregorian components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:todayDate];
+        components.day = 1;
+
+        _dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+        components.day = 27;
+        _lastDayInCurrentMonth = [gregorian dateFromComponents:components];
+        NSLog(@"first: %@ last: %@",self.dayOneInCurrentMonth, self.lastDayInCurrentMonth);
+        //
+
+        calendarView.firstDate = self.dayOneInCurrentMonth;
+        calendarView.lastDate = self.lastDayInCurrentMonth;
         calendarView.rowCellClass = [ODDCalendarRowCell class];
-        calendarView.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 
-                                                       green:247.0 / 255.0 
-                                                        blue:249.0 / 255.0 
-                                                       alpha:1.0];
-        calendarView.pagingEnabled = YES;
+        calendarView.pagingEnabled = NO;
         CGFloat onePixel = 1.0f / [UIScreen mainScreen].scale;
         calendarView.contentInset = UIEdgeInsetsMake(0.0f, onePixel, 0.0f, onePixel);
-        self.view = calendarView;
+        [self.view addSubview:calendarView];
 
         UIBarButtonItem *today = [[UIBarButtonItem alloc] init];
         today.title = @"Today";
@@ -110,27 +132,29 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [(ODDCalendarView *)self.view reload];
+    //[(ODDCalendarView *)self.view reload];
     // [self.happynessEntryView setHappynessEntry:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.layer.cornerRadius = 10.0f;
+    self.view.layer.masksToBounds = YES;
     // TODO: when view initally loads, must set the entryView to reflect current selected
     // NSDate *key = [self.calendar date];
     // ODDHappynessEntry *initialEntry = [[ODDHappynessEntryStore sharedStore] ]
 }
 
 - (void)updateTitle {
-    NSString *year = [(ODDCalendarView *)self.view currentYear];
-    if (year != self.navigationItem.title) {
-        self.navigationItem.title = year;
-    }
+    //NSString *year = [(ODDCalendarView *)self.view currentYear];
+//    if (year != self.navigationItem.title) {
+//        self.navigationItem.title = year;
+//    }
 }
 
 - (void)viewDidLayoutSubviews {
-    [(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:NO];
+    //[(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -140,7 +164,52 @@
 }
 
 - (void)moveToToday {
-    [(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:YES];
+    //[(ODDCalendarView *)self.view scrollToDate:[NSDate date] animated:YES];
+    NSDate *firstDate = self.dayOneInCurrentMonth;
+    NSDate *lastDate = self.lastDayInCurrentMonth;
+    NSLog(@"LasteDaye: %@", lastDate);
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+    NSDateComponents *components = [gregorian components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:firstDate];
+
+    NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth) fromDate:lastDate];
+
+    components.month -= 1;
+    NSDate *dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+    lastComponents.day = 0;
+    NSDate *lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+
+    self.dayOneInCurrentMonth = dayOneInCurrentMonth;
+    self.lastDayInCurrentMonth = lastDayInCurrentMonth;
+
+    NSLog(@"first: %@ last: %@",dayOneInCurrentMonth, lastDayInCurrentMonth);
+
+
+
+    ODDCalendarView *calendarView = [[ODDCalendarView alloc] init];
+    CGRect frame = CGRectMake(self.view.frame.origin.x, -500, self.view.frame.size.width, self.view.frame.size.height);
+    calendarView.frame = frame;
+    calendarView.calendar = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    calendarView.delegate = self;
+    calendarView.firstDate = dayOneInCurrentMonth;
+    calendarView.lastDate = lastDayInCurrentMonth;
+    calendarView.rowCellClass = [ODDCalendarRowCell class];
+
+    calendarView.pagingEnabled = NO;
+    CGFloat onePixel = 1.0f / [UIScreen mainScreen].scale;
+    calendarView.contentInset = UIEdgeInsetsMake(0.0f, onePixel, 0.0f, onePixel);
+    [UIView animateWithDuration:0.5
+                          delay:0.1
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [[[self.view subviews] objectAtIndex:0] setCenter:CGPointMake(self.view.center.x, 1000)];
+                         [self.view addSubview:calendarView];
+                         [[[self.view subviews] objectAtIndex:1] setCenter:CGPointMake(self.view.center.x, 250)];
+                     }
+                     completion:^(BOOL finished){
+                         [[[self.view subviews] objectAtIndex:0] removeFromSuperview];
+                     }];
 }
 
 #pragma mark - Segue to different View Controllers
@@ -149,7 +218,7 @@
 }
 
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
-    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    unsigned int flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSCalendar* calendar = [NSCalendar currentCalendar];
     NSDateComponents* components = [calendar components:flags fromDate:[NSDate date]];
     NSDate *today = [calendar dateFromComponents:components];

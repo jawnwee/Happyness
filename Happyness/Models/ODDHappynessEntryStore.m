@@ -77,4 +77,13 @@
     [_privateEntries removeObjectForKey:key];
 }
 
+#pragma mark - Calendar properties
+
+- (NSDate *)firstDate {
+    ODDHappynessEntry *first = [self.entries objectAtIndex:0];
+    NSDate *date = [first date];
+
+    return date;
+}
+
 @end

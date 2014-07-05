@@ -43,6 +43,7 @@
     [super viewDidLoad];
     [self.view sendSubviewToBack:self.grayView];
     self.tabBarController.tabBar.hidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
 
     ODDHappyness *happyness = [self.currentEntry happyness];
     ODDNote *previousNote = [self.currentEntry note];
@@ -61,12 +62,23 @@
     initialFrame.origin.y = 0;
     [self.scrollView scrollRectToVisible:initialFrame animated:NO];
     // Do any additional setup after loading the view from its nib.
+
+    [self submitButtonSetup];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self submit];
     self.tabBarController.tabBar.hidden = NO;
+}
+
+- (void)submitButtonSetup {
+    CGRect frame = CGRectMake(self.view.frame.size.width - 80.0, 30.0, 80, 30);
+    UIButton *submit = [[UIButton alloc] initWithFrame:frame];
+    [submit addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
+    [submit setTitle:@"Submit" forState:UIControlStateNormal];
+    submit.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:18.0];
+    [self.view addSubview:submit];
 }
 
 /* Submit after user leaves today view controller*/
@@ -79,6 +91,9 @@
                                                                    dateTime:self.currentDate];
     [[ODDHappynessEntryStore sharedStore] addEntry:entry];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"resortAndReload" object:self];
+
+    self.navigationController.navigationBar.hidden = NO;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

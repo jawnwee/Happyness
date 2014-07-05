@@ -9,7 +9,7 @@
 #import "ODDRootViewController.h"
 #import "ODDRootScrollView.h"
 
-#define SCROLLVIEW_HEIGHT_RATIO     3/5
+#define SCROLLVIEW_HEIGHT_RATIO     3.5/5
 #define PAGECONTROL_HEIGHT_RATIO    1/8
 
 @interface ODDRootViewController () <UIScrollViewDelegate>
@@ -63,7 +63,7 @@
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-    self.scrollView.backgroundColor = [UIColor darkGrayColor];
+    self.scrollView.backgroundColor = [UIColor blackColor];
     [self addViewsToScrollView];
     [self.view addSubview:self.scrollView];
 }

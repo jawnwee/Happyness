@@ -44,7 +44,8 @@
 /* Each row's background can be customized; needs both bottom and a top row */
 - (UIImage *)backgroundImage;
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"CalendarRow%@.png", self.bottomRow ? @"Bottom" : @""]];
+    return [UIImage imageNamed:
+                [NSString stringWithFormat:@"CalendarRow%@.png", self.bottomRow ? @"Bottom" : @""]];
 }
 
 - (void)configureOddLookCalendarTab:(UIButton *)button forDate:(NSDate *)date {

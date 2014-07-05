@@ -75,6 +75,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setNeedsStatusBarAppearanceUpdate];
     [self setUpTodayView];
     [self setUpNoteView];
     self.grayView.backgroundColor = [UIColor grayColor];
@@ -85,6 +86,10 @@
     if (self.hasBeenClickedToday) {
         [self submit];
     }
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Today View Setup

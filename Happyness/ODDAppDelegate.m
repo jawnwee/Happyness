@@ -28,9 +28,9 @@
     // Override point for customization after application launch.
 
 //    // All temporary inits, may or may not need changing later, these are the base views for the tab
-//    NSBundle *appBundle = [NSBundle mainBundle];
-//    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-//    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
+    NSBundle *appBundle = [NSBundle mainBundle];
+    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
 //    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
 //    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 //    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
@@ -45,7 +45,7 @@
 //    self.window.rootViewController = tbvc;
     
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
-    rvc.viewControllers = @[];
+    rvc.viewControllers = @[today, calendar];
     self.window.rootViewController = rvc;
     
     self.window.backgroundColor = [UIColor whiteColor];

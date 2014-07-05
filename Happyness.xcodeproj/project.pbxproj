@@ -196,13 +196,13 @@
 		EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarRowCell.m; sourceTree = "<group>"; };
 		EB362C46195F407A00F6BA76 /* ODDCalendarTabImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarTabImageView.h; sourceTree = "<group>"; };
 		EB362C47195F407A00F6BA76 /* ODDCalendarTabImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarTabImageView.m; sourceTree = "<group>"; };
-		EB362C4A195F490800F6BA76 /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CalendarRow@2x.png"; path = "Resources/Calendar/CalendarRow@2x.png"; sourceTree = "<group>"; };
-		EB362C4B195F490800F6BA76 /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CalendarRowBottom@2x.png"; path = "Resources/Calendar/CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
-		EB362C4C195F490800F6BA76 /* oddLook_calendar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oddLook_calendar_1.png; path = Resources/Calendar/oddLook_calendar_1.png; sourceTree = "<group>"; };
-		EB362C4D195F490800F6BA76 /* oddLook_calendar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oddLook_calendar_2.png; path = Resources/Calendar/oddLook_calendar_2.png; sourceTree = "<group>"; };
-		EB362C4E195F490800F6BA76 /* oddLook_calendar_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oddLook_calendar_3.png; path = Resources/Calendar/oddLook_calendar_3.png; sourceTree = "<group>"; };
-		EB362C4F195F490800F6BA76 /* oddLook_calendar_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oddLook_calendar_4.png; path = Resources/Calendar/oddLook_calendar_4.png; sourceTree = "<group>"; };
-		EB362C50195F490800F6BA76 /* oddLook_calendar_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = oddLook_calendar_5.png; path = Resources/Calendar/oddLook_calendar_5.png; sourceTree = "<group>"; };
+		EB362C4A195F490800F6BA76 /* CalendarRow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRow@2x.png"; sourceTree = "<group>"; };
+		EB362C4B195F490800F6BA76 /* CalendarRowBottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarRowBottom@2x.png"; sourceTree = "<group>"; };
+		EB362C4C195F490800F6BA76 /* oddLook_calendar_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oddLook_calendar_1.png; sourceTree = "<group>"; };
+		EB362C4D195F490800F6BA76 /* oddLook_calendar_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oddLook_calendar_2.png; sourceTree = "<group>"; };
+		EB362C4E195F490800F6BA76 /* oddLook_calendar_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oddLook_calendar_3.png; sourceTree = "<group>"; };
+		EB362C4F195F490800F6BA76 /* oddLook_calendar_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oddLook_calendar_4.png; sourceTree = "<group>"; };
+		EB362C50195F490800F6BA76 /* oddLook_calendar_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oddLook_calendar_5.png; sourceTree = "<group>"; };
 		EB658FA81951385A00A13987 /* ODDCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarViewController.h; sourceTree = "<group>"; };
 		EB658FA91951385A00A13987 /* ODDCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarViewController.m; sourceTree = "<group>"; };
 		EB6D6F871951695C00A1A164 /* ODDHappynessEntryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryView.h; sourceTree = "<group>"; };
@@ -309,7 +309,7 @@
 				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
 				EBD388481961F822000A41A1 /* ODDHappynessHeader.h */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		C4669CCA194F817900F82109 /* OldControllers */ = {
@@ -328,7 +328,7 @@
 				EBF23209195C91C7003E29AC /* CalendarViewControllers */,
 				D124B1351953934B00A9F687 /* Analysis */,
 			);
-			name = OldControllers;
+			path = OldControllers;
 			sourceTree = "<group>";
 		};
 		D124B1351953934B00A9F687 /* Analysis */ = {
@@ -342,7 +342,7 @@
 				D139EEC51950D148003A44DF /* ODDLandscapeAnalysisViewController.m */,
 				D124B1481956518C00A9F687 /* Graphs */,
 			);
-			name = Analysis;
+			path = Analysis;
 			sourceTree = "<group>";
 		};
 		D124B1481956518C00A9F687 /* Graphs */ = {
@@ -353,7 +353,7 @@
 				D175C2761965BF1F00A1E3CD /* LineGraphs */,
 				D175C27A1965BF3800A1E3CD /* BarGraphs */,
 			);
-			name = Graphs;
+			path = Graphs;
 			sourceTree = "<group>";
 		};
 		D124B14C19565B6900A9F687 /* Analysis */ = {
@@ -367,7 +367,7 @@
 				D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */,
 				D124B14F195A78FD00A9F687 /* Graphs */,
 			);
-			name = Analysis;
+			path = Analysis;
 			sourceTree = "<group>";
 		};
 		D124B14F195A78FD00A9F687 /* Graphs */ = {
@@ -380,7 +380,7 @@
 				D124B157195A7E4E00A9F687 /* ODDGraphSiderView.h */,
 				D124B158195A7E4F00A9F687 /* ODDGraphSiderView.m */,
 			);
-			name = Graphs;
+			path = Graphs;
 			sourceTree = "<group>";
 		};
 		D13F4C4F194F6A68003873B0 = {
@@ -441,7 +441,7 @@
 				D13F4C67194F6A68003873B0 /* main.m */,
 				D13F4C69194F6A68003873B0 /* Happyness-Prefix.pch */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D13F4C7A194F6A69003873B0 /* HappynessTests */ = {
@@ -459,7 +459,7 @@
 				D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */,
 				D13F4C7D194F6A69003873B0 /* InfoPlist.strings */,
 			);
-			name = "Supporting Files";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		D175C2761965BF1F00A1E3CD /* LineGraphs */ = {
@@ -470,7 +470,7 @@
 				D175C2731965BF1B00A1E3CD /* ODDCurveFittingViewController.h */,
 				D175C2741965BF1B00A1E3CD /* ODDCurveFittingViewController.m */,
 			);
-			name = LineGraphs;
+			path = LineGraphs;
 			sourceTree = "<group>";
 		};
 		D175C27A1965BF3800A1E3CD /* BarGraphs */ = {
@@ -481,16 +481,17 @@
 				D175C2771965BF3500A1E3CD /* ODDDayAveragesViewController.h */,
 				D175C2781965BF3500A1E3CD /* ODDDayAveragesViewController.m */,
 			);
-			name = BarGraphs;
+			path = BarGraphs;
 			sourceTree = "<group>";
 		};
 		D1AAF2671968869600332F59 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB04B0F819689FE100B8E984 /* Calendar */,
 				D1AAF2641968869100332F59 /* ODDRootViewController.h */,
 				D1AAF2651968869100332F59 /* ODDRootViewController.m */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D1AAF26D1968890200332F59 /* Views */ = {
@@ -499,7 +500,14 @@
 				D1AAF26A196888FA00332F59 /* ODDRootScrollView.h */,
 				D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */,
 			);
-			name = Views;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EB04B0F819689FE100B8E984 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		EB362C49195F490000F6BA76 /* Calendar */ = {
@@ -513,7 +521,7 @@
 				EB362C4F195F490800F6BA76 /* oddLook_calendar_4.png */,
 				EB362C50195F490800F6BA76 /* oddLook_calendar_5.png */,
 			);
-			name = Calendar;
+			path = Calendar;
 			sourceTree = "<group>";
 		};
 		EBC8C0C2195C17A200CC1A1E /* Resources */ = {
@@ -523,8 +531,7 @@
 				C419C82C195DA45D008AE325 /* HappynessFaces */,
 				C419C809195D89CD008AE325 /* Tab Icons */,
 			);
-			name = Resources;
-			path = ..;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
@@ -537,7 +544,7 @@
 				EB362C46195F407A00F6BA76 /* ODDCalendarTabImageView.h */,
 				EB362C47195F407A00F6BA76 /* ODDCalendarTabImageView.m */,
 			);
-			name = Misc;
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		EBE2BD7B195009E20023E9F4 /* OldViews */ = {
@@ -550,7 +557,7 @@
 				EBF2320A195C91F1003E29AC /* CalendarViews */,
 				D124B14C19565B6900A9F687 /* Analysis */,
 			);
-			name = OldViews;
+			path = OldViews;
 			sourceTree = "<group>";
 		};
 		EBF23209195C91C7003E29AC /* CalendarViewControllers */ = {
@@ -563,7 +570,7 @@
 				EBF23206195C91C0003E29AC /* ODDTimelineTableViewController.h */,
 				EBF23207195C91C0003E29AC /* ODDTimelineTableViewController.m */,
 			);
-			name = CalendarViewControllers;
+			path = CalendarViewControllers;
 			sourceTree = "<group>";
 		};
 		EBF2320A195C91F1003E29AC /* CalendarViews */ = {
@@ -577,7 +584,7 @@
 				EB6D6F881951695C00A1A164 /* ODDHappynessEntryView.m */,
 				EB12A46C19535948001F47B6 /* ODDHappynessEntryView.xib */,
 			);
-			name = CalendarViews;
+			path = CalendarViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -907,9 +914,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
-				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
+				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -926,9 +933,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
-				INFOPLIST_FILE = "Happyness/Happyness-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
+				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -946,12 +953,12 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
+				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "HappynessTests/HappynessTests-Info.plist";
+				INFOPLIST_FILE = "HappynessTests/Supporting Files/HappynessTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -968,8 +975,8 @@
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Happyness/Happyness-Prefix.pch";
-				INFOPLIST_FILE = "HappynessTests/HappynessTests-Info.plist";
+				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
+				INFOPLIST_FILE = "HappynessTests/Supporting Files/HappynessTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
