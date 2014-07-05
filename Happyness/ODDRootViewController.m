@@ -9,7 +9,6 @@
 #import "ODDRootViewController.h"
 #import "ODDRootScrollView.h"
 
-#define NUMBER_OF_PAGES             2
 #define SCROLLVIEW_HEIGHT_RATIO     3/5
 #define PAGECONTROL_HEIGHT_RATIO    1/8
 
@@ -17,14 +16,17 @@
 
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) ODDRootScrollView *scrollView;
-
 // Name clear enough?
 // TODO: create a class for this
 @property (nonatomic, strong) id bottomViewController;
 
+@property NSUInteger numberOfPages;
+
 @end
 
 @implementation ODDRootViewController
+
+@synthesize viewControllers = _viewControllers;
 
 #pragma mark - Alloc/Init
 
@@ -44,7 +46,6 @@
     [super viewDidLoad];
     [self setupScrollView];
     [self setupPageControl];
-    NSLog(@"%@", [self.scrollView subviews].description);
 }
 
 - (void)setupScrollView {
@@ -56,7 +57,7 @@
                                        scrollViewSize.width,
                                        scrollViewSize.height);
     self.scrollView = [[ODDRootScrollView alloc] initWithFrame:scrollViewFrame];
-    self.scrollView.contentSize = CGSizeMake(scrollViewSize.width * NUMBER_OF_PAGES,
+    self.scrollView.contentSize = CGSizeMake(scrollViewSize.width * self.numberOfPages,
                                              scrollViewSize.height);
     self.scrollView.delegate = self;
     self.scrollView.pagingEnabled = YES;
@@ -67,11 +68,15 @@
     [self.view addSubview:self.scrollView];
 }
 
-// TODO: Add controllers' view here.
-// Need a property for each new controller added
-// To add the view use [self.scrollView addSubview:|view|]
 - (void)addViewsToScrollView {
-
+    for (NSUInteger i = 0; i < self.numberOfPages; i++) {
+        UIViewController *newViewController = (UIViewController *)self.viewControllers[i];
+        UIView *newView = newViewController.view;
+        CGRect newViewFrame = newView.frame;
+        newViewFrame.origin.x += self.scrollView.frame.size.width * i;
+        newViewController.view.frame = newViewFrame;
+        [self.scrollView addSubview:((UIViewController *)self.viewControllers[i]).view];
+    }
 }
 
 - (void)setupPageControl {
@@ -83,7 +88,7 @@
                                          pageControlSize.width,
                                          pageControlSize.height);
     self.pageControl = [[UIPageControl alloc] initWithFrame:pageControlFrame];
-    self.pageControl.numberOfPages = NUMBER_OF_PAGES;
+    self.pageControl.numberOfPages = self.numberOfPages;
     self.pageControl.currentPage = 0;
     self.pageControl.userInteractionEnabled = NO;
     self.pageControl.backgroundColor = [UIColor lightGrayColor];
@@ -104,6 +109,13 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Setters
+
+- (void)setViewControllers:(NSArray *)viewControllers {
+    _viewControllers = viewControllers;
+    self.numberOfPages = viewControllers.count;
 }
 
 @end

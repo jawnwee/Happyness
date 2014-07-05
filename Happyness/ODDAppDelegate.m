@@ -45,6 +45,7 @@
 //    self.window.rootViewController = tbvc;
     
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
+    rvc.viewControllers = @[];
     self.window.rootViewController = rvc;
     
     self.window.backgroundColor = [UIColor whiteColor];
