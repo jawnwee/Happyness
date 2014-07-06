@@ -56,7 +56,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+    self.view.frame = CGRectMake(0,
+                                 0,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
     self.view.backgroundColor = [UIColor whiteColor];
     [self initializeTopPortionOfFrame];
     [self initializeLabels];
@@ -81,7 +84,7 @@
 - (void)initializeLabels {
     CGRect rootFrame = self.view.frame;
     CGSize rootSize = rootFrame.size;
-    self.graphTitle.frame = CGRectMake(rootSize.width / 10,
+    self.graphTitle.frame = CGRectMake(rootSize.width / 18,
                                        0,
                                        rootSize.width / 2,
                                        rootSize.height / 8);

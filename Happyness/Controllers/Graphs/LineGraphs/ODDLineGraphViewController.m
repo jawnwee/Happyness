@@ -7,6 +7,7 @@
 //
 
 #import "ODDLineGraphViewController.h"
+#import "ODDColoredAxisView.h"
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -88,7 +89,12 @@
                                                                         lineGraphPosition.y,
                                                                         siderWidth,
                                                                         lineGraphSize.height)];
-    [self.view addSubview:self.lineGraphView];
+//    ODDColoredAxisView *test = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x - siderWidth,
+//                                                                                    lineGraphPosition.y,
+//                                                                                    siderWidth,
+//                                                                                    lineGraphSize.height)];
+//    [self.view addSubview:test];
+//    self.lineGraphView.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:self.lineGraphView];
 }
 

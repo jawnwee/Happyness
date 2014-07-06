@@ -31,4 +31,12 @@
     return self;
 }
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [self initWithElements:@[] withFrame:frame];
+    if (self) {
+        
+    }
+    return self;
+}
+
 @end

@@ -43,11 +43,10 @@
     [super initializeLineGraph];
     
     self.shortTermCount = 7;
-//    self.mediumCount = (29 * 20);
     self.mediumCount = 30;
     self.factor = 20;
-    self.lineGraphView.maximumValue = 6;
-    self.lineGraphView.minimumValue = 0;
+    self.lineGraphView.maximumValue = 5.5;
+    self.lineGraphView.minimumValue = .5;
 }
 
 #pragma mark - Setup Datastore

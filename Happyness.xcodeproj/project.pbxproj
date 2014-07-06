@@ -60,6 +60,7 @@
 		D13F4C81194F6A69003873B0 /* HappynessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C80194F6A69003873B0 /* HappynessTests.m */; };
 		D175C2751965BF1B00A1E3CD /* ODDCurveFittingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D175C2741965BF1B00A1E3CD /* ODDCurveFittingViewController.m */; };
 		D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D175C2781965BF3500A1E3CD /* ODDDayAveragesViewController.m */; };
+		D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */; };
 		D1AAF2661968869100332F59 /* ODDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AAF2651968869100332F59 /* ODDRootViewController.m */; };
 		D1AAF26C196888FA00332F59 /* ODDRootScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */; };
 		D1D0074B19517BB300ED9A66 /* ODDAnalysisScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D0074A19517BB300ED9A66 /* ODDAnalysisScrollViewController.m */; };
@@ -181,6 +182,8 @@
 		D175C2781965BF3500A1E3CD /* ODDDayAveragesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDDayAveragesViewController.m; sourceTree = "<group>"; };
 		D197670E1968C6B800CF7E19 /* ODDViewSizeConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ODDViewSizeConstants.h; sourceTree = "<group>"; };
 		D19767101968C7A100CF7E19 /* ODDConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ODDConstants.h; sourceTree = "<group>"; };
+		D19767151969F53D00CF7E19 /* ODDColoredAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDColoredAxisView.h; sourceTree = "<group>"; };
+		D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDColoredAxisView.m; sourceTree = "<group>"; };
 		D1AAF2641968869100332F59 /* ODDRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDRootViewController.h; sourceTree = "<group>"; };
 		D1AAF2651968869100332F59 /* ODDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDRootViewController.m; sourceTree = "<group>"; };
 		D1AAF26A196888FA00332F59 /* ODDRootScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDRootScrollView.h; sourceTree = "<group>"; };
@@ -375,7 +378,6 @@
 				D1D00752195211C400ED9A66 /* ODDLandscapeAnalysisView.m */,
 				D1D007541952175300ED9A66 /* ODDAnalysisScrollView.h */,
 				D1D007551952175300ED9A66 /* ODDAnalysisScrollView.m */,
-				D124B14F195A78FD00A9F687 /* Graphs */,
 			);
 			path = Analysis;
 			sourceTree = "<group>";
@@ -383,6 +385,8 @@
 		D124B14F195A78FD00A9F687 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
+				D19767151969F53D00CF7E19 /* ODDColoredAxisView.h */,
+				D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */,
 				D1DBDE4F19631C4C00003762 /* ODDGraphAxis.h */,
 				D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */,
 				D124B154195A7E4700A9F687 /* ODDGraphFooterView.h */,
@@ -520,6 +524,7 @@
 				EB04B0FC1968BAE000B8E984 /* CalendarViews */,
 				D1AAF26A196888FA00332F59 /* ODDRootScrollView.h */,
 				D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */,
+				D124B14F195A78FD00A9F687 /* Graphs */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */,
 				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
 				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
+				D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */,
 				D1D00753195211C400ED9A66 /* ODDLandscapeAnalysisView.m in Sources */,
 				D124B1441953A21500A9F687 /* ODDBarGraphViewController.m in Sources */,
 				EB99473A195AA99C0095DA5B /* ODDCalendarView.m in Sources */,
