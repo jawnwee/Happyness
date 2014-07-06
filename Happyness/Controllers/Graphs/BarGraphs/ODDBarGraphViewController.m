@@ -104,7 +104,15 @@
 
 // TODO: Removed footer and siders when there isn't enough data
 - (NSUInteger)numberOfBarsInBarChartView:(JBBarChartView *)barChartView {
-    return self.numberOfBars;
+    if (self.entries.count > 0) {
+        [self.view addSubview:self.sider];
+        [self.view addSubview:self.footer];
+        return self.numberOfBars;
+    } else {
+        [self.sider removeFromSuperview];
+        [self.footer removeFromSuperview];
+        return 0;
+    }
 }
 
 - (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtAtIndex:(NSUInteger)index {

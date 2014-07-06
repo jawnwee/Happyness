@@ -53,51 +53,52 @@
 
 - (void)reloadDataStore {
     [super reloadDataStore];
-    
-    // Initialize self.allEntries
     NSUInteger numberOfAllEntries = self.entries.count;
-    ODDDoubleArrayHolder *allEntriesRatings = [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries];
-    NSUInteger index = 0;
-    for (ODDHappynessEntry *happynessItem in self.entries) {
-        [allEntriesRatings setValue:(double)happynessItem.happyness.rating atIndex:index];
-        index++;
-    }
-    self.allData =
-    [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
-                                     withValues:polynomialFitCoordinates((int)numberOfAllEntries,
-                                                                         [allEntriesRatings getValues],
-                                                                         10)];
-    
-    // Initialize self.mediumEntries;
-    NSUInteger numberOfMediumEntries = (self.mediumCount - 1) * self.factor;
-    if (numberOfAllEntries < self.mediumCount) {
-        numberOfMediumEntries = numberOfAllEntries;
-    }
-    ODDDoubleArrayHolder *mediumEntriesRatings =
+    if (self.entries.count > 0) {
+        // Initialize self.allEntries
+        ODDDoubleArrayHolder *allEntriesRatings = [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries];
+        NSUInteger index = 0;
+        for (ODDHappynessEntry *happynessItem in self.entries) {
+            [allEntriesRatings setValue:(double)happynessItem.happyness.rating atIndex:index];
+            index++;
+        }
+        self.allData =
+        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
+                                         withValues:polynomialFitCoordinates((int)numberOfAllEntries,
+                                                                             [allEntriesRatings getValues],
+                                                                             10)];
+        
+        // Initialize self.mediumEntries;
+        NSUInteger numberOfMediumEntries = (self.mediumCount - 1) * self.factor;
+        if (numberOfAllEntries < self.mediumCount) {
+            numberOfMediumEntries = numberOfAllEntries;
+        }
+        ODDDoubleArrayHolder *mediumEntriesRatings =
         [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (self.mediumCount),
                                                          numberOfAllEntries)];
-    self.mediumeData =
-    [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
-                                     withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
-                                                                                  [mediumEntriesRatings getValues],
-                                                                                  10,
-                                                                                  (int)self.factor)];
-
-    // Initialize self.shortTermEntries;
-    NSUInteger numberOfShortTermEntries = self.shortTermCount;
-    if (numberOfAllEntries < numberOfShortTermEntries) {
-        numberOfShortTermEntries = numberOfAllEntries;
+        self.mediumeData =
+        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
+                                         withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
+                                                                                      [mediumEntriesRatings getValues],
+                                                                                      10,
+                                                                                      (int)self.factor)];
+        
+        // Initialize self.shortTermEntries;
+        NSUInteger numberOfShortTermEntries = self.shortTermCount;
+        if (numberOfAllEntries < numberOfShortTermEntries) {
+            numberOfShortTermEntries = numberOfAllEntries;
+        }
+        ODDDoubleArrayHolder *shortTermRatings =
+        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfShortTermEntries,
+                                                         numberOfAllEntries)];
+        self.shortData =
+        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
+                                         withValues:polynomialFitCoordinates((int)numberOfShortTermEntries,
+                                                                             [shortTermRatings getValues],
+                                                                             6)];
+        
+        [self.lineGraphView reloadData];
     }
-    ODDDoubleArrayHolder *shortTermRatings =
-    [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfShortTermEntries,
-                                                     numberOfAllEntries)];
-    self.shortData =
-    [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
-                                     withValues:polynomialFitCoordinates((int)numberOfShortTermEntries,
-                                                                         [shortTermRatings getValues],
-                                                                         6)];
-    
-    [self.lineGraphView reloadData];
 }
 
 #pragma mark - Graph Delegate Setup

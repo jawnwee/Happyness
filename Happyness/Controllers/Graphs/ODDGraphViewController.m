@@ -45,7 +45,7 @@
         _graphShortTerm = [UIButton buttonWithType:UIButtonTypeCustom];
         _topFrame = [[UIView alloc] init];
         _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
-        _currentAmountOfData = ODDGraphAmountAll;
+        _currentAmountOfData = ODDGraphAmountShortTerm;
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(reloadDataStore)
                                                      name:@"reloadGraphData" object:nil];
@@ -131,9 +131,9 @@
     self.graphAll.layer.cornerRadius = 8;
     self.graphMedium.layer.cornerRadius = 8;
     self.graphShortTerm.layer.cornerRadius = 8;
-    self.graphAll.backgroundColor = [UIColor whiteColor];
+    self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
-    self.graphShortTerm.backgroundColor = [UIColor clearColor];
+    self.graphShortTerm.backgroundColor = [UIColor whiteColor];
     CGFloat buttonFontSize = self.graphAll.frame.size.height / 3;
     [self.graphAll.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                       size:buttonFontSize]];
@@ -141,9 +141,9 @@
                                                          size:buttonFontSize]];
     [self.graphShortTerm.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                             size:buttonFontSize]];
-    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.graphAll setTitle:@"All" forState:UIControlStateNormal];
     [self.graphMedium setTitle:@"30 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
@@ -171,6 +171,7 @@
 
 // Need to re-sort?
 - (void)reloadDataStore {
+    [[ODDHappynessEntryStore sharedStore] sortStore:YES];
     self.entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
 }
 
