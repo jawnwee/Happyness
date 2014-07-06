@@ -64,9 +64,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"****************");
-    NSLog(@"FRAME = %@", NSStringFromCGRect(self.view.frame));
-    NSLog(@"bounds = %@", NSStringFromCGRect(self.view.bounds));
     if (animated) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadGraphData" object:self];
     }

@@ -11,6 +11,7 @@
 #import "ODDTodayViewController.h"
 #import "ODDCalendarNavigationViewController.h"
 #import "ODDCalendarViewController.h"
+#import "ODDOverallCalendarViewController.h"
 #import "ODDAnalysisScrollViewController.h"
 #import "ODDSettingsViewController.h"
 #import "ODDAnalysisViewController.h"
@@ -18,6 +19,7 @@
 #import "ODDRootViewController.h"
 #import "ODDCurveFittingViewController.h"
 #import "ODDDayAveragesViewController.h"
+
 
 @implementation ODDAppDelegate
 
@@ -32,7 +34,7 @@
 //    // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ODDCalendarViewController *calendar = [[ODDCalendarViewController alloc] init];
+    ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle];
 //    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
 //    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 //    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
