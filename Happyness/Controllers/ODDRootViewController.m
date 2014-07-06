@@ -9,9 +9,6 @@
 #import "ODDRootViewController.h"
 #import "ODDRootScrollView.h"
 
-#define SCROLLVIEW_HEIGHT_RATIO     3.5/5
-#define PAGECONTROL_HEIGHT_RATIO    1/8
-
 @interface ODDRootViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIPageControl *pageControl;
@@ -82,7 +79,7 @@
 - (void)setupPageControl {
     CGSize rootViewSize = self.view.frame.size;
     CGSize pageControlSize = CGSizeMake(rootViewSize.width,
-                                        self.scrollView.frame.size.height * PAGECONTROL_HEIGHT_RATIO);
+                                        PAGECONTROL_HEIGHT);
     CGRect pageControlFrame = CGRectMake(0,
                                          self.scrollView.frame.size.height - pageControlSize.height,
                                          pageControlSize.width,
@@ -102,6 +99,31 @@
     float fractionalPage = self.scrollView.contentOffset.x / pageWidth;
     NSInteger page = lround(fractionalPage);
     self.pageControl.currentPage = page;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    NSUInteger currentPage = self.pageControl.currentPage;
+    NSUInteger lastPage = self.numberOfPages - 1;
+    if (self.numberOfPages > 1) {
+        if (currentPage == 0) {
+            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *rightController = (UIViewController *)self.viewControllers[1];
+            [rightController viewWillAppear:YES];
+            [currentController viewWillDisappear:YES];
+        } else if (currentPage == lastPage) {
+            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *leftController = (UIViewController *)self.viewControllers[lastPage - 1];
+            [leftController viewWillAppear:YES];
+            [currentController viewWillDisappear:YES];
+        } else {
+            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *rightController = (UIViewController *)self.viewControllers[currentPage + 1];
+            UIViewController *leftController = (UIViewController *)self.viewControllers[currentPage - 1];
+            [rightController viewWillAppear:YES];
+            [leftController viewWillAppear:YES];
+            [currentController viewWillDisappear:YES];
+        }
+    }
 }
 
 #pragma mark - Memory Management

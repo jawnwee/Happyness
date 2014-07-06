@@ -16,6 +16,8 @@
 #import "ODDAnalysisViewController.h"
 #import "ODDLandscapeAnalysisViewController.h"
 #import "ODDRootViewController.h"
+#import "ODDCurveFittingViewController.h"
+#import "ODDDayAveragesViewController.h"
 
 @implementation ODDAppDelegate
 
@@ -44,8 +46,12 @@
 //
 //    self.window.rootViewController = tbvc;
     
+    ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
+    ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
+    davc.numberOfBars = 7;
+    
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
-    rvc.viewControllers = @[today, calendar];
+    rvc.viewControllers = @[today, calendar, cfvc, davc];
     self.window.rootViewController = rvc;
     
     self.window.backgroundColor = [UIColor whiteColor];

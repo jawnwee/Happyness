@@ -61,7 +61,7 @@
     self.shortData = [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfBars
                                                       withValues:barHeightsValues];
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     double dayCountsValues[7] = { 0 };
     ODDDoubleArrayHolder *allDayCounts = [[ODDDoubleArrayHolder alloc] initWithCount:7
                                                                           withValues:dayCountsValues];
@@ -72,7 +72,7 @@
     NSUInteger forLoopCount = 0;
     NSUInteger entriesCount = self.entries.count;
     for (ODDHappynessEntry *entry in self.entries) {
-        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:entry.date];
+        NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:entry.date];
         NSInteger weekday = [comps weekday] - 1;
         [self.allData setValue:((double)entry.happyness.rating +
                                 [self.allData getValueAtIndex:weekday])

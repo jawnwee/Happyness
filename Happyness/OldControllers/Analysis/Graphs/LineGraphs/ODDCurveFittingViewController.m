@@ -10,6 +10,8 @@
 
 @interface ODDCurveFittingViewController ()
 
+@property NSUInteger factor;
+
 @end
 
 @implementation ODDCurveFittingViewController
@@ -41,7 +43,9 @@
     [super initializeLineGraph];
     
     self.shortTermCount = 7;
-    self.mediumCount = (29 * 20);
+//    self.mediumCount = (29 * 20);
+    self.mediumCount = 30;
+    self.factor = 20;
     self.lineGraphView.maximumValue = 6;
     self.lineGraphView.minimumValue = 0;
 }
@@ -66,23 +70,20 @@
                                                                          10)];
     
     // Initialize self.mediumEntries;
-    NSUInteger numberOfMediumEntries = self.mediumCount;
-    if (numberOfAllEntries < 30) {
+    NSUInteger numberOfMediumEntries = (self.mediumCount - 1) * self.factor;
+    if (numberOfAllEntries < self.mediumCount) {
         numberOfMediumEntries = numberOfAllEntries;
     }
     ODDDoubleArrayHolder *mediumEntriesRatings =
-        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (30),
+        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (self.mediumCount),
                                                          numberOfAllEntries)];
     self.mediumeData =
     [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
-                                     withValues:polynomialFitCoordinatesExtraData((int)30,
+                                     withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
                                                                                   [mediumEntriesRatings getValues],
                                                                                   10,
-                                                                                  20)];
-//    NSLog(@"MEDIUM DATA");
-//    for (NSUInteger i = 0; i < numberOfMediumEntries; i++) {
-//        NSLog(@"index:%lu\t value:%f", (unsigned long)i, [self.mediumeData getValueAtIndex:i]);
-//    }
+                                                                                  (int)self.factor)];
+
     // Initialize self.shortTermEntries;
     NSUInteger numberOfShortTermEntries = self.shortTermCount;
     if (numberOfAllEntries < numberOfShortTermEntries) {
@@ -108,7 +109,11 @@
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
 numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
-    return [super lineChartView:lineChartView numberOfVerticalValuesAtLineIndex:lineIndex];
+    if (self.currentAmountOfData == ODDGraphAmountMedium) {
+        return (self.mediumCount - 1) * self.factor;
+    } else {
+        return [super lineChartView:lineChartView numberOfVerticalValuesAtLineIndex:lineIndex];
+    }
 }
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView

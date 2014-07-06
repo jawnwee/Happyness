@@ -14,18 +14,26 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        // Notification used to disable scrolling when user is interacting with Graphs
+        NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+        [center addObserver:self
+                   selector:@selector(handleTouchesBegan)
+                       name:@"disableScroll"
+                     object:nil];
+        [center addObserver:self
+                   selector:@selector(handleTouchesCancelledOrEnded)
+                       name:@"enableScroll"
+                     object:nil];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)handleTouchesBegan {
+    self.scrollEnabled = NO;
 }
-*/
+
+- (void)handleTouchesCancelledOrEnded {
+    self.scrollEnabled = YES;
+}
 
 @end

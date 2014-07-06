@@ -56,14 +56,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width);
+    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initializeTopPortionOfFrame];
     [self initializeLabels];
     [self initializeButtons];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"****************");
+    NSLog(@"FRAME = %@", NSStringFromCGRect(self.view.frame));
+    NSLog(@"bounds = %@", NSStringFromCGRect(self.view.bounds));
+    if (animated) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadGraphData" object:self];
+    }
+}
+
 #pragma mark - Subviews Init/Layout
+
+- (void)initializeTopPortionOfFrame {
+    self.topFrame.backgroundColor = [UIColor blackColor];
+    CGSize rootSize = self.view.frame.size;
+    self.topFrame.frame = CGRectMake(0, 0, rootSize.width, rootSize.height / 8);
+    [self.view addSubview:self.topFrame];
+}
 
 - (void)initializeLabels {
     CGRect rootFrame = self.view.frame;
@@ -143,13 +159,6 @@
     [self.view addSubview:self.graphAll];
     [self.view addSubview:self.graphShortTerm];
     [self.view addSubview:self.graphMedium];
-}
-
-- (void)initializeTopPortionOfFrame {
-    self.topFrame.backgroundColor = [UIColor blackColor];
-    CGSize rootSize = self.view.frame.size;
-    self.topFrame.frame = CGRectMake(0, 0, rootSize.width, rootSize.height / 8);
-    [self.view addSubview:self.topFrame];
 }
 
 - (void)didReceiveMemoryWarning
