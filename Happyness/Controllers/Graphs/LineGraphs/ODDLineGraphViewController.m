@@ -11,10 +11,12 @@
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
+@property CGRect originalGraphFrame;
+
 @end
 
 @implementation ODDLineGraphViewController
-@synthesize lineGraphView = _lineGraphView;
+@synthesize lineGraphView = _graph;
 
 #pragma mark - Init/Alloc
 
@@ -23,7 +25,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _lineGraphView = [[JBLineChartView alloc] init];
     }
     return self;
 }
@@ -51,6 +52,7 @@
 #pragma mark - Subviews Init/Layout
 
 - (void)initializeLineGraph {
+    self.lineGraphView = [[JBLineChartView alloc] init];
     self.shortTermCount = 20;
     self.mediumCount = 50;
     self.lineGraphView.maximumValue = 5;
@@ -66,10 +68,11 @@
     heightPadding += (heightPadding / 3);
     CGFloat widthPadding = graphShortTermButtonFrame.origin.x;
     widthPadding += (widthPadding / 3);
-    self.lineGraphView.frame = CGRectMake(widthPadding,
-                                          heightPadding,
-                                          rootFrame.size.width - (widthPadding * 2),
-                                          rootFrame.size.height - (heightPadding * 2));
+    self.originalGraphFrame = CGRectMake(widthPadding,
+                                         heightPadding,
+                                         rootFrame.size.width - (widthPadding * 2),
+                                         rootFrame.size.height - (heightPadding * 2));
+    self.lineGraphView.frame = self.originalGraphFrame;
     
     // Should initialize footer and sider in landscapeAnalysisViewController
     CGRect lineGraphFrame = self.lineGraphView.frame;
@@ -130,13 +133,30 @@
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
 numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
-    if (self.currentAmountOfData == ODDGraphAmountAll) {
-        return [[ODDHappynessEntryStore sharedStore].happynessEntries count];
-    } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
-        return self.mediumCount;
-    } else {
-        return self.shortTermCount;
+    if (self.entries.count > 0) {
+        [self.lineGraphView setFrame:self.originalGraphFrame];
+        if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+            if (self.entries.count < self.shortTermCount) {
+                CGRect temporaryFrame = self.originalGraphFrame;
+                temporaryFrame.size.width = (temporaryFrame.size.width / self.shortTermCount) *
+                                                self.entries.count;
+                [self.lineGraphView setFrame:temporaryFrame];
+                return self.entries.count;
+            }
+            return self.shortTermCount;
+        } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
+            if (self.entries.count < self.mediumCount) {
+                return 0;
+            }
+            return self.mediumCount;
+        } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+            if  (self.entries.count < 40) {
+                return 0;
+            }
+            return [[ODDHappynessEntryStore sharedStore].happynessEntries count];
+        }
     }
+    return 0;
 }
 
 - (CGFloat)lineChartView:(JBLineChartView *)lineChartView

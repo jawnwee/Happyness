@@ -137,6 +137,7 @@
 
 #pragma mark - Button IBActions
 
+// Do we want users to be able to click this as quickly as possible?
 - (IBAction)showNewGraphFromAbove:(id)sender {
     NSInteger oldGraph = self.currentGraph;
     NSInteger newGraph = self.currentGraph - 1;
@@ -146,6 +147,8 @@
     self.currentGraph = newGraph;
     NSString *graphTitle = ((ODDGraphViewController *)self.graphs[self.currentGraph]).graphTitle;
     self.titleOfGraph.text = graphTitle;
+    self.down.userInteractionEnabled = NO;
+    self.up.userInteractionEnabled = NO;
     [self slideOldGraph:oldGraph byDelta:300 slideNewGraph:newGraph byDelta:200];
 }
 
@@ -158,6 +161,8 @@
     self.currentGraph = newGraph;
     NSString *graphTitle = ((ODDGraphViewController *)self.graphs[self.currentGraph]).graphTitle;
     self.titleOfGraph.text = graphTitle;
+    self.down.userInteractionEnabled = NO;
+    self.up.userInteractionEnabled = NO;
     [self slideOldGraph:oldGraph byDelta:-300 slideNewGraph:newGraph byDelta:-200];
 }
 
@@ -189,8 +194,9 @@
                          
                      }
                      completion:^(BOOL finished){
-                         
                          [oldGraphView removeFromSuperview];
+                         self.down.userInteractionEnabled = YES;
+                         self.up.userInteractionEnabled = YES;
                      }];
 }
 

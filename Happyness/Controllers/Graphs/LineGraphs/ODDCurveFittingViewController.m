@@ -115,7 +115,7 @@
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
 numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
-    if (self.currentAmountOfData == ODDGraphAmountMedium) {
+    if (self.currentAmountOfData == ODDGraphAmountMedium && self.entries.count >= self.mediumCount) {
         return (self.mediumCount - 1) * self.factor;
     } else {
         return [super lineChartView:lineChartView numberOfVerticalValuesAtLineIndex:lineIndex];

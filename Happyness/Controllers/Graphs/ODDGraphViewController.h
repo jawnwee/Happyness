@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) ODDGraphFooterView *footer;
 @property (nonatomic, strong) ODDGraphSiderView *sider;
+@property (nonatomic, strong) UIView *graph;
 
 - (void)setFrameSize:(CGSize)size;
 - (void)setFramePosition:(CGPoint)point;
@@ -36,7 +37,6 @@ typedef enum:uint8_t {
     ODDGraphAmountMedium = 0x1 << 2
 } ODDGraphAmount;
 
-//@property (nonatomic, strong) IBOutlet UILabel *graphTitle;
 @property (nonatomic, copy) NSString *graphTitle;
 @property (nonatomic, strong) IBOutlet UIButton *graphAll;
 @property (nonatomic, strong) IBOutlet UIButton *graphShortTerm;
