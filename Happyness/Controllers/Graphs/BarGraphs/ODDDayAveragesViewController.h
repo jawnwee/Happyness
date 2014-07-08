@@ -11,4 +11,8 @@
 
 @interface ODDDayAveragesViewController : ODDBarGraphViewController
 
+- (void)setFrameSize:(CGSize)size;
+- (void)setFramePosition:(CGPoint)point;
+- (void)reloadDataStore;
+
 @end

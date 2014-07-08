@@ -22,6 +22,10 @@
 @property (nonatomic, strong) ODDGraphFooterView *footer;
 @property (nonatomic, strong) ODDGraphSiderView *sider;
 
+- (void)setFrameSize:(CGSize)size;
+- (void)setFramePosition:(CGPoint)point;
+- (void)reloadDataStore;
+
 /*** "Protected" methods and variables ***/
 // These should only be used within the class and its subclasses.
 // The proper way to make these protected is to create a seperate header.
@@ -32,7 +36,8 @@ typedef enum:uint8_t {
     ODDGraphAmountMedium = 0x1 << 2
 } ODDGraphAmount;
 
-@property (nonatomic, strong) IBOutlet UILabel *graphTitle;
+//@property (nonatomic, strong) IBOutlet UILabel *graphTitle;
+@property (nonatomic, copy) NSString *graphTitle;
 @property (nonatomic, strong) IBOutlet UIButton *graphAll;
 @property (nonatomic, strong) IBOutlet UIButton *graphShortTerm;
 @property (nonatomic, strong) IBOutlet UIButton *graphMedium;
@@ -46,7 +51,6 @@ typedef enum:uint8_t {
 @property (nonatomic,strong) ODDDoubleArrayHolder *shortData;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
-- (void)reloadDataStore;
 - (IBAction)graphShortTerm:(id)sender;
 - (IBAction)graphMedium:(id)sender;
 - (IBAction)graphAll:(id)sender;

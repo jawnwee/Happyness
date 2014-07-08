@@ -31,16 +31,23 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Setters
+
+- (void)setFrameSize:(CGSize)size {
+    [super setFrameSize:size];
+    
+    [self initializeBarGraph];
+}
+
+- (void)setFramePosition:(CGPoint)point {
+    [super setFramePosition:point];
 }
 
 #pragma mark - Subviews Init/Layout
 
 - (void)initializeBarGraph {
     [super initializeBarGraph];
+    self.graphTitle = @"Daily Averages";
 }
 
 #pragma mark - Setup Datastore

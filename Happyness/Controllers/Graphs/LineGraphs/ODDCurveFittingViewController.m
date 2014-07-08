@@ -31,22 +31,28 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Setters
+
+- (void)setFrameSize:(CGSize)size {
+    [super setFrameSize:size];
+    
+    [self initializeLineGraph];
+}
+
+- (void)setFramePosition:(CGPoint)point {
+    [super setFramePosition:point];
 }
 
 #pragma mark - Subviews Init/Layout
 
 - (void)initializeLineGraph {
     [super initializeLineGraph];
-    
     self.shortTermCount = 7;
     self.mediumCount = 30;
     self.factor = 20;
     self.lineGraphView.maximumValue = 5.5;
     self.lineGraphView.minimumValue = .5;
+    self.graphTitle = @"Trends";
 }
 
 #pragma mark - Setup Datastore

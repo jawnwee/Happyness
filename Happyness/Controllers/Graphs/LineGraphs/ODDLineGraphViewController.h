@@ -15,6 +15,8 @@
 @property (nonatomic,strong) JBLineChartView *lineGraphView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+- (void)setFrameSize:(CGSize)size;
+- (void)setFramePosition:(CGPoint)point;
 - (void)initializeLineGraph;
 - (void)reloadDataStore;
 

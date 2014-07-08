@@ -38,7 +38,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _graphTitle = [[UILabel alloc] init];
         _notEnoughDataLabel = [[UILabel alloc] init];
         _graphAll = [UIButton buttonWithType:UIButtonTypeCustom];
         _graphMedium = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -46,9 +45,6 @@
         _topFrame = [[UIView alloc] init];
         _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
         _currentAmountOfData = ODDGraphAmountShortTerm;
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reloadDataStore)
-                                                     name:@"reloadGraphData" object:nil];
     }
     return self;
 }
@@ -56,50 +52,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.frame = CGRectMake(0,
-                                 0,
-                                 self.view.frame.size.width,
-                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+
+
+#pragma mark - Setters
+
+- (void)setFrameSize:(CGSize)size {
+    CGRect originalFrame = self.view.frame;
+    CGRect frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, size.width, size.height);
+    [self.view setFrame:frame];
     [self initializeTopPortionOfFrame];
     [self initializeLabels];
     [self initializeButtons];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    if (animated) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadGraphData" object:self];
-    }
+- (void)setFramePosition:(CGPoint)point {
+    CGRect originalFrame = self.view.frame;
+    CGRect frame = CGRectMake(point.x, point.y, originalFrame.size.width, originalFrame.size.height);
+    [self.view setFrame:frame];
 }
 
 #pragma mark - Subviews Init/Layout
 
 - (void)initializeTopPortionOfFrame {
-    self.topFrame.backgroundColor = [UIColor blackColor];
+    self.topFrame.backgroundColor = [UIColor clearColor];
     CGSize rootSize = self.view.frame.size;
-    self.topFrame.frame = CGRectMake(0, 0, rootSize.width, rootSize.height / 8);
+    CGFloat topHeight = 30;
+    self.topFrame.frame = CGRectMake(0, 0, rootSize.width, topHeight);
     [self.view addSubview:self.topFrame];
 }
 
 - (void)initializeLabels {
     CGRect rootFrame = self.view.frame;
     CGSize rootSize = rootFrame.size;
-    self.graphTitle.frame = CGRectMake(rootSize.width / 18,
-                                       0,
-                                       rootSize.width / 2,
-                                       rootSize.height / 8);
-    self.graphTitle.text = @"Placeholder";
-    CGFloat graphTitleFontSize = self.graphTitle.frame.size.height / 1.8;
-    [self.graphTitle setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:graphTitleFontSize]];
-    self.graphTitle.textColor = [UIColor whiteColor];
-    [self.view addSubview:self.graphTitle];
+    self.graphTitle = @"Placeholder";
     
     self.notEnoughDataLabel.text = @"Not Enough Data :(";
     self.notEnoughDataLabel.frame = CGRectMake(rootSize.width / 4,
                                        rootSize.height / 4,
                                        rootSize.width / 2,
                                        rootSize.height / 2);
-    [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:graphTitleFontSize]];
+    [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
     self.notEnoughDataLabel.textColor = [UIColor blackColor];
     self.notEnoughDataLabel.textAlignment = NSTextAlignmentCenter;
     if (self.entries.count == 0) {
@@ -108,42 +103,41 @@
 }
 
 - (void)initializeButtons {
-    CGRect rootFrame = self.view.frame;
-    CGSize rootSize = rootFrame.size;
-    CGRect titleFrame = self.graphTitle.frame;
-    CGSize titleSize = titleFrame.size;
-    CGPoint titlePosition = titleFrame.origin;
-    self.graphAll.frame = CGRectMake(rootSize.width - titlePosition.x - rootSize.width / 8,
-                                     titlePosition.y,
-                                     rootSize.width / 8,
-                                     titleSize.height + (titleSize.height / 6));
-    CGRect graphAllFrame = self.graphAll.frame;
-    CGSize graphAllSize = graphAllFrame.size;
-    CGPoint graphAllPosition = graphAllFrame.origin;
-    self.graphMedium.frame = CGRectMake(graphAllPosition.x - graphAllSize.width,
-                                        graphAllPosition.y,
-                                        graphAllSize.width,
-                                        graphAllSize.height);
-    self.graphShortTerm.frame = CGRectMake(graphAllPosition.x - (graphAllSize.width * 2),
-                                           graphAllPosition.y,
-                                           graphAllSize.width,
-                                           graphAllSize.height);
+    CGRect topFrame = self.topFrame.frame;
+    CGSize topSize = topFrame.size;
+    CGFloat width = 70;
+    CGFloat sidePadding = width / 4;
+    self.graphShortTerm.frame = CGRectMake(sidePadding,
+                                     0,
+                                     width,
+                                     topSize.height);
+    CGRect graphShortFrame = self.graphShortTerm.frame;
+    CGSize graphShortSize = graphShortFrame.size;
+    CGPoint graphShortPosition = graphShortFrame.origin;
+    self.graphMedium.frame = CGRectMake((topSize.width / 2) - (graphShortSize.width / 2),
+                                        graphShortPosition.y,
+                                        graphShortSize.width,
+                                        graphShortSize.height);
+    self.graphAll.frame = CGRectMake(topSize.width - sidePadding - graphShortSize.width,
+                                     graphShortPosition.y,
+                                     graphShortSize.width,
+                                     graphShortSize.height);
     self.graphAll.layer.cornerRadius = 8;
     self.graphMedium.layer.cornerRadius = 8;
     self.graphShortTerm.layer.cornerRadius = 8;
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
-    self.graphShortTerm.backgroundColor = [UIColor whiteColor];
-    CGFloat buttonFontSize = self.graphAll.frame.size.height / 3;
+    self.graphShortTerm.backgroundColor = [UIColor darkGrayColor];
+    CGFloat buttonFontSize = 18;
     [self.graphAll.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                       size:buttonFontSize]];
     [self.graphMedium.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                          size:buttonFontSize]];
     [self.graphShortTerm.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                             size:buttonFontSize]];
-    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphAll setTitle:@"All" forState:UIControlStateNormal];
     [self.graphMedium setTitle:@"30 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
@@ -180,28 +174,28 @@
 - (IBAction)graphShortTerm:(id)sender {
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
-    self.graphShortTerm.backgroundColor = [UIColor whiteColor];
-    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-}
-
-- (IBAction)graphMedium:(id)sender {
-    self.graphAll.backgroundColor = [UIColor clearColor];
-    self.graphMedium.backgroundColor = [UIColor whiteColor];
-    self.graphShortTerm.backgroundColor = [UIColor clearColor];
-    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.graphShortTerm.backgroundColor = [UIColor darkGrayColor];
+    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
-- (IBAction)graphAll:(id)sender {
-    self.graphAll.backgroundColor = [UIColor whiteColor];
-    self.graphMedium.backgroundColor = [UIColor clearColor];
+- (IBAction)graphMedium:(id)sender {
+    self.graphAll.backgroundColor = [UIColor clearColor];
+    self.graphMedium.backgroundColor = [UIColor darkGrayColor];
     self.graphShortTerm.backgroundColor = [UIColor clearColor];
     [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+}
+
+- (IBAction)graphAll:(id)sender {
+    self.graphAll.backgroundColor = [UIColor darkGrayColor];
+    self.graphMedium.backgroundColor = [UIColor clearColor];
+    self.graphShortTerm.backgroundColor = [UIColor clearColor];
+    [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 #pragma mark - Touch Events

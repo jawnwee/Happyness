@@ -74,13 +74,11 @@
     happynessTrendsFrame.origin.x = 0;
     happynessTrendsFrame.origin.y = 0;
     self.happynessTrends.view.frame = happynessTrendsFrame;
-    self.happynessTrends.graphTitle.text = @"Trending Happyness";
     self.dailyAverages = [[ODDDayAveragesViewController alloc] init];
     CGRect dailyAveragesFrame = self.dailyAverages.view.frame;
     dailyAveragesFrame.origin.x = rootSize.width;
     dailyAveragesFrame.origin.y = 0;
     self.dailyAverages.view.frame = dailyAveragesFrame;
-    self.dailyAverages.graphTitle.text = @"Daily Averages";
     self.dailyAverages.numberOfBars = 7;
     [self.scrollView addSubview:self.happynessTrends.view];
     [self.scrollView addSubview:self.dailyAverages.view];

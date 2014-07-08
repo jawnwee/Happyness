@@ -16,6 +16,8 @@
 @property NSUInteger numberOfBars;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
+- (void)setFrameSize:(CGSize)size;
+- (void)setFramePosition:(CGPoint)point;
 - (void)initializeBarGraph;
 - (void)reloadDataStore;
 

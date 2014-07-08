@@ -36,8 +36,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initializeBarGraph];
+}
+
+#pragma mark - Setters
+
+- (void)setFrameSize:(CGSize)size {
+    [super setFrameSize:size];
+}
+
+- (void)setFramePosition:(CGPoint)point {
+    [super setFramePosition:point];
 }
 
 #pragma mark - Subviews Init/Layout
@@ -52,10 +60,11 @@
     self.barChartView.dataSource = self;
     self.barChartView.userInteractionEnabled = NO;
     CGRect rootFrame = self.view.frame;
-    CGRect graphTitleFrame = self.graphTitle.frame;
-    CGFloat heightPadding = CGRectGetMaxY(graphTitleFrame);
+    CGRect topFrame = self.topFrame.frame;
+    CGRect graphShortTermButtonFrame = self.graphShortTerm.frame;
+    CGFloat heightPadding = CGRectGetMaxY(topFrame);
     heightPadding += (heightPadding / 3);
-    CGFloat widthPadding = graphTitleFrame.origin.x;
+    CGFloat widthPadding = graphShortTermButtonFrame.origin.x;
     widthPadding += (widthPadding / 3);
     self.barChartView.frame = CGRectMake(widthPadding,
                                          heightPadding,
