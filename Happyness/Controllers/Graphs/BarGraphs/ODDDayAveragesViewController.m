@@ -108,15 +108,21 @@
     }
     
     for (NSUInteger i = 0; i < 7; i++) {
-        [self.allData setValue:([self.allData getValueAtIndex:i] /
-                                [allDayCounts getValueAtIndex:i])
-                       atIndex:i];
-        [self.mediumeData setValue:([self.mediumeData getValueAtIndex:i] /
-                                    [mediumDayCounts getValueAtIndex:i])
+        if ([allDayCounts getValueAtIndex:i] != 0) {
+            [self.allData setValue:([self.allData getValueAtIndex:i] /
+                                    [allDayCounts getValueAtIndex:i])
                            atIndex:i];
-        [self.shortData setValue:([self.shortData getValueAtIndex:i] /
-                                  [shortTermDayCounts getValueAtIndex:i])
-                         atIndex:i];
+        }
+        if ([mediumDayCounts getValueAtIndex:i] != 0) {
+            [self.mediumeData setValue:([self.mediumeData getValueAtIndex:i] /
+                                        [mediumDayCounts getValueAtIndex:i])
+                               atIndex:i];
+        }
+        if ([shortTermDayCounts getValueAtIndex:i] != 0) {
+            [self.shortData setValue:([self.shortData getValueAtIndex:i] /
+                                      [shortTermDayCounts getValueAtIndex:i])
+                             atIndex:i];
+        }
     }
     
     [self.barChartView reloadData];

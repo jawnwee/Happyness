@@ -39,6 +39,8 @@
                                      0,
                                      self.view.frame.size.width,
                                      self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+        self.view.layer.cornerRadius = 10.0f;
+        self.view.layer.masksToBounds = YES;
         self.view.backgroundColor = [UIColor whiteColor];
         _graphs = graphs;
         _headerView = [[UIView alloc] init];
@@ -64,15 +66,17 @@
 - (void)initializeHeader {
     // Setup Header frame
     CGSize rootFrameSize = self.view.frame.size;
-    CGRect headerViewFrame = CGRectMake(0, STATUS_BAR_HEIGHT, rootFrameSize.width, HEADER_HEIGHT);
+    CGRect headerViewFrame = CGRectMake(0, 0, rootFrameSize.width, HEADER_HEIGHT + STATUS_BAR_HEIGHT);
+    self.headerView.layer.cornerRadius = 10.0f;
+    self.headerView.layer.masksToBounds = YES;
     self.headerView.backgroundColor = [UIColor whiteColor];
     [self.headerView setFrame:headerViewFrame];
     [self.view addSubview:self.headerView];
     
     // Setup Title
-    CGFloat titleOfGraphWidth = 100;
+    CGFloat titleOfGraphWidth = 190;
     CGRect titleOfGraphFrame = CGRectMake((rootFrameSize.width / 2) - (titleOfGraphWidth / 2),
-                                          0,
+                                          STATUS_BAR_HEIGHT,
                                           titleOfGraphWidth,
                                           HEADER_HEIGHT);
     self.titleOfGraph.backgroundColor = [UIColor grayColor];
@@ -95,21 +99,22 @@
         forControlEvents:UIControlEventTouchDown];
     [self.up.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                 size:12]];
-    [self.up setTitle:@"UP" forState:UIControlStateNormal];
     [self.up setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.up.backgroundColor = [UIColor redColor];
+    self.up.backgroundColor = [UIColor clearColor];
+    [self.up setImage:[UIImage imageNamed:@"increasing.png"] forState:UIControlStateNormal];
+    CGFloat buttonWidth = 25;
     CGRect upFrame = CGRectMake(titleOfGraphFrame.origin.x + titleOfGraphFrame.size.width,
-                                0,
-                                titleOfGraphFrame.size.width / 2,
+                                STATUS_BAR_HEIGHT,
+                                buttonWidth,
                                 HEADER_HEIGHT);
     [self.up setFrame:upFrame];
     [self.down.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                   size:12]];
-    [self.down setTitle:@"DOWN" forState:UIControlStateNormal];
     [self.down setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.down.backgroundColor = [UIColor redColor];
+    self.down.backgroundColor = [UIColor clearColor];
+    [self.down setImage:[UIImage imageNamed:@"decreasing.png"] forState:UIControlStateNormal];
     CGRect downFrame = upFrame;
-    downFrame.origin.x -= titleOfGraphFrame.size.width * 1.5;
+    downFrame.origin.x = titleOfGraphFrame.origin.x - buttonWidth;
     [self.down setFrame:downFrame];
     [self.headerView addSubview:self.up];
     [self.headerView addSubview:self.down];
