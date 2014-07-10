@@ -40,6 +40,10 @@
 		C4669CD6194F980D00F82109 /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNote.m */; };
 		C4854D7E19523395006F34FF /* ODDHappynessView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4854D7D19523395006F34FF /* ODDHappynessView.m */; };
 		C48A49D1195378DA009C6E59 /* ODDTodayNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = C48A49D0195378DA009C6E59 /* ODDTodayNoteView.m */; };
+		C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BD9196F5601001ACC87 /* ODDHappynessObserver.m */; };
+		C4C57BDE196F5672001ACC87 /* ODDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BDD196F5672001ACC87 /* ODDFeedbackViewController.m */; };
+		C4C57BE2196F56BA001ACC87 /* ODDReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BE1196F56BA001ACC87 /* ODDReminderViewController.m */; };
+		C4C57BE4196F5733001ACC87 /* feedbackCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4C57BE3196F5733001ACC87 /* feedbackCircle@2x.png */; };
 		D124B1411953A20E00A9F687 /* ODDLineGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1401953A20E00A9F687 /* ODDLineGraphViewController.m */; };
 		D124B1441953A21500A9F687 /* ODDBarGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1431953A21500A9F687 /* ODDBarGraphViewController.m */; };
 		D124B1471956518600A9F687 /* ODDGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1461956518600A9F687 /* ODDGraphViewController.m */; };
@@ -150,6 +154,13 @@
 		C4854D7D19523395006F34FF /* ODDHappynessView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessView.m; sourceTree = "<group>"; };
 		C48A49CF195378DA009C6E59 /* ODDTodayNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDTodayNoteView.h; sourceTree = "<group>"; };
 		C48A49D0195378DA009C6E59 /* ODDTodayNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDTodayNoteView.m; sourceTree = "<group>"; };
+		C4C57BD8196F5601001ACC87 /* ODDHappynessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessObserver.h; sourceTree = "<group>"; };
+		C4C57BD9196F5601001ACC87 /* ODDHappynessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessObserver.m; sourceTree = "<group>"; };
+		C4C57BDC196F5672001ACC87 /* ODDFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDFeedbackViewController.h; sourceTree = "<group>"; };
+		C4C57BDD196F5672001ACC87 /* ODDFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDFeedbackViewController.m; sourceTree = "<group>"; };
+		C4C57BE0196F56BA001ACC87 /* ODDReminderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDReminderViewController.h; sourceTree = "<group>"; };
+		C4C57BE1196F56BA001ACC87 /* ODDReminderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDReminderViewController.m; sourceTree = "<group>"; };
+		C4C57BE3196F5733001ACC87 /* feedbackCircle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedbackCircle@2x.png"; sourceTree = "<group>"; };
 		D124B13F1953A20E00A9F687 /* ODDLineGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDLineGraphViewController.h; sourceTree = "<group>"; };
 		D124B1401953A20E00A9F687 /* ODDLineGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDLineGraphViewController.m; sourceTree = "<group>"; };
 		D124B1421953A21500A9F687 /* ODDBarGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDBarGraphViewController.h; sourceTree = "<group>"; };
@@ -327,6 +338,8 @@
 				C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
 				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
 				EBD388481961F822000A41A1 /* ODDHappynessHeader.h */,
+				C4C57BD8196F5601001ACC87 /* ODDHappynessObserver.h */,
+				C4C57BD9196F5601001ACC87 /* ODDHappynessObserver.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -347,6 +360,24 @@
 				EBF23209195C91C7003E29AC /* CalendarViewControllers */,
 			);
 			path = OldControllers;
+			sourceTree = "<group>";
+		};
+		C4C57BDB196F5657001ACC87 /* FeedbackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C4C57BDC196F5672001ACC87 /* ODDFeedbackViewController.h */,
+				C4C57BDD196F5672001ACC87 /* ODDFeedbackViewController.m */,
+			);
+			name = FeedbackViewController;
+			sourceTree = "<group>";
+		};
+		C4C57BDF196F56AA001ACC87 /* ReminderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C4C57BE0196F56BA001ACC87 /* ODDReminderViewController.h */,
+				C4C57BE1196F56BA001ACC87 /* ODDReminderViewController.m */,
+			);
+			name = ReminderViewController;
 			sourceTree = "<group>";
 		};
 		D124B1481956518C00A9F687 /* Graphs */ = {
@@ -490,6 +521,8 @@
 		D1AAF2671968869600332F59 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C4C57BDF196F56AA001ACC87 /* ReminderViewController */,
+				C4C57BDB196F5657001ACC87 /* FeedbackViewController */,
 				EB94C41B196B5ED40090B466 /* ODDMainViewController.h */,
 				EB94C41C196B5ED40090B466 /* ODDMainViewController.m */,
 				D1AAF2641968869100332F59 /* ODDRootViewController.h */,
@@ -567,6 +600,7 @@
 		EBC8C0C2195C17A200CC1A1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C4C57BE3196F5733001ACC87 /* feedbackCircle@2x.png */,
 				EB362C49195F490000F6BA76 /* Calendar */,
 				C419C82C195DA45D008AE325 /* HappynessFaces */,
 				C419C809195D89CD008AE325 /* Tab Icons */,
@@ -703,6 +737,7 @@
 				C419C839195DA45D008AE325 /* Happyness_2.png in Resources */,
 				C419C828195D89CD008AE325 /* TodayTabUnselected60.png in Resources */,
 				C419C820195D89CD008AE325 /* GraphTabUnselected60.png in Resources */,
+				C4C57BE4196F5733001ACC87 /* feedbackCircle@2x.png in Resources */,
 				C419C822195D89CD008AE325 /* SettingsTabSelected60.png in Resources */,
 				EBCFE22E196E6CEE003D97E7 /* oddLook_calendar_card_1@2x.png in Resources */,
 				C419C825195D89CD008AE325 /* SettingsTabUnselected60@2x.png in Resources */,
@@ -790,6 +825,7 @@
 				EBD388461961F1C8000A41A1 /* ODDPreviousDayViewController.m in Sources */,
 				C48A49D1195378DA009C6E59 /* ODDTodayNoteView.m in Sources */,
 				EBE2BD79195000150023E9F4 /* ODDSettingsViewController.m in Sources */,
+				C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */,
 				EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */,
 				D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */,
 				EB6EEF4D196B73BC0063DEB4 /* ODDBottomRootViewController.m in Sources */,
@@ -798,6 +834,7 @@
 				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
 				D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */,
 				EBCFE226196E51A4003D97E7 /* ODDCardCollectionViewCell.m in Sources */,
+				C4C57BDE196F5672001ACC87 /* ODDFeedbackViewController.m in Sources */,
 				D124B1441953A21500A9F687 /* ODDBarGraphViewController.m in Sources */,
 				EB99473A195AA99C0095DA5B /* ODDCalendarView.m in Sources */,
 				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
@@ -805,6 +842,7 @@
 				D124B156195A7E4700A9F687 /* ODDGraphFooterView.m in Sources */,
 				D1F74C8C196DFF5500AF0EC6 /* ODDCardScrollViewController.m in Sources */,
 				C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */,
+				C4C57BE2196F56BA001ACC87 /* ODDReminderViewController.m in Sources */,
 				EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */,
 				D1DBDE5419646B7300003762 /* ODDDoubleArrayHolder.m in Sources */,
 				D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */,

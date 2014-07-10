@@ -2,26 +2,36 @@ PODS:
   - HPGrowingTextView (1.1)
   - JBChartView (2.5.5)
   - ODDPolynomial (0.2.0)
+  - SSFlatDatePicker (0.9.0)
   - TimesSquare (1.0.2)
+  - XYPieChart (0.2)
 
 DEPENDENCIES:
   - HPGrowingTextView (from `https://github.com/mattchiang777/GrowingTextView.git`)
   - JBChartView (~> 2.5.5)
   - ODDPolynomial (from `https://github.com/jjojohjohn/ODDPolynomial.git`)
+  - SSFlatDatePicker (from `https://github.com/mattchiang777/FlatDatePicker.git`)
   - TimesSquare (from `https://github.com/jjojohjohn/objc-TimesSquare.git`)
+  - XYPieChart (from `https://github.com/xyfeng/XYPieChart.git`)
 
 EXTERNAL SOURCES:
   HPGrowingTextView:
     :git: https://github.com/mattchiang777/GrowingTextView.git
   ODDPolynomial:
     :git: https://github.com/jjojohjohn/ODDPolynomial.git
+  SSFlatDatePicker:
+    :git: https://github.com/mattchiang777/FlatDatePicker.git
   TimesSquare:
     :git: https://github.com/jjojohjohn/objc-TimesSquare.git
+  XYPieChart:
+    :git: https://github.com/xyfeng/XYPieChart.git
 
 SPEC CHECKSUMS:
   HPGrowingTextView: 4318f557b33c19def1c53ec275d6e2a2d6589cd0
   JBChartView: 666486d81dd16fa0cfac7bc32b4b70d6c52e7162
   ODDPolynomial: 5a54149255c0875f21df02db0ab268bad84075a7
+  SSFlatDatePicker: 367da658974bb13c2498ab7847750d6cdb2c17c7
   TimesSquare: 5d1a173a0e8e9889c64a8654fdf494c719b938f7
+  XYPieChart: 17fa4ce063f09cf60716ff6974cfb5930bdc6afd
 
 COCOAPODS: 0.33.1

@@ -21,6 +21,8 @@
 #import "ODDCardScrollViewController.h"
 #import "ODDCalendarCardScrollCollectionViewController.h"
 #import "ODDCardCollectionViewCell.h"
+#import "ODDFeedbackViewController.h"
+#import "ODDReminderViewController.h"
 
 @implementation ODDAppDelegate
 
@@ -50,6 +52,7 @@
 //
 //    self.window.rootViewController = tbvc;
     ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
+    ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc] init];
     ODDCalendarCardScrollCollectionViewController *calendarBottom = [[ODDCalendarCardScrollCollectionViewController alloc] init];
 
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
@@ -57,8 +60,10 @@
     davc.numberOfBars = 7;
     ODDManyGraphsViewController *mgvc = [[ODDManyGraphsViewController alloc] initWithGraphs:@[cfvc, davc]];
 
+    ODDReminderViewController *reminderViewController = [[ODDReminderViewController alloc] init];
+
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
-    rvc.viewControllers = @[today, calendar, mgvc];
+    rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
     NSArray *bottomViewControllers = @[calendarBottom];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
