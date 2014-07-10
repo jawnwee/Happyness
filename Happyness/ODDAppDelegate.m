@@ -12,14 +12,12 @@
 #import "ODDCalendarNavigationViewController.h"
 #import "ODDCalendarViewController.h"
 #import "ODDOverallCalendarViewController.h"
-#import "ODDAnalysisScrollViewController.h"
 #import "ODDSettingsViewController.h"
-#import "ODDAnalysisViewController.h"
-#import "ODDLandscapeAnalysisViewController.h"
 #import "ODDRootViewController.h"
 #import "ODDCurveFittingViewController.h"
 #import "ODDDayAveragesViewController.h"
 #import "ODDManyGraphsViewController.h"
+#import "ODDCardScrollViewController.h"
 
 @implementation ODDAppDelegate
 
@@ -35,7 +33,6 @@
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle];
-//    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
 //    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 //    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
 //    ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
@@ -47,6 +44,7 @@
 //    }
 //
 //    self.window.rootViewController = tbvc;
+    ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
     
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
