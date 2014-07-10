@@ -88,7 +88,9 @@
     self.pageControl.numberOfPages = self.numberOfPages;
     self.pageControl.currentPage = 0;
     self.pageControl.userInteractionEnabled = NO;
-    self.pageControl.backgroundColor = [UIColor lightGrayColor];
+    self.pageControl.backgroundColor = [UIColor whiteColor];
+    self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     [self.view addSubview:self.pageControl];
 }
 
@@ -106,24 +108,34 @@
     NSUInteger lastPage = self.numberOfPages - 1;
     if (self.numberOfPages > 1) {
         if (currentPage == 0) {
-            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *currentController =
+                                              (UIViewController *)self.viewControllers[currentPage];
             UIViewController *rightController = (UIViewController *)self.viewControllers[1];
             [rightController viewWillAppear:YES];
             [currentController viewWillDisappear:YES];
         } else if (currentPage == lastPage) {
-            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
-            UIViewController *leftController = (UIViewController *)self.viewControllers[lastPage - 1];
+            UIViewController *currentController =
+                                             (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *leftController =
+                                            (UIViewController *)self.viewControllers[lastPage - 1];
             [leftController viewWillAppear:YES];
             [currentController viewWillDisappear:YES];
         } else {
-            UIViewController *currentController = (UIViewController *)self.viewControllers[currentPage];
-            UIViewController *rightController = (UIViewController *)self.viewControllers[currentPage + 1];
-            UIViewController *leftController = (UIViewController *)self.viewControllers[currentPage - 1];
+            UIViewController *currentController =
+                                              (UIViewController *)self.viewControllers[currentPage];
+            UIViewController *rightController =
+                                          (UIViewController *)self.viewControllers[currentPage + 1];
+            UIViewController *leftController =
+                                          (UIViewController *)self.viewControllers[currentPage - 1];
             [rightController viewWillAppear:YES];
             [leftController viewWillAppear:YES];
             [currentController viewWillDisappear:YES];
         }
     }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    
 }
 
 #pragma mark - Memory Management

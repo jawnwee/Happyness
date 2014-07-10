@@ -20,17 +20,8 @@
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-mo-oTG">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fC5-zd-0zo">
-                            <rect key="frame" x="290" y="24" width="35" height="35"/>
-                            <state key="normal" image="increasing.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="increaseMonth:" destination="-1" eventType="touchUpInside" id="mjt-Xs-Nr8"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWt-AL-iIB">
-                            <rect key="frame" x="160" y="24" width="35" height="35"/>
+                            <rect key="frame" x="155" y="24" width="35" height="35"/>
                             <state key="normal" image="decreasing.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -39,7 +30,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEO-Le-JyE">
-                            <rect key="frame" x="0.0" y="24" width="35" height="35"/>
+                            <rect key="frame" x="-5" y="24" width="35" height="35"/>
                             <state key="normal" image="decreasing.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -48,7 +39,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="goQ-aj-xiY">
-                            <rect key="frame" x="117" y="24" width="35" height="35"/>
+                            <rect key="frame" x="112" y="21" width="35" height="35"/>
                             <state key="normal" image="increasing.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
@@ -57,17 +48,26 @@
                             </connections>
                         </button>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="month" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Di7-B8-jYb">
-                            <rect key="frame" x="203" y="31" width="79" height="21"/>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                            <rect key="frame" x="191" y="31" width="97" height="21"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="year" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoZ-2j-css">
-                            <rect key="frame" x="43" y="31" width="66" height="21"/>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                            <rect key="frame" x="38" y="31" width="66" height="21"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                             <color key="textColor" red="0.26666666666666666" green="0.28627450980392155" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fC5-zd-0zo">
+                            <rect key="frame" x="289" y="24" width="35" height="35"/>
+                            <state key="normal" image="increasing.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="increaseMonth:" destination="-1" eventType="touchUpInside" id="mjt-Xs-Nr8"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

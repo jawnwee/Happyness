@@ -8,8 +8,10 @@
 
 #import "ODDCardScrollViewController.h"
 #import "ODDCardCollectionViewLayout.h"
+#import "ODDCardCollectionViewCell.h"
+#import "ODDcalendarCardCollectionViewCell.h"
 
-@interface ODDCardScrollViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ODDCardScrollViewController ()
 
 @property (nonatomic, strong) UICollectionView *cardCollectionView;
 
@@ -41,16 +43,36 @@
     viewOriginalFrame.size.height *= (1 - SCROLLVIEW_HEIGHT_RATIO);
     [self.view setFrame:viewOriginalFrame];
     ODDCardCollectionViewLayout *cardLayout = [[ODDCardCollectionViewLayout alloc] init];
+    CGSize cardSize = [self cardSizeForLayout];
+    [cardLayout setCardSize:cardSize];
+    [cardLayout setItemSize:cardSize];
+    NSLog(@"%@", NSStringFromCGSize(cardSize));
     _cardCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame
                                              collectionViewLayout:cardLayout];
-    _cardCollectionView.backgroundColor = [UIColor grayColor];
+    _cardCollectionView.backgroundColor = [UIColor whiteColor];
     _cardCollectionView.delegate = self;
     _cardCollectionView.dataSource = self;
     _cardCollectionView.showsVerticalScrollIndicator = NO;
+    _cardCollectionView.bounces = NO;
     // Horizontal indicator is set to yes for now for debugging purposes
-    _cardCollectionView.showsHorizontalScrollIndicator = YES;
-    [_cardCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [_cardCollectionView registerClass:[self.cardClass class] forCellWithReuseIdentifier:@"cardCell"];
     [self.view addSubview:_cardCollectionView];
+}
+
+- (CGSize)cardSizeForLayout {
+    /* Override this method */
+    return CGSizeZero;
+}
+
+#pragma mark - ODDLook Card Setup
+/* DO NOT proceed initializing this controller without setting up your own custom card class 
+    extended from ODDCardCollectionViewCell */
+
+- (Class)cardClass {
+    if (!_cardClass) {
+        _cardClass = [ODDCardCollectionViewCell class];
+    }
+    return _cardClass;
 }
 
 #pragma mark - UICollectionView Delegate
@@ -61,7 +83,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
-    return 15;
+    return 5;
     // When cardCellView is ready uncomment bellow and remove line above
     // return self.cards.count;
 }
@@ -69,9 +91,8 @@
 // Note: Make sure the cells are the same height as |cardCollectionVeiw|
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier"
+    ODDCalendarCardCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
                                                                            forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor greenColor];
     return cell;
     // When cardCellView is ready uncomment below and above three lines
     // return self.cards[index.row];

@@ -6,5 +6,5 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#define SCROLLVIEW_HEIGHT_RATIO     3.5/5
-#define PAGECONTROL_HEIGHT          20
+#define SCROLLVIEW_HEIGHT_RATIO     3.2/5
+#define PAGECONTROL_HEIGHT          10

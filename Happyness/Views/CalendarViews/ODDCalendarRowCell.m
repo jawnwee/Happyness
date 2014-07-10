@@ -7,6 +7,7 @@
 //
 
 #import "ODDCalendarRowCell.h"
+#import "ODDCustomColor.h"
 #import "ODDCalendarView.h"
 #import "ODDHappyness.h"
 #import "ODDHappynessEntry.h"
@@ -16,6 +17,7 @@
 @interface ODDCalendarRowCell ()
 
 @property (strong, nonatomic) NSDictionary *tabs;
+@property (strong, nonatomic) NSDictionary *colors;
 
 @end
 
@@ -24,6 +26,7 @@
 - (id)initWithCalendar:(NSCalendar *)calendar reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithCalendar:calendar reuseIdentifier:reuseIdentifier];
     _tabs = [ODDCalendarTabImageView customCalendarImageDictionary];
+    _colors = [ODDCustomColor customColorDictionary];
     if (!self) {
         return nil;
     }
@@ -66,6 +69,26 @@
     } else {
         [currentImageView setImage:nil];
 
+    }
+}
+
+- (void)configureOddLookCalendarSelected:(UIButton *)button forDate:(NSDate *)date {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
+
+    NSDictionary *entries = [[ODDHappynessEntryStore sharedStore] happynessEntries];
+    ODDHappynessEntry *entry = [entries objectForKey:key];
+    ODDHappyness *happyness = [entry happyness];
+    NSInteger value = [happyness value];
+    if (entry) {
+        NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", (long)value];
+        button.backgroundColor = [self.colors objectForKey:key];
+    } else {
+        button.backgroundColor = [UIColor colorWithRed:245.0 / 255.0 green:245.0 / 255.0
+                                                  blue:245.0 / 255.0 alpha:1.0];
     }
 }
 

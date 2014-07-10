@@ -28,7 +28,7 @@
 
 - (void)setup {
     // This is used to determine the spacing between each item in the collection
-    self.minimumLineSpacing = 18;
+    self.minimumLineSpacing = 10;
     [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
 }
 
@@ -36,18 +36,16 @@
 
 - (CGSize)collectionViewContentSize {
     NSInteger itemCount = [self.collectionView numberOfItemsInSection:0];
-    NSInteger pages = ceil(itemCount / 4);
     
-    // When cardCellView is done uncomment bellow and delete above
-    // NSInteger pages = ceil(itemCount / self.cardSize.width);
+    NSInteger pages = ceil(itemCount * (self.cardSize.width + self.minimumLineSpacing));
     
-    return CGSizeMake(300 * pages, self.collectionView.frame.size.height);
+    return CGSizeMake(pages, self.cardSize.height);
 }
 
 #pragma mark - Setters
 
 - (void)setCardSize:(CGSize)size {
-    self.cardSize = size;
+    _cardSize = size;
 }
 
 @end

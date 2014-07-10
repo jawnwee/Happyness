@@ -7,10 +7,11 @@
 //
 
 #import "ODDAppDelegate.h"
+#import "ODDMainViewController.h"
+#import "ODDBottomRootViewController.h"
 #import "ODDCustomTabBarController.h"
 #import "ODDTodayViewController.h"
 #import "ODDCalendarNavigationViewController.h"
-#import "ODDCalendarViewController.h"
 #import "ODDOverallCalendarViewController.h"
 #import "ODDSettingsViewController.h"
 #import "ODDRootViewController.h"
@@ -18,6 +19,8 @@
 #import "ODDDayAveragesViewController.h"
 #import "ODDManyGraphsViewController.h"
 #import "ODDCardScrollViewController.h"
+#import "ODDCalendarCardScrollCollectionViewController.h"
+#import "ODDCardCollectionViewCell.h"
 
 @implementation ODDAppDelegate
 
@@ -32,7 +35,9 @@
 //    // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+    ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle];
+//    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
 //    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 //    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
 //    ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
@@ -45,15 +50,21 @@
 //
 //    self.window.rootViewController = tbvc;
     ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
-    
+    ODDCalendarCardScrollCollectionViewController *calendarBottom = [[ODDCalendarCardScrollCollectionViewController alloc] init];
+
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
     davc.numberOfBars = 7;
     ODDManyGraphsViewController *mgvc = [[ODDManyGraphsViewController alloc] initWithGraphs:@[cfvc, davc]];
-    
+
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[today, calendar, mgvc];
-    self.window.rootViewController = rvc;
+
+    NSArray *bottomViewControllers = @[calendarBottom];
+    ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
+
+    ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
+    self.window.rootViewController = mainvc;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

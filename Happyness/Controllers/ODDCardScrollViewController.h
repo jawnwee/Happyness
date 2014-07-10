@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ODDCardScrollViewController : UIViewController
+@interface ODDCardScrollViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *cards;
+
+@property (strong, nonatomic) Class cardClass;
+
+- (CGSize)cardSizeForLayout;
 
 @end

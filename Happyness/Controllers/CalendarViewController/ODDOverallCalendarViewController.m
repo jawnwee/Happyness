@@ -48,6 +48,11 @@
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
 
+    [self setupHeader];
+    [self setupCalendarLogic];
+}
+
+- (void)setupHeader {
     NSDate *referenceDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     NSDateComponents *offset = [NSDateComponents new];
     offset.day = 1;
@@ -65,8 +70,8 @@
     }
 
     for (NSUInteger index = 0; index < 7; index++) {
-        NSInteger ordinality = [dayFormatter.calendar ordinalityOfUnit:NSCalendarUnitDay 
-                                                                inUnit:NSCalendarUnitWeekOfMonth 
+        NSInteger ordinality = [dayFormatter.calendar ordinalityOfUnit:NSCalendarUnitDay
+                                                                inUnit:NSCalendarUnitWeekOfMonth
                                                                forDate:referenceDate];
         CGRect frame = CGRectMake((index * headerWidth) + headerWidth / 3.0,
                                   self.calendarHeader.bounds.size.height - 15.0, 30.0, 40.0);
@@ -74,17 +79,16 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.text = [dayFormatter stringFromDate:referenceDate];
         label.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0];
-        //label.backgroundColor = self.backgroundColor;
         label.textColor = [UIColor darkGrayColor];
         [label sizeToFit];
         headerLabels[ordinality - 1] = label;
         [self.calendarHeader addSubview:label];
 
-        referenceDate = [dayFormatter.calendar dateByAddingComponents:offset toDate:referenceDate options:0];
+        referenceDate = [dayFormatter.calendar dateByAddingComponents:offset
+                                                               toDate:referenceDate
+                                                              options:0];
     }
 
-
-    [self setupCalendarLogic];
 }
 
 - (void)setupCalendarLogic {
@@ -94,7 +98,8 @@
 
     NSDateComponents *components = [gregorian
                                     components:(NSCalendarUnitEra |
-                                                NSCalendarUnitYear | NSCalendarUnitMonth) 
+                                                NSCalendarUnitYear | 
+                                                NSCalendarUnitMonth)
                                     fromDate:todayDate];
     components.day = 1;
     _dayOneInCurrentMonth = [gregorian dateFromComponents:components];
@@ -111,7 +116,11 @@
     calendar.tag = 1;
     [self.view insertSubview:calendar belowSubview:self.calendarHeader];
     [self setCurrentDate];
+}
 
+/* Used to reload data */
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
 }
 
 - (ODDCalendarView *)createCalendarView {
@@ -172,64 +181,43 @@
 }
 
 - (IBAction)increaseMonth:(id)sender {
-    NSDate *firstDate = self.dayOneInCurrentMonth;
-    NSDate *lastDate = self.lastDayInCurrentMonth;
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-
-    NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
-                                                          NSCalendarUnitYear |
-                                                          NSCalendarUnitMonth) 
-                                                fromDate:firstDate];
-
-    NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra |
-                                                              NSCalendarUnitYear |
-                                                              NSCalendarUnitMonth) 
-                                                    fromDate:lastDate];
-
-    components.month += 1;
-    NSDate *dayOneInCurrentMonth = [gregorian dateFromComponents:components];
-    lastComponents.month += 2;
-    lastComponents.day = 0;
-    NSDate *lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
-
-    self.dayOneInCurrentMonth = dayOneInCurrentMonth;
-    self.lastDayInCurrentMonth = lastDayInCurrentMonth;
-
-    ODDCalendarView *calendarView = [self createCalendarView];
-    calendarView.alpha = 0.0;
-    // Start the second calendar above the current calendar; hardcoded y  value used.
-    CGRect incomingFrame = calendarView.frame;
-    incomingFrame.origin.y += 200;
-    calendarView.frame = incomingFrame;
-    [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
-
-    [self animateCalendarUp:calendarView];
-    [self setCurrentDate];
-    // This happens to make sure selected date is always the first
+    [self changeMonth:YES];
 }
 
 - (IBAction)decreaseMonth:(id)sender {
+    [self changeMonth:NO];
+}
+
+- (void)changeMonth:(BOOL)increase {
 
     NSDate *firstDate = self.dayOneInCurrentMonth;
     NSDate *lastDate = self.lastDayInCurrentMonth;
     NSCalendar *gregorian = [[NSCalendar alloc]
-                                initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
 
     NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
                                                           NSCalendarUnitYear |
-                                                          NSCalendarUnitMonth) 
+                                                          NSCalendarUnitMonth)
                                                 fromDate:firstDate];
 
     NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra |
                                                               NSCalendarUnitYear |
-                                                              NSCalendarUnitMonth) 
+                                                              NSCalendarUnitMonth)
                                                     fromDate:lastDate];
-
-    components.month -= 1;
-    NSDate *dayOneInCurrentMonth = [gregorian dateFromComponents:components];
-    components.month += 1;
-    lastComponents.day = 0;
-    NSDate *lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+    NSDate *dayOneInCurrentMonth, *lastDayInCurrentMonth;
+    if (increase) {
+        components.month += 1;
+        dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+        lastComponents.month += 2;
+        lastComponents.day = 0;
+        lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+    } else {
+        components.month -= 1;
+        dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+        components.month += 1;
+        lastComponents.day = 0;
+        lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+    }
 
     self.dayOneInCurrentMonth = dayOneInCurrentMonth;
     self.lastDayInCurrentMonth = lastDayInCurrentMonth;
@@ -238,135 +226,105 @@
     calendarView.alpha = 0.0;
     // Start the second calendar above the current calendar; hardcoded y  value used.
     CGRect incomingFrame = calendarView.frame;
-    incomingFrame.origin.y -= 200;
-    calendarView.frame = incomingFrame;
-    [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
 
-    [self animateCalendarDown:calendarView];
-    [self setCurrentDate];
-    // This happens to make sure selected date is always the first
-    calendarView.selectedDate = self.dayOneInCurrentMonth;
-}
+    if (increase) {
+        incomingFrame.origin.y += 200;
+        calendarView.frame = incomingFrame;
+        [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
+        [self animateCalendar:calendarView firstY:-300 secondY:-200];
+    } else {
+        incomingFrame.origin.y -= 200;
+        calendarView.frame = incomingFrame;
+        [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
+        [self animateCalendar:calendarView firstY:300 secondY:200];
+    }
 
-- (IBAction)increaseYear:(id)sender {
-    NSDate *firstDate = self.dayOneInCurrentMonth;
-    NSDate *lastDate = self.lastDayInCurrentMonth;
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                                initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-
-    NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
-                                                          NSCalendarUnitYear |
-                                                          NSCalendarUnitMonth) 
-                                                fromDate:firstDate];
-
-    NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra |
-                                                              NSCalendarUnitYear |
-                                                              NSCalendarUnitMonth) 
-                                                    fromDate:lastDate];
-
-    components.year += 1;
-    NSDate *dayOneInCurrentMonth = [gregorian dateFromComponents:components];
-    lastComponents.year += 1;
-    lastComponents.month += 1;
-    lastComponents.day = 0;
-    NSDate *lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
-
-    self.dayOneInCurrentMonth = dayOneInCurrentMonth;
-    self.lastDayInCurrentMonth = lastDayInCurrentMonth;
-
-    ODDCalendarView *calendarView = [self createCalendarView];
-    calendarView.alpha = 0.0;
-    // Start the second calendar above the current calendar; hardcoded y  value used.
-    CGRect incomingFrame = calendarView.frame;
-    incomingFrame.origin.y += 200;
-    calendarView.frame = incomingFrame;
-    [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
-
-    [self animateCalendarUp:calendarView];
-    [self setCurrentDate];
-}
-
-- (IBAction)decreaseYear:(id)sender {
-    NSDate *firstDate = self.dayOneInCurrentMonth;
-    NSDate *lastDate = self.lastDayInCurrentMonth;
-    NSCalendar *gregorian = [[NSCalendar alloc]
-                                initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-
-    NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
-                                                          NSCalendarUnitYear |
-                                                          NSCalendarUnitMonth) fromDate:firstDate];
-
-    NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra |
-                                                              NSCalendarUnitYear |
-                                                              NSCalendarUnitMonth) 
-                                                    fromDate:lastDate];
-
-    components.year -= 1;
-    NSDate *dayOneInCurrentMonth = [gregorian dateFromComponents:components];
-    lastComponents.year -= 1;
-    lastComponents.month += 1;
-    lastComponents.day = 0;
-    NSDate *lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
-
-    self.dayOneInCurrentMonth = dayOneInCurrentMonth;
-    self.lastDayInCurrentMonth = lastDayInCurrentMonth;
-
-    ODDCalendarView *calendarView = [self createCalendarView];
-    calendarView.alpha = 0.0;
-    // Start the second calendar above the current calendar; hardcoded y  value used.
-    CGRect incomingFrame = calendarView.frame;
-    incomingFrame.origin.y -= 200;
-    calendarView.frame = incomingFrame;
-    [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
-
-    [self animateCalendarDown:calendarView];
     [self setCurrentDate];
     
 }
 
-- (void)animateCalendarUp:(ODDCalendarView *)calendarView {
-    [UIView animateWithDuration:0.5
-                          delay:0.0
-                        options: UIViewAnimationOptionTransitionCurlDown
-                     animations:^{
-                         ODDCalendarView *first = (ODDCalendarView *)[self.view viewWithTag:1];
-                         CGRect frame = first.frame;
-                         frame.origin.y -= 300;
-                         [first setFrame:frame];
-                         first.alpha = 0.0;
-
-                         CGRect frame2 = calendarView.frame;
-                         frame2.origin.y -= 200;
-                         [calendarView setFrame:frame2];
-                         calendarView.alpha = 1.0;
-                     }
-                     completion:^(BOOL finished){
-                         [[self.view viewWithTag:1] removeFromSuperview];
-                         calendarView.tag = 1;
-                         if (self.selectedDate) {
-                             calendarView.selectedDate = self.selectedDate;
-                             self.selectedDate = nil;
-                         }
-                     }];
+- (IBAction)increaseYear:(id)sender {
+    [self changeYear:YES];
 }
 
-- (void)animateCalendarDown:(ODDCalendarView *)calendarView {
+- (IBAction)decreaseYear:(id)sender {
+    [self changeYear:NO];
+}
+
+- (void)changeYear:(BOOL)increase {
+
+
+    NSDate *firstDate = self.dayOneInCurrentMonth;
+    NSDate *lastDate = self.lastDayInCurrentMonth;
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+    NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
+                                                          NSCalendarUnitYear |
+                                                          NSCalendarUnitMonth)
+                                                fromDate:firstDate];
+
+    NSDateComponents *lastComponents = [gregorian components:(NSCalendarUnitEra |
+                                                              NSCalendarUnitYear |
+                                                              NSCalendarUnitMonth)
+                                                    fromDate:lastDate];
+    NSDate *dayOneInCurrentMonth, *lastDayInCurrentMonth;
+    if (increase) {
+        components.year += 1;
+        dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+        lastComponents.year += 1;
+        lastComponents.month += 1;
+        lastComponents.day = 0;
+        lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+    } else {
+        components.year -= 1;
+        dayOneInCurrentMonth = [gregorian dateFromComponents:components];
+        lastComponents.year -= 1;
+        lastComponents.month += 1;
+        lastComponents.day = 0;
+        lastDayInCurrentMonth = [gregorian dateFromComponents:lastComponents];
+    }
+
+    self.dayOneInCurrentMonth = dayOneInCurrentMonth;
+    self.lastDayInCurrentMonth = lastDayInCurrentMonth;
+
+    ODDCalendarView *calendarView = [self createCalendarView];
+    calendarView.alpha = 0.0;
+    // Start the second calendar above the current calendar; hardcoded y  value used.
+    CGRect incomingFrame = calendarView.frame;
+
+    if (increase) {
+        incomingFrame.origin.y += 200;
+        calendarView.frame = incomingFrame;
+        [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
+        [self animateCalendar:calendarView firstY:-300 secondY:-200];
+    } else {
+        incomingFrame.origin.y -= 200;
+        calendarView.frame = incomingFrame;
+        [self.view insertSubview:calendarView belowSubview:self.calendarHeader];
+        [self animateCalendar:calendarView firstY:300 secondY:200];
+    }
+
+    [self setCurrentDate];
+
+}
+
+- (void)animateCalendar:(ODDCalendarView *)calendarView firstY:(CGFloat)firstDistance
+                                                       secondY:(CGFloat)secondDistance{
     [UIView animateWithDuration:0.5
                           delay:0.0
                         options: UIViewAnimationOptionTransitionCurlDown
                      animations:^{
                          ODDCalendarView *first = (ODDCalendarView *)[self.view viewWithTag:1];
                          CGRect frame = first.frame;
-                         frame.origin.y += 300;
-
+                         frame.origin.y += firstDistance;
                          [first setFrame:frame];
                          first.alpha = 0.0;
 
                          CGRect frame2 = calendarView.frame;
-                         frame2.origin.y += 200;
+                         frame2.origin.y += secondDistance;
                          [calendarView setFrame:frame2];
                          calendarView.alpha = 1.0;
-
                      }
                      completion:^(BOOL finished){
                          [[self.view viewWithTag:1] removeFromSuperview];
