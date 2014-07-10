@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDColoredView.h"
 
-@interface ODDColoredAxisView : UIView
+@interface ODDColoredAxisView : ODDColoredView
 
 @end

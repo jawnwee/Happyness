@@ -66,6 +66,8 @@
 		D13F4C77194F6A69003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
 		D13F4C7F194F6A69003873B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C7D194F6A69003873B0 /* InfoPlist.strings */; };
 		D13F4C81194F6A69003873B0 /* HappynessTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C80194F6A69003873B0 /* HappynessTests.m */; };
+		D171EB36196F376900DCA75B /* ODDColoredView.m in Sources */ = {isa = PBXBuildFile; fileRef = D171EB35196F376900DCA75B /* ODDColoredView.m */; };
+		D171EB39196F377900DCA75B /* ODDColoredLinesView.m in Sources */ = {isa = PBXBuildFile; fileRef = D171EB38196F377900DCA75B /* ODDColoredLinesView.m */; };
 		D175C2751965BF1B00A1E3CD /* ODDCurveFittingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D175C2741965BF1B00A1E3CD /* ODDCurveFittingViewController.m */; };
 		D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D175C2781965BF3500A1E3CD /* ODDDayAveragesViewController.m */; };
 		D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */; };
@@ -209,6 +211,10 @@
 		D13F4C7C194F6A69003873B0 /* HappynessTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HappynessTests-Info.plist"; sourceTree = "<group>"; };
 		D13F4C7E194F6A69003873B0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D13F4C80194F6A69003873B0 /* HappynessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HappynessTests.m; sourceTree = "<group>"; };
+		D171EB34196F376900DCA75B /* ODDColoredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDColoredView.h; sourceTree = "<group>"; };
+		D171EB35196F376900DCA75B /* ODDColoredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDColoredView.m; sourceTree = "<group>"; };
+		D171EB37196F377900DCA75B /* ODDColoredLinesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDColoredLinesView.h; sourceTree = "<group>"; };
+		D171EB38196F377900DCA75B /* ODDColoredLinesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDColoredLinesView.m; sourceTree = "<group>"; };
 		D175C2731965BF1B00A1E3CD /* ODDCurveFittingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCurveFittingViewController.h; sourceTree = "<group>"; };
 		D175C2741965BF1B00A1E3CD /* ODDCurveFittingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCurveFittingViewController.m; sourceTree = "<group>"; };
 		D175C2771965BF3500A1E3CD /* ODDDayAveragesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDDayAveragesViewController.h; sourceTree = "<group>"; };
@@ -434,8 +440,7 @@
 		D124B14F195A78FD00A9F687 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
-				D19767151969F53D00CF7E19 /* ODDColoredAxisView.h */,
-				D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */,
+				D171EB33196F374100DCA75B /* Colored */,
 				D1DBDE4F19631C4C00003762 /* ODDGraphAxis.h */,
 				D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */,
 				D124B154195A7E4700A9F687 /* ODDGraphFooterView.h */,
@@ -521,6 +526,19 @@
 				D13F4C7D194F6A69003873B0 /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D171EB33196F374100DCA75B /* Colored */ = {
+			isa = PBXGroup;
+			children = (
+				D171EB34196F376900DCA75B /* ODDColoredView.h */,
+				D171EB35196F376900DCA75B /* ODDColoredView.m */,
+				D19767151969F53D00CF7E19 /* ODDColoredAxisView.h */,
+				D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */,
+				D171EB37196F377900DCA75B /* ODDColoredLinesView.h */,
+				D171EB38196F377900DCA75B /* ODDColoredLinesView.m */,
+			);
+			path = Colored;
 			sourceTree = "<group>";
 		};
 		D175C2761965BF1F00A1E3CD /* LineGraphs */ = {
@@ -905,6 +923,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBCFE229196E543E003D97E7 /* ODDCalendarCardScrollViewController.m in Sources */,
+				D171EB36196F376900DCA75B /* ODDColoredView.m in Sources */,
 				EB835DC61970B6DE002C0A20 /* ODDCalendarTabImageView.m in Sources */,
 				C4EE1D2919761EC20080CAFD /* ODDCardQuoteScrollViewController.m in Sources */,
 				C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */,
@@ -937,6 +956,7 @@
 				D124B159195A7E4F00A9F687 /* ODDGraphSiderView.m in Sources */,
 				D1F74C8F196E1A4B00AF0EC6 /* ODDCardCollectionViewLayout.m in Sources */,
 				EB1F9CA1195BFA8C00567A31 /* ODDCalendarRowCell.m in Sources */,
+				D171EB39196F377900DCA75B /* ODDColoredLinesView.m in Sources */,
 				D1AAF26C196888FA00332F59 /* ODDRootScrollView.m in Sources */,
 				EBCFE22C196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m in Sources */,
 				D1D4A1FF196A679200340234 /* ODDManyGraphsViewController.m in Sources */,

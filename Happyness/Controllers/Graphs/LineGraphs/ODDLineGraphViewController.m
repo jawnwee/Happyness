@@ -8,6 +8,7 @@
 
 #import "ODDLineGraphViewController.h"
 #import "ODDColoredAxisView.h"
+#import "ODDColoredLinesView.h"
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -91,22 +92,25 @@
                                                                           lineGraphSize.width,
                                                                           footerHeight)];
     CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
-    self.sider = [[ODDGraphSiderView alloc] initWithElements:@[@"5",
-                                                               @"4",
-                                                               @"3",
-                                                               @"2",
-                                                               @"1",
-                                                               @"0"]
-                                                   withFrame:CGRectMake(lineGraphPosition.x - siderWidth,
-                                                                        lineGraphPosition.y,
-                                                                        siderWidth,
-                                                                        lineGraphSize.height)];
-//    ODDColoredAxisView *test = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x - siderWidth,
-//                                                                                    lineGraphPosition.y,
-//                                                                                    siderWidth,
-//                                                                                    lineGraphSize.height)];
-//    [self.view addSubview:test];
+//    self.sider = [[ODDGraphSiderView alloc] initWithElements:@[@"5",
+//                                                               @"4",
+//                                                               @"3",
+//                                                               @"2",
+//                                                               @"1",
+//                                                               @"0"]
+//                                                   withFrame:CGRectMake(lineGraphPosition.x - siderWidth,
+//                                                                        lineGraphPosition.y,
+//                                                                        siderWidth,
+//                                                                        lineGraphSize.height)];
+    ODDColoredAxisView *test = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x - siderWidth,
+                                                                                    lineGraphPosition.y,
+                                                                                    siderWidth,
+                                                                                    lineGraphSize.height)];
+    [self.view addSubview:test];
 //    self.lineGraphView.backgroundColor = [UIColor lightGrayColor];
+    ODDColoredLinesView *testLines = [[ODDColoredLinesView alloc] initWithFrame:self.lineGraphView.frame];
+    [self.view addSubview:testLines];
+    [self.view sendSubviewToBack:testLines];
     [self.view addSubview:self.lineGraphView];
 }
 

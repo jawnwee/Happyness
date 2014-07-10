@@ -34,17 +34,22 @@
 }
 
 - (void)layoutSubviews {
-//    CGFloat xPositionPadding = ceil(self.bounds.size.width / self.labels.count);
-    CGFloat width = ceil(self.bounds.size.width / self.labels.count);
+    CGFloat xPositionPadding = ceil(self.bounds.size.width / self.labels.count);
+//    CGFloat width = ceil(self.bounds.size.width / self.labels.count);
 //    CGFloat width = ceil(self.bounds.size.width / (self.labels.count * 0.7));
+    CGFloat width = 30.0;
     CGRect lastFrame = CGRectMake(0, 0, 0, 0);
     NSUInteger count = 0;
     for (UILabel *label in self.labels) {
 //        CGFloat xPosition = (xPositionPadding * count) - (xPositionPadding / 2);
-//        CGFloat xPosition = (xPositionPadding * count);
+        CGFloat xPosition = (xPositionPadding * count);
 //        label.frame = CGRectMake(xPosition, 0, width, self.bounds.size.height);
-        label.frame = CGRectMake(CGRectGetMaxX(lastFrame), 0, width, self.bounds.size.height);
-        lastFrame = label.frame;
+        [label sizeToFit];
+        CGRect labelFrame = label.frame;
+        labelFrame.origin.x = xPosition;
+        [label setFrame:labelFrame];
+//        label.frame = CGRectMake(CGRectGetMaxX(lastFrame), 0, width, self.bounds.size.height);
+//        lastFrame = label.frame;
         count++;
     }
 }
