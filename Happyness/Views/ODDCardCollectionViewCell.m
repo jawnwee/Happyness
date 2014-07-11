@@ -7,6 +7,7 @@
 //
 
 #import "ODDCardCollectionViewCell.h"
+#import "ODDHappynessHeader.h"
 
 @implementation ODDCardCollectionViewCell
 
@@ -14,7 +15,7 @@
 {
     self = [super initWithFrame:frameRect];
     if (self) {
-        // Initialization code
+
     }
     return self;
 }

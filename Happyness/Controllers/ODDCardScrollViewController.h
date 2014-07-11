@@ -16,4 +16,6 @@
 
 - (CGSize)cardSizeForLayout;
 
+- (void)reloadCollectionData;
+
 @end

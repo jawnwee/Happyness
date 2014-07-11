@@ -93,6 +93,11 @@
 		EBCFE229196E543E003D97E7 /* ODDCalendarCardScrollCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCFE228196E543E003D97E7 /* ODDCalendarCardScrollCollectionViewController.m */; };
 		EBCFE22C196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */; };
 		EBCFE22E196E6CEE003D97E7 /* oddLook_calendar_card_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE22D196E6CEE003D97E7 /* oddLook_calendar_card_1@2x.png */; };
+		EBCFE235196F40F6003D97E7 /* oddLook_card_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE230196F40F6003D97E7 /* oddLook_card_1@2x.png */; };
+		EBCFE236196F40F6003D97E7 /* oddLook_card_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE231196F40F6003D97E7 /* oddLook_card_2@2x.png */; };
+		EBCFE237196F40F6003D97E7 /* oddLook_card_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE232196F40F6003D97E7 /* oddLook_card_3@2x.png */; };
+		EBCFE238196F40F6003D97E7 /* oddLook_card_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE233196F40F6003D97E7 /* oddLook_card_4@2x.png */; };
+		EBCFE239196F40F6003D97E7 /* oddLook_card_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EBCFE234196F40F6003D97E7 /* oddLook_card_5@2x.png */; };
 		EBD13C3019513F71007EF6D0 /* ODDCalendarNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */; };
 		EBD388461961F1C8000A41A1 /* ODDPreviousDayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBD388441961F1C8000A41A1 /* ODDPreviousDayViewController.m */; };
 		EBE2BD54194FDA0D0023E9F4 /* ODDCustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EBE2BD53194FDA0D0023E9F4 /* ODDCustomColor.m */; };
@@ -238,9 +243,14 @@
 		EBCFE225196E51A4003D97E7 /* ODDCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCardCollectionViewCell.m; sourceTree = "<group>"; };
 		EBCFE227196E543E003D97E7 /* ODDCalendarCardScrollCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODDCalendarCardScrollCollectionViewController.h; path = ../ODDCalendarCardScrollCollectionViewController.h; sourceTree = "<group>"; };
 		EBCFE228196E543E003D97E7 /* ODDCalendarCardScrollCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODDCalendarCardScrollCollectionViewController.m; path = ../ODDCalendarCardScrollCollectionViewController.m; sourceTree = "<group>"; };
-		EBCFE22A196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarCardCollectionViewCell.h; sourceTree = "<group>"; };
-		EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarCardCollectionViewCell.m; sourceTree = "<group>"; };
+		EBCFE22A196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODDCalendarCardCollectionViewCell.h; path = ../ODDCalendarCardCollectionViewCell.h; sourceTree = "<group>"; };
+		EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODDCalendarCardCollectionViewCell.m; path = ../ODDCalendarCardCollectionViewCell.m; sourceTree = "<group>"; };
 		EBCFE22D196E6CEE003D97E7 /* oddLook_calendar_card_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_calendar_card_1@2x.png"; sourceTree = "<group>"; };
+		EBCFE230196F40F6003D97E7 /* oddLook_card_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_card_1@2x.png"; sourceTree = "<group>"; };
+		EBCFE231196F40F6003D97E7 /* oddLook_card_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_card_2@2x.png"; sourceTree = "<group>"; };
+		EBCFE232196F40F6003D97E7 /* oddLook_card_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_card_3@2x.png"; sourceTree = "<group>"; };
+		EBCFE233196F40F6003D97E7 /* oddLook_card_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_card_4@2x.png"; sourceTree = "<group>"; };
+		EBCFE234196F40F6003D97E7 /* oddLook_card_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "oddLook_card_5@2x.png"; sourceTree = "<group>"; };
 		EBD13C2E19513F71007EF6D0 /* ODDCalendarNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarNavigationViewController.h; sourceTree = "<group>"; };
 		EBD13C2F19513F71007EF6D0 /* ODDCalendarNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarNavigationViewController.m; sourceTree = "<group>"; };
 		EBD388431961F1C8000A41A1 /* ODDPreviousDayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDPreviousDayViewController.h; sourceTree = "<group>"; };
@@ -546,8 +556,6 @@
 				D1F74C8E196E1A4B00AF0EC6 /* ODDCardCollectionViewLayout.m */,
 				EBCFE224196E51A4003D97E7 /* ODDCardCollectionViewCell.h */,
 				EBCFE225196E51A4003D97E7 /* ODDCardCollectionViewCell.m */,
-				EBCFE22A196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.h */,
-				EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */,
 				EB04B0FC1968BAE000B8E984 /* CalendarViews */,
 				D124B14F195A78FD00A9F687 /* Graphs */,
 			);
@@ -569,6 +577,8 @@
 		EB04B0FC1968BAE000B8E984 /* CalendarViews */ = {
 			isa = PBXGroup;
 			children = (
+				EBCFE22A196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.h */,
+				EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */,
 				EB994738195AA99C0095DA5B /* ODDCalendarView.h */,
 				EB994739195AA99C0095DA5B /* ODDCalendarView.m */,
 				EB1F9C9F195BFA8C00567A31 /* ODDCalendarRowCell.h */,
@@ -601,11 +611,24 @@
 			isa = PBXGroup;
 			children = (
 				C4C57BE3196F5733001ACC87 /* feedbackCircle@2x.png */,
+				EBCFE22F196F40F6003D97E7 /* Basic Cards */,
 				EB362C49195F490000F6BA76 /* Calendar */,
 				C419C82C195DA45D008AE325 /* HappynessFaces */,
 				C419C809195D89CD008AE325 /* Tab Icons */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		EBCFE22F196F40F6003D97E7 /* Basic Cards */ = {
+			isa = PBXGroup;
+			children = (
+				EBCFE230196F40F6003D97E7 /* oddLook_card_1@2x.png */,
+				EBCFE231196F40F6003D97E7 /* oddLook_card_2@2x.png */,
+				EBCFE232196F40F6003D97E7 /* oddLook_card_3@2x.png */,
+				EBCFE233196F40F6003D97E7 /* oddLook_card_4@2x.png */,
+				EBCFE234196F40F6003D97E7 /* oddLook_card_5@2x.png */,
+			);
+			path = "Basic Cards";
 			sourceTree = "<group>";
 		};
 		EBE2BD4E194FB99E0023E9F4 /* Misc */ = {
@@ -725,9 +748,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBCFE237196F40F6003D97E7 /* oddLook_card_3@2x.png in Resources */,
 				C419C83C195DA45D008AE325 /* Happyness_3@2x.png in Resources */,
 				EB362C53195F490800F6BA76 /* oddLook_calendar_1.png in Resources */,
 				C419C83F195DA45D008AE325 /* Happyness_5.png in Resources */,
+				EBCFE238196F40F6003D97E7 /* oddLook_card_4@2x.png in Resources */,
 				C419C81E195D89CD008AE325 /* GraphTabSelected60.png in Resources */,
 				EBACA50B1969129100DBB69A /* ODDOverallCalendarViewController.xib in Resources */,
 				C419C83E195DA45D008AE325 /* Happyness_4@2x.png in Resources */,
@@ -738,6 +763,7 @@
 				C419C828195D89CD008AE325 /* TodayTabUnselected60.png in Resources */,
 				C419C820195D89CD008AE325 /* GraphTabUnselected60.png in Resources */,
 				C4C57BE4196F5733001ACC87 /* feedbackCircle@2x.png in Resources */,
+				EBCFE236196F40F6003D97E7 /* oddLook_card_2@2x.png in Resources */,
 				C419C822195D89CD008AE325 /* SettingsTabSelected60.png in Resources */,
 				EBCFE22E196E6CEE003D97E7 /* oddLook_calendar_card_1@2x.png in Resources */,
 				C419C825195D89CD008AE325 /* SettingsTabUnselected60@2x.png in Resources */,
@@ -750,6 +776,7 @@
 				C419C827195D89CD008AE325 /* TodayTabSelected60@2x.png in Resources */,
 				C419C83B195DA45D008AE325 /* Happyness_3.png in Resources */,
 				EBE2BD68194FFFDB0023E9F4 /* ODDTodayViewController.xib in Resources */,
+				EBCFE235196F40F6003D97E7 /* oddLook_card_1@2x.png in Resources */,
 				C419C821195D89CD008AE325 /* GraphTabUnselected60@2x.png in Resources */,
 				C419C837195DA45D008AE325 /* Happyness_1.png in Resources */,
 				EB362C56195F490800F6BA76 /* oddLook_calendar_4.png in Resources */,
@@ -757,6 +784,7 @@
 				C419C81C195D89CD008AE325 /* CalendarTabUnselected60.png in Resources */,
 				EB362C57195F490800F6BA76 /* oddLook_calendar_5.png in Resources */,
 				EB362C51195F490800F6BA76 /* CalendarRow@2x.png in Resources */,
+				EBCFE239196F40F6003D97E7 /* oddLook_card_5@2x.png in Resources */,
 				D13F4C6E194F6A68003873B0 /* Images.xcassets in Resources */,
 				C419C81B195D89CD008AE325 /* CalendarTabSelected60@2x.png in Resources */,
 				EB362C52195F490800F6BA76 /* CalendarRowBottom@2x.png in Resources */,

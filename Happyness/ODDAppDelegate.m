@@ -38,7 +38,6 @@
     NSBundle *appBundle = [NSBundle mainBundle];
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle];
 //    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
 //    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
 //    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
@@ -54,6 +53,7 @@
     ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
     ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc] init];
     ODDCalendarCardScrollCollectionViewController *calendarBottom = [[ODDCalendarCardScrollCollectionViewController alloc] init];
+    ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle bottomController:calendarBottom];
 
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];

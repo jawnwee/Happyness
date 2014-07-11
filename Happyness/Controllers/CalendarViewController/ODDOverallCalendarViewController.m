@@ -7,6 +7,7 @@
 //
 
 #import "ODDOverallCalendarViewController.h"
+#import "ODDCalendarCardScrollCollectionViewController.h"
 #import "ODDHappynessHeader.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarRowCell.h"
@@ -18,14 +19,20 @@
 @property (strong, nonatomic) NSDate *dayOneInCurrentMonth;
 @property (strong, nonatomic) NSDate *lastDayInCurrentMonth;
 @property (strong, nonatomic) NSDate *selectedDate;
+@property (strong, nonatomic) ODDCalendarCardScrollCollectionViewController *calendarCardController;
 
 @end
 
 @implementation ODDOverallCalendarViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil 
+                         bundle:(NSBundle *)nibBundleOrNil
+               bottomController:(ODDCalendarCardScrollCollectionViewController *)bottomController {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+
+        _calendarCardController = bottomController;
+
         for (int i = 1 ; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
             NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
@@ -178,6 +185,11 @@
 
     NSString *year = [formatter stringFromDate:currentDate];
     self.year.text = year;
+
+    NSString *dateComponents = @"MMMM YYYY";
+    [formatter setDateFormat:dateComponents];
+    self.calendarCardController.currentDate = [formatter stringFromDate:currentDate];
+    [self.calendarCardController reloadCollectionData];
 }
 
 - (IBAction)increaseMonth:(id)sender {

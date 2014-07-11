@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class ODDHappynessEntry;
+
 @interface ODDCardCollectionViewCell : UICollectionViewCell
 
 @end

@@ -10,4 +10,6 @@
 
 @interface ODDCalendarCardScrollCollectionViewController : ODDCardScrollViewController
 
+@property (strong, nonatomic) NSString *currentDate;
+
 @end

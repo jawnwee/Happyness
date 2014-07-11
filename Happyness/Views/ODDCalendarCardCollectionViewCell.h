@@ -8,6 +8,10 @@
 
 #import "ODDCardCollectionViewCell.h"
 
+@class ODDHappynessEntry;
+
 @interface ODDCalendarCardCollectionViewCell : ODDCardCollectionViewCell
+
+- (void)setHappynessEntry:(ODDHappynessEntry *)happynessEntry;
 
 @end
