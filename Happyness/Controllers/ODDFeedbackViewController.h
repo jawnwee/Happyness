@@ -13,7 +13,7 @@
 @class ODDSelectionCardScrollViewController;
 @interface ODDFeedbackViewController : UIViewController <HPGrowingTextViewDelegate, XYPieChartDataSource>
 
-@property (strong, nonatomic) XYPieChart *pieChart;
+@property (nonatomic, strong) XYPieChart *pieChart;
 
 - (instancetype)initWithCardSelectionController:
                                         (ODDSelectionCardScrollViewController *)bottomController;

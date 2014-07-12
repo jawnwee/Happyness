@@ -24,6 +24,7 @@
     return self;
 }
 
+/* Returns a feedback message */
 - (NSString *)analyzePastDays {
     NSArray *entries = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
     NSString *message;
@@ -58,7 +59,6 @@
     } else {
         message = @"You've become sadder recently. Get back up on your feet!";
     }
-
     return message;
 }
 

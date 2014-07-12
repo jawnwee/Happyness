@@ -12,8 +12,8 @@
 
 @interface ODDReminderViewController ()
 
-@property (strong, nonatomic) SSFlatDatePicker *picker;
-@property (strong, nonatomic) UISwitch *reminderSwitch;
+@property (nonatomic, strong) SSFlatDatePicker *picker;
+@property (nonatomic, strong) UISwitch *reminderSwitch;
 
 @end
 
@@ -48,7 +48,6 @@
     UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 30, 90, 31)];
     reminderLabel.text = @"Reminder";
     self.reminderSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(135, 80, 51, 31)];
-
     [self.reminderSwitch addTarget:self
                             action:@selector(switchOrPickerToggled)
                   forControlEvents:UIControlEventValueChanged];
@@ -68,7 +67,6 @@
                                             green:81.0 / 255.0
                                              blue:81.0 / 255.0
                                             alpha:1.0];
-
     [self.picker addTarget:self
                     action:@selector(switchOrPickerToggled)
           forControlEvents:UIControlEventValueChanged];
@@ -107,11 +105,12 @@
 
         [[UIApplication sharedApplication] scheduleLocalNotification:reminder];
 
-        // Testing
+        /* Testing for correct notification fire time
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setTimeStyle:NSDateFormatterFullStyle];
         [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
         NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]);
+         */
     }
 }
 

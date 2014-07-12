@@ -61,7 +61,6 @@
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-
     _pieChart = [[XYPieChart alloc] initWithFrame:CGRectMake(0,
                                                              0,
                                                              self.view.bounds.size.width,
@@ -94,6 +93,13 @@
     [self.view addSubview:hashtag];
     [hashtag addTarget:self action:@selector(addHashtag) forControlEvents:UIControlEventTouchUpInside];
 
+    /* Test submit button; crashes if you add, then go to graphs
+    UIButton *submit = [UIButton buttonWithType:UIButtonTypeSystem];
+    submit.frame = CGRectMake(200, 300, 50, 50);
+    [submit setTitle:@"Submit" forState:UIControlStateNormal];
+    [self.view addSubview:submit];
+    [submit addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
+     */
 }
 
 - (void)setUpPieChart {
@@ -144,7 +150,7 @@
     [centerImage setImage:[UIImage imageNamed:@"feedbackCircle.png"]];
     centerImage.center = CGPointMake(160, 160);
 
-    UIFont *customFont = [UIFont fontWithName:@"ProximaNovaSemiBold" size:10];
+    UIFont *customFont = [UIFont fontWithName:@"ProximaNovaSemiBold" size:10]; // Change font
     self.feedbackLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 125)];
     self.feedbackLabel.center = CGPointMake(160, 160);
     [self reloadFeedbackText];
@@ -156,7 +162,6 @@
     self.feedbackLabel.backgroundColor = [UIColor clearColor];
     self.feedbackLabel.textColor = [UIColor blackColor];
     self.feedbackLabel.textAlignment = NSTextAlignmentCenter;
-
 
     [self.pieChart addSubview:centerImage];
     [self.pieChart addSubview:self.feedbackLabel];
@@ -345,8 +350,19 @@
     if ([text isEqualToString:@"\n"]) {
         [self.noteView resignFirstResponder];
     }
+}
+
+/* Testing fake entries
+- (void)submit {
+    for (int i = 0; i < 300; i++) {
+        ODDHappyness *happy = [[ODDHappyness alloc] initWithFace:1];
+        ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happy note:nil dateTime:[NSDate dateWithTimeIntervalSinceNow:i * 24 * 60 * 60]];
+        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+>>>>>>> Fixed picker scrolling flow and cleaned up some code
+    }
     return growingTextView.text.length + (text.length - range.length) <= 140;
 }
+ */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
@@ -396,7 +412,6 @@
     NSArray *entries = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
     NSMutableArray *xValues = [[NSMutableArray alloc] init];
     NSMutableArray *yValues = [[NSMutableArray alloc] init];
-
     for (int i = 0; i < entries.count; i++) {
         [xValues addObject:[NSNumber numberWithInt:i]];
         ODDHappynessEntry *entry = [entries objectAtIndex:i];
@@ -431,11 +446,11 @@
     double b = ssXY / ssX;
     double a = avgY - b * avgX;
 
-    // Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
-    //double corCoeff = pow(ssXY, 2) / (ssX * ssY);
+    /* Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
+    double corCoeff = pow(ssXY, 2) / (ssX * ssY);
 
-    //NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
-
+    NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
+     */
     return b * (n + 1) + a;
 }
 
@@ -461,7 +476,6 @@
             [newYValues addObject:[NSNumber numberWithDouble:weightedY]];
         }
     }
-
     return newYValues;
 }
 
