@@ -24,6 +24,7 @@
 @implementation ODDRootViewController
 
 @synthesize viewControllers = _viewControllers;
+@synthesize currentPage = _currentPage;
 
 #pragma mark - Alloc/Init
 
@@ -135,7 +136,9 @@
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
+    self.currentPage = self.pageControl.currentPage;
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:@"updateBottomView" object:self];
 }
 
 #pragma mark - Memory Management

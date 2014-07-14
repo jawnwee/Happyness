@@ -28,7 +28,7 @@
 
 - (void)setup {
     // This is used to determine the spacing between each item in the collection
-    self.minimumLineSpacing = 10;
+    self.minimumLineSpacing = 5;
     [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
 }
 

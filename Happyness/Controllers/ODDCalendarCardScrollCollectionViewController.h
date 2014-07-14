@@ -12,4 +12,6 @@
 
 @property (strong, nonatomic) NSString *currentDate;
 
+-(void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
+
 @end

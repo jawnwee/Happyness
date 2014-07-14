@@ -25,6 +25,8 @@
 
 @implementation ODDOverallCalendarViewController
 
+#pragma mark - Initialization
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil 
                          bundle:(NSBundle *)nibBundleOrNil
                bottomController:(ODDCalendarCardScrollCollectionViewController *)bottomController {
@@ -33,22 +35,26 @@
 
         _calendarCardController = bottomController;
 
+        // Testing purposes, 500 random data for previous days
         for (int i = 1 ; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
             NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
             ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
             ODDNote *testNote = [[ODDNote alloc] init];
-            testNote.noteString = [NSMutableString stringWithFormat:@"testing123"];
+            testNote.noteString = [NSMutableString 
+                                   stringWithFormat:@"testing123fasldkfjaskdfjalksdfjmy name is john hahahahahahaawlajwwwwww"];
             ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
                                                                                    note:testNote
                                                                                dateTime:date];
             [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
         }
         [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+        //////////////////////////////////////////////////////
     }
     return self;
 }
 
+#pragma mark - View Setup
 - (void)viewDidLoad {
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
                                  self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
@@ -125,10 +131,6 @@
     [self setCurrentDate];
 }
 
-/* Used to reload data */
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-}
 
 - (ODDCalendarView *)createCalendarView {
 
@@ -152,6 +154,8 @@
     return calendarView;
 }
 
+#pragma mark - Calendar View Logic
+
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -164,10 +168,10 @@
         if (result == NSOrderedAscending) {
             [self increaseMonth:nil];
         } else {
-            [self decreaseMonth:self];
+            [self decreaseMonth:nil];
         }
     } else {
-        // TODO when cards are implemented
+        [self.calendarCardController scrollToDate:date animated:YES];
     }
 }
 

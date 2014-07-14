@@ -13,8 +13,6 @@
 
 @interface ODDCardScrollViewController ()
 
-@property (nonatomic, strong) UICollectionView *cardCollectionView;
-
 @end
 
 @implementation ODDCardScrollViewController
@@ -46,7 +44,6 @@
     CGSize cardSize = [self cardSizeForLayout];
     [cardLayout setCardSize:cardSize];
     [cardLayout setItemSize:cardSize];
-    NSLog(@"%@", NSStringFromCGSize(cardSize));
     _cardCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame
                                              collectionViewLayout:cardLayout];
     _cardCollectionView.backgroundColor = [UIColor whiteColor];
@@ -59,9 +56,10 @@
     [self.view addSubview:_cardCollectionView];
 }
 
+/* Override this method in subclasses if you want a different card size */
 - (CGSize)cardSizeForLayout {
-    /* Override this method */
-    return CGSizeZero;
+    CGSize size = CGSizeMake(120, 204.48);
+    return size;
 }
 
 #pragma mark - ODDLook Card Setup
@@ -84,14 +82,13 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section {
     return 5;
-    // When cardCellView is ready uncomment bellow and remove line above
-    // return self.cards.count;
 }
 
 // Note: Make sure the cells are the same height as |cardCollectionVeiw|
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODDCalendarCardCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
+    ODDCalendarCardCollectionViewCell *cell =
+                                 [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
                                                                            forIndexPath:indexPath];
     return cell;
     // When cardCellView is ready uncomment below and above three lines

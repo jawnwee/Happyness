@@ -11,8 +11,8 @@
 @interface ODDCardScrollViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) NSArray *cards;
-
-@property (strong, nonatomic) Class cardClass;
+@property (nonatomic, strong) UICollectionView *cardCollectionView;
+@property (nonatomic, strong) Class cardClass;
 
 - (CGSize)cardSizeForLayout;
 

@@ -11,7 +11,6 @@
 #import "ODDBottomRootViewController.h"
 #import "ODDCustomTabBarController.h"
 #import "ODDTodayViewController.h"
-#import "ODDCalendarNavigationViewController.h"
 #import "ODDOverallCalendarViewController.h"
 #import "ODDSettingsViewController.h"
 #import "ODDRootViewController.h"
@@ -29,31 +28,44 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-    [[UIApplication sharedApplication] registerForRemoteNotifications]; // you can also set here for local notification.
+    [[UIApplication sharedApplication] registerUserNotificationSettings:
+                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+                                                                      | UIUserNotificationTypeAlert 
+                                                                      | UIUserNotificationTypeBadge) 
+                                                             categories:nil]];
+
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
 
     // Override point for customization after application launch.
 
+    /* for (NSString* family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+
+        for (NSString* name in [UIFont fontNamesForFamilyName: family])
+        {
+            NSLog(@"  %@", name);
+        }
+    } */
 //    // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
+
+
+    // Testers for bottom scrollView
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+    ODDTodayViewController *today2 = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-//    ODDAnalysisScrollViewController *analysisScroll = [[ODDAnalysisScrollViewController alloc] init];
-//    ODDSettingsViewController *settings = [[ODDSettingsViewController alloc] initWithNibName:@"ODDSettingsViewController" bundle:appBundle];
-//    ODDCalendarNavigationViewController *calendarNav = [[ODDCalendarNavigationViewController alloc] initWithRootViewController:calendar];
-//    ODDCustomTabBarController *tbvc = [[ODDCustomTabBarController alloc] init];
-//    tbvc.viewControllers = @[today, calendarNav, analysisScroll, settings];
-//
-//    // Push tab bar icons down
-//    for (UITabBarItem *item in tbvc.tabBar.items) {
-//        item.imageInsets = UIEdgeInsetsMake(6, 0, -6, 0);
-//    }
-//
-//    self.window.rootViewController = tbvc;
+    ///////////////////////////////////////////////
+
     ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
     ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc] init];
-    ODDCalendarCardScrollCollectionViewController *calendarBottom = [[ODDCalendarCardScrollCollectionViewController alloc] init];
-    ODDOverallCalendarViewController *calendar = [[ODDOverallCalendarViewController alloc] initWithNibName:@"ODDOverallCalendarViewController" bundle:appBundle bottomController:calendarBottom];
+    ODDCalendarCardScrollCollectionViewController *calendarBottom =
+                                       [[ODDCalendarCardScrollCollectionViewController alloc] init];
+    ODDOverallCalendarViewController *calendar =
+                                       [[ODDOverallCalendarViewController alloc]
+                                                initWithNibName:@"ODDOverallCalendarViewController" 
+                                                         bundle:appBundle
+                                               bottomController:calendarBottom];
 
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
@@ -65,7 +77,7 @@
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
-    NSArray *bottomViewControllers = @[calendarBottom];
+    NSArray *bottomViewControllers = @[today, calendarBottom, todayBottom, today2];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];

@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class ODDBottomRootViewController;
+@class ODDRootViewController;
 
 @interface ODDMainViewController : UIViewController
 
-- (instancetype)initWithScrollViewController:(UIViewController *)scrollView
+- (instancetype)initWithScrollViewController:(ODDRootViewController *)scrollView
                         bottomViewController:(ODDBottomRootViewController *)assistantView;
 
 @end

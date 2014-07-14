@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) NSMutableArray *slices;
 @property (strong, nonatomic) UILabel *feedbackLabel;
+@property (nonatomic, strong) NSDictionary *colorDictionary;
 
 @end
 
@@ -26,7 +27,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-
+        _colorDictionary = [ODDCustomColor customColorDictionary];
     }
     return self;
 }
@@ -185,8 +186,8 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    NSArray *sliceColors = [[ODDCustomColor customColorDictionary] allValues];
-    return [sliceColors objectAtIndex:(index % sliceColors.count)];
+    NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", (long)index + 1];
+    return [self.colorDictionary objectForKey:key];
 }
 
 #pragma mark - Overall Score Calculations

@@ -16,8 +16,8 @@
 
 @interface ODDCalendarRowCell ()
 
-@property (strong, nonatomic) NSDictionary *tabs;
-@property (strong, nonatomic) NSDictionary *colors;
+@property (nonatomic, strong) NSDictionary *tabs;
+@property (nonatomic, strong) NSDictionary *colors;
 
 @end
 

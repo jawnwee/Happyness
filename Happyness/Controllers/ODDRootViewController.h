@@ -13,5 +13,6 @@
 // Add the view controllers in the order of how the views
 // should be laid out.
 @property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic) NSInteger currentPage;
 
 @end

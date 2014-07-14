@@ -8,17 +8,18 @@
 
 #import "ODDMainViewController.h"
 #import "ODDBottomRootViewController.h"
+#import "ODDRootViewController.h"
 
 @interface ODDMainViewController ()
 
-@property (strong, nonatomic) UIViewController *topView;
-@property (strong, nonatomic) ODDBottomRootViewController *bottomView;
+@property (nonatomic, strong) ODDRootViewController *topView;
+@property (nonatomic, strong) ODDBottomRootViewController *bottomView;
 
 @end
 
 @implementation ODDMainViewController
 
-- (instancetype)initWithScrollViewController:(UIViewController *)scrollView 
+- (instancetype)initWithScrollViewController:(ODDRootViewController *)scrollView
                         bottomViewController:(ODDBottomRootViewController *)assistantView{
     self = [super init];
     if (self) {
@@ -49,7 +50,7 @@
 }
 
 - (void)updateBottomView {
-    [self.bottomView updateView:3];
+    [self.bottomView updateView:[self.topView currentPage]];
 }
 
 /*

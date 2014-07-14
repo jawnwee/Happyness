@@ -12,14 +12,15 @@
 
 @interface ODDCalendarCardScrollCollectionViewController ()
 
-@property (strong, nonatomic) NSMutableArray *entries;
-@property (strong, nonatomic) NSMutableArray *headers;
-@property (strong, nonatomic) NSMutableDictionary *data;
-@property (strong, nonatomic) NSDateFormatter *monthDateFormatter;
+@property (nonatomic, strong) NSMutableArray *entries;
+@property (nonatomic, strong) NSMutableArray *headers;
+@property (nonatomic, strong) NSMutableDictionary *data;
+@property (nonatomic, strong) NSDateFormatter *monthDateFormatter;
 
 @end
 
 @implementation ODDCalendarCardScrollCollectionViewController
+@synthesize currentDate = _currentDate;
 
 - (instancetype)init {
     self = [super init];
@@ -33,11 +34,6 @@
 {
     [super viewDidLoad];
     [self resortAndReload];
-}
-
-- (CGSize)cardSizeForLayout {
-    CGSize size = CGSizeMake(120, 204.48);
-    return size;
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,21 +70,40 @@
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(UICollectionView *)collectionView 
+     numberOfItemsInSection:(NSInteger)section {
     return [[self.data objectForKey:self.currentDate] count];
 }
 
 // Note: Make sure the cells are the same height as |cardCollectionVeiw|
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODDCalendarCardCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
-                                                                                        forIndexPath:indexPath];
-    ODDHappynessEntry *entry = [[self.data objectForKey:self.currentDate] objectAtIndex:indexPath.row];
+    ODDCalendarCardCollectionViewCell *cell =
+                                [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell" 
+                                                                          forIndexPath:indexPath];
+    ODDHappynessEntry *entry = [[self.data objectForKey:self.currentDate] 
+                                            objectAtIndex:indexPath.row];
     [cell setHappynessEntry:entry];
     return cell;
     // When cardCellView is ready uncomment below and above three lines
     // return self.cards[index.row];
 }
+
+- (void)scrollToDate:(NSDate *)date animated:(BOOL)animated {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                        NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+
+    NSInteger index = [components day] - 1;
+    if ([[self.data objectForKey:self.currentDate] count] >= index) {
+        [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index 
+                                                                            inSection:0]
+                                        atScrollPosition:UICollectionViewScrollPositionLeft 
+                                                animated:animated];
+    }
+}
+
+
 
 
 
