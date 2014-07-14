@@ -72,7 +72,7 @@
         [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
                                          withValues:polynomialFitCoordinates((int)numberOfAllEntries,
                                                                              [allEntriesRatings getValues],
-                                                                             10)];
+                                                                             12)];
         
         // Initialize self.mediumEntries;
         NSUInteger numberOfMediumEntries = (self.mediumCount - 1) * self.factor;
@@ -86,8 +86,9 @@
         [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
                                          withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
                                                                                       [mediumEntriesRatings getValues],
-                                                                                      10,
+                                                                                      6,
                                                                                       (int)self.factor)];
+        
         
         // Initialize self.shortTermEntries;
         NSUInteger numberOfShortTermEntries = self.shortTermCount;
@@ -99,9 +100,7 @@
                                                          numberOfAllEntries)];
         self.shortData =
         [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
-                                         withValues:polynomialFitCoordinates((int)numberOfShortTermEntries,
-                                                                             [shortTermRatings getValues],
-                                                                             6)];
+                                         withValues:[shortTermRatings getValues]];
         
         [self.lineGraphView reloadData];
     }

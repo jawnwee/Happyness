@@ -10,7 +10,7 @@
 
 @interface ODDGraphAxis : UIView
 
-@property (nonatomic,strong) NSMutableArray *labels;
+@property (nonatomic, strong) NSMutableArray *labels;
 
 // Designated initializer
 - (instancetype)initWithElements:(NSArray *)elements withFrame:(CGRect)frame;

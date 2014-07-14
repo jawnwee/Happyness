@@ -76,6 +76,7 @@
     CGSize barChartSize = barChartFrame.size;
     CGPoint barChartPosition = barChartFrame.origin;
     CGFloat footerHeight = (rootFrame.size.height - barChartSize.height) / 6;
+    CGFloat siderPaddingFromGraph = 1;
     self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Sun",
                                                                  @"Mon",
                                                                  @"Tues",
@@ -83,23 +84,26 @@
                                                                  @"Thurs",
                                                                  @"Fri",
                                                                  @"Sat"]
-                                                     withFrame:CGRectMake(barChartPosition.x,
+                                                     withFrame:CGRectMake(barChartPosition.x -
+                                                                            siderPaddingFromGraph,
                                                                           CGRectGetMaxY(barChartFrame),
-                                                                          barChartSize.width,
+                                                                          barChartSize.width +
+                                                                            siderPaddingFromGraph,
                                                                           footerHeight)];
+    self.footer.isBarChart = YES;
     CGFloat siderWidth = (rootFrame.size.width - barChartSize.width) / 6;
-    self.sider = [[ODDGraphSiderView alloc] initWithElements:@[@"5",
-                                                               @"4",
-                                                               @"3",
-                                                               @"2",
-                                                               @"1",
-                                                               @"0"]
-                                                   withFrame:CGRectMake(barChartPosition.x - siderWidth,
-                                                                        barChartPosition.y,
-                                                                        siderWidth,
-                                                                        barChartSize.height)];
-    [self.view addSubview:self.sider];
-    [self.view addSubview:self.footer];
+    self.sider = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(barChartPosition.x -
+                                                                        siderWidth -
+                                                                        siderPaddingFromGraph,
+                                                                      barChartPosition.y,
+                                                                      siderWidth,
+                                                                      barChartSize.height)];
+    CGRect backgroundLinesFrame = barChartFrame;
+    backgroundLinesFrame.origin.x -= siderPaddingFromGraph;
+    backgroundLinesFrame.size.width += siderPaddingFromGraph;
+    ODDColoredLinesView *backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
+    [self.view addSubview:backgroundLines];
+    [self.view sendSubviewToBack:backgroundLines];
     [self.view addSubview:self.barChartView];
 }
 

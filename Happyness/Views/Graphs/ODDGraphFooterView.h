@@ -11,4 +11,7 @@
 
 @interface ODDGraphFooterView : ODDGraphAxis
 
+@property CGFloat siderPadding;
+@property BOOL isBarChart;
+
 @end

@@ -9,18 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "ODDPolynomialFit.h"
 #import "ODDGraphFooterView.h"
-#import "ODDGraphSiderView.h"
+#import "ODDColoredAxisView.h"
 #import "ODDHappynessEntryStore.h"
 #import "ODDHappynessEntry.h"
 #import "ODDHappyness.h"
 #import "ODDDoubleArrayHolder.h"
+#import "ODDColoredLinesView.h"
 
 @interface ODDGraphViewController : UIViewController
 
 /*** "Public methods and variables ***/
 
 @property (nonatomic, strong) ODDGraphFooterView *footer;
-@property (nonatomic, strong) ODDGraphSiderView *sider;
+@property (nonatomic, strong) ODDColoredAxisView *sider;
 @property (nonatomic, strong) UIView *graph;
 
 - (void)setFrameSize:(CGSize)size;

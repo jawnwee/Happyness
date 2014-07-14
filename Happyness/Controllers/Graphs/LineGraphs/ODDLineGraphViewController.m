@@ -7,8 +7,6 @@
 //
 
 #import "ODDLineGraphViewController.h"
-#import "ODDColoredAxisView.h"
-#import "ODDColoredLinesView.h"
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -80,37 +78,34 @@
     CGSize lineGraphSize = lineGraphFrame.size;
     CGPoint lineGraphPosition = lineGraphFrame.origin;
     CGFloat footerHeight = (rootFrame.size.height - lineGraphSize.height) / 6;
-    self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Mon",
-                                                                 @"Tues",
-                                                                 @"Wed",
-                                                                 @"Thurs",
-                                                                 @"Fri",
-                                                                 @"Sat",
-                                                                 @"Sun"]
-                                                     withFrame:CGRectMake(lineGraphPosition.x,
+    CGFloat siderPaddingFromGraph = 1;
+    self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"4/18",
+                                                                 @"4/19",
+                                                                 @"4/20",
+                                                                 @"4/21",
+                                                                 @"4/22",
+                                                                 @"4/23",
+                                                                 @"4/24"]
+                                                     withFrame:CGRectMake(lineGraphPosition.x -
+                                                                            siderPaddingFromGraph,
                                                                           CGRectGetMaxY(lineGraphFrame),
-                                                                          lineGraphSize.width,
+                                                                          lineGraphSize.width +
+                                                                           siderPaddingFromGraph,
                                                                           footerHeight)];
+    self.footer.siderPadding = siderPaddingFromGraph;
     CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
-//    self.sider = [[ODDGraphSiderView alloc] initWithElements:@[@"5",
-//                                                               @"4",
-//                                                               @"3",
-//                                                               @"2",
-//                                                               @"1",
-//                                                               @"0"]
-//                                                   withFrame:CGRectMake(lineGraphPosition.x - siderWidth,
-//                                                                        lineGraphPosition.y,
-//                                                                        siderWidth,
-//                                                                        lineGraphSize.height)];
-    ODDColoredAxisView *test = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x - siderWidth,
-                                                                                    lineGraphPosition.y,
-                                                                                    siderWidth,
-                                                                                    lineGraphSize.height)];
-    [self.view addSubview:test];
-//    self.lineGraphView.backgroundColor = [UIColor lightGrayColor];
-    ODDColoredLinesView *testLines = [[ODDColoredLinesView alloc] initWithFrame:self.lineGraphView.frame];
-    [self.view addSubview:testLines];
-    [self.view sendSubviewToBack:testLines];
+    CGRect backgroundLinesFrame = lineGraphFrame;
+    backgroundLinesFrame.origin.x -= siderPaddingFromGraph;
+    backgroundLinesFrame.size.width += siderPaddingFromGraph;
+    self.sider = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x -
+                                                                        siderWidth -
+                                                                        siderPaddingFromGraph,
+                                                                      lineGraphPosition.y,
+                                                                      siderWidth,
+                                                                      lineGraphSize.height)];
+    ODDColoredLinesView *backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
+    [self.view addSubview:backgroundLines];
+    [self.view sendSubviewToBack:backgroundLines];
     [self.view addSubview:self.lineGraphView];
 }
 
