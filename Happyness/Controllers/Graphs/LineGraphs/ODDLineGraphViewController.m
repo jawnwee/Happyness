@@ -7,6 +7,8 @@
 //
 
 #import "ODDLineGraphViewController.h"
+#define NUMBER_OF_XAXIS_LABELS 7
+
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
@@ -51,7 +53,7 @@
 - (void)initializeLineGraph {
     self.lineGraphView = [[JBLineChartView alloc] init];
     self.shortTermCount = 7;
-    self.mediumCount = 35;
+    self.mediumCount = 31;
     self.lineGraphView.maximumValue = 5;
     self.lineGraphView.minimumValue = 0;
     
@@ -64,7 +66,7 @@
     CGFloat heightPadding = CGRectGetMaxY(topFrame);
     heightPadding += (heightPadding / 3);
     CGFloat widthPadding = graphShortTermButtonFrame.origin.x;
-    widthPadding += (widthPadding / 3);
+    widthPadding += (widthPadding / 2);
     self.lineGraphView.frame = CGRectMake(widthPadding,
                                           heightPadding,
                                           rootFrame.size.width - (widthPadding * 2),
@@ -114,12 +116,12 @@
 
 - (void)reloadXAxis {
     NSMutableArray *newLabels = [[NSMutableArray alloc] init];
-    NSDate *nextDate = ((ODDHappynessEntry *)[self.entries lastObject]).date;
+    NSDate *nextDateToAdd = ((ODDHappynessEntry *)[self.entries lastObject]).date;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"M/d"];
     CGFloat secondsPerDay = 60 * 60 * 24;
     if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
-        for (NSUInteger i = 1; i <= self.shortTermCount; i++) {
+        for (NSUInteger i = 1; i <= NUMBER_OF_XAXIS_LABELS; i++) {
             NSInteger actualIndex = self.entries.count - i;
             if (actualIndex < 0) {
                 break;
@@ -129,19 +131,25 @@
         }
     } else if (self.currentAmountOfData == ODDGraphAmountMedium &&
                self.entries.count >= self.mediumCount) {
-        for (NSUInteger i = 0; i < self.shortTermCount; i++) {
-            [newLabels insertObject:[dateFormatter stringFromDate:nextDate] atIndex:0];
-            nextDate = [NSDate dateWithTimeInterval:-(secondsPerDay * 5) sinceDate:nextDate];
+        for (NSUInteger i = 0; i < NUMBER_OF_XAXIS_LABELS; i++) {
+            [newLabels insertObject:[dateFormatter stringFromDate:nextDateToAdd] atIndex:0];
+            nextDateToAdd = [NSDate dateWithTimeInterval:-(secondsPerDay * 5) sinceDate:nextDateToAdd];
         }
     } else if (self.currentAmountOfData == ODDGraphAmountAll) {
-        // TODO: Adjust All amount accordingly
-        [newLabels addObjectsFromArray: @[@"4/18",
-                                          @"4/19",
-                                          @"4/20",
-                                          @"4/21",
-                                          @"4/22",
-                                          @"4/23",
-                                          @"4/24"]];
+        
+        NSDate *mostRecentDate = nextDateToAdd;
+        NSDate *nextDateToAdd = ((ODDHappynessEntry *)[self.entries firstObject]).date;
+        CGFloat timeDifference = [mostRecentDate timeIntervalSinceDate:nextDateToAdd];
+        CGFloat timeDelta = timeDifference / 6;
+        NSDateFormatter *monthYearFormatter = [[NSDateFormatter alloc] init];
+        [monthYearFormatter setDateFormat:@"M/d/yy"];
+        [newLabels addObject:[monthYearFormatter stringFromDate:nextDateToAdd]];
+        nextDateToAdd = [NSDate dateWithTimeInterval:timeDelta sinceDate:nextDateToAdd];
+        for (NSUInteger i = 1; i < NUMBER_OF_XAXIS_LABELS - 1; i++) {
+            [newLabels addObject:[dateFormatter stringFromDate:nextDateToAdd]];
+            nextDateToAdd = [NSDate dateWithTimeInterval:timeDelta sinceDate:nextDateToAdd];
+        }
+        [newLabels addObject:[monthYearFormatter stringFromDate:mostRecentDate]];
     }
     [self.footer setElements:newLabels];
 }

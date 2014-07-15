@@ -68,7 +68,7 @@
     CGFloat heightPadding = CGRectGetMaxY(topFrame);
     heightPadding += (heightPadding / 3);
     CGFloat widthPadding = graphShortTermButtonFrame.origin.x;
-    widthPadding += (widthPadding / 3);
+    widthPadding += (widthPadding / 2);
     self.barChartView.frame = CGRectMake(widthPadding,
                                          heightPadding,
                                          rootFrame.size.width - (widthPadding * 2),

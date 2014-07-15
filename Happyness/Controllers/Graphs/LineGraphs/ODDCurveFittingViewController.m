@@ -9,6 +9,7 @@
 #import "ODDCurveFittingViewController.h"
 
 #define ALL_COUNT_FOR_SMALL_DATA 500
+#define POLYFIT_DEGREE 7
 
 @interface ODDCurveFittingViewController ()
 
@@ -49,12 +50,10 @@
 
 - (void)initializeLineGraph {
     [super initializeLineGraph];
-    self.shortTermCount = 7;
-    self.mediumCount = 35;
     self.lineGraphView.maximumValue = 5.5;
     self.lineGraphView.minimumValue = .5;
     self.graphTitle = @"Trends";
-    [self.graphMedium setTitle:@"35 Days" forState:UIControlStateNormal];
+    [self.graphMedium setTitle:@"31 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
 }
 
@@ -76,7 +75,7 @@
             [[ODDDoubleArrayHolder alloc] initWithCount:ALL_COUNT_FOR_SMALL_DATA
                                              withValues:polynomialFitCoordinatesExtraData((int)numberOfAllEntries,
                                                                                           [allEntriesRatings getValues],
-                                                                                          8,
+                                                                                          POLYFIT_DEGREE,
                                                                                           ALL_COUNT_FOR_SMALL_DATA,
                                                                                           0)];
         } else {
@@ -84,7 +83,7 @@
             [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
                                              withValues:polynomialFitCoordinates((int)numberOfAllEntries,
                                                                                  [allEntriesRatings getValues],
-                                                                                 8)];
+                                                                                 POLYFIT_DEGREE)];
         }
         
         // Initialize self.mediumEntries;
@@ -119,7 +118,7 @@
                 [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
                                                  withValues:polynomialFitCoordinatesExtraData((int)mediumEntriesRatingsCount,
                                                                                               [mediumEntriesRatings getValues],
-                                                                                              8,
+                                                                                              POLYFIT_DEGREE,
                                                                                               (int)self.numberOfMediumEntries,
                                                                                               startDifference)];
             } else {
@@ -127,7 +126,7 @@
                 [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
                                                  withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
                                                                                               [mediumEntriesRatings getValues],
-                                                                                              8,
+                                                                                              POLYFIT_DEGREE,
                                                                                               (int)self.numberOfMediumEntries,
                                                                                               0)];
             }

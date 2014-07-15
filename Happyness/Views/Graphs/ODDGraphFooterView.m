@@ -43,7 +43,7 @@
         CGFloat width = ceil(graphWidth / self.labels.count);
         label.textAlignment = NSTextAlignmentCenter;
         if (self.isBarChart) {
-            CGFloat barPaddingGuess = 4;
+            CGFloat barPaddingGuess = 3;
             CGFloat xPosition = self.siderPadding + (xPositionPadding * count) - barPaddingGuess;
             label.frame = CGRectMake(xPosition,
                                      0,
