@@ -50,6 +50,7 @@
     _cardCollectionView.delegate = self;
     _cardCollectionView.dataSource = self;
     _cardCollectionView.showsVerticalScrollIndicator = NO;
+    //_cardCollectionView.showsHorizontalScrollIndicator = NO;
     _cardCollectionView.bounces = NO;
     // Horizontal indicator is set to yes for now for debugging purposes
     [_cardCollectionView registerClass:[self.cardClass class] forCellWithReuseIdentifier:@"cardCell"];
@@ -91,8 +92,6 @@
                                  [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
                                                                            forIndexPath:indexPath];
     return cell;
-    // When cardCellView is ready uncomment below and above three lines
-    // return self.cards[index.row];
 }
 
 #pragma mark - Handle Collection Data

@@ -7,19 +7,20 @@
 //
 
 #import "ODDOverallCalendarViewController.h"
-#import "ODDCalendarCardScrollCollectionViewController.h"
+#import "ODDCalendarCardScrollViewController.h"
 #import "ODDHappynessHeader.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarRowCell.h"
 
 @interface ODDOverallCalendarViewController () <TSQCalendarViewDelegate>
-@property (weak, nonatomic) IBOutlet UIView *calendarHeader;
-@property (weak, nonatomic) IBOutlet UILabel *month;
-@property (weak, nonatomic) IBOutlet UILabel *year;
-@property (strong, nonatomic) NSDate *dayOneInCurrentMonth;
-@property (strong, nonatomic) NSDate *lastDayInCurrentMonth;
-@property (strong, nonatomic) NSDate *selectedDate;
-@property (strong, nonatomic) ODDCalendarCardScrollCollectionViewController *calendarCardController;
+@property (nonatomic, weak) IBOutlet UIView *calendarHeader;
+@property (nonatomic, weak) IBOutlet UILabel *month;
+@property (nonatomic, weak) IBOutlet UILabel *year;
+@property (nonatomic, strong) NSDate *dayOneInCurrentMonth;
+@property (nonatomic, strong) NSDate *lastDayInCurrentMonth;
+@property (nonatomic, strong) NSDate *selectedDate;
+@property (nonatomic, strong) ODDCalendarCardScrollViewController *calendarCardController;
+@property (nonatomic, strong) ODDCalendarView *currentCalendar;
 
 @end
 
@@ -29,14 +30,14 @@
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil 
                          bundle:(NSBundle *)nibBundleOrNil
-               bottomController:(ODDCalendarCardScrollCollectionViewController *)bottomController {
+               bottomController:(ODDCalendarCardScrollViewController *)bottomController {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
         _calendarCardController = bottomController;
 
         // Testing purposes, 500 random data for previous days
-        for (int i = 1 ; i <= 500; i++) {
+        /* for (int i = 1 ; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
             NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
             ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
@@ -48,7 +49,7 @@
                                                                                dateTime:date];
             [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
         }
-        [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+        [[ODDHappynessEntryStore sharedStore] sortStore:YES]; */
         //////////////////////////////////////////////////////
     }
     return self;
@@ -151,7 +152,15 @@
     CGFloat onePixel = 1.0f / [UIScreen mainScreen].scale;
     calendarView.contentInset = UIEdgeInsetsMake(0.0f, onePixel, 0.0f, onePixel);
 
+    self.currentCalendar = calendarView;
     return calendarView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.currentCalendar reload];
+    [self.calendarCardController resortAndReload];
+    [self.currentCalendar scrollToDate:[NSDate date] animated:YES];
 }
 
 #pragma mark - Calendar View Logic

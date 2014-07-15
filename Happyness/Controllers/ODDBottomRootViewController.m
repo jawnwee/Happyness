@@ -24,12 +24,7 @@
 - (instancetype)initWithViewControllers:(NSArray *)bottomViewControllers {
     self = [super init];
     if (self) {
-        CGRect frame = self.view.frame;
-        frame.origin.y += (frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
-        self.view.frame = frame;
         _viewControllers = bottomViewControllers;
-        [self.view addSubview:[[self.viewControllers objectAtIndex:0] view]];
-        _currentPage = 0;
     }
     return self;
 }
@@ -37,6 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    CGRect frame = self.view.frame;
+    frame.origin.y += (frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+    self.view.frame = frame;
+    [self.view addSubview:[[self.viewControllers objectAtIndex:0] view]];
+    _currentPage = 0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +69,7 @@
 
     POPSpringAnimation *onScreenAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
     onScreenAnimation.toValue = [NSValue valueWithCGRect:resultFrame];
-    onScreenAnimation.springBounciness = 5.0f;
+    onScreenAnimation.springBounciness = 3.0f;
     CGRect leaveToFrame = currentView.frame;
 
     if (isMovingRight) {

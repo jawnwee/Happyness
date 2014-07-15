@@ -22,6 +22,4 @@
 - (void)removeEntry:(ODDHappynessEntry *)entry;
 - (NSDate *)firstDate;
 
-
-
 @end

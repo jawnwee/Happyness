@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class ODDCalendarCardScrollCollectionViewController;
+@class ODDCalendarCardScrollViewController;
 
 @interface ODDOverallCalendarViewController : UIViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
-               bottomController:(ODDCalendarCardScrollCollectionViewController *)bottomController;
+               bottomController:(ODDCalendarCardScrollViewController *)bottomController;
 
 
 @end

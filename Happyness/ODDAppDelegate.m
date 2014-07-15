@@ -18,9 +18,10 @@
 #import "ODDDayAveragesViewController.h"
 #import "ODDManyGraphsViewController.h"
 #import "ODDCardScrollViewController.h"
-#import "ODDCalendarCardScrollCollectionViewController.h"
+#import "ODDCalendarCardScrollViewController.h"
 #import "ODDCardCollectionViewCell.h"
 #import "ODDFeedbackViewController.h"
+#import "ODDSelectionCardScrollViewController.h"
 #import "ODDReminderViewController.h"
 
 @implementation ODDAppDelegate
@@ -50,22 +51,29 @@
 //    // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
 
-
+    [ODDHappynessEntryStore sharedStore];
     // Testers for bottom scrollView
     ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDTodayViewController *today2 = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ///////////////////////////////////////////////
 
-    ODDCardScrollViewController *csvc = [[ODDCardScrollViewController alloc] init];
-    ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc] init];
-    ODDCalendarCardScrollCollectionViewController *calendarBottom =
-                                       [[ODDCalendarCardScrollCollectionViewController alloc] init];
+
+    ODDSelectionCardScrollViewController *selectionBottom =
+                                       [[ODDSelectionCardScrollViewController alloc] init];
+    ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc]
+                                                    initWithCardSelectionController:selectionBottom];
+
+
+    ODDCalendarCardScrollViewController *calendarBottom =
+                                       [[ODDCalendarCardScrollViewController alloc] init];
     ODDOverallCalendarViewController *calendar =
                                        [[ODDOverallCalendarViewController alloc]
                                                 initWithNibName:@"ODDOverallCalendarViewController" 
                                                          bundle:appBundle
                                                bottomController:calendarBottom];
+
+    
 
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
@@ -77,7 +85,7 @@
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
-    NSArray *bottomViewControllers = @[today, calendarBottom, todayBottom, today2];
+    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, todayBottom, today2];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];

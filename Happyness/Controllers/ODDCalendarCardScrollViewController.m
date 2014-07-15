@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import "ODDCalendarCardScrollCollectionViewController.h"
+#import "ODDCalendarCardScrollViewController.h"
 #import "ODDCalendarCardCollectionViewCell.h"
 #import "ODDHappynessHeader.h"
 
-@interface ODDCalendarCardScrollCollectionViewController ()
+@interface ODDCalendarCardScrollViewController ()
 
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, strong) NSMutableArray *headers;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ODDCalendarCardScrollCollectionViewController
+@implementation ODDCalendarCardScrollViewController
 @synthesize currentDate = _currentDate;
 
 - (instancetype)init {
@@ -93,9 +93,13 @@
     NSDateComponents *components = [[NSCalendar currentCalendar] components:
                                         NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
                                                                    fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
 
     NSInteger index = [components day] - 1;
-    if ([[self.data objectForKey:self.currentDate] count] >= index) {
+    if ([[self.data objectForKey:self.currentDate] count] >= index &&
+                    [[[ODDHappynessEntryStore sharedStore] happynessEntries] objectForKey:key]) {
+
         [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index 
                                                                             inSection:0]
                                         atScrollPosition:UICollectionViewScrollPositionLeft 

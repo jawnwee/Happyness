@@ -10,10 +10,18 @@
 #import "HPGrowingTextView.h"
 #import "XYPieChart.h"
 
-@class ODDTodayNoteView;
-
+@class ODDSelectionCardScrollViewController;
 @interface ODDFeedbackViewController : UIViewController <HPGrowingTextViewDelegate, XYPieChartDataSource>
 
 @property (strong, nonatomic) XYPieChart *pieChart;
+
+- (instancetype)initWithCardSelectionController:
+                                        (ODDSelectionCardScrollViewController *)bottomController;
+
+@end
+
+@protocol SubmitEntryObserver
+
+- (void)submit;
 
 @end
