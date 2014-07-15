@@ -36,29 +36,26 @@
 }
 
 - (void)layoutSubviews {
-    CGFloat graphWidth = self.frame.size.width - self.siderPadding;
+    CGFloat graphWidth = self.frame.size.width - self.siderPadding - self.rightPadding;
     CGFloat xPositionPadding = ceil(graphWidth / self.labels.count);
-//    CGFloat width = ceil(self.bounds.size.width / (self.labels.count * 0.7));
     NSUInteger count = 0;
     for (UILabel *label in self.labels) {
-//        CGFloat xPosition = (xPositionPadding * count);
-//        label.frame = CGRectMake(xPosition, 0, width, self.bounds.size.height);
-//        CGRect labelFrame = label.frame;
-//        labelFrame.origin.x = xPosition;
-//        [label setFrame:labelFrame];
         CGFloat width = ceil(graphWidth / self.labels.count);
+        label.textAlignment = NSTextAlignmentCenter;
         if (self.isBarChart) {
-            label.textAlignment = NSTextAlignmentCenter;
-            CGFloat barPaddingGuess = 3;
+            CGFloat barPaddingGuess = 4;
             CGFloat xPosition = self.siderPadding + (xPositionPadding * count) - barPaddingGuess;
             label.frame = CGRectMake(xPosition,
                                      0,
                                      width,
                                      self.bounds.size.height);
         } else {
-            width = ceil((graphWidth / (self.labels.count - 1)));
-            CGFloat xPositionPadding = ceil(graphWidth / (self.labels.count - 1));
-            CGFloat xPosition = 1 + (xPositionPadding * count) - (width / 2);
+            CGFloat xPositionPadding = ceil(graphWidth / (self.labels.count));
+            if (self.labels.count > 1) {
+                width = ceil((graphWidth / (self.labels.count - 1)));
+                xPositionPadding = ceil(graphWidth / (self.labels.count - 1));
+            }
+            CGFloat xPosition = self.siderPadding + (xPositionPadding * count) - (width / 2);
             label.frame = CGRectMake(xPosition,
                                      0,
                                      width,
@@ -68,12 +65,8 @@
     }
 }
 
-- (void)layoutForBarChart {
-    
-}
-
-- (void)layoutForLineGraph {
-    
+- (void)setElements:(NSMutableArray *)elements {
+    [super setElements:elements];
 }
 
 @end

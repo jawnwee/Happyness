@@ -20,12 +20,15 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextSetAlpha(context, 0.3);
-    CGContextSetLineWidth(context, 1.0f);
+    CGContextSetAlpha(context, 0.5);
+    CGFloat linesWidth = 1.0f;
+    CGContextSetLineWidth(context, linesWidth);
     for (NSUInteger i = 0; i < 5; i++) {
         CGContextSetStrokeColorWithColor(context, [self chooseColorForNumber:i].CGColor);
-        CGContextMoveToPoint(context, 0, i * (self.bounds.size.height / 5));
-        CGContextAddLineToPoint(context, self.bounds.size.width, i * (self.bounds.size.height / 5));
+        CGContextMoveToPoint(context, 0, (i * (self.bounds.size.height / 5)) + (linesWidth / 2));
+        CGContextAddLineToPoint(context,
+                                self.bounds.size.width,
+                                (i * (self.bounds.size.height / 5)) + (linesWidth / 2));
         CGContextStrokePath(context);
     }
 }

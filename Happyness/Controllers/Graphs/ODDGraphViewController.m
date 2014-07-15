@@ -8,12 +8,10 @@
 
 #import "ODDGraphViewController.h"
 #import "ODDHappynessEntryStore.h"
+#import "ODDCustomColor.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ODDGraphViewController ()
-
-// Need to implement this properly
-@property (nonatomic,strong) IBOutlet UILabel *notEnoughDataLabel;
 
 @end
 
@@ -30,6 +28,8 @@
 @synthesize allData = _allData;
 @synthesize mediumeData = _mediumData;
 @synthesize shortData = _shortData;
+@synthesize colors = _colors;
+@synthesize notEnoughDataLabel = _notEnoughDataLabel;
 
 #pragma mark - Init/Alloc
 
@@ -45,6 +45,7 @@
         _topFrame = [[UIView alloc] init];
         _entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
         _currentAmountOfData = ODDGraphAmountShortTerm;
+        _colors = [ODDCustomColor customColorDictionary];
     }
     return self;
 }
@@ -85,16 +86,10 @@
 }
 
 - (void)initializeLabels {
-    CGRect rootFrame = self.view.frame;
-    CGSize rootSize = rootFrame.size;
-    self.graphTitle = @"Placeholder";
-    
     self.notEnoughDataLabel.text = @"Not Enough Data :(";
-    self.notEnoughDataLabel.frame = CGRectMake(rootSize.width / 4,
-                                       rootSize.height / 4,
-                                       rootSize.width / 2,
-                                       rootSize.height / 2);
     [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
+    [self.notEnoughDataLabel sizeToFit];
+    self.notEnoughDataLabel.center = self.view.center;
     self.notEnoughDataLabel.textColor = [UIColor blackColor];
     self.notEnoughDataLabel.textAlignment = NSTextAlignmentCenter;
     if (self.entries.count == 0) {
@@ -127,7 +122,7 @@
     self.graphShortTerm.layer.cornerRadius = 8;
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
-    self.graphShortTerm.backgroundColor = [UIColor darkGrayColor];
+    self.graphShortTerm.backgroundColor = self.colors[@"oddLook_textcolor"];
     CGFloat buttonFontSize = 18;
     [self.graphAll.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                       size:buttonFontSize]];
@@ -135,11 +130,11 @@
                                                          size:buttonFontSize]];
     [self.graphShortTerm.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                             size:buttonFontSize]];
-    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphAll setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphAll setTitle:@"All" forState:UIControlStateNormal];
-    [self.graphMedium setTitle:@"30 Days" forState:UIControlStateNormal];
+    [self.graphMedium setTitle:@"35 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
     [self.graphAll addTarget:self
                       action:@selector(graphAll:)
@@ -174,28 +169,28 @@
 - (IBAction)graphShortTerm:(id)sender {
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
-    self.graphShortTerm.backgroundColor = [UIColor darkGrayColor];
-    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.graphShortTerm.backgroundColor = self.colors[@"oddLook_textcolor"];
+    [self.graphAll setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (IBAction)graphMedium:(id)sender {
     self.graphAll.backgroundColor = [UIColor clearColor];
-    self.graphMedium.backgroundColor = [UIColor darkGrayColor];
+    self.graphMedium.backgroundColor = self.colors[@"oddLook_textcolor"];
     self.graphShortTerm.backgroundColor = [UIColor clearColor];
-    [self.graphAll setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphAll setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
 }
 
 - (IBAction)graphAll:(id)sender {
-    self.graphAll.backgroundColor = [UIColor darkGrayColor];
+    self.graphAll.backgroundColor = self.colors[@"oddLook_textcolor"];
     self.graphMedium.backgroundColor = [UIColor clearColor];
     self.graphShortTerm.backgroundColor = [UIColor clearColor];
     [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.graphMedium setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.graphShortTerm setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.graphMedium setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
+    [self.graphShortTerm setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
 }
 
 #pragma mark - Touch Events

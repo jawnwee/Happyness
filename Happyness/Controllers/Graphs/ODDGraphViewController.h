@@ -22,6 +22,7 @@
 
 @property (nonatomic, strong) ODDGraphFooterView *footer;
 @property (nonatomic, strong) ODDColoredAxisView *sider;
+@property (nonatomic, strong) ODDColoredLinesView *backgroundLines;
 @property (nonatomic, strong) UIView *graph;
 
 - (void)setFrameSize:(CGSize)size;
@@ -39,6 +40,7 @@ typedef enum:uint8_t {
 } ODDGraphAmount;
 
 @property (nonatomic, copy) NSString *graphTitle;
+@property (nonatomic, strong) IBOutlet UILabel *notEnoughDataLabel;
 @property (nonatomic, strong) IBOutlet UIButton *graphAll;
 @property (nonatomic, strong) IBOutlet UIButton *graphShortTerm;
 @property (nonatomic, strong) IBOutlet UIButton *graphMedium;
@@ -50,6 +52,7 @@ typedef enum:uint8_t {
 @property (nonatomic,strong) ODDDoubleArrayHolder *allData;
 @property (nonatomic,strong) ODDDoubleArrayHolder *mediumeData;
 @property (nonatomic,strong) ODDDoubleArrayHolder *shortData;
+@property (nonatomic, strong) NSDictionary* colors;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil;
 - (IBAction)graphShortTerm:(id)sender;

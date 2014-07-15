@@ -8,9 +8,11 @@
 
 #import "ODDCurveFittingViewController.h"
 
+#define ALL_COUNT_FOR_SMALL_DATA 500
+
 @interface ODDCurveFittingViewController ()
 
-@property NSUInteger factor;
+@property NSUInteger numberOfMediumEntries;
 
 @end
 
@@ -48,11 +50,12 @@
 - (void)initializeLineGraph {
     [super initializeLineGraph];
     self.shortTermCount = 7;
-    self.mediumCount = 30;
-    self.factor = 20;
+    self.mediumCount = 35;
     self.lineGraphView.maximumValue = 5.5;
     self.lineGraphView.minimumValue = .5;
     self.graphTitle = @"Trends";
+    [self.graphMedium setTitle:@"35 Days" forState:UIControlStateNormal];
+    [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
 }
 
 #pragma mark - Setup Datastore
@@ -68,26 +71,67 @@
             [allEntriesRatings setValue:(double)happynessItem.happyness.rating atIndex:index];
             index++;
         }
-        self.allData =
-        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
-                                         withValues:polynomialFitCoordinates((int)numberOfAllEntries,
-                                                                             [allEntriesRatings getValues],
-                                                                             12)];
+        if (numberOfAllEntries < ALL_COUNT_FOR_SMALL_DATA) {
+            self.allData =
+            [[ODDDoubleArrayHolder alloc] initWithCount:ALL_COUNT_FOR_SMALL_DATA
+                                             withValues:polynomialFitCoordinatesExtraData((int)numberOfAllEntries,
+                                                                                          [allEntriesRatings getValues],
+                                                                                          8,
+                                                                                          ALL_COUNT_FOR_SMALL_DATA,
+                                                                                          0)];
+        } else {
+            self.allData =
+            [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries
+                                             withValues:polynomialFitCoordinates((int)numberOfAllEntries,
+                                                                                 [allEntriesRatings getValues],
+                                                                                 8)];
+        }
         
         // Initialize self.mediumEntries;
-        NSUInteger numberOfMediumEntries = (self.mediumCount - 1) * self.factor;
+        self.numberOfMediumEntries = 580;
+        NSUInteger mediumEntriesRatingsCount = 0;
         if (numberOfAllEntries < self.mediumCount) {
-            numberOfMediumEntries = numberOfAllEntries;
+            self.numberOfMediumEntries = numberOfAllEntries;
+            mediumEntriesRatingsCount = self.numberOfMediumEntries;
+        } else {
+            NSDate *latestDate = ((ODDHappynessEntry *)[self.entries lastObject]).date;
+            mediumEntriesRatingsCount += 1;
+            CGFloat secondsPerDay = 60 * 60 * 24;
+            CGFloat secondsForMediumCount = self.mediumCount * secondsPerDay;
+            for (NSInteger i = self.entries.count - 2; i >= 0; i--) {
+                NSDate *nextDate = ((ODDHappynessEntry *)self.entries[i]).date;
+                CGFloat timeInterval = [latestDate timeIntervalSinceDate:nextDate];
+                if (timeInterval > secondsForMediumCount) {
+                    break;
+                }
+                mediumEntriesRatingsCount++;
+            }
+            ODDDoubleArrayHolder *mediumEntriesRatings =
+            [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (mediumEntriesRatingsCount),
+                                                             numberOfAllEntries)];
+
+            if (mediumEntriesRatingsCount < self.mediumCount) {
+                NSDate *mostRecentDate = ((ODDHappynessEntry *)self.entries[self.entries.count -
+                                                                            mediumEntriesRatingsCount -
+                                                                            2]).date;
+                int startDifference = ceil([latestDate timeIntervalSinceDate:mostRecentDate] / secondsPerDay);
+                self.mediumeData =
+                [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
+                                                 withValues:polynomialFitCoordinatesExtraData((int)mediumEntriesRatingsCount,
+                                                                                              [mediumEntriesRatings getValues],
+                                                                                              8,
+                                                                                              (int)self.numberOfMediumEntries,
+                                                                                              startDifference)];
+            } else {
+                self.mediumeData =
+                [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
+                                                 withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
+                                                                                              [mediumEntriesRatings getValues],
+                                                                                              8,
+                                                                                              (int)self.numberOfMediumEntries,
+                                                                                              0)];
+            }
         }
-        ODDDoubleArrayHolder *mediumEntriesRatings =
-        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (self.mediumCount),
-                                                         numberOfAllEntries)];
-        self.mediumeData =
-        [[ODDDoubleArrayHolder alloc] initWithCount:numberOfMediumEntries
-                                         withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
-                                                                                      [mediumEntriesRatings getValues],
-                                                                                      6,
-                                                                                      (int)self.factor)];
         
         
         // Initialize self.shortTermEntries;
@@ -115,9 +159,11 @@
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
 numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
     if (self.currentAmountOfData == ODDGraphAmountMedium && self.entries.count >= self.mediumCount) {
-        return (self.mediumCount - 1) * self.factor;
+        return self.numberOfMediumEntries;
+    } else if (self.currentAmountOfData == ODDGraphAmountAll && self.entries.count < 500) {
+        return ALL_COUNT_FOR_SMALL_DATA;
     } else {
-        return [super lineChartView:lineChartView numberOfVerticalValuesAtLineIndex:lineIndex];
+    return [super lineChartView:lineChartView numberOfVerticalValuesAtLineIndex:lineIndex];
     }
 }
 
@@ -150,6 +196,17 @@ verticalValueForHorizontalIndex:horizontalIndex
     return 1.5;
 }
 
+- (UIColor *)lineChartView:(JBLineChartView *)lineChartView
+   colorForLineAtLineIndex:(NSUInteger)lineIndex {
+    return [super lineChartView:lineChartView colorForLineAtLineIndex:lineIndex];
+}
+
+- (UIColor *)lineChartView:(JBLineChartView *)lineChartView
+  colorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex
+                   atLineIndex:(NSUInteger)lineIndex {
+    return self.colors[@"oddLook_textcolor"];
+}
+
 #pragma mark - Graph Selection
 
 - (UIColor *)verticalSelectionColorForLineChartView:(JBLineChartView *)lineChartView {
@@ -176,7 +233,7 @@ selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
 - (UIColor *)lineChartView:(JBLineChartView *)lineChartView
 selectionColorForDotAtHorizontalIndex:(NSUInteger)horizontalIndex
                           atLineIndex:(NSUInteger)lineIndex {
-    return [UIColor lightGrayColor];
+    return self.colors[@"oddLook_textcolor"];
 }
 
 #pragma mark - Button IBActions

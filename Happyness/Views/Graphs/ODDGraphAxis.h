@@ -14,5 +14,6 @@
 
 // Designated initializer
 - (instancetype)initWithElements:(NSArray *)elements withFrame:(CGRect)frame;
+- (void)setElements:(NSMutableArray *)elements;
 
 @end

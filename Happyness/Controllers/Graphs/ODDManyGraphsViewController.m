@@ -8,6 +8,7 @@
 
 #import "ODDManyGraphsViewController.h"
 #import "ODDGraphViewController.h"
+#import "ODDCustomColor.h"
 
 #define HEADER_HEIGHT 40
 #define STATUS_BAR_HEIGHT 20 // Should always be 20 points
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) UILabel *titleOfGraph;
 @property (nonatomic, strong) NSArray *graphs;
 @property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) NSDictionary* colors;
 @property NSInteger currentGraph;
 
 @end
@@ -48,6 +50,7 @@
         _titleOfGraph = [[UILabel alloc] init];
         _up = [[UIButton alloc] init];
         _down = [[UIButton alloc] init];
+        _colors = [ODDCustomColor customColorDictionary];
         [self setupGraphSizes];
         ODDGraphViewController *currentGraphController = (ODDGraphViewController *)_graphs[_currentGraph];
         [self layoutGraph:currentGraphController atY:0];
@@ -84,7 +87,7 @@
     NSString *graphTitle = ((ODDGraphViewController *)self.graphs[self.currentGraph]).graphTitle;
     self.titleOfGraph.text = graphTitle;
     self.titleOfGraph.backgroundColor = [UIColor clearColor];
-    self.titleOfGraph.textColor = [UIColor blackColor];
+    self.titleOfGraph.textColor = self.colors[@"oddLook_textcolor"];
     self.titleOfGraph.font = [UIFont fontWithName:@"HelveticaNeue-Light"
                                              size:30];
     self.titleOfGraph.textAlignment = NSTextAlignmentCenter;
@@ -97,9 +100,6 @@
     [self.down addTarget:self
                   action:@selector(showNewGraphFromAbove:)
         forControlEvents:UIControlEventTouchDown];
-    [self.up.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
-                                                size:12]];
-    [self.up setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.up.backgroundColor = [UIColor clearColor];
     [self.up setImage:[UIImage imageNamed:@"increasing.png"] forState:UIControlStateNormal];
     CGFloat buttonWidth = 25;
@@ -108,9 +108,6 @@
                                 buttonWidth,
                                 HEADER_HEIGHT);
     [self.up setFrame:upFrame];
-    [self.down.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
-                                                  size:12]];
-    [self.down setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.down.backgroundColor = [UIColor clearColor];
     [self.down setImage:[UIImage imageNamed:@"decreasing.png"] forState:UIControlStateNormal];
     CGRect downFrame = upFrame;

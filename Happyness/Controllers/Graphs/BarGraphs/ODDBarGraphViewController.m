@@ -51,14 +51,17 @@
 #pragma mark - Subviews Init/Layout
 
 - (void)initializeBarGraph {
-    self.shortTermCount = 20;
-    self.mediumCount = 50;
+    self.shortTermCount = 14;
+    self.mediumCount = 60;
     self.barChartView.maximumValue = 5;
     self.barChartView.minimumValue = 0;
+    [self.graphMedium setTitle:@"60 Days" forState:UIControlStateNormal];
+    [self.graphShortTerm setTitle:@"14 Days" forState:UIControlStateNormal];
     
     self.barChartView.delegate = self;
     self.barChartView.dataSource = self;
     self.barChartView.userInteractionEnabled = NO;
+    self.barChartView.showsVerticalSelection = NO;
     CGRect rootFrame = self.view.frame;
     CGRect topFrame = self.topFrame.frame;
     CGRect graphShortTermButtonFrame = self.graphShortTerm.frame;
@@ -71,12 +74,13 @@
                                          rootFrame.size.width - (widthPadding * 2),
                                          rootFrame.size.height - (heightPadding * 2));
     
-    // Should initialize footer and sider in landscapeAnalysisViewController
     CGRect barChartFrame = self.barChartView.frame;
     CGSize barChartSize = barChartFrame.size;
     CGPoint barChartPosition = barChartFrame.origin;
     CGFloat footerHeight = (rootFrame.size.height - barChartSize.height) / 6;
-    CGFloat siderPaddingFromGraph = 1;
+    CGFloat siderPaddingFromGraph = 5;
+    CGFloat extraRightSpace = 10;
+    CGFloat siderWidth = (rootFrame.size.width - barChartSize.width) / 6;
     self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"Sun",
                                                                  @"Mon",
                                                                  @"Tues",
@@ -85,13 +89,17 @@
                                                                  @"Fri",
                                                                  @"Sat"]
                                                      withFrame:CGRectMake(barChartPosition.x -
-                                                                            siderPaddingFromGraph,
+                                                                            siderPaddingFromGraph -
+                                                                            siderWidth,
                                                                           CGRectGetMaxY(barChartFrame),
                                                                           barChartSize.width +
-                                                                            siderPaddingFromGraph,
+                                                                            siderPaddingFromGraph +
+                                                                            siderWidth +
+                                                                            extraRightSpace,
                                                                           footerHeight)];
     self.footer.isBarChart = YES;
-    CGFloat siderWidth = (rootFrame.size.width - barChartSize.width) / 6;
+    self.footer.siderPadding = siderPaddingFromGraph + siderWidth;
+    self.footer.rightPadding = extraRightSpace;
     self.sider = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(barChartPosition.x -
                                                                         siderWidth -
                                                                         siderPaddingFromGraph,
@@ -100,10 +108,8 @@
                                                                       barChartSize.height)];
     CGRect backgroundLinesFrame = barChartFrame;
     backgroundLinesFrame.origin.x -= siderPaddingFromGraph;
-    backgroundLinesFrame.size.width += siderPaddingFromGraph;
-    ODDColoredLinesView *backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
-    [self.view addSubview:backgroundLines];
-    [self.view sendSubviewToBack:backgroundLines];
+    backgroundLinesFrame.size.width += siderPaddingFromGraph + extraRightSpace;
+    self.backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
     [self.view addSubview:self.barChartView];
 }
 
@@ -115,17 +121,42 @@
 
 #pragma mark - Graph Delegate Setup
 
-// TODO: Removed footer and siders when there isn't enough data
 - (NSUInteger)numberOfBarsInBarChartView:(JBBarChartView *)barChartView {
     if (self.entries.count > 0) {
+        [self.notEnoughDataLabel removeFromSuperview];
+        [self.view addSubview:self.backgroundLines];
         [self.view addSubview:self.sider];
         [self.view addSubview:self.footer];
-        return self.numberOfBars;
+        [self.view bringSubviewToFront:self.barChartView];
+        if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+            return self.numberOfBars;
+        } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
+            if (self.entries.count < self.mediumCount) {
+                [self.backgroundLines removeFromSuperview];
+                [self.sider removeFromSuperview];
+                [self.footer removeFromSuperview];
+                [self.view addSubview:self.notEnoughDataLabel];
+                return 0;
+            }
+            return self.numberOfBars;
+        } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+            if  (self.entries.count < self.mediumCount) {
+                [self.backgroundLines removeFromSuperview];
+                [self.sider removeFromSuperview];
+                [self.footer removeFromSuperview];
+                [self.view addSubview:self.notEnoughDataLabel];
+                return 0;
+            }
+            return self.numberOfBars;
+        }
     } else {
+        [self.backgroundLines removeFromSuperview];
         [self.sider removeFromSuperview];
         [self.footer removeFromSuperview];
+        [self.view addSubview:self.notEnoughDataLabel];
         return 0;
     }
+    return 0;
 }
 
 - (CGFloat)barChartView:(JBBarChartView *)barChartView heightForBarViewAtAtIndex:(NSUInteger)index {
@@ -138,9 +169,22 @@
     }
 }
 
+- (UIColor *)barChartView:(JBBarChartView *)barChartView colorForBarViewAtIndex:(NSUInteger)index {
+    CGFloat value = [self barChartView:barChartView heightForBarViewAtAtIndex:index];
+    if (value <= 1.02) {
+        return self.colors[@"oddLook_color_1"];
+    } else if (value <= 2.02) {
+        return self.colors[@"oddLook_color_2"];
+    } else if (value <= 3.02) {
+        return self.colors[@"oddLook_color_3"];
+    } else if (value <= 4.02) {
+        return self.colors[@"oddLook_color_4"];
+    } else {
+        return self.colors[@"oddLook_color_5"];
+    }
+}
+
 #pragma mark - Graph Selection
-
-
 
 #pragma mark - Button IBActions
 

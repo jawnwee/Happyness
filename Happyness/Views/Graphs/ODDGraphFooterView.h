@@ -12,6 +12,9 @@
 @interface ODDGraphFooterView : ODDGraphAxis
 
 @property CGFloat siderPadding;
+@property CGFloat rightPadding;
 @property BOOL isBarChart;
+
+- (void)setElements:(NSMutableArray *)elements;
 
 @end

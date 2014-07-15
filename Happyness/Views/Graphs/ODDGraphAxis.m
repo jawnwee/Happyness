@@ -19,10 +19,8 @@
         for (NSString *labelTitle in elements) {
             UILabel *newLabel = [[UILabel alloc] init];
             newLabel.text = labelTitle;
-            newLabel.adjustsFontSizeToFitWidth = YES;
             newLabel.textAlignment = NSTextAlignmentCenter;
             newLabel.backgroundColor = [UIColor clearColor];
-            //            CGFloat fontSize = frame.size.height / 2;
             [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
             [self addSubview:newLabel];
             [_labels addObject:newLabel];
@@ -37,6 +35,23 @@
         
     }
     return self;
+}
+
+- (void)setElements:(NSMutableArray *)elements {
+    self.backgroundColor = [UIColor clearColor];
+    for (UILabel *label in self.labels) {
+        [label removeFromSuperview];
+    }
+    self.labels = [[NSMutableArray alloc] initWithCapacity:elements.count];
+    for (NSString *labelTitle in elements) {
+        UILabel *newLabel = [[UILabel alloc] init];
+        newLabel.text = labelTitle;
+        newLabel.textAlignment = NSTextAlignmentCenter;
+        newLabel.backgroundColor = [UIColor clearColor];
+        [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
+        [_labels addObject:newLabel];
+        [self addSubview:newLabel];
+    }
 }
 
 @end

@@ -7,6 +7,13 @@
 //
 
 #import "ODDColoredView.h"
+#import "ODDCustomColor.h"
+
+@interface ODDColoredView ()
+
+@property (nonatomic, strong) NSDictionary *colors;
+
+@end
 
 @implementation ODDColoredView
 
@@ -14,6 +21,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+        _colors = [ODDCustomColor customColorDictionary];
     }
     return self;
 }
@@ -21,15 +29,15 @@
 - (UIColor *)chooseColorForNumber:(NSUInteger)number {
     switch (number) {
         case 0:
-            return [UIColor greenColor];
+            return self.colors[@"oddLook_color_5"];
         case 1:
-            return [UIColor blueColor];
+            return self.colors[@"oddLook_color_4"];
         case 2:
-            return [UIColor yellowColor];
+            return self.colors[@"oddLook_color_3"];
         case 3:
-            return [UIColor purpleColor];
+            return self.colors[@"oddLook_color_2"];
         case 4:
-            return [UIColor redColor];
+            return self.colors[@"oddLook_color_1"];
         default:
             return [UIColor blackColor];
     }

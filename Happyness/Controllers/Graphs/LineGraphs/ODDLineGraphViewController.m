@@ -10,8 +10,6 @@
 
 @interface ODDLineGraphViewController () <JBLineChartViewDataSource, JBLineChartViewDelegate>
 
-@property CGRect originalGraphFrame;
-
 @end
 
 @implementation ODDLineGraphViewController
@@ -52,8 +50,8 @@
 
 - (void)initializeLineGraph {
     self.lineGraphView = [[JBLineChartView alloc] init];
-    self.shortTermCount = 20;
-    self.mediumCount = 50;
+    self.shortTermCount = 7;
+    self.mediumCount = 35;
     self.lineGraphView.maximumValue = 5;
     self.lineGraphView.minimumValue = 0;
     
@@ -67,45 +65,41 @@
     heightPadding += (heightPadding / 3);
     CGFloat widthPadding = graphShortTermButtonFrame.origin.x;
     widthPadding += (widthPadding / 3);
-    self.originalGraphFrame = CGRectMake(widthPadding,
-                                         heightPadding,
-                                         rootFrame.size.width - (widthPadding * 2),
-                                         rootFrame.size.height - (heightPadding * 2));
-    self.lineGraphView.frame = self.originalGraphFrame;
+    self.lineGraphView.frame = CGRectMake(widthPadding,
+                                          heightPadding,
+                                          rootFrame.size.width - (widthPadding * 2),
+                                          rootFrame.size.height - (heightPadding * 2));
     
-    // Should initialize footer and sider in landscapeAnalysisViewController
     CGRect lineGraphFrame = self.lineGraphView.frame;
     CGSize lineGraphSize = lineGraphFrame.size;
     CGPoint lineGraphPosition = lineGraphFrame.origin;
     CGFloat footerHeight = (rootFrame.size.height - lineGraphSize.height) / 6;
-    CGFloat siderPaddingFromGraph = 1;
-    self.footer = [[ODDGraphFooterView alloc] initWithElements:@[@"4/18",
-                                                                 @"4/19",
-                                                                 @"4/20",
-                                                                 @"4/21",
-                                                                 @"4/22",
-                                                                 @"4/23",
-                                                                 @"4/24"]
+    CGFloat siderPaddingFromGraph = 5;
+    CGFloat extraRightSpace = 10;
+    CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
+    self.footer = [[ODDGraphFooterView alloc] initWithElements:@[]
                                                      withFrame:CGRectMake(lineGraphPosition.x -
-                                                                            siderPaddingFromGraph,
+                                                                            siderPaddingFromGraph -
+                                                                            siderWidth,
                                                                           CGRectGetMaxY(lineGraphFrame),
                                                                           lineGraphSize.width +
-                                                                           siderPaddingFromGraph,
+                                                                           siderPaddingFromGraph +
+                                                                            siderWidth +
+                                                                            extraRightSpace,
                                                                           footerHeight)];
-    self.footer.siderPadding = siderPaddingFromGraph;
-    CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
-    CGRect backgroundLinesFrame = lineGraphFrame;
-    backgroundLinesFrame.origin.x -= siderPaddingFromGraph;
-    backgroundLinesFrame.size.width += siderPaddingFromGraph;
+    self.footer.isBarChart = NO;
+    self.footer.siderPadding = siderPaddingFromGraph + siderWidth;
+    self.footer.rightPadding = extraRightSpace;
     self.sider = [[ODDColoredAxisView alloc] initWithFrame:CGRectMake(lineGraphPosition.x -
                                                                         siderWidth -
                                                                         siderPaddingFromGraph,
                                                                       lineGraphPosition.y,
                                                                       siderWidth,
                                                                       lineGraphSize.height)];
-    ODDColoredLinesView *backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
-    [self.view addSubview:backgroundLines];
-    [self.view sendSubviewToBack:backgroundLines];
+    CGRect backgroundLinesFrame = lineGraphFrame;
+    backgroundLinesFrame.origin.x -= siderPaddingFromGraph;
+    backgroundLinesFrame.size.width += siderPaddingFromGraph + extraRightSpace;
+    self.backgroundLines = [[ODDColoredLinesView alloc] initWithFrame:backgroundLinesFrame];
     [self.view addSubview:self.lineGraphView];
 }
 
@@ -113,47 +107,96 @@
 
 - (void)reloadDataStore {
     [super reloadDataStore];
+    [self reloadXAxis];
+}
+
+#pragma mark - Setup XAxis
+
+- (void)reloadXAxis {
+    NSMutableArray *newLabels = [[NSMutableArray alloc] init];
+    NSDate *nextDate = ((ODDHappynessEntry *)[self.entries lastObject]).date;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"M/d"];
+    CGFloat secondsPerDay = 60 * 60 * 24;
+    if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+        for (NSUInteger i = 1; i <= self.shortTermCount; i++) {
+            NSInteger actualIndex = self.entries.count - i;
+            if (actualIndex < 0) {
+                break;
+            }
+            ODDHappynessEntry *entry = self.entries[actualIndex];
+            [newLabels insertObject:[dateFormatter stringFromDate:entry.date] atIndex:0];
+        }
+    } else if (self.currentAmountOfData == ODDGraphAmountMedium &&
+               self.entries.count >= self.mediumCount) {
+        for (NSUInteger i = 0; i < self.shortTermCount; i++) {
+            [newLabels insertObject:[dateFormatter stringFromDate:nextDate] atIndex:0];
+            nextDate = [NSDate dateWithTimeInterval:-(secondsPerDay * 5) sinceDate:nextDate];
+        }
+    } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+        // TODO: Adjust All amount accordingly
+        [newLabels addObjectsFromArray: @[@"4/18",
+                                          @"4/19",
+                                          @"4/20",
+                                          @"4/21",
+                                          @"4/22",
+                                          @"4/23",
+                                          @"4/24"]];
+    }
+    [self.footer setElements:newLabels];
 }
 
 #pragma mark - Graph Delegate Setup
 
-// TODO: Add property numberOfLines
 - (NSUInteger)numberOfLinesInLineChartView:(JBLineChartView *)lineChartView {
     if (self.entries.count > 0) {
+        [self.notEnoughDataLabel removeFromSuperview];
+        [self.view addSubview:self.backgroundLines];
         [self.view addSubview:self.sider];
         [self.view addSubview:self.footer];
-        return 1;
+        [self.view bringSubviewToFront:self.lineGraphView];
+        if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+            return 1;
+        } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
+            if (self.entries.count < self.mediumCount) {
+                [self.backgroundLines removeFromSuperview];
+                [self.sider removeFromSuperview];
+                [self.footer removeFromSuperview];
+                [self.view addSubview:self.notEnoughDataLabel];
+                return 0;
+            }
+            return 1;
+        } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+            if  (self.entries.count < self.mediumCount) {
+                [self.backgroundLines removeFromSuperview];
+                [self.sider removeFromSuperview];
+                [self.footer removeFromSuperview];
+                [self.view addSubview:self.notEnoughDataLabel];
+                return 0;
+            }
+            return 1;
+        }
     } else {
+        [self.backgroundLines removeFromSuperview];
         [self.sider removeFromSuperview];
         [self.footer removeFromSuperview];
+        [self.view addSubview:self.notEnoughDataLabel];
         return 0;
     }
+    return 0;
 }
 
 - (NSUInteger)lineChartView:(JBLineChartView *)lineChartView
 numberOfVerticalValuesAtLineIndex:(NSUInteger)lineIndex {
-    if (self.entries.count > 0) {
-        [self.lineGraphView setFrame:self.originalGraphFrame];
-        if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
-            if (self.entries.count < self.shortTermCount) {
-                CGRect temporaryFrame = self.originalGraphFrame;
-                temporaryFrame.size.width = (temporaryFrame.size.width / self.shortTermCount) *
-                                                self.entries.count;
-                [self.lineGraphView setFrame:temporaryFrame];
-                return self.entries.count;
-            }
-            return self.shortTermCount;
-        } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
-            if (self.entries.count < self.mediumCount) {
-                return 0;
-            }
-            return self.mediumCount;
-        } else if (self.currentAmountOfData == ODDGraphAmountAll) {
-            if  (self.entries.count < 40) {
-                return 0;
-            }
-            return [[ODDHappynessEntryStore sharedStore].happynessEntries count];
+    if (self.currentAmountOfData == ODDGraphAmountShortTerm) {
+        if (self.entries.count < self.shortTermCount) {
+            return self.entries.count;
         }
+        return self.shortTermCount;
+    } else if (self.currentAmountOfData == ODDGraphAmountMedium) {
+        return self.mediumCount;
+    } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+        return [[ODDHappynessEntryStore sharedStore].happynessEntries count];
     }
     return 0;
 }
@@ -174,10 +217,15 @@ verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
     return FALSE;
 }
 
+- (UIColor *)lineChartView:(JBLineChartView *)lineChartView
+   colorForLineAtLineIndex:(NSUInteger)lineIndex {
+    return self.colors[@"oddLook_textcolor"];
+}
+
 #pragma mark - Graph Selection
 
 - (UIColor *)verticalSelectionColorForLineChartView:(JBLineChartView *)lineChartView {
-    return [UIColor redColor];
+    return self.colors[@"oddLook_textcolor"];
 }
 
 - (CGFloat)verticalSelectionWidthForLineChartView:(JBLineChartView *)lineChartView {
@@ -186,7 +234,7 @@ verticalValueForHorizontalIndex:(NSUInteger)horizontalIndex
 
 - (UIColor *)lineChartView:(JBLineChartView *)lineChartView
 selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
-    return [UIColor lightGrayColor];
+    return self.colors[@"oddLook_textcolor"];
 }
 
 - (void)lineChartView:(JBLineChartView *)lineChartView
@@ -201,18 +249,21 @@ selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
     [super graphAll:sender];
     self.currentAmountOfData = ODDGraphAmountAll;
     [self.lineGraphView reloadData];
+    [self reloadXAxis];
 }
 
 - (IBAction)graphShortTerm:(id)sender {
     [super graphShortTerm:sender];
     self.currentAmountOfData = ODDGraphAmountShortTerm;
     [self.lineGraphView reloadData];
+    [self reloadXAxis];
 }
 
 - (IBAction)graphMedium:(id)sender {
     [super graphMedium:sender];
     self.currentAmountOfData = ODDGraphAmountMedium;
     [self.lineGraphView reloadData];
+    [self reloadXAxis];
 }
 
 #pragma mark - Touch Events
