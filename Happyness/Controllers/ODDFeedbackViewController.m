@@ -350,6 +350,7 @@
     if ([text isEqualToString:@"\n"]) {
         [self.noteView resignFirstResponder];
     }
+    return growingTextView.text.length + (text.length - range.length) <= 140;
 }
 
 /* Testing fake entries
