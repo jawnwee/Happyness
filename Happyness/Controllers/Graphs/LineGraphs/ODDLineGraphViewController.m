@@ -54,12 +54,14 @@
     self.lineGraphView = [[JBLineChartView alloc] init];
     self.shortTermCount = 7;
     self.mediumCount = 31;
-    self.lineGraphView.maximumValue = 5;
-    self.lineGraphView.minimumValue = 0;
+    self.lineGraphView.maximumValue = 5.5;
+    self.lineGraphView.minimumValue = 0.5;
     
     self.lineGraphView.delegate = self;
     self.lineGraphView.dataSource = self;
     self.lineGraphView.userInteractionEnabled = NO;
+    self.lineGraphView.showsLineSelection = NO;
+    self.lineGraphView.showsVerticalSelection = NO;
     CGRect rootFrame = self.view.frame;
     CGRect topFrame = self.topFrame.frame;
     CGRect graphShortTermButtonFrame = self.graphShortTerm.frame;
@@ -75,7 +77,7 @@
     CGRect lineGraphFrame = self.lineGraphView.frame;
     CGSize lineGraphSize = lineGraphFrame.size;
     CGPoint lineGraphPosition = lineGraphFrame.origin;
-    CGFloat footerHeight = (rootFrame.size.height - lineGraphSize.height) / 6;
+    CGFloat footerHeight = (rootFrame.size.height - lineGraphSize.height);
     CGFloat siderPaddingFromGraph = 5;
     CGFloat extraRightSpace = 10;
     CGFloat siderWidth = (rootFrame.size.width - lineGraphSize.width) / 6;
@@ -136,20 +138,25 @@
             nextDateToAdd = [NSDate dateWithTimeInterval:-(secondsPerDay * 5) sinceDate:nextDateToAdd];
         }
     } else if (self.currentAmountOfData == ODDGraphAmountAll) {
-        
         NSDate *mostRecentDate = nextDateToAdd;
         NSDate *nextDateToAdd = ((ODDHappynessEntry *)[self.entries firstObject]).date;
         CGFloat timeDifference = [mostRecentDate timeIntervalSinceDate:nextDateToAdd];
+        NSDateFormatter *yearFormatter = [[NSDateFormatter alloc] init];
+        [yearFormatter setDateFormat:@"yyyy"];
+        NSString *firstDate = [dateFormatter stringFromDate:nextDateToAdd];
+        firstDate = [firstDate stringByAppendingString:@"\n"];
+        firstDate = [firstDate stringByAppendingString:[yearFormatter stringFromDate:nextDateToAdd]];
+        [newLabels addObject:firstDate];
         CGFloat timeDelta = timeDifference / 6;
-        NSDateFormatter *monthYearFormatter = [[NSDateFormatter alloc] init];
-        [monthYearFormatter setDateFormat:@"M/d/yy"];
-        [newLabels addObject:[monthYearFormatter stringFromDate:nextDateToAdd]];
         nextDateToAdd = [NSDate dateWithTimeInterval:timeDelta sinceDate:nextDateToAdd];
         for (NSUInteger i = 1; i < NUMBER_OF_XAXIS_LABELS - 1; i++) {
             [newLabels addObject:[dateFormatter stringFromDate:nextDateToAdd]];
             nextDateToAdd = [NSDate dateWithTimeInterval:timeDelta sinceDate:nextDateToAdd];
         }
-        [newLabels addObject:[monthYearFormatter stringFromDate:mostRecentDate]];
+        NSString *lastDate = [dateFormatter stringFromDate:mostRecentDate];
+        lastDate = [lastDate stringByAppendingString:@"\n"];
+        lastDate = [lastDate stringByAppendingString:[yearFormatter stringFromDate:mostRecentDate]];
+        [newLabels addObject:lastDate];
     }
     [self.footer setElements:newLabels];
 }

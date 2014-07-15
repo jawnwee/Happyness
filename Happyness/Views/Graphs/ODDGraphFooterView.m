@@ -16,6 +16,7 @@
 
 @implementation ODDGraphFooterView
 @synthesize siderPadding = _siderPadding;
+@synthesize rightPadding = _rightPadding;
 @synthesize isBarChart = _isBarChart;
 
 - (id)initWithElements:(NSArray *)elements withFrame:(CGRect)frame {
@@ -56,10 +57,11 @@
                 xPositionPadding = ceil(graphWidth / (self.labels.count - 1));
             }
             CGFloat xPosition = self.siderPadding + (xPositionPadding * count) - (width / 2);
+            [label sizeToFit];
             label.frame = CGRectMake(xPosition,
                                      0,
                                      width,
-                                     self.bounds.size.height);
+                                     label.frame.size.height);
         }
         count++;
     }

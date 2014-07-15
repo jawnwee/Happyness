@@ -18,9 +18,9 @@
         _labels = [[NSMutableArray alloc] initWithCapacity:elements.count];
         for (NSString *labelTitle in elements) {
             UILabel *newLabel = [[UILabel alloc] init];
+            newLabel.numberOfLines = 0;
             newLabel.text = labelTitle;
             newLabel.textAlignment = NSTextAlignmentCenter;
-            newLabel.backgroundColor = [UIColor clearColor];
             [newLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
             [self addSubview:newLabel];
             [_labels addObject:newLabel];
@@ -45,6 +45,7 @@
     self.labels = [[NSMutableArray alloc] initWithCapacity:elements.count];
     for (NSString *labelTitle in elements) {
         UILabel *newLabel = [[UILabel alloc] init];
+        newLabel.numberOfLines = 0;
         newLabel.text = labelTitle;
         newLabel.textAlignment = NSTextAlignmentCenter;
         newLabel.backgroundColor = [UIColor clearColor];

@@ -50,8 +50,6 @@
 
 - (void)initializeLineGraph {
     [super initializeLineGraph];
-    self.lineGraphView.maximumValue = 5.5;
-    self.lineGraphView.minimumValue = .5;
     self.graphTitle = @"Trends";
     [self.graphMedium setTitle:@"31 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"7 Days" forState:UIControlStateNormal];
@@ -126,7 +124,7 @@
                 [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
                                                  withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
                                                                                               [mediumEntriesRatings getValues],
-                                                                                              POLYFIT_DEGREE,
+                                                                                              POLYFIT_DEGREE ,
                                                                                               (int)self.numberOfMediumEntries,
                                                                                               0)];
             }
