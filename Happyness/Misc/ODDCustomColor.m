@@ -55,6 +55,10 @@
     return [UIColor colorWithRed:41.0 / 255.0 green:50.0 / 255.0 blue:75.0 / 255.0 alpha:1.0];
 }
 
++ (UIColor *)customReminderOffColor {
+    return [UIColor colorWithWhite:0.5 alpha:0.25];
+}
+
 + (NSDictionary *)customColorDictionary {
     NSDictionary *oddLookColors = [[NSDictionary alloc] initWithObjectsAndKeys:
                                    [self customTealColor], @"oddLook_color_5",

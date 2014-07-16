@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B965EC9DBBC4996B5B5256B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F4DC1B69D0EB48DE9F6257FF /* libPods.a */; };
+		C406531E1976FFFA0046806B /* ODDCustomReminderSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = C406531D1976FFFA0046806B /* ODDCustomReminderSwitchView.m */; };
 		C419C81A195D89CD008AE325 /* CalendarTabSelected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C80A195D89CD008AE325 /* CalendarTabSelected60.png */; };
 		C419C81B195D89CD008AE325 /* CalendarTabSelected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C80B195D89CD008AE325 /* CalendarTabSelected60@2x.png */; };
 		C419C81C195D89CD008AE325 /* CalendarTabUnselected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C80C195D89CD008AE325 /* CalendarTabUnselected60.png */; };
@@ -138,6 +139,8 @@
 
 /* Begin PBXFileReference section */
 		12333AFD44A64D3197FEF77F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C406531C1976FFFA0046806B /* ODDCustomReminderSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomReminderSwitchView.h; sourceTree = "<group>"; };
+		C406531D1976FFFA0046806B /* ODDCustomReminderSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomReminderSwitchView.m; sourceTree = "<group>"; };
 		C419C80A195D89CD008AE325 /* CalendarTabSelected60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTabSelected60.png; sourceTree = "<group>"; };
 		C419C80B195D89CD008AE325 /* CalendarTabSelected60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CalendarTabSelected60@2x.png"; sourceTree = "<group>"; };
 		C419C80C195D89CD008AE325 /* CalendarTabUnselected60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CalendarTabUnselected60.png; sourceTree = "<group>"; };
@@ -433,6 +436,8 @@
 			children = (
 				C4EE1D2B19761F2D0080CAFD /* ODDCardQuoteCollectionViewCell.h */,
 				C4EE1D2C19761F2D0080CAFD /* ODDCardQuoteCollectionViewCell.m */,
+				C406531C1976FFFA0046806B /* ODDCustomReminderSwitchView.h */,
+				C406531D1976FFFA0046806B /* ODDCustomReminderSwitchView.m */,
 			);
 			name = ReminderViews;
 			sourceTree = "<group>";
@@ -962,6 +967,7 @@
 				EBE2BD79195000150023E9F4 /* ODDSettingsViewController.m in Sources */,
 				C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */,
 				EBE2BD57194FF0BD0023E9F4 /* ODDCustomTabBarController.m in Sources */,
+				C406531E1976FFFA0046806B /* ODDCustomReminderSwitchView.m in Sources */,
 				D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */,
 				EB6EEF4D196B73BC0063DEB4 /* ODDBottomRootViewController.m in Sources */,
 				D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */,

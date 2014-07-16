@@ -9,11 +9,14 @@
 #import "ODDReminderViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SSFlatDatePicker.h"
+#import "ODDCustomReminderSwitchView.h"
+#import "ODDCustomColor.h"
 
 @interface ODDReminderViewController ()
 
 @property (nonatomic, strong) SSFlatDatePicker *picker;
-@property (nonatomic, strong) UISwitch *reminderSwitch;
+@property (nonatomic, strong) ODDCustomReminderSwitchView *reminderSwitch;
+@property (nonatomic) BOOL reminderIsOn;
 
 @end
 
@@ -45,19 +48,21 @@
 }
 
 - (void)setUpSwitch {
-    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 30, 90, 31)];
+    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 30, 150, 31)];
+    reminderLabel.font = [UIFont fontWithName:@"GothamNarrow-Light" size:36];
     reminderLabel.text = @"Reminder";
-    self.reminderSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(135, 70, 51, 31)];
+    self.reminderSwitch = [[ODDCustomReminderSwitchView alloc] initWithFrame:CGRectMake(125, 75, 70, 35)];
+
     [self.reminderSwitch addTarget:self
-                            action:@selector(switchOrPickerToggled)
-                  forControlEvents:UIControlEventValueChanged];
+                            action:@selector(switchToggled)
+                  forControlEvents:UIControlEventTouchUpInside];
 
     [self.view addSubview:reminderLabel];
     [self.view addSubview:self.reminderSwitch];
 }
 
 - (void)setUpPicker {
-    self.picker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(40, 120, 240, 200)];
+    self.picker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(40, 130, 240, 200)];
     self.picker.datePickerMode = SSFlatDatePickerModeTime;
     self.picker.gradientColor = self.picker.backgroundColor = [UIColor colorWithRed:240.0 / 255.0
                                                                               green:240.0 / 255.0
@@ -68,7 +73,7 @@
                                              blue:81.0 / 255.0
                                             alpha:1.0];
     [self.picker addTarget:self
-                    action:@selector(switchOrPickerToggled)
+                    action:@selector(pickerToggled)
           forControlEvents:UIControlEventValueChanged];
 
     [self.view addSubview:self.picker];
@@ -76,13 +81,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // Show selected time
 }
 
 #pragma mark - Switch and Picker Handling
 
-- (void)switchOrPickerToggled {
-    if (self.reminderSwitch.isOn) {
+- (void)updateReminder {
+    if (self.reminderIsOn) {
         NSCalendar *calendar = [NSCalendar currentCalendar];
         calendar.timeZone = [NSTimeZone defaultTimeZone];
         NSDate *currentDate = [NSDate date];
@@ -111,6 +115,35 @@
         [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
         NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]);
          */
+    }
+}
+
+- (void)switchToggled {
+    self.reminderIsOn = !self.reminderIsOn;
+    UIView *slider = [[self.reminderSwitch subviews] objectAtIndex:0];
+    if (self.reminderIsOn) {
+        CGRect slideRightFrame = slider.frame;
+        slideRightFrame.origin.x += self.reminderSwitch.frame.size.width / 2;
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             slider.frame = slideRightFrame;
+                             self.reminderSwitch.backgroundColor = [ODDCustomColor customTealColor];
+                         }];
+        [self updateReminder];
+    } else {
+        CGRect slideLeftFrame = slider.frame;
+        slideLeftFrame.origin.x -= self.reminderSwitch.frame.size.width / 2;
+        [UIView animateWithDuration:0.2
+                         animations:^{
+                             slider.frame = slideLeftFrame;
+                             self.reminderSwitch.backgroundColor = [ODDCustomColor customReminderOffColor];
+                         }];
+    }
+}
+
+- (void)pickerToggled {
+    if (self.reminderIsOn) {
+        [self updateReminder];
     }
 }
 

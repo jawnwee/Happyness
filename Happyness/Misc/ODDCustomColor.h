@@ -11,5 +11,9 @@
 @interface ODDCustomColor : UIColor
 
 + (NSDictionary *)customColorDictionary;
++ (UIColor *)customTealColor;
++ (UIColor *)customDarkColor;
++ (UIColor *)textColor;
++ (UIColor *)customReminderOffColor;
 
 @end
