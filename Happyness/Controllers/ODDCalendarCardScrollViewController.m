@@ -75,7 +75,7 @@
     return [[self.data objectForKey:self.currentDate] count];
 }
 
-// Note: Make sure the cells are the same height as |cardCollectionVeiw|
+// Note: Make sure the cells are the same height as cardCollectionVeiw|
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODDCalendarCardCollectionViewCell *cell =
@@ -85,8 +85,6 @@
                                             objectAtIndex:indexPath.row];
     [cell setHappynessEntry:entry];
     return cell;
-    // When cardCellView is ready uncomment below and above three lines
-    // return self.cards[index.row];
 }
 
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated {
@@ -95,10 +93,11 @@
                                                                    fromDate:date];
     NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
                      (long)[components year], (long)[components month], (long)[components day]];
+    ODDHappynessEntry *entry = [[[ODDHappynessEntryStore sharedStore] happynessEntries]
+                                                                      objectForKey:key];
 
-    NSInteger index = [components day] - 1;
-    if ([[self.data objectForKey:self.currentDate] count] >= index &&
-                    [[[ODDHappynessEntryStore sharedStore] happynessEntries] objectForKey:key]) {
+    NSInteger index = [[self.data objectForKey:self.currentDate] indexOfObject:entry];
+    if ([[self.data objectForKey:self.currentDate] count] >= index && entry) {
 
         [self.cardCollectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:index 
                                                                             inSection:0]

@@ -23,6 +23,11 @@
     if (self) {
         self.cardClass = [ODDSelectionCardCollectionViewCell class];
         _selectedCard = -1;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                selector:@selector(clearCards)
+                                                    name:UIApplicationSignificantTimeChangeNotification
+                                                    object:nil];
     }
     return self;
 }
@@ -51,9 +56,9 @@
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    self.selectedCard = indexPath.row % 5;
+    self.selectedCard = -(indexPath.row % 5) + 5;
     NSDate *date = [NSDate date];
-    ODDHappyness *happyness = [[ODDHappyness alloc] initWithFace:self.selectedCard + 1];
+    ODDHappyness *happyness = [[ODDHappyness alloc] initWithFace:self.selectedCard];
     ODDNote *note = [[ODDNote alloc] init];
     ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
                                                                            note:note
@@ -70,13 +75,18 @@
                                 [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
                                                                           forIndexPath:indexPath];
     // Needed because card names start from oddLook_card_1
-    [cell setCardValue:((indexPath.row % 5) + 1)];
-    if (self.selectedCard == indexPath.row % 5) {
+    [cell setCardValue:(-(indexPath.row % 5) + 5)];
+    if (self.selectedCard == (-(indexPath.row % 5) + 5)) {
         [cell selectCard];
     } else {
         [cell deselect];
     }
     return cell;
+}
+
+- (void)clearCards {
+    self.selectedCard = -1;
+    [self reloadCollectionData];
 }
 
 

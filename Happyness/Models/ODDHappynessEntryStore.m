@@ -77,6 +77,10 @@
     [_privateEntries removeObjectForKey:key];
 }
 
+- (void)setEmptyCurrentDate {
+    
+}
+
 #pragma mark - Calendar properties
 
 - (NSDate *)firstDate {

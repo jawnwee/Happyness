@@ -13,7 +13,7 @@
 @interface ODDCalendarCardCollectionViewCell ()
 
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UILabel *noteLabel;
+@property (nonatomic, strong) UITextView *noteLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) CGSize shadowOffset;
 
@@ -45,11 +45,12 @@
 
 - (void)setupNoteLabel {
 
-    _noteLabel = [[UILabel alloc] initWithFrame:[self createNoteFrame]];
-    _noteLabel.numberOfLines = 6.0;
+    _noteLabel = [[UITextView alloc] initWithFrame:[self createNoteFrame]];
     _noteLabel.font = [UIFont fontWithName:@"Whitney-Book" size:12.0];
     _noteLabel.textColor = [[ODDCustomColor customColorDictionary]
                             objectForKey:@"oddLook_textcolor"];
+    _noteLabel.backgroundColor = [UIColor clearColor];
+    _noteLabel.editable = NO;
     [self.contentView addSubview:_noteLabel];
 
 }
@@ -93,7 +94,6 @@
     self.noteLabel.text = note.noteString;
     self.dateLabel.text = [NSString stringWithFormat:@"%ld", (long) day];
     [self.dateLabel sizeToFit];
-    [self.noteLabel sizeToFit];
 }
 
 - (CGRect)createDateFrame {
@@ -103,7 +103,7 @@
 
 /* Adjust this to move the space for notes; will need to change for iphone6 */
 - (CGRect)createNoteFrame {
-    CGRect noteFrame = CGRectMake(6.0, 120.0, 110, 100);
+    CGRect noteFrame = CGRectMake(5.0, 112.0, 110, 100);
     return noteFrame;
 }
 

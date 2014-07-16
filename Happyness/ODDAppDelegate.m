@@ -9,10 +9,7 @@
 #import "ODDAppDelegate.h"
 #import "ODDMainViewController.h"
 #import "ODDBottomRootViewController.h"
-#import "ODDCustomTabBarController.h"
-#import "ODDTodayViewController.h"
 #import "ODDOverallCalendarViewController.h"
-#import "ODDSettingsViewController.h"
 #import "ODDRootViewController.h"
 #import "ODDCurveFittingViewController.h"
 #import "ODDDayAveragesViewController.h"
@@ -54,9 +51,9 @@
 
     [ODDHappynessEntryStore sharedStore];
     // Testers for bottom scrollView
-    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ODDTodayViewController *today2 = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+//    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+//    ODDTodayViewController *today2 = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
+//    ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
     ///////////////////////////////////////////////
 
 
@@ -87,7 +84,7 @@
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
-    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, todayBottom, reminderBottom];
+    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, selectionBottom, reminderBottom];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];

@@ -38,6 +38,11 @@
         _note = [[ODDNote alloc] init];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(submitEntryForDay)
+                                                     name:UIApplicationSignificantTimeChangeNotification
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillShow:)
                                                      name:UIKeyboardWillShowNotification
                                                    object:nil];
@@ -132,7 +137,7 @@
     [self.pieChart setStartPieAngle:-M_PI_2];
     [self.pieChart setPieRadius:120]; // change back to 62.5 or whatever value we need
     [self.pieChart setAnimationSpeed:2.0];
-    [self.pieChart setShowLabel:YES];
+    [self.pieChart setShowLabel:NO];
     [self.pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:24]];
     [self.pieChart setLabelRadius:120];
     [self.pieChart setShowPercentage:NO];
@@ -144,23 +149,54 @@
     [self.view addSubview:self.pieChart];
 }
 
+- (void)resetAndReloadPieChart {
+    self.slices = [NSMutableArray arrayWithCapacity:5];
+    int oneCount = 0, twoCount = 0, threeCount = 0, fourCount = 0, fiveCount = 0;
+
+    NSArray *store = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
+    for (int i = 0; i < store.count; i++) {
+        ODDHappyness *temp = ((ODDHappynessEntry *)[store objectAtIndex:i]).happyness;
+        if (temp.value == 1) {
+            oneCount += 1;
+        } else if (temp.value == 2) {
+            twoCount += 1;
+        } else if (temp.value == 3) {
+            threeCount += 1;
+        } else if (temp.value == 4) {
+            fourCount += 1;
+        } else {
+            fiveCount += 1;
+        }
+    }
+    [_slices addObject:[NSNumber numberWithInt:oneCount]];
+    [_slices addObject:[NSNumber numberWithInt:twoCount]];
+    [_slices addObject:[NSNumber numberWithInt:threeCount]];
+    [_slices addObject:[NSNumber numberWithInt:fourCount]];
+    [_slices addObject:[NSNumber numberWithInt:fiveCount]];
+
+    [self.pieChart reloadData];
+}
+
 - (void)setUpFeedbackView {
     CGRect imageRect = CGRectMake(0, 0, 200, 200);
     UIImageView *centerImage = [[UIImageView alloc] initWithFrame:imageRect];
     [centerImage setImage:[UIImage imageNamed:@"feedbackCircle.png"]];
     centerImage.center = CGPointMake(160, 160);
 
-    UIFont *customFont = [UIFont fontWithName:@"ProximaNovaSemiBold" size:10]; // Change font
+    UIFont *customFont = [UIFont fontWithName:@"GothamRounded-Bold" size:16];
     self.feedbackLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 125)];
     self.feedbackLabel.center = CGPointMake(160, 160);
     [self reloadFeedbackText];
     self.feedbackLabel.font = customFont;
+    self.feedbackLabel.alpha = 0.7;
     self.feedbackLabel.numberOfLines = 0;
     self.feedbackLabel.adjustsFontSizeToFitWidth = YES;
     self.feedbackLabel.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     self.feedbackLabel.minimumScaleFactor = 1.0f / 2.0f;
     self.feedbackLabel.backgroundColor = [UIColor clearColor];
-    self.feedbackLabel.textColor = [UIColor blackColor];
+
+    self.feedbackLabel.textColor = [[ODDCustomColor customColorDictionary] 
+                                                             objectForKey:@"oddLook_textcolor"];
     self.feedbackLabel.textAlignment = NSTextAlignmentCenter;
 
     [self.pieChart addSubview:centerImage];
@@ -168,32 +204,19 @@
 }
 
 - (void)reloadFeedbackText {
-    double overallScore = [self calculateOverallScoreWithLinearRegression];
-    NSLog(@"overallScore: %f", overallScore);
+    NSInteger count = [[[ODDHappynessEntryStore sharedStore] happynessEntries] count];
     NSString *text;
 
-    if (overallScore <= 1) {
-        text = @"Overall: You are very negative \n\n";
-    } else if (overallScore <= 2) {
-        text = @"Overall: You are sad \n\n";
-    } else if (overallScore <= 3) {
-        text = @"Overall: Neither positive nor negative, just neutral \n\n";
-    } else if (overallScore <= 4) {
-        text = @"Overall: Today was a good day - Ice Cube \n\n";
+    if (count == 0) {
+        text = @"Wecome! How are you today? Select how you're feeling below and get Happy!";
+    } else if (count == 1) {
+        text = @"Welcome back! We hope you're getting happier!";
     } else {
-        text = @"BOOMSHAKALAKA \n\n";
-    }
-
-    if ([[ODDHappynessEntryStore sharedStore] happynessEntries].count > 1) {
         ODDHappynessObserver *observer = [[ODDHappynessObserver alloc] init];
-        NSString *analysis = [observer analyzePastDays];
-
-        NSString *feedback = [text stringByAppendingString:analysis];
-        self.feedbackLabel.text = feedback;
-    } else {
-        self.feedbackLabel.text = text;
+        text = [observer analyzePastDays];
     }
 
+    self.feedbackLabel.text = text;
 }
 
 - (void)didReceiveMemoryWarning
@@ -228,12 +251,12 @@
     self.noteContainerView.backgroundColor = [UIColor clearColor];
 
     self.noteView = [[ODDTodayNoteView alloc]
-                     initWithFrame:CGRectMake(0, self.view.frame.size.height - 34, 270, 40)];
+                     initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, 270, 40)];
     self.noteView.delegate = self;
 
 
     self.clearAllButton = [[UIButton alloc]
-                           initWithFrame:CGRectMake(270, self.view.frame.size.height - 34, 50, 40)];
+                           initWithFrame:CGRectMake(270, self.view.frame.size.height - 40, 50, 40)];
 
     self.clearAllButton.backgroundColor = [UIColor lightGrayColor];
     self.clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
@@ -300,7 +323,8 @@
     // get a rect for the textView frame
     CGRect containerFrame = self.noteContainerView.frame;
     // Matt: play with height values to make textView move upon keyboard showing
-    containerFrame.origin.y = self.view.bounds.size.height - self.noteContainerView.frame.size.height - 30.0;
+    containerFrame.origin.y = self.view.bounds.size.height -
+                              self.noteContainerView.frame.size.height - 20.0;
     // animations settings
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
@@ -350,12 +374,14 @@
 }
 
 /* Dismiss keyboard upon pressing "Done" and impose 140 character limit */
-- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView 
+shouldChangeTextInRange:(NSRange)range
+        replacementText:(NSString *)text {
 
     if ([text isEqualToString:@"\n"]) {
         [self.noteView resignFirstResponder];
     }
-    return growingTextView.text.length + (text.length - range.length) <= 140;
+    return growingTextView.text.length + (text.length - range.length) <= 100;
 }
 
 /* Testing fake entries
@@ -382,15 +408,25 @@
 - (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
     self.note.noteString = growingTextView.text;
 }
+#pragma mark - Submit
 
+- (void)submitEntryForDay {
+    // TODO Core Data logic here
+
+}
 
 #pragma mark - Delegate for Card Selection View Controller
 - (void)submit {
-    [self setUpPieChart];
-    [self.pieChart reloadData];
-    [self reloadFeedbackText];
-    // double overall = [self calculateOverallScoreWithLinearRegression];
-    // NSLog(@"Overall score: %f", overall);
+    NSDate *date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
+    ODDHappynessEntry *entry = [[[ODDHappynessEntryStore sharedStore] happynessEntries] 
+                                                                      objectForKey:key];
+    entry.note = self.note;
+    [self resetAndReloadPieChart];
 }
 
 #pragma mark - XYPieChart Data Source
@@ -412,9 +448,9 @@
 }
 
 #pragma mark - Overall Score Calculations
-- (double)calculateOverallScoreWithLinearRegression {
+- (CGFloat)calculateOverallScoreWithLinearRegression {
     // Get two arrays: x and y points
-    NSArray *entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
+    NSArray *entries = [[ODDHappynessEntryStore sharedStore]sortedStore];
     if (entries.count == 0) {
         return 0.0;
     }
@@ -436,35 +472,33 @@
     NSMutableArray *weightedY = [self getWeightedYWithX:xValues andY:yValues];
 
     // Calculate sum of squares ssX, ssY, and ssXY
-    NSUInteger n = xValues.count;
-    double sX, sY, ssX, ssY, ssXY;
+    NSInteger n = xValues.count;
+    CGFloat sX, sY, ssX, ssY, ssXY;
     sX = sY = ssX = ssY = ssXY = 0;
     for (int i = 0; i < n; i++) {
-        double x = [[xValues objectAtIndex:i] doubleValue];
-        double y = [[weightedY objectAtIndex:i] doubleValue];
+        CGFloat x = [[xValues objectAtIndex:i] doubleValue];
+        CGFloat y = [[weightedY objectAtIndex:i] doubleValue];
         sX += x;
         sY += y;
         ssX += x * x;
         ssY += y * y;
         ssXY += x * y;
     }
-    double avgX = sX / n;
-    double avgY = sY / n;
+    CGFloat avgX = sX / n;
+    CGFloat avgY = sY / n;
 
     ssX = ssX - n * (avgX * avgX);//pow(avgX, 2);
     ssY = ssY - n * (avgY * avgY);//pow(avgY, 2);
     ssXY = ssXY - n * avgX * avgY;
 
     // Best fit of line: y_i = a + b * x_i
-    double b = ssXY / ssX;
-    double a = avgY - b * avgX;
+    CGFloat b = ssXY / ssX;
+    CGFloat a = avgY - b * avgX;
 
-    /*// Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
-    double corCoeff = pow(ssXY, 2) / (ssX * ssY);
-
-    //NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
-     */
-    
+    // Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
+//    double corCoeff = pow(ssXY, 2) / (ssX * ssY);
+//
+//    NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
     return b * n + a;
 }
 

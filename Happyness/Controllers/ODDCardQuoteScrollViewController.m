@@ -61,7 +61,7 @@
                                               forIndexPath:indexPath];
     // Needed because card names start from oddLook_card_1
     [cell setCardValueAndQuoteTextShadow:-indexPath.row + 5];
-    NSString *quote = [NSString stringWithFormat:@"quote_%ld", -indexPath.row + 5];
+    NSString *quote = [NSString stringWithFormat:@"quote_%ld", (long)(-indexPath.row + 5)];
     [cell setQuoteText:[self.quoteDictionary objectForKey:quote]];
 
     return cell;
