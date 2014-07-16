@@ -85,49 +85,53 @@
         }
         
         // Initialize self.mediumEntries;
-        self.numberOfMediumEntries = 580;
+        self.numberOfMediumEntries = 500;
         NSUInteger mediumEntriesRatingsCount = 0;
         if (numberOfAllEntries < self.mediumCount) {
             self.numberOfMediumEntries = numberOfAllEntries;
             mediumEntriesRatingsCount = self.numberOfMediumEntries;
         } else {
-            NSDate *latestDate = ((ODDHappynessEntry *)[self.entries lastObject]).date;
-            mediumEntriesRatingsCount += 1;
             CGFloat secondsPerDay = 60 * 60 * 24;
             CGFloat secondsForMediumCount = self.mediumCount * secondsPerDay;
-            for (NSInteger i = self.entries.count - 2; i >= 0; i--) {
-                NSDate *nextDate = ((ODDHappynessEntry *)self.entries[i]).date;
+            NSArray *mediumEntries =
+                [self.entries subarrayWithRange:NSMakeRange(numberOfAllEntries - self.mediumCount,
+                                                            self.mediumCount)];
+            NSUInteger count = 0;
+            NSDate *latestDate = ((ODDHappynessEntry *)[self.entries lastObject]).date;
+            for (NSInteger i = mediumEntries.count - 2; i >= 0; i--) {
+                NSDate *nextDate = ((ODDHappynessEntry *)mediumEntries[i]).date;
                 CGFloat timeInterval = [latestDate timeIntervalSinceDate:nextDate];
                 if (timeInterval > secondsForMediumCount) {
                     break;
                 }
-                mediumEntriesRatingsCount++;
+                count++;
             }
             ODDDoubleArrayHolder *mediumEntriesRatings =
-            [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - (mediumEntriesRatingsCount),
-                                                             numberOfAllEntries)];
-
-            if (mediumEntriesRatingsCount < self.mediumCount) {
-                NSDate *mostRecentDate = ((ODDHappynessEntry *)self.entries[self.entries.count -
-                                                                            mediumEntriesRatingsCount -
-                                                                            2]).date;
-                int startDifference = ceil([latestDate timeIntervalSinceDate:mostRecentDate] / secondsPerDay);
-                self.mediumeData =
-                [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
-                                                 withValues:polynomialFitCoordinatesExtraData((int)mediumEntriesRatingsCount,
-                                                                                              [mediumEntriesRatings getValues],
-                                                                                              POLYFIT_DEGREE,
-                                                                                              (int)self.numberOfMediumEntries,
-                                                                                              startDifference)];
-            } else {
-                self.mediumeData =
-                [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
-                                                 withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
-                                                                                              [mediumEntriesRatings getValues],
-                                                                                              POLYFIT_DEGREE ,
-                                                                                              (int)self.numberOfMediumEntries,
-                                                                                              0)];
+            [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - self.mediumCount,
+                                                             numberOfAllEntries)];  // TODO: Correct usage of NSRange
+            for (int i = 0; i < [mediumEntriesRatings getSize]; i++) {
+                NSLog(@"%f", [mediumEntriesRatings getValueAtIndex:i]);
             }
+            NSDate *firstDate = ((ODDHappynessEntry *)mediumEntries[0]).date;
+            NSDate *lastDate = ((ODDHappynessEntry *)[mediumEntries lastObject]).date;
+            NSDate *dateAtEndOfLoop = ((ODDHappynessEntry *)mediumEntries[mediumEntries.count -
+                                                                          count -
+                                                                          1]).date;
+            float startDifference = ceil([dateAtEndOfLoop timeIntervalSinceDate:firstDate] /
+                                       secondsPerDay);
+            float totalDifference = ceil([lastDate timeIntervalSinceDate:firstDate]) / secondsPerDay;
+            float startRatio = startDifference / totalDifference;
+            float actualStart = startRatio * self.mediumCount;
+            if (startDifference == 0) {
+                startRatio = 0;
+            }
+            self.mediumeData =
+            [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
+                                             withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,
+                                                                                          [mediumEntriesRatings getValues],
+                                                                                          POLYFIT_DEGREE,
+                                                                                          (int)self.numberOfMediumEntries,
+                                                                                          actualStart)];
         }
         
         
