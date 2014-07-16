@@ -23,19 +23,20 @@
 #import "ODDFeedbackViewController.h"
 #import "ODDSelectionCardScrollViewController.h"
 #import "ODDReminderViewController.h"
+#import "ODDCardQuoteScrollViewController.h"
 
 @implementation ODDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:
-                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
-                                                                      | UIUserNotificationTypeAlert 
-                                                                      | UIUserNotificationTypeBadge) 
-                                                             categories:nil]];
-
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
+//    [[UIApplication sharedApplication] registerUserNotificationSettings:
+//                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+//                                                                      | UIUserNotificationTypeAlert 
+//                                                                      | UIUserNotificationTypeBadge) 
+//                                                             categories:nil]];
+//
+//    [[UIApplication sharedApplication] registerForRemoteNotifications];
 
     // Override point for customization after application launch.
 
@@ -73,7 +74,8 @@
                                                          bundle:appBundle
                                                bottomController:calendarBottom];
 
-    
+    ODDCardQuoteScrollViewController *reminderBottom = [[ODDCardQuoteScrollViewController alloc] init];
+
 
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
@@ -85,7 +87,7 @@
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
-    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, todayBottom, today2];
+    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, todayBottom, reminderBottom];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];

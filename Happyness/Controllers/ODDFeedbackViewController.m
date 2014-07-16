@@ -169,25 +169,30 @@
 
 - (void)reloadFeedbackText {
     double overallScore = [self calculateOverallScoreWithLinearRegression];
+    NSLog(@"overallScore: %f", overallScore);
     NSString *text;
 
-    if (overallScore <= 15) {
+    if (overallScore <= 1) {
         text = @"Overall: You are very negative \n\n";
-    } else if (overallScore <= 35) {
+    } else if (overallScore <= 2) {
         text = @"Overall: You are sad \n\n";
-    } else if (overallScore <= 65) {
+    } else if (overallScore <= 3) {
         text = @"Overall: Neither positive nor negative, just neutral \n\n";
-    } else if (overallScore <= 85) {
+    } else if (overallScore <= 4) {
         text = @"Overall: Today was a good day - Ice Cube \n\n";
     } else {
         text = @"BOOMSHAKALAKA \n\n";
     }
-//
-//    ODDHappynessObserver *observer = [[ODDHappynessObserver alloc] init];
-//    NSString *analysis = [observer analyzePastDays];
-//
-//    NSString *feedback = [text stringByAppendingString:analysis];
-//    self.feedbackLabel.text = feedback;
+
+    if ([[ODDHappynessEntryStore sharedStore] happynessEntries].count > 1) {
+        ODDHappynessObserver *observer = [[ODDHappynessObserver alloc] init];
+        NSString *analysis = [observer analyzePastDays];
+
+        NSString *feedback = [text stringByAppendingString:analysis];
+        self.feedbackLabel.text = feedback;
+    } else {
+        self.feedbackLabel.text = text;
+    }
 
 }
 
@@ -407,17 +412,24 @@
 }
 
 #pragma mark - Overall Score Calculations
-
 - (double)calculateOverallScoreWithLinearRegression {
     // Get two arrays: x and y points
-    NSArray *entries = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
+    NSArray *entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
+    if (entries.count == 0) {
+        return 0.0;
+    }
     NSMutableArray *xValues = [[NSMutableArray alloc] init];
     NSMutableArray *yValues = [[NSMutableArray alloc] init];
+
     for (int i = 0; i < entries.count; i++) {
-        [xValues addObject:[NSNumber numberWithInt:i]];
+        [xValues addObject:[NSNumber numberWithInt:i + 1]];
         ODDHappynessEntry *entry = [entries objectAtIndex:i];
         ODDHappyness *happyness = entry.happyness;
         [yValues addObject:[NSNumber numberWithDouble:happyness.rating]];
+    }
+
+    if (entries.count == 1) {
+        return [[yValues objectAtIndex:0] doubleValue];
     }
 
     // Get weighted y coordinates
@@ -439,20 +451,21 @@
     double avgX = sX / n;
     double avgY = sY / n;
 
-    ssX = ssX - n * pow(avgX, 2);
-    ssY = ssY - n * pow(avgY, 2);
+    ssX = ssX - n * (avgX * avgX);//pow(avgX, 2);
+    ssY = ssY - n * (avgY * avgY);//pow(avgY, 2);
     ssXY = ssXY - n * avgX * avgY;
 
     // Best fit of line: y_i = a + b * x_i
     double b = ssXY / ssX;
     double a = avgY - b * avgX;
 
-    /* Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
+    /*// Correlation coeffcient, r^2, gives quality of the estimate, 1 being perfect and 0 otherwise
     double corCoeff = pow(ssXY, 2) / (ssX * ssY);
 
-    NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
+    //NSLog(@"n: %lu, a: %f --- b: %f --- cor: %f --- avgX: %f --- avgY: %f --- ssX: %f - ssY: %f - ssXY: %f", n, a, b, corCoeff, avgX, avgY, ssX, ssY, ssXY);
      */
-    return b * (n + 1) + a;
+    
+    return b * n + a;
 }
 
 - (NSMutableArray *)getWeightedYWithX:(NSMutableArray *)xValues andY:(NSMutableArray *)yValues {
