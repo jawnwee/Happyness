@@ -60,19 +60,9 @@
     [collectionView dequeueReusableCellWithReuseIdentifier:@"cardCell"
                                               forIndexPath:indexPath];
     // Needed because card names start from oddLook_card_1
-    [cell setCardValue:-indexPath.row + 5];
-    NSString *quote = [NSString stringWithFormat:@"quote_%ld", indexPath.row + 1];
-    cell.label.hidden = YES;
-    CGRect frame = CGRectMake(7, 0, cell.frame.size.width - 20, cell.frame.size.height);
-    cell.label = [[UILabel alloc] initWithFrame:frame];
-    cell.label.textAlignment = NSTextAlignmentCenter;
-    cell.label.numberOfLines = 0;
-    cell.label.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.label.font = [UIFont fontWithName:@"GothamRounded-Bold" size:12.0];
-    cell.label.textColor = [UIColor whiteColor];
-
-    [cell addSubview:cell.label];
-    cell.label.text = [self.quoteDictionary objectForKey:quote];
+    [cell setCardValueAndQuoteTextShadow:-indexPath.row + 5];
+    NSString *quote = [NSString stringWithFormat:@"quote_%ld", -indexPath.row + 5];
+    [cell setQuoteText:[self.quoteDictionary objectForKey:quote]];
 
     return cell;
 }

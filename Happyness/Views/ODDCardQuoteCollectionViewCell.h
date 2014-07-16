@@ -10,7 +10,7 @@
 
 @interface ODDCardQuoteCollectionViewCell : ODDCardCollectionViewCell
 
-@property (nonatomic, strong) UILabel *label;
-- (void)setCardValue:(NSInteger)value;
+- (void)setCardValueAndQuoteTextShadow:(NSInteger)value;
+- (void)setQuoteText:(NSString *)text;
 
 @end

@@ -47,7 +47,7 @@
 - (void)setUpSwitch {
     UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(125, 30, 90, 31)];
     reminderLabel.text = @"Reminder";
-    self.reminderSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(135, 80, 51, 31)];
+    self.reminderSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(135, 70, 51, 31)];
     [self.reminderSwitch addTarget:self
                             action:@selector(switchOrPickerToggled)
                   forControlEvents:UIControlEventValueChanged];
@@ -57,7 +57,7 @@
 }
 
 - (void)setUpPicker {
-    self.picker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(40, 150, 240, 200)];
+    self.picker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(40, 120, 240, 200)];
     self.picker.datePickerMode = SSFlatDatePickerModeTime;
     self.picker.gradientColor = self.picker.backgroundColor = [UIColor colorWithRed:240.0 / 255.0
                                                                               green:240.0 / 255.0
