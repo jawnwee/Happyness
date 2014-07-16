@@ -86,11 +86,7 @@
         
         // Initialize self.mediumEntries;
         self.numberOfMediumEntries = 500;
-        NSUInteger mediumEntriesRatingsCount = 0;
-        if (numberOfAllEntries < self.mediumCount) {
-            self.numberOfMediumEntries = numberOfAllEntries;
-            mediumEntriesRatingsCount = self.numberOfMediumEntries;
-        } else {
+        if (numberOfAllEntries >= self.mediumCount) {
             CGFloat secondsPerDay = 60 * 60 * 24;
             CGFloat secondsForMediumCount = self.mediumCount * secondsPerDay;
             NSArray *mediumEntries =
@@ -106,25 +102,18 @@
                 }
                 count++;
             }
+            // TODO: Correct usage of NSRange
             ODDDoubleArrayHolder *mediumEntriesRatings =
             [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - self.mediumCount,
-                                                             numberOfAllEntries)];  // TODO: Correct usage of NSRange
-            for (int i = 0; i < [mediumEntriesRatings getSize]; i++) {
-                NSLog(@"%f", [mediumEntriesRatings getValueAtIndex:i]);
-            }
+                                                             numberOfAllEntries)];
             NSDate *firstDate = ((ODDHappynessEntry *)mediumEntries[0]).date;
             NSDate *lastDate = ((ODDHappynessEntry *)[mediumEntries lastObject]).date;
-            NSDate *dateAtEndOfLoop = ((ODDHappynessEntry *)mediumEntries[mediumEntries.count -
-                                                                          count -
-                                                                          1]).date;
-            float startDifference = ceil([dateAtEndOfLoop timeIntervalSinceDate:firstDate] /
-                                       secondsPerDay);
             float totalDifference = ceil([lastDate timeIntervalSinceDate:firstDate]) / secondsPerDay;
-            float startRatio = startDifference / totalDifference;
-            float actualStart = startRatio * self.mediumCount;
-            if (startDifference == 0) {
+            float startRatio = 1 - (self.mediumCount / totalDifference);
+            if (startRatio < 0) {
                 startRatio = 0;
             }
+            float actualStart = startRatio * self.mediumCount;
             self.mediumeData =
             [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfMediumEntries
                                              withValues:polynomialFitCoordinatesExtraData((int)self.mediumCount,

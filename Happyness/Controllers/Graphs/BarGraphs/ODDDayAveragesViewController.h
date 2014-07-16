@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ODDBarGraphViewController.h"
 
 @interface ODDDayAveragesViewController : ODDBarGraphViewController

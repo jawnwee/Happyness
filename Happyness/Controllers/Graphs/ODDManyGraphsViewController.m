@@ -60,6 +60,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     ODDGraphViewController *currentGraphController = (ODDGraphViewController *)self.graphs[self.currentGraph];
     [currentGraphController reloadDataStore];
 }

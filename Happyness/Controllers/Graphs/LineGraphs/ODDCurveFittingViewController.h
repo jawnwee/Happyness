@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ODDLineGraphViewController.h"
 
 @interface ODDCurveFittingViewController : ODDLineGraphViewController

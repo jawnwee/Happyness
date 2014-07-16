@@ -37,9 +37,11 @@
         _calendarCardController = bottomController;
 
         // Testing purposes, 500 random data for previous days
-        for (int i = 1 ; i <= 500; i++) {
+        for (int i = 0; i <= 500; i++) {
             int test = arc4random_uniform(5) + 1;
-            NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * i)];
+            int randomTimeDelta = arc4random_uniform(3);
+            i += randomTimeDelta;
+            NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * randomTimeDelta * i)];
             ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
             ODDNote *testNote = [[ODDNote alloc] init];
             testNote.noteString = [NSMutableString 

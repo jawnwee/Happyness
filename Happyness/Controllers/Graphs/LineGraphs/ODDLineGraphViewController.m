@@ -137,7 +137,8 @@
             [newLabels insertObject:[dateFormatter stringFromDate:nextDateToAdd] atIndex:0];
             nextDateToAdd = [NSDate dateWithTimeInterval:-(secondsPerDay * 5) sinceDate:nextDateToAdd];
         }
-    } else if (self.currentAmountOfData == ODDGraphAmountAll) {
+    } else if (self.currentAmountOfData == ODDGraphAmountAll &&
+               self.entries.count >= self.mediumCount) {
         NSDate *mostRecentDate = nextDateToAdd;
         NSDate *nextDateToAdd = ((ODDHappynessEntry *)[self.entries firstObject]).date;
         CGFloat timeDifference = [mostRecentDate timeIntervalSinceDate:nextDateToAdd];

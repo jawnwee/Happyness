@@ -54,6 +54,7 @@
 		D124B1471956518600A9F687 /* ODDGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B1461956518600A9F687 /* ODDGraphViewController.m */; };
 		D124B156195A7E4700A9F687 /* ODDGraphFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B155195A7E4700A9F687 /* ODDGraphFooterView.m */; };
 		D124B159195A7E4F00A9F687 /* ODDGraphSiderView.m in Sources */ = {isa = PBXBuildFile; fileRef = D124B158195A7E4F00A9F687 /* ODDGraphSiderView.m */; };
+		D13B1B811976F61D00079EA5 /* ODDStatisticsCardScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D13B1B801976F61D00079EA5 /* ODDStatisticsCardScrollView.m */; };
 		D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5B194F6A68003873B0 /* Foundation.framework */; };
 		D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */; };
 		D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
@@ -195,6 +196,8 @@
 		D124B155195A7E4700A9F687 /* ODDGraphFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDGraphFooterView.m; sourceTree = "<group>"; };
 		D124B157195A7E4E00A9F687 /* ODDGraphSiderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphSiderView.h; sourceTree = "<group>"; };
 		D124B158195A7E4F00A9F687 /* ODDGraphSiderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDGraphSiderView.m; sourceTree = "<group>"; };
+		D13B1B7F1976F61D00079EA5 /* ODDStatisticsCardScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDStatisticsCardScrollView.h; sourceTree = "<group>"; };
+		D13B1B801976F61D00079EA5 /* ODDStatisticsCardScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDStatisticsCardScrollView.m; sourceTree = "<group>"; };
 		D13F4C58194F6A68003873B0 /* Happyness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Happyness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13F4C5B194F6A68003873B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -427,6 +430,8 @@
 		D124B1481956518C00A9F687 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
+				D13B1B7F1976F61D00079EA5 /* ODDStatisticsCardScrollView.h */,
+				D13B1B801976F61D00079EA5 /* ODDStatisticsCardScrollView.m */,
 				D1D4A1FD196A679200340234 /* ODDManyGraphsViewController.h */,
 				D1D4A1FE196A679200340234 /* ODDManyGraphsViewController.m */,
 				D124B1451956518600A9F687 /* ODDGraphViewController.h */,
@@ -922,6 +927,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D13B1B811976F61D00079EA5 /* ODDStatisticsCardScrollView.m in Sources */,
 				EBCFE229196E543E003D97E7 /* ODDCalendarCardScrollViewController.m in Sources */,
 				D171EB36196F376900DCA75B /* ODDColoredView.m in Sources */,
 				EB835DC61970B6DE002C0A20 /* ODDCalendarTabImageView.m in Sources */,
