@@ -66,6 +66,7 @@
 
     [self setupHeader];
     [self setupCalendarLogic];
+    [self.currentCalendar scrollToDate:[NSDate date] animated:YES];
 }
 
 - (void)setupHeader {
@@ -162,7 +163,6 @@
     [super viewWillAppear:animated];
     [self.currentCalendar reload];
     [self.calendarCardController resortAndReload];
-    [self.currentCalendar scrollToDate:[NSDate date] animated:YES];
 }
 
 #pragma mark - Calendar View Logic
