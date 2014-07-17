@@ -56,7 +56,11 @@
 }
 
 + (UIColor *)customReminderOffColor {
-    return [UIColor colorWithWhite:0.5 alpha:0.25];
+    return [UIColor colorWithRed:240.0 / 255.0 green:240.0 / 255.0 blue:240.0 / 255.0 alpha:1.0];
+}
+
++ (UIColor *)customPickerTextColor {
+    return [UIColor colorWithRed:81.0 / 255.0 green:81.0 / 255.0 blue:81.0 / 255.0 alpha:1.0];
 }
 
 + (NSDictionary *)customColorDictionary {

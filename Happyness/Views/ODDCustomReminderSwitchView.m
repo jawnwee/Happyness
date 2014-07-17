@@ -9,6 +9,12 @@
 #import "ODDCustomReminderSwitchView.h"
 #import "ODDCustomColor.h"
 
+@interface ODDCustomReminderSwitchView ()
+
+//@property (nonatomic, strong) UIView *slider;
+
+@end
+
 @implementation ODDCustomReminderSwitchView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -24,13 +30,20 @@
 - (void)setup {
     self.layer.cornerRadius = 5.0f;
     self.backgroundColor = [ODDCustomColor customReminderOffColor];
-    UIView *slider = [[UIView alloc] initWithFrame:CGRectMake(0,
+    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                               0, 
                                                               self.frame.size.width / 2 + 5,
                                                               self.frame.size.height)];
-    slider.backgroundColor = [ODDCustomColor textColor];
-    slider.layer.cornerRadius = 5.0f;
-    [self addSubview:slider];
+    self.slider.backgroundColor = [ODDCustomColor textColor];
+    self.slider.layer.cornerRadius = 5.0f;
+    [self addSubview:self.slider];
+}
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    if ([self pointInside:point withEvent:event]) {
+        return self;
+    }
+    return nil;
 }
 
 /*

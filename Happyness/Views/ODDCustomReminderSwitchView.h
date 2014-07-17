@@ -10,4 +10,6 @@
 
 @interface ODDCustomReminderSwitchView : UIControl
 
+@property (nonatomic, strong) UIView *slider;
+
 @end

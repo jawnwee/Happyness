@@ -15,5 +15,6 @@
 + (UIColor *)customDarkColor;
 + (UIColor *)textColor;
 + (UIColor *)customReminderOffColor;
++ (UIColor *)customPickerTextColor;
 
 @end
