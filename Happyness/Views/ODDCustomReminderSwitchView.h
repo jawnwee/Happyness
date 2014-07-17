@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODDCustomReminderSwitchSliderView.h"
 
 @interface ODDCustomReminderSwitchView : UIControl
 
-@property (nonatomic, strong) UIView *slider;
+@property (nonatomic, strong) ODDCustomReminderSwitchSliderView *slider;
 
 @end

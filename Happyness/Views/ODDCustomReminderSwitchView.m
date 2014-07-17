@@ -11,8 +11,6 @@
 
 @interface ODDCustomReminderSwitchView ()
 
-//@property (nonatomic, strong) UIView *slider;
-
 @end
 
 @implementation ODDCustomReminderSwitchView
@@ -30,12 +28,10 @@
 - (void)setup {
     self.layer.cornerRadius = 5.0f;
     self.backgroundColor = [ODDCustomColor customReminderOffColor];
-    self.slider = [[UIView alloc] initWithFrame:CGRectMake(0,
+    self.slider = [[ODDCustomReminderSwitchSliderView alloc] initWithFrame:CGRectMake(0,
                                                               0, 
                                                               self.frame.size.width / 2 + 5,
                                                               self.frame.size.height)];
-    self.slider.backgroundColor = [ODDCustomColor textColor];
-    self.slider.layer.cornerRadius = 5.0f;
     [self addSubview:self.slider];
 }
 
@@ -45,14 +41,5 @@
     }
     return nil;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

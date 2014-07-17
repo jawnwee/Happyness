@@ -35,6 +35,7 @@
 		C419C83E195DA45D008AE325 /* Happyness_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C834195DA45D008AE325 /* Happyness_4@2x.png */; };
 		C419C83F195DA45D008AE325 /* Happyness_5.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C835195DA45D008AE325 /* Happyness_5.png */; };
 		C419C840195DA45D008AE325 /* Happyness_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C836195DA45D008AE325 /* Happyness_5@2x.png */; };
+		C4365FB71978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4365FB61978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m */; };
 		C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */; };
 		C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappyness.m */; };
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
@@ -163,6 +164,8 @@
 		C419C834195DA45D008AE325 /* Happyness_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Happyness_4@2x.png"; sourceTree = "<group>"; };
 		C419C835195DA45D008AE325 /* Happyness_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Happyness_5.png; sourceTree = "<group>"; };
 		C419C836195DA45D008AE325 /* Happyness_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Happyness_5@2x.png"; sourceTree = "<group>"; };
+		C4365FB51978621700FFAED3 /* ODDCustomReminderSwitchSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomReminderSwitchSliderView.h; sourceTree = "<group>"; };
+		C4365FB61978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomReminderSwitchSliderView.m; sourceTree = "<group>"; };
 		C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntry.h; sourceTree = "<group>"; };
 		C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntry.m; sourceTree = "<group>"; };
 		C4669CCE194F823200F82109 /* ODDHappyness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappyness.h; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 				C4EE1D2C19761F2D0080CAFD /* ODDCardQuoteCollectionViewCell.m */,
 				C406531C1976FFFA0046806B /* ODDCustomReminderSwitchView.h */,
 				C406531D1976FFFA0046806B /* ODDCustomReminderSwitchView.m */,
+				C4365FB51978621700FFAED3 /* ODDCustomReminderSwitchSliderView.h */,
+				C4365FB61978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m */,
 			);
 			name = ReminderViews;
 			sourceTree = "<group>";
@@ -933,6 +938,7 @@
 				EB835DC61970B6DE002C0A20 /* ODDCalendarTabImageView.m in Sources */,
 				C4EE1D2919761EC20080CAFD /* ODDCardQuoteScrollViewController.m in Sources */,
 				C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */,
+				C4365FB71978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m in Sources */,
 				C406531E1976FFFA0046806B /* ODDCustomReminderSwitchView.m in Sources */,
 				D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */,
 				EB6EEF4D196B73BC0063DEB4 /* ODDBottomRootViewController.m in Sources */,

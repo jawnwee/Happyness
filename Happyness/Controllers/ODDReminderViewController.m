@@ -127,7 +127,7 @@
         [self turnOffPickerCover];
         self.picker.gradientColor = self.picker.backgroundColor = [ODDCustomColor customReminderOffColor];
         CGRect slideRightFrame = slider.frame;
-        slideRightFrame.origin.x += self.reminderSwitch.frame.size.width / 2;
+        slideRightFrame.origin.x = self.reminderSwitch.frame.size.width / 2 - 5;
         [UIView animateWithDuration:0.2
                          animations:^{
                              slider.frame = slideRightFrame;
@@ -136,7 +136,7 @@
     } else {
         [self turnOnPickerCover];
         CGRect slideLeftFrame = slider.frame;
-        slideLeftFrame.origin.x -= self.reminderSwitch.frame.size.width / 2;
+        slideLeftFrame.origin.x = 0;//self.reminderSwitch.frame.size.width / 2;
         [UIView animateWithDuration:0.2
                          animations:^{
                              slider.frame = slideLeftFrame;
