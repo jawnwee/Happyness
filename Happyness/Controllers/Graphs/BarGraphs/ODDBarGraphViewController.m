@@ -209,22 +209,30 @@
 #pragma mark - Touch Events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    [self.barChartView touchesBegan:touches withEvent:event];
+    if (self.barChartView.showsVerticalSelection) {        
+        [super touchesBegan:touches withEvent:event];
+        [self.barChartView touchesBegan:touches withEvent:event];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    [self.barChartView touchesCancelled:touches withEvent:event];
+    if (self.barChartView.showsVerticalSelection) {
+        [super touchesCancelled:touches withEvent:event];
+        [self.barChartView touchesCancelled:touches withEvent:event];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    [self.barChartView touchesEnded:touches withEvent:event];
+    if (self.barChartView.showsVerticalSelection) {
+        [super touchesEnded:touches withEvent:event];
+        [self.barChartView touchesEnded:touches withEvent:event];
+    }
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.barChartView touchesMoved:touches withEvent:event];
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {\
+    if (self.barChartView.showsVerticalSelection) {
+        [self.barChartView touchesMoved:touches withEvent:event];
+    }
 }
 
 

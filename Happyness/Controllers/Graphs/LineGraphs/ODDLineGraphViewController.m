@@ -285,22 +285,30 @@ selectionColorForLineAtLineIndex:(NSUInteger)lineIndex {
 #pragma mark - Touch Events
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesBegan:touches withEvent:event];
-    [self.lineGraphView touchesBegan:touches withEvent:event];
+    if (self.lineGraphView.showsVerticalSelection) {
+        [super touchesBegan:touches withEvent:event];
+        [self.lineGraphView touchesBegan:touches withEvent:event];
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesCancelled:touches withEvent:event];
-    [self.lineGraphView touchesCancelled:touches withEvent:event];
+    if (self.lineGraphView.showsVerticalSelection) {
+        [super touchesCancelled:touches withEvent:event];
+        [self.lineGraphView touchesCancelled:touches withEvent:event];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    [super touchesEnded:touches withEvent:event];
-    [self.lineGraphView touchesEnded:touches withEvent:event];
+    if (self.lineGraphView.showsVerticalSelection) {
+        [super touchesEnded:touches withEvent:event];
+        [self.lineGraphView touchesEnded:touches withEvent:event];
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.lineGraphView touchesMoved:touches withEvent:event];
+    if (self.lineGraphView.showsVerticalSelection) {
+        [self.lineGraphView touchesMoved:touches withEvent:event];
+    }
 }
 
 @end
