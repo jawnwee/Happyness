@@ -10,4 +10,7 @@
 
 @interface ODDStatisticsCardScrollView : ODDCardScrollViewController
 
+@property (nonatomic, strong) NSMutableArray *cardOccurences;
+@property (nonatomic, strong) NSMutableArray *longestStreak;
+
 @end

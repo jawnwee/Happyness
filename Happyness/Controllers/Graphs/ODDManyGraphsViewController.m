@@ -9,6 +9,7 @@
 #import "ODDManyGraphsViewController.h"
 #import "ODDGraphViewController.h"
 #import "ODDCustomColor.h"
+#import "ODDStatisticsCardScrollView.h"
 
 #define HEADER_HEIGHT 40
 #define STATUS_BAR_HEIGHT 20 // Should always be 20 points
@@ -26,6 +27,7 @@
 @end
 
 @implementation ODDManyGraphsViewController
+@synthesize cards = _cards;
 
 #pragma mark - Alloc/Init
 
@@ -63,6 +65,8 @@
     [super viewWillAppear:animated];
     ODDGraphViewController *currentGraphController = (ODDGraphViewController *)self.graphs[self.currentGraph];
     [currentGraphController reloadDataStore];
+    //TODO: Uncomment once completed
+//    [self setupCardStatistics];
 }
 
 #pragma mark - Subviews Init/Layout
@@ -201,6 +205,64 @@
                          self.down.userInteractionEnabled = YES;
                          self.up.userInteractionEnabled = YES;
                      }];
+}
+
+#pragma mark - Setup card statistics
+
+
+// TODO: Complete this method
+// If we want longest streak the current method doesn't work
+- (void)setupCardStatistics {
+    NSArray *entries = ((ODDGraphViewController *)self.graphs[0]).entries;
+    NSRange longestStreaks[5] = { NSMakeRange(0, 0),
+        NSMakeRange(0, 0),
+        NSMakeRange(0, 0),
+        NSMakeRange(0, 0),
+        NSMakeRange(0, 0) };
+    uint totalCounts[5] = { 0, 0, 0, 0, 0 };
+    NSUInteger lastRating = ((ODDHappynessEntry *)entries[0]).happyness.rating,
+    currentCount = 1,
+    index = 0;
+    for (ODDHappynessEntry *entry in entries) {
+        NSUInteger rating = entry.happyness.rating;
+        totalCounts[rating - 1]  +=  1;
+        if (rating == lastRating) {
+            currentCount += 1;
+        } else {
+            if (currentCount >= longestStreaks[rating - 1].length) {
+                longestStreaks[rating - 1].location = index - currentCount;
+                longestStreaks[rating - 1].length = currentCount - 1;
+            }
+            currentCount = 1;
+        }
+        lastRating = entry.happyness.rating;
+        index++;
+    }
+    
+    NSMutableArray *totalCountArray = [[NSMutableArray alloc] initWithCapacity:5],
+                *longestStreakArray = [[NSMutableArray alloc] initWithCapacity:5];
+    NSString *countString, *streakString, *firstDate, *lastDate;
+    ODDHappynessEntry *firstEntry, *lastEntry;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"M/d"];
+    for (NSUInteger i = 0; i < 5; i++) {
+        countString = [NSString stringWithFormat:@"Total Count:\n%d", totalCounts[i]];
+        totalCountArray[i] = countString;
+        firstEntry = (ODDHappynessEntry *)entries[longestStreaks[i].location];
+        lastEntry = (ODDHappynessEntry *)entries[longestStreaks[i].location +
+                                                 longestStreaks[i].length];
+        firstDate = [dateFormatter stringFromDate:firstEntry.date];
+        lastDate = [dateFormatter stringFromDate:lastEntry.date];
+        if (totalCounts[i] == 0) {
+            streakString = @"Longest Streak:\tNone";
+        } else {
+            streakString = [NSString stringWithFormat:@"Longest Streak:\n%@ - %@", firstDate, lastDate];
+        }
+        longestStreakArray[i] = streakString;
+    }
+    
+    self.cards.cardOccurences = totalCountArray;
+    self.cards.longestStreak = longestStreakArray;
 }
 
 @end

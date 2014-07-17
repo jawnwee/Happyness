@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODDPolynomialFit.h"
 #import "ODDGraphFooterView.h"
 #import "ODDColoredAxisView.h"
+#import "ODDColoredLinesView.h"
 #import "ODDHappynessEntryStore.h"
 #import "ODDHappynessEntry.h"
 #import "ODDHappyness.h"
 #import "ODDDoubleArrayHolder.h"
-#import "ODDColoredLinesView.h"
 
 @interface ODDGraphViewController : UIViewController
 

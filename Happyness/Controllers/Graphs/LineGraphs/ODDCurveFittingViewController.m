@@ -7,6 +7,7 @@
 //
 
 #import "ODDCurveFittingViewController.h"
+#import "ODDPolynomialFit.h"
 
 #define ALL_COUNT_FOR_SMALL_DATA 500
 #define POLYFIT_DEGREE 7

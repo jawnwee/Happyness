@@ -74,6 +74,7 @@
 		D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = D19767161969F53D00CF7E19 /* ODDColoredAxisView.m */; };
 		D1AAF2661968869100332F59 /* ODDRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AAF2651968869100332F59 /* ODDRootViewController.m */; };
 		D1AAF26C196888FA00332F59 /* ODDRootScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */; };
+		D1B40D0B19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B40D0A19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m */; };
 		D1D4A1FF196A679200340234 /* ODDManyGraphsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D1D4A1FE196A679200340234 /* ODDManyGraphsViewController.m */; };
 		D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */; };
 		D1DBDE5419646B7300003762 /* ODDDoubleArrayHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DBDE5319646B7300003762 /* ODDDoubleArrayHolder.m */; };
@@ -230,6 +231,8 @@
 		D1AAF2651968869100332F59 /* ODDRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDRootViewController.m; sourceTree = "<group>"; };
 		D1AAF26A196888FA00332F59 /* ODDRootScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDRootScrollView.h; sourceTree = "<group>"; };
 		D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDRootScrollView.m; sourceTree = "<group>"; };
+		D1B40D0919779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDStatisticsCollectionViewCell.h; sourceTree = "<group>"; };
+		D1B40D0A19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDStatisticsCollectionViewCell.m; sourceTree = "<group>"; };
 		D1D4A1FD196A679200340234 /* ODDManyGraphsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDManyGraphsViewController.h; sourceTree = "<group>"; };
 		D1D4A1FE196A679200340234 /* ODDManyGraphsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDManyGraphsViewController.m; sourceTree = "<group>"; };
 		D1DBDE4F19631C4C00003762 /* ODDGraphAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDGraphAxis.h; sourceTree = "<group>"; };
@@ -445,6 +448,8 @@
 		D124B14F195A78FD00A9F687 /* Graphs */ = {
 			isa = PBXGroup;
 			children = (
+				D1B40D0919779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.h */,
+				D1B40D0A19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m */,
 				D171EB33196F374100DCA75B /* Colored */,
 				D1DBDE4F19631C4C00003762 /* ODDGraphAxis.h */,
 				D1DBDE5019631C4C00003762 /* ODDGraphAxis.m */,
@@ -938,6 +943,7 @@
 				EB6EEF4D196B73BC0063DEB4 /* ODDBottomRootViewController.m in Sources */,
 				D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */,
 				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
+				D1B40D0B19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m in Sources */,
 				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
 				D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */,
 				EBCFE226196E51A4003D97E7 /* ODDCardCollectionViewCell.m in Sources */,

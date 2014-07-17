@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ODDStatisticsCardScrollView;
 
 @interface ODDManyGraphsViewController : UIViewController
+
+@property (nonatomic, strong) ODDStatisticsCardScrollView *cards;
 
 // Designated initializer
 - (instancetype)initWithGraphs:(NSArray *)graphs;

@@ -21,6 +21,7 @@
 #import "ODDSelectionCardScrollViewController.h"
 #import "ODDReminderViewController.h"
 #import "ODDCardQuoteScrollViewController.h"
+#import "ODDStatisticsCardScrollView.h"
 
 @implementation ODDAppDelegate
 
@@ -77,14 +78,16 @@
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
     davc.numberOfBars = 7;
+    ODDStatisticsCardScrollView *graphBottom = [[ODDStatisticsCardScrollView alloc] init];
     ODDManyGraphsViewController *mgvc = [[ODDManyGraphsViewController alloc] initWithGraphs:@[cfvc, davc]];
+    mgvc.cards = graphBottom;
 
     ODDReminderViewController *reminderViewController = [[ODDReminderViewController alloc] init];
 
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
 
-    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, selectionBottom, reminderBottom];
+    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, graphBottom, reminderBottom];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
