@@ -220,11 +220,11 @@
         NSMakeRange(0, 0),
         NSMakeRange(0, 0) };
     uint totalCounts[5] = { 0, 0, 0, 0, 0 };
-    NSUInteger lastRating = ((ODDHappynessEntry *)entries[0]).happyness.rating,
+    NSUInteger lastRating = [((ODDHappynessEntry *)entries[0]).happyness.rating integerValue],
     currentCount = 1,
     index = 0;
     for (ODDHappynessEntry *entry in entries) {
-        NSUInteger rating = entry.happyness.rating;
+        NSUInteger rating = [entry.happyness.rating integerValue];
         totalCounts[rating - 1]  +=  1;
         if (rating == lastRating) {
             currentCount += 1;
@@ -235,7 +235,7 @@
             }
             currentCount = 1;
         }
-        lastRating = entry.happyness.rating;
+        lastRating = [entry.happyness.rating integerValue];
         index++;
     }
     

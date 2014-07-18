@@ -45,7 +45,7 @@
     for (int i = 0; i < numDays; i++) {
         ODDHappynessEntry *entry = [entries objectAtIndex:entries.count - 1 - i];
         ODDHappyness *happyness = entry.happyness;
-        [pastDays addObject:[NSNumber numberWithInteger:happyness.rating]];
+        [pastDays addObject:[NSNumber numberWithInteger:[happyness.rating intValue]]];
     }
 
     // Entries get older as they increase; rating1 is most recent entry

@@ -82,33 +82,33 @@
                                                                                 withValues:dayCountsValues];
     NSUInteger forLoopCount = 0;
     NSUInteger entriesCount = self.entries.count;
-    for (ODDHappynessEntry *entry in self.entries) {
-        NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:entry.date];
-        NSInteger weekday = [comps weekday] - 1;
-        [self.allData setValue:((double)entry.happyness.rating +
-                                [self.allData getValueAtIndex:weekday])
-                       atIndex:weekday];
-        [allDayCounts setValue:([allDayCounts getValueAtIndex:weekday] + 1) atIndex:weekday];
-        
-        if ((entriesCount - forLoopCount) <= self.mediumCount) {
-            [self.mediumeData setValue:((double)entry.happyness.rating +
-                                        [self.mediumeData getValueAtIndex:weekday])
-                               atIndex:weekday];
-            [mediumDayCounts setValue:([mediumDayCounts getValueAtIndex:weekday] + 1)
-                              atIndex:weekday];
-        }
-        
-        if ((entriesCount - forLoopCount) <= self.shortTermCount) {
-            [self.shortData setValue:((double)entry.happyness.rating +
-                                      [self.shortData getValueAtIndex:weekday])
-                             atIndex:weekday];
-            [shortTermDayCounts setValue:([shortTermDayCounts getValueAtIndex:weekday] + 1)
-                                 atIndex:weekday];
-        }
-        
-        forLoopCount++;
-    }
-    
+//    for (ODDHappynessEntry *entry in self.entries) {
+//        NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:entry.date];
+//        NSInteger weekday = [comps weekday] - 1;
+//        [self.allData setValue:((double)entry.happyness.rating +
+//                                [self.allData getValueAtIndex:weekday])
+//                       atIndex:weekday];
+//        [allDayCounts setValue:([allDayCounts getValueAtIndex:weekday] + 1) atIndex:weekday];
+//        
+//        if ((entriesCount - forLoopCount) <= self.mediumCount) {
+//            [self.mediumeData setValue:((double)entry.happyness.rating +
+//                                        [self.mediumeData getValueAtIndex:weekday])
+//                               atIndex:weekday];
+//            [mediumDayCounts setValue:([mediumDayCounts getValueAtIndex:weekday] + 1)
+//                              atIndex:weekday];
+//        }
+//        
+//        if ((entriesCount - forLoopCount) <= self.shortTermCount) {
+//            [self.shortData setValue:((double)entry.happyness.rating +
+//                                      [self.shortData getValueAtIndex:weekday])
+//                             atIndex:weekday];
+//            [shortTermDayCounts setValue:([shortTermDayCounts getValueAtIndex:weekday] + 1)
+//                                 atIndex:weekday];
+//        }
+//        
+//        forLoopCount++;
+//    }
+
     for (NSUInteger i = 0; i < 7; i++) {
         if ([allDayCounts getValueAtIndex:i] != 0) {
             [self.allData setValue:([self.allData getValueAtIndex:i] /

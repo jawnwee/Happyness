@@ -36,10 +36,11 @@
 		C419C83F195DA45D008AE325 /* Happyness_5.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C835195DA45D008AE325 /* Happyness_5.png */; };
 		C419C840195DA45D008AE325 /* Happyness_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C836195DA45D008AE325 /* Happyness_5@2x.png */; };
 		C4365FB71978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4365FB61978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m */; };
-		C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */; };
-		C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CCF194F823200F82109 /* ODDHappyness.m */; };
+		C45595131978D8AC002347DF /* Happyness.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C45595111978D8AC002347DF /* Happyness.xcdatamodeld */; };
+		C455951F1979A84B002347DF /* ODDHappyness.m in Sources */ = {isa = PBXBuildFile; fileRef = C455951E1979A84B002347DF /* ODDHappyness.m */; };
+		C45595221979A84C002347DF /* ODDHappynessEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = C45595211979A84C002347DF /* ODDHappynessEntry.m */; };
+		C45595251979A84C002347DF /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C45595241979A84C002347DF /* ODDNote.m */; };
 		C4669CD3194F824C00F82109 /* ODDHappynessEntryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */; };
-		C4669CD6194F980D00F82109 /* ODDNote.m in Sources */ = {isa = PBXBuildFile; fileRef = C4669CD5194F980D00F82109 /* ODDNote.m */; };
 		C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BD9196F5601001ACC87 /* ODDHappynessObserver.m */; };
 		C4C57BDE196F5672001ACC87 /* ODDFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BDD196F5672001ACC87 /* ODDFeedbackViewController.m */; };
 		C4C57BE2196F56BA001ACC87 /* ODDReminderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C4C57BE1196F56BA001ACC87 /* ODDReminderViewController.m */; };
@@ -175,14 +176,15 @@
 		C419C836195DA45D008AE325 /* Happyness_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Happyness_5@2x.png"; sourceTree = "<group>"; };
 		C4365FB51978621700FFAED3 /* ODDCustomReminderSwitchSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCustomReminderSwitchSliderView.h; sourceTree = "<group>"; };
 		C4365FB61978621700FFAED3 /* ODDCustomReminderSwitchSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCustomReminderSwitchSliderView.m; sourceTree = "<group>"; };
-		C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntry.h; sourceTree = "<group>"; };
-		C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntry.m; sourceTree = "<group>"; };
-		C4669CCE194F823200F82109 /* ODDHappyness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappyness.h; sourceTree = "<group>"; };
-		C4669CCF194F823200F82109 /* ODDHappyness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappyness.m; sourceTree = "<group>"; };
+		C45595121978D8AC002347DF /* Happyness.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Happyness.xcdatamodel; sourceTree = "<group>"; };
+		C455951D1979A84B002347DF /* ODDHappyness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODDHappyness.h; path = ../ODDHappyness.h; sourceTree = "<group>"; };
+		C455951E1979A84B002347DF /* ODDHappyness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODDHappyness.m; path = ../ODDHappyness.m; sourceTree = "<group>"; };
+		C45595201979A84C002347DF /* ODDHappynessEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODDHappynessEntry.h; path = ../ODDHappynessEntry.h; sourceTree = "<group>"; };
+		C45595211979A84C002347DF /* ODDHappynessEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODDHappynessEntry.m; path = ../ODDHappynessEntry.m; sourceTree = "<group>"; };
+		C45595231979A84C002347DF /* ODDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODDNote.h; path = ../ODDNote.h; sourceTree = "<group>"; };
+		C45595241979A84C002347DF /* ODDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODDNote.m; path = ../ODDNote.m; sourceTree = "<group>"; };
 		C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessEntryStore.h; sourceTree = "<group>"; };
 		C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessEntryStore.m; sourceTree = "<group>"; };
-		C4669CD4194F980D00F82109 /* ODDNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDNote.h; sourceTree = "<group>"; };
-		C4669CD5194F980D00F82109 /* ODDNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDNote.m; sourceTree = "<group>"; };
 		C4C57BD8196F5601001ACC87 /* ODDHappynessObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDHappynessObserver.h; sourceTree = "<group>"; };
 		C4C57BD9196F5601001ACC87 /* ODDHappynessObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDHappynessObserver.m; sourceTree = "<group>"; };
 		C4C57BDC196F5672001ACC87 /* ODDFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDFeedbackViewController.h; sourceTree = "<group>"; };
@@ -391,12 +393,12 @@
 		C4669CC8194F814D00F82109 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				C4669CCB194F81CD00F82109 /* ODDHappynessEntry.h */,
-				C4669CCC194F81CD00F82109 /* ODDHappynessEntry.m */,
-				C4669CCE194F823200F82109 /* ODDHappyness.h */,
-				C4669CCF194F823200F82109 /* ODDHappyness.m */,
-				C4669CD4194F980D00F82109 /* ODDNote.h */,
-				C4669CD5194F980D00F82109 /* ODDNote.m */,
+				C45595231979A84C002347DF /* ODDNote.h */,
+				C45595241979A84C002347DF /* ODDNote.m */,
+				C45595201979A84C002347DF /* ODDHappynessEntry.h */,
+				C45595211979A84C002347DF /* ODDHappynessEntry.m */,
+				C455951D1979A84B002347DF /* ODDHappyness.h */,
+				C455951E1979A84B002347DF /* ODDHappyness.m */,
 				C4669CD1194F824C00F82109 /* ODDHappynessEntryStore.h */,
 				C4669CD2194F824C00F82109 /* ODDHappynessEntryStore.m */,
 				EBD388481961F822000A41A1 /* ODDHappynessHeader.h */,
@@ -523,6 +525,7 @@
 				D13F4C6A194F6A68003873B0 /* ODDAppDelegate.h */,
 				D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */,
 				D13F4C6D194F6A68003873B0 /* Images.xcassets */,
+				C45595111978D8AC002347DF /* Happyness.xcdatamodeld */,
 				C4669CC8194F814D00F82109 /* Models */,
 				D1AAF26D1968890200332F59 /* Views */,
 				D1AAF2671968869600332F59 /* Controllers */,
@@ -838,7 +841,7 @@
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
 					D13F4C57194F6A68003873B0 = {
-						DevelopmentTeam = 6UN3N9H6B4;
+						DevelopmentTeam = BJAYWJUEC7;
 					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;
@@ -1003,6 +1006,7 @@
 				D13B1B811976F61D00079EA5 /* ODDStatisticsCardScrollView.m in Sources */,
 				EBCFE229196E543E003D97E7 /* ODDCalendarCardScrollViewController.m in Sources */,
 				D171EB36196F376900DCA75B /* ODDColoredView.m in Sources */,
+				C45595131978D8AC002347DF /* Happyness.xcdatamodeld in Sources */,
 				EB835DC61970B6DE002C0A20 /* ODDCalendarTabImageView.m in Sources */,
 				C4EE1D2919761EC20080CAFD /* ODDCardQuoteScrollViewController.m in Sources */,
 				C4C57BDA196F5601001ACC87 /* ODDHappynessObserver.m in Sources */,
@@ -1011,16 +1015,14 @@
 				D175C2791965BF3500A1E3CD /* ODDDayAveragesViewController.m in Sources */,
 				EB6EEF4D196B73BC0063DEB4 /* ODDBottomRootViewController.m in Sources */,
 				D1DBDE5119631C4C00003762 /* ODDGraphAxis.m in Sources */,
-				C4669CD6194F980D00F82109 /* ODDNote.m in Sources */,
 				D1B40D0B19779DDC00FD0D52 /* ODDStatisticsCollectionViewCell.m in Sources */,
-				C4669CD0194F823200F82109 /* ODDHappyness.m in Sources */,
 				D19767171969F53D00CF7E19 /* ODDColoredAxisView.m in Sources */,
 				EBCFE226196E51A4003D97E7 /* ODDCardCollectionViewCell.m in Sources */,
 				EB844E451974584200D8C546 /* ODDSelectionCardScrollViewController.m in Sources */,
 				C4C57BDE196F5672001ACC87 /* ODDFeedbackViewController.m in Sources */,
+				C45595221979A84C002347DF /* ODDHappynessEntry.m in Sources */,
 				D124B1441953A21500A9F687 /* ODDBarGraphViewController.m in Sources */,
 				EB99473A195AA99C0095DA5B /* ODDCalendarView.m in Sources */,
-				C4669CCD194F81CD00F82109 /* ODDHappynessEntry.m in Sources */,
 				D1AAF2661968869100332F59 /* ODDRootViewController.m in Sources */,
 				D124B156195A7E4700A9F687 /* ODDGraphFooterView.m in Sources */,
 				EB0BD90F1977215E005B716A /* ODDTodayNoteView.m in Sources */,
@@ -1042,6 +1044,8 @@
 				EBCFE22C196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m in Sources */,
 				EB4DCBFB19786EB200EFB3E3 /* ODDWelcomeScreenViewController.m in Sources */,
 				D1D4A1FF196A679200340234 /* ODDManyGraphsViewController.m in Sources */,
+				C455951F1979A84B002347DF /* ODDHappyness.m in Sources */,
+				C45595251979A84C002347DF /* ODDNote.m in Sources */,
 				D124B1471956518600A9F687 /* ODDGraphViewController.m in Sources */,
 				D13F4C68194F6A68003873B0 /* main.m in Sources */,
 				EB844E421974524F00D8C546 /* ODDSelectionCardCollectionViewCell.m in Sources */,
@@ -1174,7 +1178,7 @@
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13eacac5-94bc-432d-b7ae-bc0c6fe15a52";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1197,7 +1201,7 @@
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13eacac5-94bc-432d-b7ae-bc0c6fe15a52";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1274,6 +1278,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C45595111978D8AC002347DF /* Happyness.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C45595121978D8AC002347DF /* Happyness.xcdatamodel */,
+			);
+			currentVersion = C45595121978D8AC002347DF /* Happyness.xcdatamodel */;
+			path = Happyness.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D13F4C50194F6A68003873B0 /* Project object */;
 }

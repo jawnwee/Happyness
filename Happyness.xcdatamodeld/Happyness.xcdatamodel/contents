@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6172.15" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ODDHappyness" representedClassName="ODDHappyness" syncable="YES">
+        <attribute name="rating" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ODDHappynessEntry" inverseName="happyness" inverseEntity="ODDHappynessEntry" syncable="YES"/>
+    </entity>
+    <entity name="ODDHappynessEntry" representedClassName="ODDHappynessEntry" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="happyness" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ODDHappyness" inverseName="entry" inverseEntity="ODDHappyness" syncable="YES"/>
+        <relationship name="note" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ODDNote" inverseName="entry" inverseEntity="ODDNote" syncable="YES"/>
+    </entity>
+    <entity name="ODDNote" representedClassName="ODDNote" syncable="YES">
+        <attribute name="noteString" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ODDHappynessEntry" inverseName="note" inverseEntity="ODDHappynessEntry" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ODDHappyness" positionX="18" positionY="63" width="128" height="88"/>
+        <element name="ODDHappynessEntry" positionX="54" positionY="99" width="128" height="88"/>
+        <element name="ODDNote" positionX="-27" positionY="18" width="128" height="73"/>
+    </elements>
+</model>

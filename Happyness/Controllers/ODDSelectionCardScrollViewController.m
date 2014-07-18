@@ -13,6 +13,7 @@
 @interface ODDSelectionCardScrollViewController ()
 
 @property (nonatomic) NSInteger selectedCard;
+@property (nonatomic, strong) ODDHappynessEntry *entryForToday;
 
 @end
 
@@ -57,16 +58,30 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCard = -(indexPath.row % 5) + 5;
-    NSDate *date = [NSDate date];
-    ODDHappyness *happyness = [[ODDHappyness alloc] initWithFace:self.selectedCard];
-    ODDNote *note = [[ODDNote alloc] init];
-    ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happyness
-                                                                           note:note
-                                                                       dateTime:date];
-    [[ODDHappynessEntryStore sharedStore] addEntry:entry];
-    [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+    NSNumber *value = [NSNumber numberWithLong:self.selectedCard];
+    if (self.entryForToday) {
+        self.entryForToday.happyness.value = value;
+    } else {
+        NSDate *date = [NSDate date];
+        self.entryForToday = [ODDHappynessEntry MR_createEntity];
+        ODDHappyness *happyness = [ODDHappyness MR_createEntity];
+        happyness.rating = value;
+        happyness.value = value;
+        happyness.entry = self.entryForToday;
+
+        ODDNote *note = [ODDNote MR_createEntity];
+        note.entry = self.entryForToday;
+
+        self.entryForToday.happyness = happyness;
+        self.entryForToday.note = note;
+        self.entryForToday.date = date;
+
+        [[ODDHappynessEntryStore sharedStore] addEntry:self.entryForToday];
+        [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+    }
     [self.delegate submit];
     [self reloadCollectionData];
+    [self saveContext];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -86,6 +101,7 @@
 
 - (void)clearCards {
     self.selectedCard = -1;
+    self.entryForToday = nil;
     [self reloadCollectionData];
 }
 
@@ -100,6 +116,11 @@
     if (currentOffsetX < (contentWidth / 8.0)) {
         scrollView.contentOffset = CGPointMake(currentOffsetX + (contentWidth / 2.0), currentOffsetY);
     }
+}
+
+- (void)saveContext {
+    NSManagedObjectContext *defaultContext = [NSManagedObjectContext MR_defaultContext];
+    [defaultContext MR_saveToPersistentStoreAndWait];
 }
 
 @end

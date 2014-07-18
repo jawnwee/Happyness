@@ -30,7 +30,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Crashlytics startWithAPIKey:@"15cff1e39186231362a287dbc7407a93ea1631de"];
+    [MagicalRecord setupCoreDataStack];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    NSArray *allEntries = [ODDHappynessEntry MR_findAll];
+    ODDHappynessEntry *entry;
+    for (entry in allEntries) {
+        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+    }
 //    [[UIApplication sharedApplication] registerUserNotificationSettings:
 //                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
 //                                                                      | UIUserNotificationTypeAlert 
@@ -52,24 +58,31 @@
     } */
     NSBundle *appBundle = [NSBundle mainBundle];
 
-
+/*
     // Testing purposes, 500 random data for previous days
-    for (int i = 1; i <= 400; i++) {
-        int test = arc4random_uniform(5) + 1;
+    for (int i = 1; i <= 5; i++) {
+        NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         int randomTimeDelta = 1;
         //int randomTimeDelta = arc4random_uniform(2);
         // i += randomTimeDelta;
         NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * randomTimeDelta * i)];
-        ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
-        ODDNote *testNote = [[ODDNote alloc] init];
-        testNote.noteString = [NSMutableString
-                               stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
-        ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
-                                                                               note:testNote
-                                                                           dateTime:date];
+        ODDHappynessEntry *testEntry = [ODDHappynessEntry MR_createEntity];
+        ODDHappyness *testHappyness = [ODDHappyness MR_createEntity];
+        testHappyness.value = value;
+        testHappyness.entry = testEntry;
+        ODDNote *note = [ODDNote MR_createEntity];
+        note.noteString = [NSMutableString
+                          stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
+        note.entry = testEntry;
+
+        testEntry.happyness = testHappyness;
+        testEntry.note = note;
+        testEntry.date = date;
+
         [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
     }
     [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+ */
     //////////////////////////////////////////////////////
 
     // Feedback
@@ -113,12 +126,11 @@
 
     ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
 
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
-//        self.window.rootViewController = mainvc;
-//    } else {
-//        self.window.rootViewController = welcomeScreen;
-//    }
-    self.window.rootViewController = welcomeScreen;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
+        self.window.rootViewController = mainvc;
+    } else {
+        self.window.rootViewController = welcomeScreen;
+    }
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

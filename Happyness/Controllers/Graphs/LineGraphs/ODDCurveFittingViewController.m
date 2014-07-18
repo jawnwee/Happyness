@@ -66,7 +66,8 @@
         ODDDoubleArrayHolder *allEntriesRatings = [[ODDDoubleArrayHolder alloc] initWithCount:numberOfAllEntries];
         NSUInteger index = 0;
         for (ODDHappynessEntry *happynessItem in self.entries) {
-            [allEntriesRatings setValue:(double)happynessItem.happyness.rating atIndex:index];
+            double rating = [happynessItem.happyness.rating doubleValue];
+            [allEntriesRatings setValue:rating atIndex:index];
             index++;
         }
         if (numberOfAllEntries < ALL_COUNT_FOR_SMALL_DATA) {

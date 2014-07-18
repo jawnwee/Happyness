@@ -35,7 +35,7 @@
         bottomController.delegate = self;
         _colorDictionary = [ODDCustomColor customColorDictionary];
 
-        _note = [[ODDNote alloc] init];
+        _note = [ODDNote MR_createEntity];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(submitEntryForDay)
@@ -120,13 +120,14 @@
     NSArray *store = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
     for (int i = 0; i < store.count; i++) {
         ODDHappyness *temp = ((ODDHappynessEntry *)[store objectAtIndex:i]).happyness;
-        if (temp.value == 1) {
+        int value = [temp.value intValue];
+        if (value == 1) {
             oneCount += 1;
-        } else if (temp.value == 2) {
+        } else if (value == 2) {
             twoCount += 1;
-        } else if (temp.value == 3) {
+        } else if (value == 3) {
             threeCount += 1;
-        } else if (temp.value == 4) {
+        } else if (value == 4) {
             fourCount += 1;
         } else {
             fiveCount += 1;
@@ -161,13 +162,14 @@
     NSArray *store = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
     for (int i = 0; i < store.count; i++) {
         ODDHappyness *temp = ((ODDHappynessEntry *)[store objectAtIndex:i]).happyness;
-        if (temp.value == 1) {
+        int value = [temp.value intValue];
+        if (value == 1) {
             oneCount += 1;
-        } else if (temp.value == 2) {
+        } else if (value == 2) {
             twoCount += 1;
-        } else if (temp.value == 3) {
+        } else if (value == 3) {
             threeCount += 1;
-        } else if (temp.value == 4) {
+        } else if (value == 4) {
             fourCount += 1;
         } else {
             fiveCount += 1;
@@ -454,7 +456,8 @@ shouldChangeTextInRange:(NSRange)range
         [xValues addObject:[NSNumber numberWithInt:i + 1]];
         ODDHappynessEntry *entry = [entries objectAtIndex:i];
         ODDHappyness *happyness = entry.happyness;
-        [yValues addObject:[NSNumber numberWithDouble:happyness.rating]];
+        double rating = [happyness.rating doubleValue];
+        [yValues addObject:[NSNumber numberWithDouble:rating]];
     }
 
     if (entries.count == 1) {

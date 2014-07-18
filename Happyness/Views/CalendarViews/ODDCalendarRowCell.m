@@ -63,7 +63,7 @@
     NSDictionary *entries = [[ODDHappynessEntryStore sharedStore] happynessEntries];
     ODDHappynessEntry *entry = [entries objectForKey:key];
     if (entry) {
-        NSInteger value = [[entry happyness] value];
+        NSInteger value = [[[entry happyness] value] integerValue];
         NSString *string = [NSString stringWithFormat:@"oddLook_calendar_%ld", (long)value];
         [currentImageView setImage:[self.tabs objectForKey:string]];
     } else {
@@ -82,7 +82,7 @@
     NSDictionary *entries = [[ODDHappynessEntryStore sharedStore] happynessEntries];
     ODDHappynessEntry *entry = [entries objectForKey:key];
     ODDHappyness *happyness = [entry happyness];
-    NSInteger value = [happyness value];
+    NSInteger value = [[happyness value] integerValue];
     if (entry) {
         NSString *key = [NSString stringWithFormat:@"oddLook_color_%ld", (long)value];
         button.backgroundColor = [self.colors objectForKey:key];

@@ -61,6 +61,7 @@
     return self.privateEntries;
 }
 
+
 /* Convert date to a Year/Month/Day format and use it as a the key for the entry */
 - (void)addEntry:(ODDHappynessEntry *)entry {
     NSDate *date = [entry date];
@@ -75,6 +76,8 @@
 - (void)removeEntry:(ODDHappynessEntry *)entry {
     NSDate *key = [entry date];
     [_privateEntries removeObjectForKey:key];
+    [entry MR_deleteEntity];
+    [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
 - (void)setEmptyCurrentDate {

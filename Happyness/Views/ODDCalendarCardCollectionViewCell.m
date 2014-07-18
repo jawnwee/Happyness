@@ -71,7 +71,7 @@
     NSDate *entryDate = [happynessEntry date];
     ODDNote *note = [happynessEntry note];
     ODDHappyness *happyness = [happynessEntry happyness];
-    NSInteger value = [happyness value];
+    NSInteger value = [[happyness value] integerValue];
 
     NSDateComponents *components = [[NSCalendar currentCalendar] components:
                                     NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
