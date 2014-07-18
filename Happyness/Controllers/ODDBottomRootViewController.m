@@ -36,28 +36,22 @@
     frame.origin.y += (frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
     self.view.frame = frame;
     [self.view addSubview:[[self.viewControllers objectAtIndex:0] view]];
+    CGRect adjustedFrame = [[self.viewControllers objectAtIndex:0] view].frame;
+    adjustedFrame.origin.x += 420;
+    for (int i = 1; i < [self.viewControllers count]; i++) {
+        [[self.viewControllers objectAtIndex:i] view].frame = adjustedFrame;
+        [self.view addSubview:[[self.viewControllers objectAtIndex:i] view]];
+    }
     _currentPage = 0;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)updateView:(NSInteger)index {
     UIView *current = [[self.viewControllers objectAtIndex: self.currentPage] view];
     UIView *incoming = [[self.viewControllers objectAtIndex:index] view];
-    CGRect adjustedFrame = incoming.frame;
 
     if (index > self.currentPage) {
-
-        adjustedFrame.origin.x += 420;
-        incoming.frame = adjustedFrame;
         [self animate:current nextView:incoming toRight:NO];
     } else if (index < self.currentPage) {
-        adjustedFrame.origin.x -= 420;
-        incoming.frame = adjustedFrame;
         [self animate:current nextView:incoming toRight:YES];
     }
     self.currentPage = index;
@@ -81,17 +75,20 @@
     POPBasicAnimation *offscreenAnimation = [POPBasicAnimation easeInAnimation];
     offscreenAnimation.property = [POPAnimatableProperty propertyWithName:kPOPViewFrame];
     offscreenAnimation.toValue = [NSValue valueWithCGRect:leaveToFrame];
-    offscreenAnimation.duration = 0.3f;
+    offscreenAnimation.duration = 0.2f;
 
     [onScreenAnimation setCompletionBlock:^(POPAnimation *anim, BOOL finished) {
-        [currentView removeFromSuperview];
         incomingView.frame = resultFrame;
     }];
     [currentView pop_addAnimation:offscreenAnimation forKey:@"offscreenAnimation"];
-
-    [self.view addSubview:incomingView];
     [incomingView pop_addAnimation:onScreenAnimation forKey:@"onscreenAnimation"];
-
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end

@@ -70,7 +70,9 @@
     self.shortData = [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfBars
                                                       withValues:barHeightsValues];
     
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    //NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     double dayCountsValues[7] = { 0 };
     ODDDoubleArrayHolder *allDayCounts = [[ODDDoubleArrayHolder alloc] initWithCount:self.numberOfBars
                                                                           withValues:dayCountsValues];

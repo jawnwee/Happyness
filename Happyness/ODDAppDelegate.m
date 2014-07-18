@@ -5,9 +5,10 @@
 //  Created by Yujun Cho on 6/16/14.
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
-
+#import <Crashlytics/Crashlytics.h>
 #import "ODDAppDelegate.h"
 #import "ODDMainViewController.h"
+#import "ODDWelcomeScreenViewController.h"
 #import "ODDBottomRootViewController.h"
 #import "ODDOverallCalendarViewController.h"
 #import "ODDRootViewController.h"
@@ -22,11 +23,13 @@
 #import "ODDReminderViewController.h"
 #import "ODDCardQuoteScrollViewController.h"
 #import "ODDStatisticsCardScrollView.h"
+#import "ODDHappynessHeader.h"
 
 @implementation ODDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Crashlytics startWithAPIKey:@"15cff1e39186231362a287dbc7407a93ea1631de"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //    [[UIApplication sharedApplication] registerUserNotificationSettings:
 //                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
@@ -47,23 +50,35 @@
             NSLog(@"  %@", name);
         }
     } */
-//    // All temporary inits, may or may not need changing later, these are the base views for the tab
     NSBundle *appBundle = [NSBundle mainBundle];
 
-    [ODDHappynessEntryStore sharedStore];
-    // Testers for bottom scrollView
-//    ODDTodayViewController *today = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-//    ODDTodayViewController *today2 = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-//    ODDTodayViewController *todayBottom = [[ODDTodayViewController alloc] initWithNibName:@"ODDTodayViewController" bundle:appBundle];
-    ///////////////////////////////////////////////
 
+    // Testing purposes, 500 random data for previous days
+    for (int i = 1; i <= 400; i++) {
+        int test = arc4random_uniform(5) + 1;
+        int randomTimeDelta = 1;
+        //int randomTimeDelta = arc4random_uniform(2);
+        // i += randomTimeDelta;
+        NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * randomTimeDelta * i)];
+        ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
+        ODDNote *testNote = [[ODDNote alloc] init];
+        testNote.noteString = [NSMutableString
+                               stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
+        ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
+                                                                               note:testNote
+                                                                           dateTime:date];
+        [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
+    }
+    [[ODDHappynessEntryStore sharedStore] sortStore:YES];
+    //////////////////////////////////////////////////////
 
+    // Feedback
     ODDSelectionCardScrollViewController *selectionBottom =
                                        [[ODDSelectionCardScrollViewController alloc] init];
     ODDFeedbackViewController *fvc = [[ODDFeedbackViewController alloc]
                                                     initWithCardSelectionController:selectionBottom];
 
-
+    // Calendar
     ODDCalendarCardScrollViewController *calendarBottom =
                                        [[ODDCalendarCardScrollViewController alloc] init];
     ODDOverallCalendarViewController *calendar =
@@ -72,9 +87,7 @@
                                                          bundle:appBundle
                                                bottomController:calendarBottom];
 
-    ODDCardQuoteScrollViewController *reminderBottom = [[ODDCardQuoteScrollViewController alloc] init];
-
-
+    // Graphs
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
     ODDDayAveragesViewController *davc = [[ODDDayAveragesViewController alloc] init];
     davc.numberOfBars = 7;
@@ -82,17 +95,31 @@
     ODDManyGraphsViewController *mgvc = [[ODDManyGraphsViewController alloc] initWithGraphs:@[cfvc, davc]];
     mgvc.cards = graphBottom;
 
+
+    // Reminder
+    ODDCardQuoteScrollViewController *reminderBottom = [[ODDCardQuoteScrollViewController alloc] init];
     ODDReminderViewController *reminderViewController = [[ODDReminderViewController alloc] init];
 
-    ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
-    rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
-
+    // Bottom View Controllers
     NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, graphBottom, reminderBottom];
     ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
+    // Top View Controllers
+    ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
+    rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
+
+    // Root View Controller
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
-    self.window.rootViewController = mainvc;
-    
+
+    ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
+
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
+//        self.window.rootViewController = mainvc;
+//    } else {
+//        self.window.rootViewController = welcomeScreen;
+//    }
+    self.window.rootViewController = welcomeScreen;
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

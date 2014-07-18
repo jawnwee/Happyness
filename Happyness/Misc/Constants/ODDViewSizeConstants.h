@@ -7,4 +7,5 @@
 //
 
 #define SCROLLVIEW_HEIGHT_RATIO     3.2/5
-#define PAGECONTROL_HEIGHT          10
+#define TOP_HEIGHT_RATIO            3.4/5
+#define PAGECONTROL_HEIGHT          15

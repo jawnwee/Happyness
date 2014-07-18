@@ -13,9 +13,6 @@
 
 @property (nonatomic, strong) UIPageControl *pageControl;
 @property (nonatomic, strong) ODDRootScrollView *scrollView;
-// Name clear enough?
-// TODO: create a class for this
-@property (nonatomic, strong) id bottomViewController;
 
 @property NSUInteger numberOfPages;
 
@@ -80,16 +77,16 @@
 - (void)setupPageControl {
     CGSize rootViewSize = self.view.frame.size;
     CGSize pageControlSize = CGSizeMake(rootViewSize.width,
-                                        PAGECONTROL_HEIGHT);
+                                        PAGECONTROL_HEIGHT + 5.0);
     CGRect pageControlFrame = CGRectMake(0,
-                                         self.scrollView.frame.size.height - pageControlSize.height,
+                                         self.scrollView.frame.size.height - pageControlSize.height - 10.0,
                                          pageControlSize.width,
                                          pageControlSize.height);
     self.pageControl = [[UIPageControl alloc] initWithFrame:pageControlFrame];
     self.pageControl.numberOfPages = self.numberOfPages;
     self.pageControl.currentPage = 0;
     self.pageControl.userInteractionEnabled = NO;
-    self.pageControl.backgroundColor = [UIColor whiteColor];
+    self.pageControl.backgroundColor = [UIColor clearColor];
     self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     self.pageControl.currentPageIndicatorTintColor = [UIColor darkGrayColor];
     [self.view addSubview:self.pageControl];

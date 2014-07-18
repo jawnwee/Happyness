@@ -62,7 +62,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
-                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+                                 self.view.frame.size.height * TOP_HEIGHT_RATIO);
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -81,9 +81,14 @@
     [self setUpNoteView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.pieChart reloadData];
+}
+
 - (void)setupNoteButton {
     UIButton *note = [UIButton buttonWithType:UIButtonTypeCustom];
-    note.frame = CGRectMake(self.view.bounds.size.width - 40.0, self.view.frame.size.height - 50.0, 25, 25);
+    note.frame = CGRectMake(self.view.bounds.size.width - 50.0, self.view.frame.size.height - 70.0, 45, 45);
     note.backgroundColor = [UIColor clearColor];
     [note setImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
     [self.view addSubview:note];
@@ -92,7 +97,7 @@
 
 - (void)setupHashtagButton {
     UIButton *hashtag = [UIButton buttonWithType:UIButtonTypeCustom];
-    hashtag.frame = CGRectMake(25.0, self.view.frame.size.height - 52.0, 25, 25);
+    hashtag.frame = CGRectMake(15.0, self.view.frame.size.height - 74.0, 45, 45);
     hashtag.backgroundColor = [UIColor clearColor];
     [hashtag setImage:[UIImage imageNamed:@"hashtag.png"] forState:UIControlStateNormal];
     [self.view addSubview:hashtag];
@@ -208,9 +213,9 @@
     NSString *text;
 
     if (count == 0) {
-        text = @"Wecome! How are you today? Select how you're feeling below and get Happy!";
+        text = @"Hi! How are you today? Select how you're feeling below and get Happy!";
     } else if (count == 1) {
-        text = @"Welcome back! We hope you're getting happier!";
+        text = @"Hey, welcome back! We hope you're getting happier!";
     } else {
         ODDHappynessObserver *observer = [[ODDHappynessObserver alloc] init];
         text = [observer analyzePastDays];
@@ -324,7 +329,7 @@
     CGRect containerFrame = self.noteContainerView.frame;
     // Matt: play with height values to make textView move upon keyboard showing
     containerFrame.origin.y = self.view.bounds.size.height -
-                              self.noteContainerView.frame.size.height - 20.0;
+                              self.noteContainerView.frame.size.height - 40.0;
     // animations settings
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationBeginsFromCurrentState:YES];
@@ -383,18 +388,6 @@ shouldChangeTextInRange:(NSRange)range
     }
     return growingTextView.text.length + (text.length - range.length) <= 100;
 }
-
-/* Testing fake entries
-- (void)submit {
-    for (int i = 0; i < 300; i++) {
-        ODDHappyness *happy = [[ODDHappyness alloc] initWithFace:1];
-        ODDHappynessEntry *entry = [[ODDHappynessEntry alloc] initWithHappyness:happy note:nil dateTime:[NSDate dateWithTimeIntervalSinceNow:i * 24 * 60 * 60]];
-        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
->>>>>>> Fixed picker scrolling flow and cleaned up some code
-    }
-    return growingTextView.text.length + (text.length - range.length) <= 140;
-}
- */
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {

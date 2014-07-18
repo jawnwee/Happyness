@@ -35,24 +35,6 @@
     if (self) {
 
         _calendarCardController = bottomController;
-
-        // Testing purposes, 500 random data for previous days
-        for (int i = 0; i <= 500; i++) {
-            int test = arc4random_uniform(5) + 1;
-            int randomTimeDelta = arc4random_uniform(3);
-            i += randomTimeDelta;
-            NSDate *date = [NSDate dateWithTimeIntervalSinceNow:(-86400 * randomTimeDelta * i)];
-            ODDHappyness *testing = [[ODDHappyness alloc] initWithFace:test];
-            ODDNote *testNote = [[ODDNote alloc] init];
-            testNote.noteString = [NSMutableString 
-                                   stringWithFormat:@"testing123fasldkfjaskdfjalksdfjmy name is john hahahahahahaawlajwwwwww"];
-            ODDHappynessEntry *testEntry = [[ODDHappynessEntry alloc] initWithHappyness:testing
-                                                                                   note:testNote
-                                                                               dateTime:date];
-            [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
-        }
-        [[ODDHappynessEntryStore sharedStore] sortStore:YES];
-        //////////////////////////////////////////////////////
     }
     return self;
 }
@@ -60,7 +42,7 @@
 #pragma mark - View Setup
 - (void)viewDidLoad {
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
-                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO);
+                                 self.view.frame.size.height * TOP_HEIGHT_RATIO);
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
 
@@ -76,8 +58,10 @@
     NSMutableArray *headerLabels = [NSMutableArray arrayWithCapacity:7];
 
     NSDateFormatter *dayFormatter = [NSDateFormatter new];
+//    dayFormatter.calendar = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     dayFormatter.calendar = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSGregorianCalendar];
     dayFormatter.dateFormat = @"cccccc";
 
     CGFloat headerWidth = self.calendarHeader.bounds.size.width / 7.0;
@@ -110,8 +94,10 @@
 
 - (void)setupCalendarLogic {
     NSDate *todayDate = [NSDate date];
+//    NSCalendar *gregorian = [[NSCalendar alloc]
+//                                initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSCalendar *gregorian = [[NSCalendar alloc]
-                                initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSGregorianCalendar];
 
     NSDateComponents *components = [gregorian
                                     components:(NSCalendarUnitEra |
@@ -145,8 +131,10 @@
     frame.size.height = self.view.frame.size.height - 100.0;
     calendarView.frame = frame;
     calendarView.backgroundColor = [UIColor whiteColor];
+//    calendarView.calendar = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     calendarView.calendar = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSGregorianCalendar];
     calendarView.delegate = self;
     calendarView.firstDate = self.dayOneInCurrentMonth;
     calendarView.lastDate = self.lastDayInCurrentMonth;
@@ -219,8 +207,10 @@
 
     NSDate *firstDate = self.dayOneInCurrentMonth;
     NSDate *lastDate = self.lastDayInCurrentMonth;
+//    NSCalendar *gregorian = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSGregorianCalendar];
 
     NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
                                                           NSCalendarUnitYear |
@@ -283,8 +273,10 @@
 
     NSDate *firstDate = self.dayOneInCurrentMonth;
     NSDate *lastDate = self.lastDayInCurrentMonth;
+//    NSCalendar *gregorian = [[NSCalendar alloc]
+//                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSCalendar *gregorian = [[NSCalendar alloc]
-                             initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+                             initWithCalendarIdentifier:NSGregorianCalendar];
 
     NSDateComponents *components = [gregorian components:(NSCalendarUnitEra |
                                                           NSCalendarUnitYear |

@@ -27,8 +27,8 @@
         NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
         [center addObserver:self selector:@selector(updateBottomView)
                        name:@"updateBottomView" object:nil];
-        _topView = scrollView;
         _bottomView = assistantView;
+        _topView = scrollView;
     }
     return self;
 }

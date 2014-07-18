@@ -62,7 +62,7 @@
 
 - (void)setFrameSize:(CGSize)size {
     CGRect originalFrame = self.view.frame;
-    CGRect frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, size.width, size.height);
+    CGRect frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, size.width, size.height - 20);
     [self.view setFrame:frame];
     [self initializeTopPortionOfFrame];
     [self initializeLabels];
