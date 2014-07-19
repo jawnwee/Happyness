@@ -80,8 +80,15 @@
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }
 
-- (void)setEmptyCurrentDate {
-    
+- (ODDHappynessEntry *)todayEntry {
+    NSDate *date = [NSDate date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
+
+    return [self.privateEntries objectForKey:key];
 }
 
 #pragma mark - Calendar properties

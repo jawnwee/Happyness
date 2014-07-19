@@ -23,7 +23,12 @@
     self = [super init];
     if (self) {
         self.cardClass = [ODDSelectionCardCollectionViewCell class];
-        _selectedCard = -1;
+        ODDHappynessEntry *todayEntry = [[ODDHappynessEntryStore sharedStore] todayEntry];
+        if (todayEntry) {
+            _selectedCard = todayEntry.happyness.value.integerValue;
+        } else {
+            _selectedCard = -1;
+        }
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                 selector:@selector(clearCards)
@@ -56,7 +61,8 @@
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)collectionView:(UICollectionView *)collectionView
+                                didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedCard = -(indexPath.row % 5) + 5;
     NSNumber *value = [NSNumber numberWithLong:self.selectedCard];
     if (self.entryForToday) {
@@ -111,10 +117,12 @@
     CGFloat currentOffsetY = scrollView.contentOffset.y;
     CGFloat contentWidth = scrollView.contentSize.width;
     if (currentOffsetX > ((contentWidth * 5) / 8.0)) {
-        scrollView.contentOffset = CGPointMake(currentOffsetX - (contentWidth / 2.0), currentOffsetY);
+        scrollView.contentOffset = CGPointMake(currentOffsetX - (contentWidth / 2.0),
+                                               currentOffsetY);
     }
     if (currentOffsetX < (contentWidth / 8.0)) {
-        scrollView.contentOffset = CGPointMake(currentOffsetX + (contentWidth / 2.0), currentOffsetY);
+        scrollView.contentOffset = CGPointMake(currentOffsetX + (contentWidth / 2.0),
+                                               currentOffsetY);
     }
 }
 

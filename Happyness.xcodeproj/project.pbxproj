@@ -633,7 +633,6 @@
 		D1AAF26D1968890200332F59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C4EE1D2A19761F100080CAFD /* ReminderViews */,
 				D1AAF26A196888FA00332F59 /* ODDRootScrollView.h */,
 				D1AAF26B196888FA00332F59 /* ODDRootScrollView.m */,
 				D1F74C8D196E1A4B00AF0EC6 /* ODDCardCollectionViewLayout.h */,
@@ -643,6 +642,7 @@
 				EB844E3F1974523400D8C546 /* FeedBackViews */,
 				EB04B0FC1968BAE000B8E984 /* CalendarViews */,
 				D124B14F195A78FD00A9F687 /* Graphs */,
+				C4EE1D2A19761F100080CAFD /* ReminderViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -841,7 +841,7 @@
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
 					D13F4C57194F6A68003873B0 = {
-						DevelopmentTeam = BJAYWJUEC7;
+						DevelopmentTeam = 6UN3N9H6B4;
 					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;

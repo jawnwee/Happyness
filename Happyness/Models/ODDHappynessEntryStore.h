@@ -20,6 +20,7 @@
 - (void)sortStore:(BOOL)isAscending;
 - (void)addEntry:(ODDHappynessEntry *)entry;
 - (void)removeEntry:(ODDHappynessEntry *)entry;
+- (ODDHappynessEntry *)todayEntry;
 - (NSDate *)firstDate;
 
 @end

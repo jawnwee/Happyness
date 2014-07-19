@@ -52,7 +52,8 @@
     UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 30, 150, 31)];
     reminderLabel.font = [UIFont fontWithName:@"GothamNarrow-Light" size:36];
     reminderLabel.text = @"Reminder";
-    self.reminderSwitch = [[ODDCustomReminderSwitchView alloc] initWithFrame:CGRectMake(125, 75, 70, 35)];
+    self.reminderSwitch = [[ODDCustomReminderSwitchView alloc]
+                                              initWithFrame:CGRectMake(125, 75, 70, 35)];
 
     [self.reminderSwitch addTarget:self
                             action:@selector(switchToggled)
@@ -89,8 +90,15 @@
         calendar.timeZone = [NSTimeZone defaultTimeZone];
         NSDate *currentDate = [NSDate date];
         NSDate *pickerDate = self.picker.date;
-        NSDateComponents *dateComp = [calendar components:(kCFCalendarUnitYear | kCFCalendarUnitMonth | kCFCalendarUnitDay) fromDate:currentDate];
-        NSDateComponents *pickerComp = [calendar components:(kCFCalendarUnitHour | kCFCalendarUnitMinute) fromDate:pickerDate];
+        NSDateComponents *dateComp = [calendar components:(kCFCalendarUnitYear | 
+                                                           kCFCalendarUnitMonth | 
+                                                           kCFCalendarUnitDay) 
+                                                 fromDate:currentDate];
+
+        NSDateComponents *pickerComp = [calendar components:(kCFCalendarUnitHour | 
+                                                             kCFCalendarUnitMinute) 
+                                                   fromDate:pickerDate];
+
         NSDateComponents *comp = [[NSDateComponents alloc] init];
 
         [comp setYear:dateComp.year];

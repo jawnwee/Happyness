@@ -35,12 +35,10 @@
         bottomController.delegate = self;
         _colorDictionary = [ODDCustomColor customColorDictionary];
 
-        _note = [ODDNote MR_createEntity];
-
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(submitEntryForDay)
-                                                     name:UIApplicationSignificantTimeChangeNotification
-                                                   object:nil];
+                                            selector:@selector(submitEntryForDay)
+                                                name:UIApplicationSignificantTimeChangeNotification
+                                              object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillShow:)
@@ -84,11 +82,19 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.pieChart reloadData];
+    ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
+    if (entry) {
+        self.note = entry.note;
+        self.noteView.text = entry.note.noteString;
+    } else {
+        _note = [ODDNote MR_createEntity];
+    }
 }
 
 - (void)setupNoteButton {
     UIButton *note = [UIButton buttonWithType:UIButtonTypeCustom];
-    note.frame = CGRectMake(self.view.bounds.size.width - 50.0, self.view.frame.size.height - 70.0, 45, 45);
+    note.frame = CGRectMake(self.view.bounds.size.width - 50.0, 
+                            self.view.frame.size.height - 70.0, 45, 45);
     note.backgroundColor = [UIColor clearColor];
     [note setImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
     [self.view addSubview:note];
@@ -101,7 +107,9 @@
     hashtag.backgroundColor = [UIColor clearColor];
     [hashtag setImage:[UIImage imageNamed:@"hashtag.png"] forState:UIControlStateNormal];
     [self.view addSubview:hashtag];
-    [hashtag addTarget:self action:@selector(addHashtag) forControlEvents:UIControlEventTouchUpInside];
+    [hashtag addTarget:self 
+                action:@selector(addHashtag) 
+      forControlEvents:UIControlEventTouchUpInside];
 
     /* Test submit button; crashes if you add, then go to graphs
     UIButton *submit = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -243,8 +251,8 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OddLook"
                                                     message:@"Do you like hashtags?"
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
     [alert show];
 }
 
@@ -314,7 +322,8 @@
      [doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
      [containerView addSubview:doneBtn];
      */
-    self.noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    self.noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | 
+                                              UIViewAutoresizingFlexibleTopMargin;
 }
 
 - (void)keyboardWillShow:(NSNotification *)note {
@@ -401,7 +410,14 @@ shouldChangeTextInRange:(NSRange)range
 }
 
 - (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
-    self.note.noteString = growingTextView.text;
+    ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
+    if (entry) {
+        ODDNote *note = entry.note;
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            ODDNote *local = [note MR_inContext:localContext];
+            local.noteString = growingTextView.text;
+        }];
+    }
 }
 #pragma mark - Submit
 
