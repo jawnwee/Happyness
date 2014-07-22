@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface ODDReminderViewController : UIViewController
+@interface ODDReminderViewController : GAITrackedViewController
 
 @end

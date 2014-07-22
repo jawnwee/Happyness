@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
+#import "GAIDictionaryBuilder.h"
 #import "ODDOverallCalendarViewController.h"
 #import "ODDCalendarCardScrollViewController.h"
 #import "ODDHappynessHeader.h"
@@ -50,6 +51,18 @@
     [self setupCalendarLogic];
     [self.currentCalendar scrollToDate:[NSDate date] animated:YES];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Calendar"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+
+    [self.currentCalendar reload];
+    [self.calendarCardController resortAndReload];
+}
+
 
 - (void)setupHeader {
     NSDate *referenceDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
@@ -145,12 +158,6 @@
 
     self.currentCalendar = calendarView;
     return calendarView;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [self.currentCalendar reload];
-    [self.calendarCardController resortAndReload];
 }
 
 #pragma mark - Calendar View Logic

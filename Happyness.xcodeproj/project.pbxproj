@@ -84,6 +84,10 @@
 		D1F74C8F196E1A4B00AF0EC6 /* ODDCardCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F74C8E196E1A4B00AF0EC6 /* ODDCardCollectionViewLayout.m */; };
 		EB0BD90A1976345A005B716A /* feedbackQuotations.JSON in Resources */ = {isa = PBXBuildFile; fileRef = EB0BD9091976345A005B716A /* feedbackQuotations.JSON */; };
 		EB0BD90F1977215E005B716A /* ODDTodayNoteView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB0BD90E1977215E005B716A /* ODDTodayNoteView.m */; };
+		EB17CC7B197B861B0007C440 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB17CC7A197B861B0007C440 /* libGoogleAnalyticsServices.a */; };
+		EB17CC7D197B863D0007C440 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB17CC7C197B863D0007C440 /* SystemConfiguration.framework */; };
+		EB17CC7F197B86430007C440 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB17CC7E197B86430007C440 /* libz.dylib */; };
+		EB17CC81197B8A630007C440 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB17CC80197B8A630007C440 /* libsqlite3.dylib */; };
 		EB1F9CA1195BFA8C00567A31 /* ODDCalendarRowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */; };
 		EB282EC91974888C007FB0A7 /* checkmark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB282EC81974888C007FB0A7 /* checkmark@2x.png */; };
 		EB282ECE1974CEC3007FB0A7 /* feedbackCircle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB282ECB1974CEC3007FB0A7 /* feedbackCircle@2x.png */; };
@@ -259,6 +263,20 @@
 		EB0BD9091976345A005B716A /* feedbackQuotations.JSON */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = feedbackQuotations.JSON; sourceTree = "<group>"; };
 		EB0BD90D1977215E005B716A /* ODDTodayNoteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDTodayNoteView.h; sourceTree = "<group>"; };
 		EB0BD90E1977215E005B716A /* ODDTodayNoteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDTodayNoteView.m; sourceTree = "<group>"; };
+		EB17CC70197B85C80007C440 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		EB17CC71197B85C80007C440 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		EB17CC72197B85C80007C440 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		EB17CC73197B85C80007C440 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		EB17CC74197B85C80007C440 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		EB17CC75197B85C80007C440 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		EB17CC76197B85C80007C440 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		EB17CC77197B85C80007C440 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		EB17CC78197B85C80007C440 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		EB17CC79197B85C80007C440 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		EB17CC7A197B861B0007C440 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = GoogleAnalyticsServicesiOS_3.08/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		EB17CC7C197B863D0007C440 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		EB17CC7E197B86430007C440 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		EB17CC80197B8A630007C440 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		EB1F9C9F195BFA8C00567A31 /* ODDCalendarRowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarRowCell.h; sourceTree = "<group>"; };
 		EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarRowCell.m; sourceTree = "<group>"; };
 		EB282EC81974888C007FB0A7 /* checkmark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "checkmark@2x.png"; sourceTree = "<group>"; };
@@ -329,11 +347,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB17CC81197B8A630007C440 /* libsqlite3.dylib in Frameworks */,
+				EB17CC7F197B86430007C440 /* libz.dylib in Frameworks */,
+				EB17CC7D197B863D0007C440 /* SystemConfiguration.framework in Frameworks */,
 				D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */,
 				EBD8A8271978E2A40079B641 /* Crashlytics.framework in Frameworks */,
 				D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */,
 				D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */,
 				0B965EC9DBBC4996B5B5256B /* libPods.a in Frameworks */,
+				EB17CC7B197B861B0007C440 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +531,10 @@
 		D13F4C5A194F6A68003873B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB17CC80197B8A630007C440 /* libsqlite3.dylib */,
+				EB17CC7E197B86430007C440 /* libz.dylib */,
+				EB17CC7C197B863D0007C440 /* SystemConfiguration.framework */,
+				EB17CC7A197B861B0007C440 /* libGoogleAnalyticsServices.a */,
 				EBD8A8261978E2A40079B641 /* Crashlytics.framework */,
 				D13F4C5B194F6A68003873B0 /* Foundation.framework */,
 				D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */,
@@ -531,6 +557,7 @@
 				D1AAF2671968869600332F59 /* Controllers */,
 				EBE2BD4E194FB99E0023E9F4 /* Misc */,
 				EBC8C0C2195C17A200CC1A1E /* Resources */,
+				EB17CC6F197B85A90007C440 /* Google Analytics */,
 				D13F4C62194F6A68003873B0 /* Supporting Files */,
 			);
 			path = Happyness;
@@ -670,6 +697,23 @@
 				EB1F9CA0195BFA8C00567A31 /* ODDCalendarRowCell.m */,
 			);
 			path = CalendarViews;
+			sourceTree = "<group>";
+		};
+		EB17CC6F197B85A90007C440 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				EB17CC70197B85C80007C440 /* GAI.h */,
+				EB17CC71197B85C80007C440 /* GAIDictionaryBuilder.h */,
+				EB17CC72197B85C80007C440 /* GAIEcommerceFields.h */,
+				EB17CC73197B85C80007C440 /* GAIEcommerceProduct.h */,
+				EB17CC74197B85C80007C440 /* GAIEcommerceProductAction.h */,
+				EB17CC75197B85C80007C440 /* GAIEcommercePromotion.h */,
+				EB17CC76197B85C80007C440 /* GAIFields.h */,
+				EB17CC77197B85C80007C440 /* GAILogger.h */,
+				EB17CC78197B85C80007C440 /* GAITrackedViewController.h */,
+				EB17CC79197B85C80007C440 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		EB282ECA1974CEC3007FB0A7 /* Feedback */ = {
@@ -1177,7 +1221,11 @@
 				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.08",
+				);
+				PRODUCT_NAME = Happyness;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1200,7 +1248,11 @@
 				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.08",
+				);
+				PRODUCT_NAME = Happyness;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1223,7 +1275,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "HappynessTests/Supporting Files/HappynessTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HappynessTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -1241,7 +1293,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "HappynessTests/Supporting Files/HappynessTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HappynessTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

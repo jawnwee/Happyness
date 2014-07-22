@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
+#import "GAIDictionaryBuilder.h"
 #import "ODDFeedbackViewController.h"
 #import "ODDSelectionCardScrollViewController.h"
 #import "ODDHappynessHeader.h"
@@ -13,7 +14,8 @@
 #import "ODDHappynessObserver.h"
 #import "ODDTodayNoteView.h"
 
-@interface ODDFeedbackViewController () <ODDSelectionCardScrollViewControllerDelegate>
+@interface ODDFeedbackViewController () <ODDSelectionCardScrollViewControllerDelegate,
+                                         UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *slices;
 @property (nonatomic, strong) UILabel *feedbackLabel;
@@ -81,6 +83,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Feedback"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+
     [self.pieChart reloadData];
     ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
     if (entry) {
@@ -244,6 +251,15 @@
 #pragma mark - Note and Hashtag
 
 - (void)addNote {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+
+    [tracker set:kGAIScreenName value:@"Feedback"];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:@"note"
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
+
     [self.noteView becomeFirstResponder];
 }
 
@@ -254,6 +270,22 @@
                                           cancelButtonTitle:@"No"
                                           otherButtonTitles:@"Yes", nil];
     [alert show];
+}
+
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+
+    [tracker set:kGAIScreenName value:@"Feedback"];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"UX"
+                                                          action:@"touch"
+                                                           label:title
+                                                           value:nil] build]];
+    [tracker set:kGAIScreenName value:nil];
+
 }
 
 # pragma mark - Note

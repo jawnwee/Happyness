@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 @class ODDStatisticsCardScrollView;
 
-@interface ODDManyGraphsViewController : UIViewController
+@interface ODDManyGraphsViewController : GAITrackedViewController
 
 @property (nonatomic, strong) ODDStatisticsCardScrollView *cards;
 

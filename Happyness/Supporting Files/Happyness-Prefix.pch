@@ -15,4 +15,6 @@
     #import <Foundation/Foundation.h>
     #import "ODDConstants.h"
     #import "CoreData+MagicalRecord.h"
+    #import "GAI.h"
+    #import "GAIFields.h"
 #endif

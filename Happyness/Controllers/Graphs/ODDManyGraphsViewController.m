@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
+#import "GAIDictionaryBuilder.h"
 #import "ODDManyGraphsViewController.h"
 #import "ODDGraphViewController.h"
 #import "ODDCustomColor.h"
@@ -60,9 +61,13 @@
     }
     return self;
 }
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Analysis"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+
     ODDGraphViewController *currentGraphController = (ODDGraphViewController *)self.graphs[self.currentGraph];
     [currentGraphController reloadDataStore];
     //TODO: Uncomment once completed

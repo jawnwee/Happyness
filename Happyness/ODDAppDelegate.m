@@ -29,24 +29,16 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Crashlytics startWithAPIKey:@"15cff1e39186231362a287dbc7407a93ea1631de"];
-    [MagicalRecord setupCoreDataStack];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    NSArray *allEntries = [ODDHappynessEntry MR_findAll];
-    ODDHappynessEntry *entry;
-    for (entry in allEntries) {
-        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
-    }
-//    [[UIApplication sharedApplication] registerUserNotificationSettings:
-//                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
-//                                                                      | UIUserNotificationTypeAlert 
-//                                                                      | UIUserNotificationTypeBadge) 
-//                                                             categories:nil]];
-//
-//    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    // iOS8 Notification Implementation
+    /* [[UIApplication sharedApplication] registerUserNotificationSettings:
+                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+                                                                      | UIUserNotificationTypeAlert 
+                                                                      | UIUserNotificationTypeBadge) 
+                                                             categories:nil]];
+
+    [[UIApplication sharedApplication] registerForRemoteNotifications]; */
 
     // Override point for customization after application launch.
-
     /* for (NSString* family in [UIFont familyNames])
     {
         NSLog(@"%@", family);
@@ -56,11 +48,27 @@
             NSLog(@"  %@", name);
         }
     } */
-    NSBundle *appBundle = [NSBundle mainBundle];
 
-/*
+    // Google Analytics
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    [[GAI sharedInstance].logger setLogLevel:kGAILogLevelVerbose];
+    [GAI sharedInstance].dispatchInterval = 20;
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-51721437-2"];
+
+    // Crashyltics
+    [Crashlytics startWithAPIKey:@"15cff1e39186231362a287dbc7407a93ea1631de"];
+
+    // Core Data
+    [MagicalRecord setupCoreDataStack];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    NSArray *allEntries = [ODDHappynessEntry MR_findAll];
+    ODDHappynessEntry *entry;
+    for (entry in allEntries) {
+        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+    }
+
     // Testing purposes, 500 random data for previous days
-    for (int i = 1; i <= 5; i++) {
+    /*for (int i = 1; i <= 500; i++) {
         NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         int randomTimeDelta = 1;
         //int randomTimeDelta = arc4random_uniform(2);
@@ -72,7 +80,7 @@
         testHappyness.entry = testEntry;
         ODDNote *note = [ODDNote MR_createEntity];
         note.noteString = [NSMutableString
-                          stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
+                           stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
         note.entry = testEntry;
 
         testEntry.happyness = testHappyness;
@@ -82,8 +90,9 @@
         [[ODDHappynessEntryStore sharedStore] addEntry:testEntry];
     }
     [[ODDHappynessEntryStore sharedStore] sortStore:YES];
- */
-    //////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////// */
+
+    NSBundle *appBundle = [NSBundle mainBundle];
 
     // Feedback
     ODDSelectionCardScrollViewController *selectionBottom =
@@ -126,11 +135,7 @@
 
     ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
 
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
-        self.window.rootViewController = mainvc;
-    } else {
-        self.window.rootViewController = welcomeScreen;
-    }
+    self.window.rootViewController = welcomeScreen;
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
+#import "GAIDictionaryBuilder.h"
 #import "ODDReminderViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SSFlatDatePicker.h"
@@ -23,8 +24,7 @@
 
 @implementation ODDReminderViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -34,9 +34,9 @@
 
 #pragma mark - View Cycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    self.screenName = @"Reminder";
     // Do any additional setup after loading the view.
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
                                  self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO + 20);
@@ -45,7 +45,15 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpSwitch];
     [self setUpPicker];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Reminder"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
 }
 
 - (void)setUpSwitch {
@@ -72,13 +80,7 @@
                     action:@selector(pickerToggled)
           forControlEvents:UIControlEventValueChanged];
     [self.view addSubview:self.picker];
-    if (!self.reminderIsOn) {
-        [self turnOnPickerCover];
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+    [self switchToggled];
 }
 
 #pragma mark - Switch and Picker Handling
@@ -109,7 +111,7 @@
 
 
         UILocalNotification *reminder = [[UILocalNotification alloc] init];
-        reminder.alertBody = [NSString stringWithFormat:@"It's %ld:%ld! How was your day?", (long)comp.hour, (long)comp.minute];
+        reminder.alertBody = [NSString stringWithFormat:@"Hey, how was your day?"];
         reminder.alertAction = @"Tell me how it went!";
         reminder.soundName = UILocalNotificationDefaultSoundName;
         reminder.fireDate = [calendar dateFromComponents:comp];

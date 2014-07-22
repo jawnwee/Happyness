@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
 @class ODDCalendarCardScrollViewController;
 
-@interface ODDOverallCalendarViewController : UIViewController
+@interface ODDOverallCalendarViewController : GAITrackedViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
