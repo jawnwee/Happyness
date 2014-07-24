@@ -885,7 +885,7 @@
 				ORGANIZATIONNAME = OddLook;
 				TargetAttributes = {
 					D13F4C57194F6A68003873B0 = {
-						DevelopmentTeam = 6UN3N9H6B4;
+						DevelopmentTeam = BJAYWJUEC7;
 					};
 					D13F4C72194F6A69003873B0 = {
 						TestTargetID = D13F4C57194F6A68003873B0;

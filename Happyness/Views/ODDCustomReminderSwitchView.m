@@ -28,11 +28,21 @@
 - (void)setup {
     self.layer.cornerRadius = 5.0f;
     self.backgroundColor = [ODDCustomColor customReminderOffColor];
-    self.slider = [[ODDCustomReminderSwitchSliderView alloc] initWithFrame:CGRectMake(0,
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0,
+                                                           0,
+                                                           self.frame.size.width,
+                                                           self.frame.size.height)];
+    self.label.text = @"OFF";
+    self.label.font = [UIFont fontWithName:@"GothamRounded-Bold" size:24];
+    self.label.adjustsFontSizeToFitWidth = YES;
+    self.label.textAlignment = NSTextAlignmentCenter;
+    self.label.textColor = [UIColor lightGrayColor];
+/*    self.slider = [[ODDCustomReminderSwitchSliderView alloc] initWithFrame:CGRectMake(0,
                                                               0, 
                                                               self.frame.size.width / 2 + 5,
                                                               self.frame.size.height)];
-    [self addSubview:self.slider];
+ */
+    [self addSubview:self.label];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {

@@ -12,6 +12,7 @@
 
 + (NSDictionary *)customColorDictionary;
 + (UIColor *)customTealColor;
++ (UIColor *)customDarkTealColor;
 + (UIColor *)customDarkColor;
 + (UIColor *)textColor;
 + (UIColor *)customReminderOffColor;

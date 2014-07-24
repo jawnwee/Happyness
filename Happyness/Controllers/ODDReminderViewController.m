@@ -19,6 +19,7 @@
 @property (nonatomic, strong) ODDCustomReminderSwitchView *reminderSwitch;
 @property (nonatomic) BOOL reminderIsOn;
 @property (nonatomic, strong) UIView *pickerOffView;
+@property (nonatomic, strong) UIView *reminderButtonShadow;
 
 @end
 
@@ -53,7 +54,7 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Reminder"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-    
+
 }
 
 - (void)setUpSwitch {
@@ -61,12 +62,20 @@
     reminderLabel.font = [UIFont fontWithName:@"GothamNarrow-Light" size:36];
     reminderLabel.text = @"Reminder";
     self.reminderSwitch = [[ODDCustomReminderSwitchView alloc]
-                                              initWithFrame:CGRectMake(125, 75, 70, 35)];
+                           initWithFrame:CGRectMake(125, 75, 70, 35)];
 
     [self.reminderSwitch addTarget:self
                             action:@selector(switchToggled)
                   forControlEvents:UIControlEventTouchUpInside];
 
+    self.reminderButtonShadow = [[UIView alloc] initWithFrame:CGRectMake(self.reminderSwitch.frame.origin.x,
+                                                           self.reminderSwitch.frame.origin.y + 3,
+                                                           self.reminderSwitch.frame.size.width,
+                                                           self.reminderSwitch.frame.size.height)];
+    self.reminderButtonShadow.backgroundColor = [UIColor grayColor];
+    self.reminderButtonShadow.layer.cornerRadius = 5.0f;
+
+    [self.view addSubview:self.reminderButtonShadow];
     [self.view addSubview:reminderLabel];
     [self.view addSubview:self.reminderSwitch];
 }
@@ -92,13 +101,13 @@
         calendar.timeZone = [NSTimeZone defaultTimeZone];
         NSDate *currentDate = [NSDate date];
         NSDate *pickerDate = self.picker.date;
-        NSDateComponents *dateComp = [calendar components:(kCFCalendarUnitYear | 
-                                                           kCFCalendarUnitMonth | 
-                                                           kCFCalendarUnitDay) 
+        NSDateComponents *dateComp = [calendar components:(kCFCalendarUnitYear |
+                                                           kCFCalendarUnitMonth |
+                                                           kCFCalendarUnitDay)
                                                  fromDate:currentDate];
 
-        NSDateComponents *pickerComp = [calendar components:(kCFCalendarUnitHour | 
-                                                             kCFCalendarUnitMinute) 
+        NSDateComponents *pickerComp = [calendar components:(kCFCalendarUnitHour |
+                                                             kCFCalendarUnitMinute)
                                                    fromDate:pickerDate];
 
         NSDateComponents *comp = [[NSDateComponents alloc] init];
@@ -122,35 +131,33 @@
         [[UIApplication sharedApplication] scheduleLocalNotification:reminder];
 
         /* //Testing for correct notification fire time
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setTimeStyle:NSDateFormatterFullStyle];
-        [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
-        NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]);
-        */
+         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+         [formatter setTimeStyle:NSDateFormatterFullStyle];
+         [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
+         NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]);
+         */
     }
 }
 
 - (void)switchToggled {
+    CGRect slideFrame = self.reminderSwitch.frame;
     self.reminderIsOn = !self.reminderIsOn;
-    UIView *slider = [[self.reminderSwitch subviews] objectAtIndex:0];
     if (self.reminderIsOn) {
-        [self turnOffPickerCover];
-        self.picker.gradientColor = self.picker.backgroundColor = [ODDCustomColor customReminderOffColor];
-        CGRect slideRightFrame = slider.frame;
-        slideRightFrame.origin.x = self.reminderSwitch.frame.size.width / 2 - 5;
-        [UIView animateWithDuration:0.2
+        [self turnOnPicker];
+        [self turnOnReminderSwitch];
+        slideFrame.origin.y = self.reminderSwitch.frame.origin.y + 3;
+        [UIView animateWithDuration:0.1
                          animations:^{
-                             slider.frame = slideRightFrame;
-                             self.reminderSwitch.backgroundColor = [ODDCustomColor customTealColor];
+                             self.reminderSwitch.frame = slideFrame;
                          }];
+
     } else {
-        [self turnOnPickerCover];
-        CGRect slideLeftFrame = slider.frame;
-        slideLeftFrame.origin.x = 0;//self.reminderSwitch.frame.size.width / 2;
-        [UIView animateWithDuration:0.2
+        [self turnOffPicker];
+        [self turnOffReminderSwitch];
+        slideFrame.origin.y = self.reminderSwitch.frame.origin.y - 3;
+        [UIView animateWithDuration:0.1
                          animations:^{
-                             slider.frame = slideLeftFrame;
-                             self.reminderSwitch.backgroundColor = [ODDCustomColor customReminderOffColor];
+                             self.reminderSwitch.frame = slideFrame;
                          }];
     }
     [self scheduleReminder];
@@ -162,7 +169,19 @@
     }
 }
 
-- (void)turnOnPickerCover {
+- (void)turnOnReminderSwitch {
+    self.reminderSwitch.backgroundColor = [ODDCustomColor customTealColor];
+    self.reminderSwitch.label.text = @"ON";
+    self.reminderSwitch.label.textColor = [ODDCustomColor customPickerTextColor];
+}
+
+- (void)turnOffReminderSwitch {
+    self.reminderSwitch.backgroundColor = [ODDCustomColor customReminderOffColor];
+    self.reminderSwitch.label.text = @"OFF";
+    self.reminderSwitch.label.textColor = [UIColor lightGrayColor];
+}
+
+- (void)turnOffPicker {
     self.pickerOffView = [[UIView alloc] initWithFrame:self.picker.frame];
     self.pickerOffView.layer.cornerRadius = 10.0f;
     self.picker.textColor = [[ODDCustomColor customPickerTextColor] colorWithAlphaComponent:0.5];
@@ -170,7 +189,8 @@
     [self.view addSubview:self.pickerOffView];
 }
 
-- (void)turnOffPickerCover {
+- (void)turnOnPicker {
+    self.picker.gradientColor = self.picker.backgroundColor = [ODDCustomColor customReminderOffColor];
     self.picker.textColor = [ODDCustomColor customPickerTextColor];
     [self.pickerOffView removeFromSuperview];
 }
