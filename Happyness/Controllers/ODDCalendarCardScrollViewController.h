@@ -8,6 +8,12 @@
 
 #import "ODDCardScrollViewController.h"
 
+@protocol ODDCalendarCardScrollViewControllerDelegate
+
+- (void)changedEntry;
+
+@end
+
 @interface ODDCalendarCardScrollViewController : ODDCardScrollViewController
 
 @property (strong, nonatomic) NSString *currentDate;
@@ -15,5 +21,8 @@
 -(void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
 
 - (void)resortAndReload;
+
+@property (nonatomic, weak) id<ODDCalendarCardScrollViewControllerDelegate> delegate;
+
 
 @end

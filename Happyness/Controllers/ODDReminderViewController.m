@@ -13,6 +13,9 @@
 #import "ODDCustomReminderSwitchView.h"
 #import "ODDCustomColor.h"
 
+#define HEADER_HEIGHT 45
+#define STATUS_BAR_HEIGHT 20 // Should always be 20 points
+
 @interface ODDReminderViewController ()
 
 @property (nonatomic, strong) SSFlatDatePicker *picker;
@@ -37,7 +40,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.screenName = @"Reminder";
     // Do any additional setup after loading the view.
     self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
                                  self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO + 20);
@@ -58,9 +60,24 @@
 }
 
 - (void)setUpSwitch {
-    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake(85, 30, 150, 31)];
-    reminderLabel.font = [UIFont fontWithName:@"GothamNarrow-Light" size:36];
-    reminderLabel.text = @"Reminder";
+    CGRect headerFrame = CGRectMake(0.0, 0.0,
+                                    self.view.frame.size.width,
+                                    STATUS_BAR_HEIGHT + HEADER_HEIGHT);
+    UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
+    CGFloat adjustedHeight = STATUS_BAR_HEIGHT - 5.0;
+    CGFloat titleOfMonthWidth = 190;
+    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width / 2) - (titleOfMonthWidth / 2),
+                                                                       adjustedHeight,
+                                                                       titleOfMonthWidth,
+                                                                       HEADER_HEIGHT)];
+    reminderLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
+    reminderLabel.text = @"Push Notification";
+    reminderLabel.textColor = [ODDCustomColor textColor];
+    reminderLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:headerView];
+    [headerView addSubview:reminderLabel];
+
+
     self.reminderSwitch = [[ODDCustomReminderSwitchView alloc]
                            initWithFrame:CGRectMake(125, 75, 70, 35)];
 
@@ -68,7 +85,8 @@
                             action:@selector(switchToggled)
                   forControlEvents:UIControlEventTouchUpInside];
 
-    self.reminderButtonShadow = [[UIView alloc] initWithFrame:CGRectMake(self.reminderSwitch.frame.origin.x,
+    self.reminderButtonShadow = [[UIView alloc]
+                                 initWithFrame:CGRectMake(self.reminderSwitch.frame.origin.x,
                                                            self.reminderSwitch.frame.origin.y + 3,
                                                            self.reminderSwitch.frame.size.width,
                                                            self.reminderSwitch.frame.size.height)];
@@ -76,7 +94,6 @@
     self.reminderButtonShadow.layer.cornerRadius = 5.0f;
 
     [self.view addSubview:self.reminderButtonShadow];
-    [self.view addSubview:reminderLabel];
     [self.view addSubview:self.reminderSwitch];
 }
 
@@ -96,7 +113,7 @@
 
 - (void)scheduleReminder {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    if (self.reminderIsOn) {
+    if (self.reminderIsOn && ![[NSUserDefaults standardUserDefaults] objectForKey:@"Reminder"]) {
         NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
         calendar.timeZone = [NSTimeZone defaultTimeZone];
         NSDate *currentDate = [NSDate date];
@@ -114,10 +131,9 @@
 
         [comp setYear:dateComp.year];
         [comp setMonth:dateComp.month];
+        [comp setMinute:pickerComp.minute];
         [comp setDay:dateComp.day];
         [comp setHour:pickerComp.hour];
-        [comp setMinute:pickerComp.minute];
-
 
         UILocalNotification *reminder = [[UILocalNotification alloc] init];
         reminder.alertBody = [NSString stringWithFormat:@"Hey, how was your day?"];
@@ -172,7 +188,7 @@
 - (void)turnOnReminderSwitch {
     self.reminderSwitch.backgroundColor = [ODDCustomColor customTealColor];
     self.reminderSwitch.label.text = @"ON";
-    self.reminderSwitch.label.textColor = [ODDCustomColor customPickerTextColor];
+    self.reminderSwitch.label.textColor = [ODDCustomColor whiteColor];
 }
 
 - (void)turnOffReminderSwitch {

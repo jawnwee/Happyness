@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GAITrackedViewController.h"
-#import "HPGrowingTextView.h"
 #import "XYPieChart.h"
 
 @class ODDSelectionCardScrollViewController;
-@interface ODDFeedbackViewController : GAITrackedViewController <HPGrowingTextViewDelegate, XYPieChartDataSource>
+@interface ODDFeedbackViewController : GAITrackedViewController <XYPieChartDataSource>
 
 @property (nonatomic, strong) XYPieChart *pieChart;
 

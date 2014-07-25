@@ -8,14 +8,18 @@
 
 #import "ODDCalendarCardScrollViewController.h"
 #import "ODDCalendarCardCollectionViewCell.h"
+#import "ODDCalendarModalViewController.h"
+#import "ODDDismissingAnimator.h"
+#import "ODDPresentingAnimator.h"
 #import "ODDHappynessHeader.h"
 
-@interface ODDCalendarCardScrollViewController ()
+@interface ODDCalendarCardScrollViewController () <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, strong) NSMutableArray *headers;
 @property (nonatomic, strong) NSMutableDictionary *data;
 @property (nonatomic, strong) NSDateFormatter *monthDateFormatter;
+@property (nonatomic, strong) ODDCalendarCardCollectionViewCell *selectedCell;
 
 @end
 
@@ -30,14 +34,14 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+    
     [self resortAndReload];
 }
 
-- (void)didReceiveMemoryWarning
-{
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -66,6 +70,37 @@
     [self reloadCollectionData];
 }
 
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
+{
+    return [ODDPresentingAnimator new];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    ODDHappynessEntry *entry = ((ODDCalendarModalViewController *)dismissed).selectedHappyness;
+    if (entry) {
+        ODDNote *note = entry.note;
+        note.noteString = ((ODDCalendarModalViewController *)dismissed).text;
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            ODDHappynessEntry *localEntry = [entry MR_inContext:localContext];
+            ODDNote *localNote = [note MR_inContext:localContext];
+            localNote.noteString = ((ODDCalendarModalViewController *)dismissed).text;
+            localEntry.note = localNote;
+        }];
+        [self.selectedCell setHappynessEntry:entry];
+        [self.delegate changedEntry];
+        //[self reloadCollectionData];
+    }
+
+    return [ODDDismissingAnimator new];
+}
+
+#pragma mark - UICollectionViewDelegates
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -73,6 +108,27 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView 
      numberOfItemsInSection:(NSInteger)section {
     return [[self.data objectForKey:self.currentDate] count];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView 
+    didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    self.selectedCell =
+             (ODDCalendarCardCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
+
+    ODDHappynessEntry *selectedEntry = self.selectedCell.currentEntry;
+    
+    ODDCalendarModalViewController *noteViewController = [[ODDCalendarModalViewController alloc] init];
+    noteViewController.selectedHappyness = selectedEntry;
+    if (selectedEntry) {
+        noteViewController.text = selectedEntry.note.noteString;
+    }
+    noteViewController.transitioningDelegate = self;
+    noteViewController.modalPresentationStyle = UIModalPresentationCustom;
+    [self presentViewController:noteViewController
+                       animated:YES
+                     completion:NULL];
+
 }
 
 // Note: Make sure the cells are the same height as cardCollectionVeiw|

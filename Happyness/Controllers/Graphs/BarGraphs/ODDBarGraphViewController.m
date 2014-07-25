@@ -53,7 +53,7 @@
 - (void)initializeBarGraph {
     self.shortTermCount = 14;
     self.mediumCount = 60;
-    self.barChartView.maximumValue = 5;
+    self.barChartView.maximumValue = 100;
     self.barChartView.minimumValue = 0;
     [self.graphMedium setTitle:@"60 Days" forState:UIControlStateNormal];
     [self.graphShortTerm setTitle:@"14 Days" forState:UIControlStateNormal];
@@ -171,13 +171,13 @@
 
 - (UIColor *)barChartView:(JBBarChartView *)barChartView colorForBarViewAtIndex:(NSUInteger)index {
     CGFloat value = [self barChartView:barChartView heightForBarViewAtAtIndex:index];
-    if (value <= 1.02) {
+    if (value <= 20.02) {
         return self.colors[@"oddLook_color_1"];
-    } else if (value <= 2.02) {
+    } else if (value <= 40.02) {
         return self.colors[@"oddLook_color_2"];
-    } else if (value <= 3.02) {
+    } else if (value <= 60.02) {
         return self.colors[@"oddLook_color_3"];
-    } else if (value <= 4.02) {
+    } else if (value <= 80.02) {
         return self.colors[@"oddLook_color_4"];
     } else {
         return self.colors[@"oddLook_color_5"];

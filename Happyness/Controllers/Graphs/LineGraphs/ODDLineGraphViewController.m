@@ -54,8 +54,8 @@
     self.lineGraphView = [[JBLineChartView alloc] init];
     self.shortTermCount = 7;
     self.mediumCount = 31;
-    self.lineGraphView.maximumValue = 5.5;
-    self.lineGraphView.minimumValue = 0.5;
+    self.lineGraphView.maximumValue = 102;
+    self.lineGraphView.minimumValue = 8;
     
     self.lineGraphView.delegate = self;
     self.lineGraphView.dataSource = self;

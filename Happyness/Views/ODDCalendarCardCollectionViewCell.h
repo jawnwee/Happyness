@@ -12,6 +12,9 @@
 
 @interface ODDCalendarCardCollectionViewCell : ODDCardCollectionViewCell
 
+@property (nonatomic, strong) UITextView *noteLabel;
+@property (nonatomic, strong) ODDHappynessEntry *currentEntry;
+
 - (void)setHappynessEntry:(ODDHappynessEntry *)happynessEntry;
 
 @end

@@ -10,13 +10,26 @@
 #import "ODDOverallCalendarViewController.h"
 #import "ODDCalendarCardScrollViewController.h"
 #import "ODDHappynessHeader.h"
+#import "ODDCalendarModalViewController.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarRowCell.h"
+#import "ODDPresentingAnimator.h"
+#import "ODDDismissingAnimator.h"
+#import "ODDCustomColor.h"
 
-@interface ODDOverallCalendarViewController () <TSQCalendarViewDelegate>
-@property (nonatomic, weak) IBOutlet UIView *calendarHeader;
-@property (nonatomic, weak) IBOutlet UILabel *month;
-@property (nonatomic, weak) IBOutlet UILabel *year;
+#define HEADER_HEIGHT 45
+#define STATUS_BAR_HEIGHT 20 // Should always be 20 points
+
+@interface ODDOverallCalendarViewController () < TSQCalendarViewDelegate,
+                                                ODDCalendarCardScrollViewControllerDelegate,
+                                                UIViewControllerTransitioningDelegate >
+
+@property (nonatomic, strong)  UIView *calendarHeader;
+@property (nonatomic, strong)  UILabel *month;
+@property (nonatomic, strong)  UILabel *monthYear;
+//@property (nonatomic, weak) IBOutlet UILabel *year;
+@property (nonatomic, strong) UIButton *increaseMonthButton;
+@property (nonatomic, strong) UIButton *decreaseMonthButton;
 @property (nonatomic, strong) NSDate *dayOneInCurrentMonth;
 @property (nonatomic, strong) NSDate *lastDayInCurrentMonth;
 @property (nonatomic, strong) NSDate *selectedDate;
@@ -29,23 +42,24 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil 
-                         bundle:(NSBundle *)nibBundleOrNil
-               bottomController:(ODDCalendarCardScrollViewController *)bottomController {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (instancetype)initWithbottomController:(ODDCalendarCardScrollViewController *)bottomController {
+    self = [super init];
     if (self) {
-
         _calendarCardController = bottomController;
+        _calendarCardController.delegate = self;
     }
     return self;
 }
 
 #pragma mark - View Setup
 - (void)viewDidLoad {
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
-                                 self.view.frame.size.height * TOP_HEIGHT_RATIO);
+    self.view.frame = CGRectMake(0,
+                                 0,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO + 20);
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
 
     [self setupHeader];
     [self setupCalendarLogic];
@@ -65,6 +79,59 @@
 
 
 - (void)setupHeader {
+
+    // Header View
+    CGRect headerFrame = CGRectMake(0.0, 0.0,
+                                    self.view.frame.size.width,
+                                    STATUS_BAR_HEIGHT + HEADER_HEIGHT);
+    _calendarHeader = [[UIView alloc] initWithFrame:headerFrame];
+    _calendarHeader.layer.cornerRadius = 10.0;
+    _calendarHeader.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:_calendarHeader];
+
+    // Title of Header
+    [self setCurrentDate];
+    CGFloat adjustedHeight = STATUS_BAR_HEIGHT - 5.0;
+    CGFloat titleOfMonthWidth = 190;
+    CGRect titleOfMonthFrame = CGRectMake((self.view.frame.size.width / 2) - (titleOfMonthWidth / 2),
+                                          adjustedHeight,
+                                          titleOfMonthWidth,
+                                          HEADER_HEIGHT);
+    _month = [[UILabel alloc] init];
+    _monthYear = [[UILabel alloc] initWithFrame:titleOfMonthFrame];
+    _monthYear.backgroundColor = [UIColor clearColor];
+    _monthYear.textColor = [ODDCustomColor textColor];
+    _monthYear.font = [UIFont fontWithName:@"Helvetica"
+                                             size:22];
+    _monthYear.textAlignment = NSTextAlignmentCenter;
+    [self.calendarHeader addSubview:self.monthYear];
+
+    _increaseMonthButton = [[UIButton alloc] init];
+    _decreaseMonthButton = [[UIButton alloc] init];
+    [_increaseMonthButton addTarget:self
+                action:@selector(increaseMonth)
+      forControlEvents:UIControlEventTouchDown];
+    [_decreaseMonthButton addTarget:self
+                  action:@selector(decreaseMonth)
+        forControlEvents:UIControlEventTouchDown];
+    _increaseMonthButton.backgroundColor = [UIColor clearColor];
+    [_increaseMonthButton setImage:[UIImage imageNamed:@"increasing.png"] forState:UIControlStateNormal];
+    CGFloat buttonWidth = 45;
+    CGRect upFrame = CGRectMake(titleOfMonthFrame.origin.x + titleOfMonthFrame.size.width,
+                                adjustedHeight,
+                                buttonWidth,
+                                HEADER_HEIGHT);
+    [_increaseMonthButton setFrame:upFrame];
+    _decreaseMonthButton.backgroundColor = [UIColor clearColor];
+    [_decreaseMonthButton setImage:[UIImage imageNamed:@"decreasing.png"] forState:UIControlStateNormal];
+    CGRect downFrame = upFrame;
+    downFrame.origin.x = titleOfMonthFrame.origin.x - buttonWidth;
+    [_decreaseMonthButton setFrame:downFrame];
+    [self.calendarHeader addSubview:self.increaseMonthButton];
+    [self.calendarHeader addSubview:self.decreaseMonthButton];
+
+
+    // Setting up Sunday - Saturday
     NSDate *referenceDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     NSDateComponents *offset = [NSDateComponents new];
     offset.day = 1;
@@ -88,7 +155,7 @@
                                                                 inUnit:NSCalendarUnitWeekOfMonth
                                                                forDate:referenceDate];
         CGRect frame = CGRectMake((index * headerWidth) + headerWidth / 3.0,
-                                  self.calendarHeader.bounds.size.height - 15.0, 30.0, 40.0);
+                                  self.calendarHeader.bounds.size.height - 8.0, 30.0, 40.0);
         UILabel *label = [[UILabel alloc] initWithFrame:frame];
         label.textAlignment = NSTextAlignmentCenter;
         label.text = [dayFormatter stringFromDate:referenceDate];
@@ -160,6 +227,42 @@
     return calendarView;
 }
 
+#pragma mark - UIViewControllerTransition Delegates
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
+{
+    return [ODDPresentingAnimator new];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    ODDHappynessEntry *entry = ((ODDCalendarModalViewController *)dismissed).selectedHappyness;
+    if (entry) {
+        ODDNote *note = entry.note;
+        note.noteString = ((ODDCalendarModalViewController *)dismissed).text;
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            ODDHappynessEntry *localEntry = [entry MR_inContext:localContext];
+            ODDNote *localNote = [note MR_inContext:localContext];
+            localNote.noteString = ((ODDCalendarModalViewController *)dismissed).text;
+            localEntry.note = localNote;
+        }];
+        [[ODDHappynessEntryStore sharedStore] addEntry:entry];
+        [self.currentCalendar reload];
+        [self.calendarCardController resortAndReload];
+    }
+
+    return [ODDDismissingAnimator new];
+}
+
+
+#pragma mark - Calendar Card Scroll View Delegate
+
+- (void)changedEntry {
+    [self.currentCalendar reload];
+}
+
 #pragma mark - Calendar View Logic
 
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
@@ -167,14 +270,37 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM"];
     NSString *monthName = [formatter stringFromDate:date];
+    // For HappynessEntryObject
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
+    ////////////////////////////////////////////////////////////////////////////////
 
     if (![self.month.text isEqualToString:monthName]) {
         NSComparisonResult result = [self.dayOneInCurrentMonth compare:date];
         self.selectedDate = date;
         if (result == NSOrderedAscending) {
-            [self increaseMonth:nil];
+            [self increaseMonth];
         } else {
-            [self decreaseMonth:nil];
+            [self decreaseMonth];
+        }
+    } else if (![[[ODDHappynessEntryStore sharedStore] happynessEntries] objectForKey:key]) {
+        // If HappynessEntry doesnt exist in current month, and we are in same month
+        // create a new one
+        NSComparisonResult result = [[NSDate date] compare:date];
+        self.selectedDate = date;
+        if (result == NSOrderedDescending) {
+            ODDCalendarModalViewController *noteViewController =
+                                                      [[ODDCalendarModalViewController alloc] init];
+            noteViewController.selectedDate = date;
+            noteViewController.selectedHappyness = NULL;
+            noteViewController.transitioningDelegate = self;
+            noteViewController.modalPresentationStyle = UIModalPresentationCustom;
+            [self presentViewController:noteViewController
+                               animated:YES
+                             completion:NULL];
         }
     } else {
         [self.calendarCardController scrollToDate:date animated:YES];
@@ -186,15 +312,17 @@
     NSDate *currentDate = self.dayOneInCurrentMonth;
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"MMMM"];
+    [formatter setDateFormat:@"MMMM YYYY"];
 
+    NSString *monthYearName = [formatter stringFromDate:currentDate];
+    self.monthYear.text = monthYearName;
+
+    [formatter setDateFormat:@"MMMM"];
     NSString *monthName = [formatter stringFromDate:currentDate];
     self.month.text = monthName;
 
-    [formatter setDateFormat:@"YYYY"];
-
-    NSString *year = [formatter stringFromDate:currentDate];
-    self.year.text = year;
+//    NSString *year = [formatter stringFromDate:currentDate];
+//    self.year.text = year;
 
     NSString *dateComponents = @"MMMM YYYY";
     [formatter setDateFormat:dateComponents];
@@ -202,11 +330,11 @@
     [self.calendarCardController reloadCollectionData];
 }
 
-- (IBAction)increaseMonth:(id)sender {
+- (void)increaseMonth {
     [self changeMonth:YES];
 }
 
-- (IBAction)decreaseMonth:(id)sender {
+- (void)decreaseMonth {
     [self changeMonth:NO];
 }
 

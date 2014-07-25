@@ -13,7 +13,6 @@
 @interface ODDCalendarCardCollectionViewCell ()
 
 @property (nonatomic, strong) UILabel *dateLabel;
-@property (nonatomic, strong) UITextView *noteLabel;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic) CGSize shadowOffset;
 
@@ -63,7 +62,6 @@
     _dateLabel.shadowColor = [UIColor lightTextColor];
     _dateLabel.shadowOffset = self.shadowOffset;
     [self.contentView addSubview:_dateLabel];
-
 }
 
 /* Change this class if want to make the calendar cards to display differently */
@@ -71,6 +69,7 @@
     NSDate *entryDate = [happynessEntry date];
     ODDNote *note = [happynessEntry note];
     ODDHappyness *happyness = [happynessEntry happyness];
+    _currentEntry = happynessEntry;
     NSInteger value = [[happyness value] integerValue];
 
     NSDateComponents *components = [[NSCalendar currentCalendar] components:
@@ -103,7 +102,7 @@
 
 /* Adjust this to move the space for notes; will need to change for iphone6 */
 - (CGRect)createNoteFrame {
-    CGRect noteFrame = CGRectMake(5.0, 112.0, 110, 100);
+    CGRect noteFrame = CGRectMake(5.0, 120.0, 110, 75);
     return noteFrame;
 }
 

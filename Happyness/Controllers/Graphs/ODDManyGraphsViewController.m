@@ -12,7 +12,7 @@
 #import "ODDCustomColor.h"
 #import "ODDStatisticsCardScrollView.h"
 
-#define HEADER_HEIGHT 40
+#define HEADER_HEIGHT 45
 #define STATUS_BAR_HEIGHT 20 // Should always be 20 points
 
 @interface ODDManyGraphsViewController ()
@@ -87,9 +87,10 @@
     [self.view addSubview:self.headerView];
     
     // Setup Title
+    CGFloat adjustedHeight = STATUS_BAR_HEIGHT - 5.0;
     CGFloat titleOfGraphWidth = 190;
     CGRect titleOfGraphFrame = CGRectMake((rootFrameSize.width / 2) - (titleOfGraphWidth / 2),
-                                          STATUS_BAR_HEIGHT,
+                                          adjustedHeight,
                                           titleOfGraphWidth,
                                           HEADER_HEIGHT);
     self.titleOfGraph.backgroundColor = [UIColor grayColor];
@@ -98,8 +99,8 @@
     self.titleOfGraph.text = graphTitle;
     self.titleOfGraph.backgroundColor = [UIColor clearColor];
     self.titleOfGraph.textColor = self.colors[@"oddLook_textcolor"];
-    self.titleOfGraph.font = [UIFont fontWithName:@"HelveticaNeue-Light"
-                                             size:30];
+    self.titleOfGraph.font = [UIFont fontWithName:@"Helvetica"
+                                             size:22];
     self.titleOfGraph.textAlignment = NSTextAlignmentCenter;
     [self.headerView addSubview:self.titleOfGraph];
     
@@ -112,9 +113,11 @@
         forControlEvents:UIControlEventTouchDown];
     self.up.backgroundColor = [UIColor clearColor];
     [self.up setImage:[UIImage imageNamed:@"increasing.png"] forState:UIControlStateNormal];
-    CGFloat buttonWidth = 25;
+
+    // Header Buttons
+    CGFloat buttonWidth = 45;
     CGRect upFrame = CGRectMake(titleOfGraphFrame.origin.x + titleOfGraphFrame.size.width,
-                                STATUS_BAR_HEIGHT,
+                                adjustedHeight,
                                 buttonWidth,
                                 HEADER_HEIGHT);
     [self.up setFrame:upFrame];

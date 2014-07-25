@@ -13,9 +13,12 @@
 #import "ODDCustomColor.h"
 #import "ODDHappynessObserver.h"
 #import "ODDTodayNoteView.h"
+#import "ODDNoteModalViewController.h"
+#import "ODDPresentingAnimator.h"
+#import "ODDDismissingAnimator.h"
 
 @interface ODDFeedbackViewController () <ODDSelectionCardScrollViewControllerDelegate,
-                                         UIAlertViewDelegate>
+                                         UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) NSMutableArray *slices;
 @property (nonatomic, strong) UILabel *feedbackLabel;
@@ -36,20 +39,9 @@
     if (self) {
         bottomController.delegate = self;
         _colorDictionary = [ODDCustomColor customColorDictionary];
-
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                            selector:@selector(submitEntryForDay)
-                                                name:UIApplicationSignificantTimeChangeNotification
-                                              object:nil];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillShow:)
-                                                     name:UIKeyboardWillShowNotification
-                                                   object:nil];
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(keyboardWillHide:)
-                                                     name:UIKeyboardWillHideNotification
+                                                 selector:@selector(reloadFeedbackText)
+                                                     name:UIApplicationSignificantTimeChangeNotification
                                                    object:nil];
     }
     return self;
@@ -78,7 +70,6 @@
 
     [self setupNoteButton];
     [self setupHashtagButton];
-    [self setUpNoteView];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -101,7 +92,7 @@
 - (void)setupNoteButton {
     UIButton *note = [UIButton buttonWithType:UIButtonTypeCustom];
     note.frame = CGRectMake(self.view.bounds.size.width - 50.0, 
-                            self.view.frame.size.height - 70.0, 45, 45);
+                            self.view.frame.size.height - 73.0, 45, 45);
     note.backgroundColor = [UIColor clearColor];
     [note setImage:[UIImage imageNamed:@"note.png"] forState:UIControlStateNormal];
     [self.view addSubview:note];
@@ -118,13 +109,6 @@
                 action:@selector(addHashtag) 
       forControlEvents:UIControlEventTouchUpInside];
 
-    /* Test submit button; crashes if you add, then go to graphs
-    UIButton *submit = [UIButton buttonWithType:UIButtonTypeSystem];
-    submit.frame = CGRectMake(200, 300, 50, 50);
-    [submit setTitle:@"Submit" forState:UIControlStateNormal];
-    [self.view addSubview:submit];
-    [submit addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
-     */
 }
 
 - (void)setUpPieChart {
@@ -132,7 +116,10 @@
     self.slices = [NSMutableArray arrayWithCapacity:5];
     int oneCount = 0, twoCount = 0, threeCount = 0, fourCount = 0, fiveCount = 0;
 
-    NSArray *store = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
+    NSArray *store = [[ODDHappynessEntryStore sharedStore] sortedStore];
+    if (store.count >= 14) {
+        store = [store subarrayWithRange:NSMakeRange(store.count - 14, 14)];
+    }
     for (int i = 0; i < store.count; i++) {
         ODDHappyness *temp = ((ODDHappynessEntry *)[store objectAtIndex:i]).happyness;
         int value = [temp.value intValue];
@@ -174,7 +161,10 @@
     self.slices = [NSMutableArray arrayWithCapacity:5];
     int oneCount = 0, twoCount = 0, threeCount = 0, fourCount = 0, fiveCount = 0;
 
-    NSArray *store = [[[ODDHappynessEntryStore sharedStore] happynessEntries] allValues];
+    NSArray *store = [[ODDHappynessEntryStore sharedStore] sortedStore];
+    if (store.count >= 14) {
+        store = [store subarrayWithRange:NSMakeRange(store.count - 14, 14)];
+    }
     for (int i = 0; i < store.count; i++) {
         ODDHappyness *temp = ((ODDHappynessEntry *)[store objectAtIndex:i]).happyness;
         int value = [temp.value intValue];
@@ -241,13 +231,6 @@
     self.feedbackLabel.text = text;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 #pragma mark - Note and Hashtag
 
 - (void)addNote {
@@ -260,12 +243,30 @@
                                                            value:nil] build]];
     [tracker set:kGAIScreenName value:nil];
 
-    [self.noteView becomeFirstResponder];
+    ODDNoteModalViewController *noteViewController = [[ODDNoteModalViewController alloc] init];
+
+    ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
+    if (entry) {
+        noteViewController.text = entry.note.noteString;
+        noteViewController.transitioningDelegate = self;
+        noteViewController.modalPresentationStyle = UIModalPresentationCustom;
+        [self presentViewController:noteViewController
+                           animated:YES
+                         completion:NULL];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Happyness"
+                                                        message:@"Please select an entry below first"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    }
 }
 
 - (void)addHashtag {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"OddLook"
-                                                    message:@"Do you like hashtags?"
+                                                    message:@"Do you want to tag your notes?"
                                                    delegate:nil
                                           cancelButtonTitle:@"No"
                                           otherButtonTitles:@"Yes", nil];
@@ -288,174 +289,26 @@
 
 }
 
-# pragma mark - Note
+#pragma mark - UIViewControllerTransitioningDelegate
 
-/* Still need to make sure note view slides down every new day */
-- (void)setUpNoteView {
-    self.noteContainerView = [[UIView alloc]
-                              initWithFrame:CGRectMake(0, -self.view.bounds.size.height, 320,
-                                                       self.view.bounds.size.height)];
-    self.noteContainerView.backgroundColor = [UIColor clearColor];
-
-    self.noteView = [[ODDTodayNoteView alloc]
-                     initWithFrame:CGRectMake(0, self.view.frame.size.height - 40, 270, 40)];
-    self.noteView.delegate = self;
-
-
-    self.clearAllButton = [[UIButton alloc]
-                           initWithFrame:CGRectMake(270, self.view.frame.size.height - 40, 50, 40)];
-
-    self.clearAllButton.backgroundColor = [UIColor lightGrayColor];
-    self.clearAllButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    [self.clearAllButton setTitle:@"X" forState:UIControlStateNormal];
-    [self.clearAllButton addTarget:self action:@selector(clearButtonSelected)
-                  forControlEvents:UIControlEventTouchUpInside];
-
-    /* entryBackground; edit these lines for back
-     UIImage *rawEntryBackground = [UIImage imageNamed:@"MessageEntryInputField.png"];
-     UIImage *entryBackground = [rawEntryBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-     UIImageView *entryImageView = [[UIImageView alloc] initWithImage:entryBackground];
-     entryImageView.frame = CGRectMake(5, 0, 248, 40);
-     entryImageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-     */
-
-    /* messageEntryBackground
-     UIImage *rawBackground = [UIImage imageNamed:@"MessageEntryBackground.png"];
-     UIImage *background = [rawBackground stretchableImageWithLeftCapWidth:13 topCapHeight:22];
-     UIImageView *imageView = [[UIImageView alloc] initWithImage:background];
-     imageView.frame = CGRectMake(0, 0, containerView.frame.size.width, containerView.frame.size.height);
-     imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-     */
-
-    [self.view addSubview:self.noteContainerView];
-    //[containerView addSubview:imageView];
-    [self.noteContainerView addSubview:self.noteView];
-    [self.noteContainerView addSubview:self.clearAllButton];
-    //[containerView addSubview:entryImageView];
-
-    /* Replace image with custom CLEAR ALL
-     UIImage *sendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-     UIImage *selectedSendBtnBackground = [[UIImage imageNamed:@"MessageEntrySendButton.png"] stretchableImageWithLeftCapWidth:13 topCapHeight:0];
-     */
-
-    /*Replace doneBtn with a clearAll button
-     UIButton *doneBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-     doneBtn.frame = CGRectMake(containerView.frame.size.width - 69, 8, 63, 27);
-     doneBtn.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-     [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
-
-     [doneBtn setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.4] forState:UIControlStateNormal];
-     doneBtn.titleLabel.shadowOffset = CGSizeMake (0.0, -1.0);
-     doneBtn.titleLabel.font = [UIFont boldSystemFontOfSize:18.0f];
-
-     [doneBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-     [doneBtn addTarget:self action:@selector(resignTextView) forControlEvents:UIControlEventTouchUpInside];
-     [doneBtn setBackgroundImage:sendBtnBackground forState:UIControlStateNormal];
-     [doneBtn setBackgroundImage:selectedSendBtnBackground forState:UIControlStateSelected];
-     [containerView addSubview:doneBtn];
-     */
-    self.noteContainerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | 
-                                              UIViewAutoresizingFlexibleTopMargin;
-}
-
-- (void)keyboardWillShow:(NSNotification *)note {
-    // get keyboard size and location
-    CGRect keyboardBounds;
-    [[note.userInfo valueForKey:UIKeyboardFrameEndUserInfoKey] getValue: &keyboardBounds];
-    NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-
-    // Need to translate the bounds to account for rotation.
-    keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
-
-    // get a rect for the textView frame
-    CGRect containerFrame = self.noteContainerView.frame;
-    // Matt: play with height values to make textView move upon keyboard showing
-    containerFrame.origin.y = self.view.bounds.size.height -
-                              self.noteContainerView.frame.size.height - 40.0;
-    // animations settings
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:[duration doubleValue]];
-    [UIView setAnimationCurve:[curve intValue]];
-
-    // set views with new info
-    self.noteContainerView.frame = containerFrame;
-
-
-    // commit animations
-    [UIView commitAnimations];
-}
-
-- (void)keyboardWillHide:(NSNotification *)note {
-    NSNumber *duration = [note.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
-    NSNumber *curve = [note.userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
-
-    // get a rect for the textView frame
-    CGRect containerFrame = self.noteContainerView.frame;
-    containerFrame.origin.y = self.view.bounds.size.height + containerFrame.size.height;
-
-    // animations settings
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationBeginsFromCurrentState:YES];
-    [UIView setAnimationDuration:[duration doubleValue]];
-    [UIView setAnimationCurve:[curve intValue]];
-
-    // set views with new info
-    self.noteContainerView.frame = containerFrame;
-
-    // commit animations
-    [UIView commitAnimations];
-}
-
-- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
-    float diff = (growingTextView.frame.size.height - height);
-
-    CGRect r = self.noteContainerView.frame;
-    r.size.height -= diff;
-    r.origin.y += diff;
-    self.noteContainerView.frame = r;
-
-    CGRect clearR = self.clearAllButton.frame;
-    clearR.size.height -= diff;
-    self.clearAllButton.frame = clearR;
-}
-
-/* Dismiss keyboard upon pressing "Done" and impose 140 character limit */
-- (BOOL)growingTextView:(HPGrowingTextView *)growingTextView 
-shouldChangeTextInRange:(NSRange)range
-        replacementText:(NSString *)text {
-
-    if ([text isEqualToString:@"\n"]) {
-        [self.noteView resignFirstResponder];
-    }
-    return growingTextView.text.length + (text.length - range.length) <= 100;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source
 {
-    return NO;
+    return [ODDPresentingAnimator new];
 }
 
-- (void)clearButtonSelected {
-    self.noteView.text = @"";
-}
-
-- (void)growingTextViewDidEndEditing:(HPGrowingTextView *)growingTextView {
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
     ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
     if (entry) {
         ODDNote *note = entry.note;
         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
             ODDNote *local = [note MR_inContext:localContext];
-            local.noteString = growingTextView.text;
+            local.noteString = ((ODDNoteModalViewController *)dismissed).text;
         }];
     }
-}
-#pragma mark - Submit
-
-- (void)submitEntryForDay {
-    // TODO Core Data logic here
-
+    return [ODDDismissingAnimator new];
 }
 
 #pragma mark - Delegate for Card Selection View Controller
@@ -493,7 +346,7 @@ shouldChangeTextInRange:(NSRange)range
 #pragma mark - Overall Score Calculations
 - (CGFloat)calculateOverallScoreWithLinearRegression {
     // Get two arrays: x and y points
-    NSArray *entries = [[ODDHappynessEntryStore sharedStore]sortedStore];
+    NSArray *entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
     if (entries.count == 0) {
         return 0.0;
     }
@@ -569,6 +422,10 @@ shouldChangeTextInRange:(NSRange)range
         }
     }
     return newYValues;
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 

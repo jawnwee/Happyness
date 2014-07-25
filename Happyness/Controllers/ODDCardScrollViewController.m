@@ -51,7 +51,7 @@
     _cardCollectionView.dataSource = self;
     _cardCollectionView.showsVerticalScrollIndicator = NO;
     //_cardCollectionView.showsHorizontalScrollIndicator = NO;
-    _cardCollectionView.bounces = NO;
+    _cardCollectionView.bounces = YES;
     // Horizontal indicator is set to yes for now for debugging purposes
     [_cardCollectionView registerClass:[self.cardClass class] forCellWithReuseIdentifier:@"cardCell"];
     [self.view addSubview:_cardCollectionView];

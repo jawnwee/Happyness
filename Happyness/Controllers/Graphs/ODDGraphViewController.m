@@ -62,7 +62,8 @@
 
 - (void)setFrameSize:(CGSize)size {
     CGRect originalFrame = self.view.frame;
-    CGRect frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y, size.width, size.height - 20);
+    CGRect frame = CGRectMake(originalFrame.origin.x, originalFrame.origin.y,
+                              size.width, size.height - 20);
     [self.view setFrame:frame];
     [self initializeTopPortionOfFrame];
     [self initializeLabels];
@@ -123,7 +124,7 @@
     self.graphAll.backgroundColor = [UIColor clearColor];
     self.graphMedium.backgroundColor = [UIColor clearColor];
     self.graphShortTerm.backgroundColor = self.colors[@"oddLook_textcolor"];
-    CGFloat buttonFontSize = 18;
+    CGFloat buttonFontSize = 16.0;
     [self.graphAll.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"
                                                       size:buttonFontSize]];
     [self.graphMedium.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light"

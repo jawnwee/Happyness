@@ -67,8 +67,8 @@
         [[ODDHappynessEntryStore sharedStore] addEntry:entry];
     }
 
-    // Testing purposes, 500 random data for previous days
-    /*for (int i = 1; i <= 500; i++) {
+    /* // Testing purposes, 500 random data for previous days
+    for (int i = 1; i <= 20; i++) {
         NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         int randomTimeDelta = 1;
         //int randomTimeDelta = arc4random_uniform(2);
@@ -92,8 +92,6 @@
     [[ODDHappynessEntryStore sharedStore] sortStore:YES];
     ////////////////////////////////////////////////////// */
 
-    NSBundle *appBundle = [NSBundle mainBundle];
-
     // Feedback
     ODDSelectionCardScrollViewController *selectionBottom =
                                        [[ODDSelectionCardScrollViewController alloc] init];
@@ -104,10 +102,7 @@
     ODDCalendarCardScrollViewController *calendarBottom =
                                        [[ODDCalendarCardScrollViewController alloc] init];
     ODDOverallCalendarViewController *calendar =
-                                       [[ODDOverallCalendarViewController alloc]
-                                                initWithNibName:@"ODDOverallCalendarViewController" 
-                                                         bundle:appBundle
-                                               bottomController:calendarBottom];
+                 [[ODDOverallCalendarViewController alloc] initWithbottomController:calendarBottom];
 
     // Graphs
     ODDCurveFittingViewController *cfvc = [[ODDCurveFittingViewController alloc] init];
@@ -134,8 +129,12 @@
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
 
     ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
-
-    self.window.rootViewController = welcomeScreen;
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
+        self.window.rootViewController = mainvc;
+    } else {
+        self.window.rootViewController = welcomeScreen;
+    }
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];

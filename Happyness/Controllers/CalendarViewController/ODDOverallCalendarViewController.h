@@ -11,11 +11,9 @@
 
 @class ODDCalendarCardScrollViewController;
 
+
 @interface ODDOverallCalendarViewController : GAITrackedViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil
-                         bundle:(NSBundle *)nibBundleOrNil
-               bottomController:(ODDCalendarCardScrollViewController *)bottomController;
-
+- (instancetype)initWithbottomController:(ODDCalendarCardScrollViewController *)bottomController;
 
 @end

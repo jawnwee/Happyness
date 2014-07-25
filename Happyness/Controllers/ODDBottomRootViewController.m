@@ -51,8 +51,12 @@
 
     if (index > self.currentPage) {
         [self animate:current nextView:incoming toRight:NO];
+        [[self.viewControllers objectAtIndex:index] viewWillAppear:YES];
+        [[self.viewControllers objectAtIndex: self.currentPage] viewWillDisappear:YES];
     } else if (index < self.currentPage) {
         [self animate:current nextView:incoming toRight:YES];
+        [[self.viewControllers objectAtIndex:index] viewWillAppear:YES];
+        [[self.viewControllers objectAtIndex: self.currentPage] viewWillDisappear:YES];
     }
     self.currentPage = index;
 }

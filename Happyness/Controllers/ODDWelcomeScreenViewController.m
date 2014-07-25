@@ -38,7 +38,7 @@
 - (void)setupPageViews {
     CGSize scrollSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height);
     _scrollView = [[UIScrollView alloc] initWithFrame:self.view.frame];
-    _scrollView.contentSize = CGSizeMake(scrollSize.width * 3, scrollSize.height);
+    _scrollView.contentSize = CGSizeMake(scrollSize.width * 4, scrollSize.height);
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -49,14 +49,14 @@
 }
 
 - (void)addWelcomeViews {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         NSString *imageName = [NSString stringWithFormat:@"welcome_page_%d", i + 1];
         UIImage *image = [UIImage imageNamed: imageName];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
 
         imageView.center = CGPointMake(self.view.center.x + (i * self.view.frame.size.width),
                                        self.view.center.y);
-        if (i == 2) {
+        if (i == 3) {
             imageView.center = CGPointMake(self.view.center.x + (i * self.view.frame.size.width),
                                            self.view.center.y - imageView.frame.size.height / 2.5);
             UIButton *complete = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -79,7 +79,7 @@
                                       pageControlSize.width,
                                       pageControlSize.height);
     _pageControl = [[UIPageControl alloc] initWithFrame:frame];
-    _pageControl.numberOfPages = 3;
+    _pageControl.numberOfPages = 4;
     _pageControl.currentPage = 0;
     _pageControl.userInteractionEnabled = NO;
     _pageControl.backgroundColor = [UIColor clearColor];

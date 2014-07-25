@@ -125,15 +125,24 @@
                                                                                           actualStart)];
         }
         
-        
+
+
         // Initialize self.shortTermEntries;
         NSUInteger numberOfShortTermEntries = self.shortTermCount;
         if (numberOfAllEntries < numberOfShortTermEntries) {
             numberOfShortTermEntries = numberOfAllEntries;
         }
-        ODDDoubleArrayHolder *shortTermRatings =
-        [allEntriesRatings subarrayWithRange:NSMakeRange(numberOfAllEntries - numberOfShortTermEntries,
-                                                         numberOfAllEntries)];
+        ODDDoubleArrayHolder *shortTermRatings = [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries];
+        NSArray *adjustedEntries = [self.entries
+                                    subarrayWithRange:
+                                    NSMakeRange(self.entries.count - numberOfShortTermEntries,
+                                                numberOfShortTermEntries)];
+        index = 0;
+        for (ODDHappynessEntry *happynessItem in adjustedEntries) {
+            double rating = [happynessItem.happyness.value doubleValue] * 18;
+            [shortTermRatings setValue:rating atIndex:index];
+            index++;
+        }
         self.shortData =
         [[ODDDoubleArrayHolder alloc] initWithCount:numberOfShortTermEntries
                                          withValues:[shortTermRatings getValues]];
