@@ -12,6 +12,7 @@
 #import "ODDHappynessHeader.h"
 #import "ODDCalendarModalViewController.h"
 #import "ODDCalendarView.h"
+#import "ODDCalendarCell.h"
 #import "ODDCalendarRowCell.h"
 #import "ODDPresentingAnimator.h"
 #import "ODDDismissingAnimator.h"
@@ -267,6 +268,8 @@
 
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
 
+     NSLog(@"called? part");
+
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM"];
     NSString *monthName = [formatter stringFromDate:date];
@@ -286,6 +289,7 @@
         } else {
             [self decreaseMonth];
         }
+        NSLog(@"first part");
     } else if (![[[ODDHappynessEntryStore sharedStore] happynessEntries] objectForKey:key]) {
         // If HappynessEntry doesnt exist in current month, and we are in same month
         // create a new one
@@ -298,12 +302,14 @@
             noteViewController.selectedHappyness = NULL;
             noteViewController.transitioningDelegate = self;
             noteViewController.modalPresentationStyle = UIModalPresentationCustom;
-            [self presentViewController:noteViewController
-                               animated:YES
-                             completion:NULL];
+            [self.view.window.rootViewController presentViewController:noteViewController 
+                                                              animated:YES 
+                                                            completion:nil];
         }
+        NSLog(@"second part");
     } else {
         [self.calendarCardController scrollToDate:date animated:YES];
+        NSLog(@"third part");
     }
 }
 
@@ -403,6 +409,7 @@
     [self changeYear:NO];
 }
 
+// No longer used, but if needed. here it is
 - (void)changeYear:(BOOL)increase {
 
 

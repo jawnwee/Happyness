@@ -53,8 +53,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.frame = CGRectMake(0, 0, self.view.frame.size.width,
-                                 self.view.frame.size.height * TOP_HEIGHT_RATIO);
+    self.view.frame = CGRectMake(0,
+                                 0,
+                                 self.view.frame.size.width,
+                                 self.view.frame.size.height * SCROLLVIEW_HEIGHT_RATIO + 20);
     self.view.layer.cornerRadius = 10.0f;
     self.view.layer.masksToBounds = YES;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -62,7 +64,7 @@
                                                              0,
                                                              self.view.bounds.size.width,
                                                              self.view.bounds.size.height)
-                                           Center:CGPointMake(60, 60)
+                                           Center:CGPointMake(self.view.frame.size.width / 6.0, self.view.frame.size.width / 6.0)
                                            Radius:100];
     [self setUpPieChart];
     [self setUpFeedbackView];
@@ -143,14 +145,16 @@
 
     [self.pieChart setDataSource:self];
     [self.pieChart setStartPieAngle:-M_PI_2];
-    [self.pieChart setPieRadius:120]; // change back to 62.5 or whatever value we need
+    [self.pieChart setPieRadius:self.view.frame.size.width / 2.8]; // change back to 62.5 or whatever value we need
     [self.pieChart setAnimationSpeed:2.0];
     [self.pieChart setShowLabel:NO];
     [self.pieChart setLabelFont:[UIFont fontWithName:@"DBLCDTempBlack" size:24]];
     [self.pieChart setLabelRadius:120];
     [self.pieChart setShowPercentage:NO];
     [self.pieChart setPieBackgroundColor:[UIColor whiteColor]];
-    [self.pieChart setPieCenter:CGPointMake(160, 160)];
+    CGPoint adjustedCenter = self.view.center;
+    adjustedCenter.y -= adjustedCenter.y * 0.15;
+    [self.pieChart setPieCenter:adjustedCenter];
     [self.pieChart setUserInteractionEnabled:NO];
     [self.pieChart setLabelShadowColor:[UIColor blackColor]];
 
@@ -190,14 +194,16 @@
 }
 
 - (void)setUpFeedbackView {
-    CGRect imageRect = CGRectMake(0, 0, 200, 200);
+    CGRect imageRect = CGRectMake(0, 0, self.view.frame.size.width / 1.7, self.view.frame.size.width / 1.7);
     UIImageView *centerImage = [[UIImageView alloc] initWithFrame:imageRect];
     [centerImage setImage:[UIImage imageNamed:@"feedbackCircle.png"]];
-    centerImage.center = CGPointMake(160, 160);
+    CGPoint adjustedCenter = self.view.center;
+    adjustedCenter.y -= adjustedCenter.y * 0.15;
+    centerImage.center = adjustedCenter;
 
     UIFont *customFont = [UIFont fontWithName:@"GothamRounded-Bold" size:16];
     self.feedbackLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 125, 125)];
-    self.feedbackLabel.center = CGPointMake(160, 160);
+    self.feedbackLabel.center = adjustedCenter;
     [self reloadFeedbackText];
     self.feedbackLabel.font = customFont;
     self.feedbackLabel.alpha = 0.7;

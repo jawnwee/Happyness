@@ -11,6 +11,7 @@
 #import "ODDCardCollectionViewCell.h"
 #import "ODDcalendarCardCollectionViewCell.h"
 
+
 @interface ODDCardScrollViewController ()
 
 @end
@@ -59,7 +60,12 @@
 
 /* Override this method in subclasses if you want a different card size */
 - (CGSize)cardSizeForLayout {
-    CGSize size = CGSizeMake(120, 204.48);
+    CGSize size;
+    if (IS_IPHONE_5) {
+        size = CGSizeMake(120, 204.48);
+    } else {
+        size = CGSizeMake(self.view.frame.size.width / 3.2, self.view.frame.size.height * 0.97);
+    }
     return size;
 }
 

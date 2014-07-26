@@ -78,8 +78,13 @@
     [headerView addSubview:reminderLabel];
 
 
+    CGRect switchFrame = CGRectMake(0, 0, self.view.frame.size.width * 0.2, self.view.frame.size.height * 0.1);
     self.reminderSwitch = [[ODDCustomReminderSwitchView alloc]
-                           initWithFrame:CGRectMake(125, 75, 70, 35)];
+                           initWithFrame:switchFrame];
+    CGPoint center = self.view.center;
+    center.y -= self.view.frame.size.height * 0.30;
+    self.reminderSwitch.center = center;
+
 
     [self.reminderSwitch addTarget:self
                             action:@selector(switchToggled)
@@ -98,7 +103,9 @@
 }
 
 - (void)setUpPicker {
-    self.picker = [[SSFlatDatePicker alloc] initWithFrame:CGRectMake(40, 130, 240, 200)];
+    CGRect frame = CGRectMake(self.view.frame.size.width * 0.1, self.view.frame.size.height * 0.35,
+                              self.view.frame.size.width * 0.8, self.view.frame.size.height * 0.5);
+    self.picker = [[SSFlatDatePicker alloc] initWithFrame:frame];
     self.picker.datePickerMode = SSFlatDatePickerModeTime;
     self.picker.gradientColor = self.picker.backgroundColor = [ODDCustomColor customReminderOffColor];
     self.picker.textColor = [ODDCustomColor customPickerTextColor];

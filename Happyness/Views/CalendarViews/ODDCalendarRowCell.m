@@ -43,6 +43,14 @@
     return self;
 }
 
++ (CGFloat)cellHeight {
+    if (IS_IPHONE_5) {
+        return 44.0;
+    } else {
+        return 44.0;
+    }
+}
+
 
 /* Each row's background can be customized; needs both bottom and a top row */
 - (UIImage *)backgroundImage;

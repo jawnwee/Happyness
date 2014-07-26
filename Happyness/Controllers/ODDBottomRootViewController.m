@@ -37,7 +37,7 @@
     self.view.frame = frame;
     [self.view addSubview:[[self.viewControllers objectAtIndex:0] view]];
     CGRect adjustedFrame = [[self.viewControllers objectAtIndex:0] view].frame;
-    adjustedFrame.origin.x += 420;
+    adjustedFrame.origin.x += self.view.frame.size.width;
     for (int i = 1; i < [self.viewControllers count]; i++) {
         [[self.viewControllers objectAtIndex:i] view].frame = adjustedFrame;
         [self.view addSubview:[[self.viewControllers objectAtIndex:i] view]];
@@ -71,9 +71,9 @@
     CGRect leaveToFrame = currentView.frame;
 
     if (isMovingRight) {
-        leaveToFrame.origin.x += 420.0;
+        leaveToFrame.origin.x += self.view.frame.size.width;
     } else {
-        leaveToFrame.origin.x -= 420.0;
+        leaveToFrame.origin.x -= self.view.frame.size.width;
     }
 
     POPBasicAnimation *offscreenAnimation = [POPBasicAnimation easeInAnimation];

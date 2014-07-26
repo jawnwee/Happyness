@@ -102,7 +102,12 @@
 
 /* Adjust this to move the space for notes; will need to change for iphone6 */
 - (CGRect)createNoteFrame {
-    CGRect noteFrame = CGRectMake(5.0, 120.0, 110, 75);
+    CGRect noteFrame;
+    if (IS_IPHONE_5) {
+        noteFrame = CGRectMake(5.0, 120.0, 110, 75);
+    } else {
+        noteFrame = CGRectMake(5.0, 80.0, 80, 52);
+    }
     return noteFrame;
 }
 

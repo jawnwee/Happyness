@@ -87,9 +87,9 @@
         noteViewController.text = self.entryForToday.note.noteString;
         noteViewController.transitioningDelegate = self;
         noteViewController.modalPresentationStyle = UIModalPresentationCustom;
-        [self presentViewController:noteViewController
-                           animated:YES
-                         completion:NULL];
+        [self.view.window.rootViewController presentViewController:noteViewController
+                                                          animated:YES
+                                                        completion:nil];
 
         ODDNote *note = [ODDNote MR_createEntity];
         note.entry = self.entryForToday;

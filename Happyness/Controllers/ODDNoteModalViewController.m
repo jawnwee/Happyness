@@ -22,9 +22,16 @@
 - (void)viewDidLoad {
     UIView *windowView = (UIView *)([[UIApplication sharedApplication] windows].firstObject);
     CGRect windowFrame = windowView.frame;
-    CGRect frame = CGRectMake(0.0, 0.0,
-                              windowFrame.size.width - 40.0,
-                              windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 30.0);
+    CGRect frame;
+    if (IS_IPHONE_5) {
+        frame = CGRectMake(0.0, 0.0,
+                           windowFrame.size.width - 40.0,
+                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 30.0);
+    } else {
+        frame = CGRectMake(0.0, 15.0,
+                           windowFrame.size.width - 40.0,
+                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 70.0);
+    }
     self.view = [[UIView alloc] initWithFrame:frame];
 
     // This frame is adjusted for the text view frame
