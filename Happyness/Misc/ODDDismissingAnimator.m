@@ -31,6 +31,7 @@
             *stop = YES;
         }
     }];
+
     POPBasicAnimation *opacityAnimation = [POPBasicAnimation animationWithPropertyNamed:kPOPLayerOpacity];
     opacityAnimation.toValue = @(0.0);
 

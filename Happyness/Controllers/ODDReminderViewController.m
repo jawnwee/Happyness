@@ -66,10 +66,12 @@
     UIView *headerView = [[UIView alloc] initWithFrame:headerFrame];
     CGFloat adjustedHeight = STATUS_BAR_HEIGHT - 5.0;
     CGFloat titleOfMonthWidth = 190;
-    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.view.frame.size.width / 2) - (titleOfMonthWidth / 2),
-                                                                       adjustedHeight,
-                                                                       titleOfMonthWidth,
-                                                                       HEADER_HEIGHT)];
+    UILabel *reminderLabel = [[UILabel alloc] initWithFrame:
+                              CGRectMake((self.view.frame.size.width / 2) - (titleOfMonthWidth / 2),
+                                          adjustedHeight,
+                                          titleOfMonthWidth,
+                                          HEADER_HEIGHT)];
+
     reminderLabel.font = [UIFont fontWithName:@"Helvetica" size:22];
     reminderLabel.text = @"Push Notification";
     reminderLabel.textColor = [ODDCustomColor textColor];
@@ -82,7 +84,7 @@
     self.reminderSwitch = [[ODDCustomReminderSwitchView alloc]
                            initWithFrame:switchFrame];
     CGPoint center = self.view.center;
-    center.y -= self.view.frame.size.height * 0.30;
+    center.y -= self.view.frame.size.height * 0.27;
     self.reminderSwitch.center = center;
 
 
@@ -120,7 +122,7 @@
 
 - (void)scheduleReminder {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    if (self.reminderIsOn && ![[NSUserDefaults standardUserDefaults] objectForKey:@"Reminder"]) {
+    if (self.reminderIsOn && [[NSUserDefaults standardUserDefaults] objectForKey:@"Reminder"]) {
         NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
         calendar.timeZone = [NSTimeZone defaultTimeZone];
         NSDate *currentDate = [NSDate date];
@@ -143,7 +145,7 @@
         [comp setHour:pickerComp.hour];
 
         UILocalNotification *reminder = [[UILocalNotification alloc] init];
-        reminder.alertBody = [NSString stringWithFormat:@"Hey, how was your day?"];
+        reminder.alertBody = [NSString stringWithFormat:@"Don't forget to log your entry today :D."];
         reminder.alertAction = @"Tell me how it went!";
         reminder.soundName = UILocalNotificationDefaultSoundName;
         reminder.fireDate = [calendar dateFromComponents:comp];
@@ -153,12 +155,12 @@
 
         [[UIApplication sharedApplication] scheduleLocalNotification:reminder];
 
-        /* //Testing for correct notification fire time
+         /* //Testing for correct notification fire time
          NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
          [formatter setTimeStyle:NSDateFormatterFullStyle];
          [formatter setTimeZone:[NSTimeZone defaultTimeZone]];
-         NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]);
-         */
+         NSLog(@"Setting reminder for time: %@", [formatter stringFromDate:reminder.fireDate]); */
+
     }
 }
 

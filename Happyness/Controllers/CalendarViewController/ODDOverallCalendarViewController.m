@@ -11,6 +11,7 @@
 #import "ODDCalendarCardScrollViewController.h"
 #import "ODDHappynessHeader.h"
 #import "ODDCalendarModalViewController.h"
+#import "ODDSelectionModalViewController.h"
 #import "ODDCalendarView.h"
 #import "ODDCalendarCell.h"
 #import "ODDCalendarRowCell.h"
@@ -239,16 +240,8 @@
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
 {
-    ODDHappynessEntry *entry = ((ODDCalendarModalViewController *)dismissed).selectedHappyness;
+    ODDHappynessEntry *entry = ((ODDSelectionModalViewController *)dismissed).currentEntry;
     if (entry) {
-        ODDNote *note = entry.note;
-        note.noteString = ((ODDCalendarModalViewController *)dismissed).text;
-        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-            ODDHappynessEntry *localEntry = [entry MR_inContext:localContext];
-            ODDNote *localNote = [note MR_inContext:localContext];
-            localNote.noteString = ((ODDCalendarModalViewController *)dismissed).text;
-            localEntry.note = localNote;
-        }];
         [[ODDHappynessEntryStore sharedStore] addEntry:entry];
         [self.currentCalendar reload];
         [self.calendarCardController resortAndReload];
@@ -267,8 +260,6 @@
 #pragma mark - Calendar View Logic
 
 - (void)calendarView:(TSQCalendarView *)calendarView didSelectDate:(NSDate *)date {
-
-     NSLog(@"called? part");
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MMMM"];
@@ -289,27 +280,24 @@
         } else {
             [self decreaseMonth];
         }
-        NSLog(@"first part");
     } else if (![[[ODDHappynessEntryStore sharedStore] happynessEntries] objectForKey:key]) {
         // If HappynessEntry doesnt exist in current month, and we are in same month
         // create a new one
-        NSComparisonResult result = [[NSDate date] compare:date];
+        NSComparisonResult result = [[NSDate dateWithTimeIntervalSinceNow:-86400] compare:date];
         self.selectedDate = date;
         if (result == NSOrderedDescending) {
-            ODDCalendarModalViewController *noteViewController =
-                                                      [[ODDCalendarModalViewController alloc] init];
+            ODDSelectionModalViewController *noteViewController =
+                                                      [[ODDSelectionModalViewController alloc] init];
             noteViewController.selectedDate = date;
-            noteViewController.selectedHappyness = NULL;
+            noteViewController.currentEntry = NULL;
             noteViewController.transitioningDelegate = self;
             noteViewController.modalPresentationStyle = UIModalPresentationCustom;
-            [self.view.window.rootViewController presentViewController:noteViewController 
+            [self.view.window.rootViewController presentViewController:noteViewController
                                                               animated:YES 
                                                             completion:nil];
         }
-        NSLog(@"second part");
     } else {
         [self.calendarCardController scrollToDate:date animated:YES];
-        NSLog(@"third part");
     }
 }
 

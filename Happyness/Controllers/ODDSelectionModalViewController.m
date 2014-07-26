@@ -57,7 +57,7 @@
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1.f
-                                                           constant:-25.f]];
+                                                           constant:-15.f]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:clearButton
                                                           attribute:NSLayoutAttributeCenterX
                                                           relatedBy:NSLayoutRelationEqual
@@ -72,12 +72,21 @@
 - (void)setupCollectionView{
     UIView *windowView = (UIView *)([[UIApplication sharedApplication] windows].firstObject);
     CGRect windowFrame = windowView.frame;
-    CGRect frame = CGRectMake(0.0, 0.0,
-                              windowFrame.size.width - 40.0,
-                              windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 30.0);
-    [self.view setFrame:frame];
+    CGRect frame;
+    CGSize cardSize;
+    if (IS_IPHONE_5) {
+        frame = CGRectMake(0.0, 0.0,
+                           windowFrame.size.width - 40.0,
+                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 30.0);
+        cardSize = CGSizeMake(120, 204.48);
+    } else {
+        frame = CGRectMake(0.0, 0.0,
+                           windowFrame.size.width - 40.0,
+                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 90.0);
+        cardSize = CGSizeMake(self.view.frame.size.width / 3.5, self.view.frame.size.height * 0.28);
+    }
+    self.view = [[UIView alloc] initWithFrame:frame];
     ODDCardCollectionViewLayout *cardLayout = [[ODDCardCollectionViewLayout alloc] init];
-    CGSize cardSize = [self cardSizeForLayout];
     [cardLayout setCardSize:cardSize];
     [cardLayout setItemSize:cardSize];
     self.cardCollectionView = [[UICollectionView alloc] initWithFrame:self.view.frame

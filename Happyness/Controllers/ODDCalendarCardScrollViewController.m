@@ -92,10 +92,9 @@
             localEntry.note = localNote;
         }];
         [self.selectedCell setHappynessEntry:entry];
-        [self.delegate changedEntry];
-        //[self reloadCollectionData];
     }
-
+    [self resortAndReload];
+    [self.delegate changedEntry];
     return [ODDDismissingAnimator new];
 }
 

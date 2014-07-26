@@ -47,7 +47,7 @@
     if (IS_IPHONE_5) {
         return 44.0;
     } else {
-        return 44.0;
+        return 43.0;
     }
 }
 

@@ -106,7 +106,7 @@
     if (IS_IPHONE_5) {
         noteFrame = CGRectMake(5.0, 120.0, 110, 75);
     } else {
-        noteFrame = CGRectMake(5.0, 80.0, 80, 52);
+        noteFrame = CGRectMake(5.0, self.frame.size.height * .6, 80, 52);
     }
     return noteFrame;
 }

@@ -11,8 +11,10 @@
 #import "ODDSelectionModalViewController.h"
 #import "ODDPresentingAnimator.h"
 #import "ODDDismissingAnimator.h"
+#import "ODDCustomColor.h"
 
-@interface ODDCalendarModalViewController () <UIViewControllerTransitioningDelegate>
+@interface ODDCalendarModalViewController () <UIViewControllerTransitioningDelegate,
+                                              UIAlertViewDelegate>
 
 @end
 
@@ -20,56 +22,60 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self changeHappynessButton];
+    [self deleteEntryButton];
 }
 
-- (void)changeHappynessButton {
-    UIButton *changeHappyness = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeHappyness.translatesAutoresizingMaskIntoConstraints = NO;
+- (void)deleteEntryButton {
+    UIButton *deleteButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    deleteButton.backgroundColor = [UIColor whiteColor];
+    deleteButton.translatesAutoresizingMaskIntoConstraints = NO;
+    deleteButton.tintColor = [ODDCustomColor textColor];
+    deleteButton.titleLabel.font = [UIFont fontWithName:@"GothamRounded-Bold" size:18];
+    deleteButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [deleteButton setTitle:@"Delete Entry" forState:UIControlStateNormal];
+    [deleteButton addTarget:self action:@selector(deleteEntry) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:deleteButton];
 
-    [changeHappyness setImage:[UIImage imageNamed:@"change_happyness.png"]
-                   forState:UIControlStateNormal];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:deleteButton
+                                                          attribute:NSLayoutAttributeCenterX
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view
+                                                          attribute:NSLayoutAttributeCenterX
+                                                         multiplier:1.f
+                                                           constant:-5.f]];
 
-    [changeHappyness addTarget:self
-                      action:@selector(updateHappyness)
-            forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:changeHappyness];
-
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:changeHappyness
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:deleteButton
                                                           attribute:NSLayoutAttributeBottom
                                                           relatedBy:NSLayoutRelationEqual
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1.f
                                                            constant:-30.f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:changeHappyness
-                                                          attribute:NSLayoutAttributeCenterX
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.f
-                                                           constant:0.0]];
+
+
 }
 
-- (void)updateHappyness {
-    ODDSelectionModalViewController *cardsViewController =
-            [[ODDSelectionModalViewController alloc] initWithHappynessEntry:self.selectedHappyness];
-    cardsViewController.selectedDate = self.selectedDate;
+- (void)deleteEntry {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Happyness"
+                                                    message:@"Are you sure you want to delete your entry?"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
+    alert.delegate = self;
+    [alert show];
+}
 
-    UIView *cardsView = cardsViewController.view;
-    CGRect adjustBounds = cardsView.frame;
-    adjustBounds.origin.y += 50.0f;
-    cardsView.frame = adjustBounds;
-    cardsView.layer.cornerRadius = 8.0f;
-    cardsViewController.view = cardsView;
 
-    cardsViewController.transitioningDelegate = self;
-    cardsViewController.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:cardsViewController
-                       animated:YES
-                     completion:NULL];
-    
+#pragma mark - AlertView Delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([title isEqualToString:@"Yes"]) {
+        ODDHappynessEntry *entry = self.selectedHappyness;
+        [[ODDHappynessEntryStore sharedStore] removeEntry:entry];
+        self.selectedHappyness = NULL;
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate

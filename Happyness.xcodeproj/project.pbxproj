@@ -794,8 +794,8 @@
 			children = (
 				EB4258B71980887500FAD45B /* ODDDismissingAnimator.h */,
 				EB4258B81980887500FAD45B /* ODDDismissingAnimator.m */,
-				EB4258BA1980888000FAD45B /* ODDPresentingAnimator.h */,
 				EB4258BB1980888000FAD45B /* ODDPresentingAnimator.m */,
+				EB4258BA1980888000FAD45B /* ODDPresentingAnimator.h */,
 			);
 			name = Animators;
 			sourceTree = "<group>";

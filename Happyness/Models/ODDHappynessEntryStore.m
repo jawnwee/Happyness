@@ -74,8 +74,14 @@
 }
 
 - (void)removeEntry:(ODDHappynessEntry *)entry {
-    NSDate *key = [entry date];
+    NSDate *date = [entry date];
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:
+                                    NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear
+                                                                   fromDate:date];
+    NSString *key = [NSString stringWithFormat:@"%ld/%ld/%ld",
+                     (long)[components year], (long)[components month], (long)[components day]];
     [_privateEntries removeObjectForKey:key];
+    self.entries = [[NSMutableArray alloc] initWithArray:[self.privateEntries allValues]];
     [entry MR_deleteEntity];
     [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
 }

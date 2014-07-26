@@ -67,7 +67,7 @@
         [[ODDHappynessEntryStore sharedStore] addEntry:entry];
     }
 
-    /* // Testing purposes, 500 random data for previous days
+    /*// Testing purposes, 500 random data for previous days
     for (int i = 1; i <= 20; i++) {
         NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         int randomTimeDelta = 1;

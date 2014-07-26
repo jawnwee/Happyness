@@ -30,16 +30,16 @@
     } else {
         frame = CGRectMake(0.0, 15.0,
                            windowFrame.size.width - 40.0,
-                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 70.0);
+                           windowFrame.size.height * SCROLLVIEW_HEIGHT_RATIO - 90.0);
     }
     self.view = [[UIView alloc] initWithFrame:frame];
 
     // This frame is adjusted for the text view frame
-    frame.size.height -= 50.0;
+    frame.size.height -= 70.0;
 
     _textView = [[UITextView alloc] initWithFrame:frame];
     _textView.delegate = self;
-    if ([self.text isEqualToString:@""]) {
+    if ([self.text isEqualToString:@""] || !self.text) {
         _textView.text = @"Hey! How was your day today?";
         _textView.textColor = [UIColor lightGrayColor];
     } else {
@@ -94,7 +94,7 @@
                                                              toItem:self.view
                                                           attribute:NSLayoutAttributeBottom
                                                          multiplier:1.f
-                                                           constant:-30.f]];
+                                                           constant:-32.f]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:dismissButton
                                                           attribute:NSLayoutAttributeRight
                                                           relatedBy:NSLayoutRelationEqual

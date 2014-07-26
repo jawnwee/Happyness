@@ -56,7 +56,11 @@
     self.label.textAlignment = NSTextAlignmentCenter;
     self.label.numberOfLines = 0;
     self.label.lineBreakMode = NSLineBreakByWordWrapping;
-    self.label.font = [UIFont fontWithName:@"GothamRounded-Bold" size:12.0];
+    if (IS_IPHONE_5) {
+        self.label.font = [UIFont fontWithName:@"GothamRounded-Bold" size:12.0];
+    } else {
+        self.label.font = [UIFont fontWithName:@"GothamRounded-Bold" size:10.0];
+    }
     self.label.textColor = [UIColor whiteColor];
     self.label.shadowOffset = self.shadowOffset;
     [self addSubview:self.label];

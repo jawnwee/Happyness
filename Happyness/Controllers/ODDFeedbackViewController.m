@@ -256,7 +256,7 @@
         noteViewController.text = entry.note.noteString;
         noteViewController.transitioningDelegate = self;
         noteViewController.modalPresentationStyle = UIModalPresentationCustom;
-        [self presentViewController:noteViewController
+        [self.view.window.rootViewController presentViewController:noteViewController
                            animated:YES
                          completion:NULL];
     } else {

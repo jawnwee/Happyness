@@ -22,7 +22,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _imageView = [[UIImageView alloc] init];
-        CGRect checkMark = CGRectMake(CGRectGetMidX(self.bounds) - 10, 140.0, 22.5, 22.5);
+        CGRect checkMark = CGRectMake(CGRectGetMidX(self.bounds) - 10, CGRectGetMidY(self.bounds) *  1.3, 22.5, 22.5);
         _checkMark = [[UIImageView alloc] initWithFrame:checkMark];
         self.backgroundView  = _imageView;
         [self addSubview:_checkMark];
