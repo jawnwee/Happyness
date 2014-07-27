@@ -81,7 +81,7 @@
     [tracker set:kGAIScreenName value:@"Feedback"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 
-    [self.pieChart reloadData];
+    [self resetAndReloadPieChart];
     ODDHappynessEntry *entry = [[ODDHappynessEntryStore sharedStore] todayEntry];
     if (entry) {
         self.note = entry.note;

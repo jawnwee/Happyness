@@ -53,6 +53,10 @@
         NSString *imageName = [NSString stringWithFormat:@"welcome_page_%d", i + 1];
         UIImage *image = [UIImage imageNamed: imageName];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+        CGRect adjustedFrame = imageView.frame;
+        adjustedFrame.size.width *= 0.88;
+        adjustedFrame.size.height *= 0.85;
+        imageView.frame = adjustedFrame;
 
         imageView.center = CGPointMake(self.view.center.x + (i * self.view.frame.size.width),
                                        self.view.center.y);

@@ -68,7 +68,7 @@
     }
 
     /*// Testing purposes, 500 random data for previous days
-    for (int i = 1; i <= 20; i++) {
+    for (int i = 1; i <= 7; i++) {
         NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         int randomTimeDelta = 1;
         //int randomTimeDelta = arc4random_uniform(2);
