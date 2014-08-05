@@ -62,7 +62,7 @@
 - (CGSize)cardSizeForLayout {
     CGSize size;
     if (IS_IPHONE_5) {
-        size = CGSizeMake(120, 204.48);
+        size = CGSizeMake(115, 190.48);
     } else {
         size = CGSizeMake(self.view.frame.size.width / 3.2, self.view.frame.size.height * 0.97);
     }

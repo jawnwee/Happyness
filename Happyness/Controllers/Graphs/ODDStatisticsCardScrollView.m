@@ -56,7 +56,7 @@
     
     
     [cell setOccurencesText:self.cardOccurences[index - 1]];
-    [cell setLongestStreakText:self.longestStreak[index - 1]];
+    //[cell setLongestStreakText:self.longestStreak[index - 1]];
 
     return cell;
 }

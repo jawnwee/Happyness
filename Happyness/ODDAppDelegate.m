@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 #import <Crashlytics/Crashlytics.h>
+#import <Parse/Parse.h>
+#import "GAI.h"
 #import "ODDAppDelegate.h"
 #import "ODDMainViewController.h"
 #import "ODDWelcomeScreenViewController.h"
@@ -30,13 +32,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // iOS8 Notification Implementation
-    /* [[UIApplication sharedApplication] registerUserNotificationSettings:
-                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
-                                                                      | UIUserNotificationTypeAlert 
-                                                                      | UIUserNotificationTypeBadge) 
-                                                             categories:nil]];
-
-    [[UIApplication sharedApplication] registerForRemoteNotifications]; */
+//    [application registerUserNotificationSettings:
+//                           [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+//                                                                      | UIUserNotificationTypeAlert 
+//                                                                      | UIUserNotificationTypeBadge) 
+//                                                             categories:nil]];
+//      [application registerForRemoteNotifications];
 
     // Override point for customization after application launch.
     /* for (NSString* family in [UIFont familyNames])
@@ -55,6 +56,16 @@
     [GAI sharedInstance].dispatchInterval = 20;
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-51721437-2"];
 
+    // Parse
+    [Parse setApplicationId:@"OoypfgwuQO8kBcJcnrYpVKauZE0CHMGC4GLOd8cy"
+                  clientKey:@"Ny8QlT4YASQz04Vf2LSDnsD7VAXRK4xjjSNEEHnO"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+//    [application registerForRemoteNotificationTypes:
+//     UIRemoteNotificationTypeBadge |
+//     UIRemoteNotificationTypeAlert |
+//     UIRemoteNotificationTypeSound];
+
+
     // Crashyltics
     [Crashlytics startWithAPIKey:@"15cff1e39186231362a287dbc7407a93ea1631de"];
 
@@ -67,9 +78,16 @@
         [[ODDHappynessEntryStore sharedStore] addEntry:entry];
     }
 
-    /*// Testing purposes, 500 random data for previous days
-    for (int i = 1; i <= 7; i++) {
-        NSNumber *value = [NSNumber numberWithInt:arc4random_uniform(5) + 1];
+    // Testing purposes, 500 random data for previous days
+    for (int i = 1; i <= 100; i++) {
+        NSNumber *value; //= [NSNumber numberWithInt:arc4random_uniform(5) + 1];
+        if (i <= 7) {
+            value = [NSNumber numberWithInt:arc4random_uniform(3) + 3];
+        } else if (i >= 80){
+            value = [NSNumber numberWithInt:arc4random_uniform(3) + 1];
+        } else {
+            value = [NSNumber numberWithInt:arc4random_uniform(4) + 2];
+        }
         int randomTimeDelta = 1;
         //int randomTimeDelta = arc4random_uniform(2);
         // i += randomTimeDelta;
@@ -80,7 +98,7 @@
         testHappyness.entry = testEntry;
         ODDNote *note = [ODDNote MR_createEntity];
         note.noteString = [NSMutableString
-                           stringWithFormat:@"testing123. dont tap me, i dont do anything yet!"];
+                           stringWithFormat:@""];
         note.entry = testEntry;
 
         testEntry.happyness = testHappyness;
@@ -117,28 +135,67 @@
     ODDCardQuoteScrollViewController *reminderBottom = [[ODDCardQuoteScrollViewController alloc] init];
     ODDReminderViewController *reminderViewController = [[ODDReminderViewController alloc] init];
 
-    // Bottom View Controllers
-    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, graphBottom, reminderBottom];
-    ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
-
     // Top View Controllers
     ODDRootViewController *rvc = [[ODDRootViewController alloc] init];
     rvc.viewControllers = @[fvc, calendar, mgvc, reminderViewController];
+
+    // Bottom View Controllers
+    NSArray *bottomViewControllers = @[selectionBottom, calendarBottom, graphBottom, reminderBottom];
+    ODDBottomRootViewController *brvc = [[ODDBottomRootViewController alloc] initWithViewControllers:bottomViewControllers];
 
     // Root View Controller
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
 
     ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"tutorialComplete"]) {
-        self.window.rootViewController = mainvc;
+
+    // Uncomment when iOS8 comes out
+    /* if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        [application registerUserNotificationSettings:
+                            [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound
+                                                                         | UIUserNotificationTypeAlert
+                                                                         | UIUserNotificationTypeBadge)
+                                                              categories:nil]];
+        [application registerForRemoteNotifications];
     } else {
-        self.window.rootViewController = welcomeScreen;
-    }
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         (UIRemoteNotificationTypeAlert |
+          UIRemoteNotificationTypeBadge |
+          UIRemoteNotificationTypeSound)];
+    } */
+
+    // Use this instead for now
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeAlert |
+      UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound)];
+
+    self.window.rootViewController = mainvc;
 
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSString *token = [[[deviceToken description]
+                        stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]]
+                       stringByReplacingOccurrencesOfString:@" "
+                       withString:@""];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:[NSString stringWithFormat:@"%@", token] forKey:@"DeviceToken"];
+
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application
+didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

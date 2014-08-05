@@ -28,7 +28,7 @@
         _imageView = [[UIImageView alloc] init];
         self.backgroundView  = _imageView;
         self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        CGFloat onePixel = 3.0f / [UIScreen mainScreen].scale;
+        CGFloat onePixel = 2.0f / [UIScreen mainScreen].scale;
         static CGSize shadowOffset;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
@@ -36,7 +36,8 @@
         });
         self.shadowOffset = shadowOffset;
         
-        [self setComingSoonLabels];
+        [self setOccurencesLabel];
+        
     }
     return self;
 }
@@ -46,7 +47,7 @@
     comingSoon.textAlignment = NSTextAlignmentCenter;
     comingSoon.numberOfLines = 0;
     comingSoon.lineBreakMode = NSLineBreakByWordWrapping;
-    comingSoon.font = [UIFont fontWithName:@"GothamRounded-Bold" size:14.0];
+    comingSoon.font = [UIFont fontWithName:@"Nunito-Bold" size:14.0];
     comingSoon.textColor = [UIColor whiteColor];
     comingSoon.shadowOffset = self.shadowOffset;
     comingSoon.text = @"Coming Soon";
@@ -60,13 +61,13 @@
 }
 
 - (void)setCardValueAndLabelsShadow:(NSInteger)value {
-    NSString *cardImage = [NSString stringWithFormat:@"oddLook_card_%ld", (long)value];
+    NSString *cardImage = [NSString stringWithFormat:@"oddLook_selection_card_%ld", (long)value];
     UIImage *card = [UIImage imageNamed:cardImage];
     self.imageView.image = card;
     
     UIColor *labelShadowColor = [[ODDCustomColor customColorDictionary]
                                  objectForKey:
-                                 [NSString stringWithFormat:@"oddLook_color_dark_%ld", (long) value]];
+                                [NSString stringWithFormat:@"oddLook_color_dark_%ld", (long)value]];
     self.occurences.shadowColor = labelShadowColor;
     self.longestStreak.shadowColor = labelShadowColor;
 }
@@ -76,7 +77,7 @@
     self.occurences.textAlignment = NSTextAlignmentCenter;
     self.occurences.numberOfLines = 0;
     self.occurences.lineBreakMode = NSLineBreakByWordWrapping;
-    self.occurences.font = [UIFont fontWithName:@"GothamRounded-Bold" size:14.0];
+    self.occurences.font = [UIFont fontWithName:@"Nunito-Bold" size:16.0];
     self.occurences.textColor = [UIColor whiteColor];
     self.occurences.shadowOffset = self.shadowOffset;
     [self addSubview:self.occurences];
@@ -87,7 +88,7 @@
     self.longestStreak.textAlignment = NSTextAlignmentCenter;
     self.longestStreak.numberOfLines = 0;
     self.longestStreak.lineBreakMode = NSLineBreakByWordWrapping;
-    self.longestStreak.font = [UIFont fontWithName:@"GothamRounded-Bold" size:14.0];
+    self.longestStreak.font = [UIFont fontWithName:@"Nunito-Bold" size:14.0];
     self.longestStreak.textColor = [UIColor whiteColor];
     self.longestStreak.shadowOffset = self.shadowOffset;
     [self addSubview:self.longestStreak];

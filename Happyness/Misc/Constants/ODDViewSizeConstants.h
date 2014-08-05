@@ -9,7 +9,7 @@
 #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 #ifdef IS_IPHONE_5
-#define SCROLLVIEW_HEIGHT_RATIO     3.2/5
+#define SCROLLVIEW_HEIGHT_RATIO     3.3/5
 #else
 #define SCROLLVIEW_HEIGHT_RATIO     3.5/5
 #endif

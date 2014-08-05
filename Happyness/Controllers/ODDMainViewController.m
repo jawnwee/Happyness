@@ -6,9 +6,11 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "ODDMainViewController.h"
 #import "ODDBottomRootViewController.h"
 #import "ODDRootViewController.h"
+#import "ODDHappynessHeader.h"
 
 @interface ODDMainViewController ()
 
@@ -36,6 +38,9 @@
 {
     [super viewDidLoad];
     [self setupSubviews];
+
+    // Uncomment to track user data
+    // [self updateUserDataInParse];
 }
 
 - (void)setupSubviews {
@@ -53,15 +58,42 @@
     [self.bottomView updateView:[self.topView currentPage]];
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)updateUserDataInParse {
+    PFQuery *query = [PFQuery queryWithClassName:@"HappynessUsers"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSString *deviceID = [self currentDevice];
+        PFObject *currentUser;
+        for (PFObject *object in objects) {
+            if ([object[@"User"] isEqualToString:deviceID]) {
+                currentUser = object;
+            }
+        }
+        if (!currentUser) {
+            PFObject *newUser = [PFObject objectWithClassName:@"HappynessUsers"];
+            newUser[@"User"] = [self currentDevice];
+            [newUser saveInBackground];
+        } else {
+            NSDictionary *entries = [[ODDHappynessEntryStore sharedStore] happynessEntries];
+            for (NSString *key in [entries allKeys]) {
+                NSCharacterSet *notAllowedChars =
+                    [[NSCharacterSet characterSetWithCharactersInString:
+                    @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"] invertedSet];
+                NSString *resultString = [[key componentsSeparatedByCharactersInSet:notAllowedChars]
+                                          componentsJoinedByString:@""];
+                NSString *append = @"ODD";
+                NSString *resultKey = [NSString stringWithFormat:@"%@%@", append, resultString];
+                currentUser[resultKey] =
+                                ((ODDHappynessEntry *)[entries objectForKey:key]).happyness.rating;
+            }
+            [currentUser saveInBackground];
+        }
+    }];
 }
-*/
+
+- (NSString *)currentDevice {
+    NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    return uniqueIdentifier;
+}
 
 @end

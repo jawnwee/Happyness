@@ -15,6 +15,12 @@
 #import "ODDHappyness.h"
 #import "ODDDoubleArrayHolder.h"
 
+@protocol ODDGraphViewControllerDelegate
+
+- (void)graphViewChanged:(NSInteger)count;
+
+@end
+
 @interface ODDGraphViewController : UIViewController
 
 /*** "Public methods and variables ***/
@@ -23,6 +29,8 @@
 @property (nonatomic, strong) ODDColoredAxisView *sider;
 @property (nonatomic, strong) ODDColoredLinesView *backgroundLines;
 @property (nonatomic, strong) UIView *graph;
+@property (nonatomic, weak) id<ODDGraphViewControllerDelegate> delegate;
+
 
 - (void)setFrameSize:(CGSize)size;
 - (void)setFramePosition:(CGPoint)point;

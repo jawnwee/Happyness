@@ -88,7 +88,7 @@
 
 - (void)initializeLabels {
     self.notEnoughDataLabel.text = @"Not Enough Data :(";
-    [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:20]];
+    [self.notEnoughDataLabel setFont:[UIFont fontWithName:@"Nunito-Bold" size:20]];
     [self.notEnoughDataLabel sizeToFit];
     self.notEnoughDataLabel.center = self.view.center;
     self.notEnoughDataLabel.textColor = [UIColor blackColor];
@@ -149,6 +149,7 @@
     [self.view addSubview:self.graphAll];
     [self.view addSubview:self.graphShortTerm];
     [self.view addSubview:self.graphMedium];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -174,6 +175,8 @@
     [self.graphAll setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.delegate graphViewChanged:self.shortTermCount];
+    
 }
 
 - (IBAction)graphMedium:(id)sender {
@@ -183,6 +186,7 @@
     [self.graphAll setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
+    [self.delegate graphViewChanged:self.mediumCount];
 }
 
 - (IBAction)graphAll:(id)sender {
@@ -192,6 +196,7 @@
     [self.graphAll setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.graphMedium setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
     [self.graphShortTerm setTitleColor:self.colors[@"oddLook_textcolor"] forState:UIControlStateNormal];
+    [self.delegate graphViewChanged:self.entries.count];
 }
 
 #pragma mark - Touch Events

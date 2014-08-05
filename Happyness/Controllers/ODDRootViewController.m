@@ -70,7 +70,7 @@
         CGRect newViewFrame = newView.frame;
         newViewFrame.origin.x += self.scrollView.frame.size.width * i;
         newViewController.view.frame = newViewFrame;
-        [self.scrollView addSubview:((UIViewController *)self.viewControllers[i]).view];
+        [self.scrollView addSubview:newView];
     }
 }
 

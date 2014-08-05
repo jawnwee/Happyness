@@ -15,12 +15,13 @@
 #define HEADER_HEIGHT 45
 #define STATUS_BAR_HEIGHT 20 // Should always be 20 points
 
-@interface ODDManyGraphsViewController ()
+@interface ODDManyGraphsViewController () <ODDGraphViewControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIButton *up;
 @property (nonatomic, strong) IBOutlet UIButton *down;
 @property (nonatomic, strong) UILabel *titleOfGraph;
 @property (nonatomic, strong) NSArray *graphs;
+@property (nonatomic, strong) NSArray *currentEntries;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) NSDictionary* colors;
 @property NSInteger currentGraph;
@@ -61,17 +62,32 @@
     }
     return self;
 }
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.screenName = @"Analysis";
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+
+    ODDGraphViewController *currentGraphController = (ODDGraphViewController *)self.graphs[self.currentGraph];
+    [currentGraphController reloadDataStore];
+
+    NSInteger count = [[[ODDHappynessEntryStore sharedStore] sortedStore] count];
+    if (count < 7) {
+        [self graphViewChanged:count];
+    } else {
+        [self graphViewChanged:7];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Analysis"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-
-    ODDGraphViewController *currentGraphController = (ODDGraphViewController *)self.graphs[self.currentGraph];
-    [currentGraphController reloadDataStore];
-    //TODO: Uncomment once completed
-//    [self setupCardStatistics];
 }
 
 #pragma mark - Subviews Init/Layout
@@ -144,6 +160,7 @@
 - (void)setupGraphSizes {
     CGFloat heightPadding = HEADER_HEIGHT + STATUS_BAR_HEIGHT;
     for (ODDGraphViewController * graphViewController in self.graphs) {
+        graphViewController.delegate = self;
         CGSize currentGraphSize = graphViewController.view.frame.size;
         currentGraphSize.height = self.view.frame.size.height - heightPadding;
         [graphViewController setFrameSize:currentGraphSize];
@@ -189,6 +206,7 @@
               byDelta:(NSInteger)newGraphDelta {
     ODDGraphViewController *oldGraphController = (ODDGraphViewController *)self.graphs[oldGraph];
     ODDGraphViewController *newGraphController = (ODDGraphViewController *)self.graphs[newGraph];
+    [newGraphController graphShortTerm:nil];
     newGraphController.view.alpha = 0.0;
     [self layoutGraph:newGraphController atY:-newGraphDelta];
     UIView *oldGraphView = oldGraphController.view;
@@ -215,62 +233,42 @@
                      }];
 }
 
+#pragma mark - GraphViewControllerDelegate
+
+- (void)graphViewChanged:(NSInteger)count {
+    
+    NSArray *entries = [[ODDHappynessEntryStore sharedStore] sortedStore];
+    if (count > entries.count) {
+        self.currentEntries = entries;
+    } else {
+        self.currentEntries = [entries subarrayWithRange:NSMakeRange(entries.count - count, count)];
+    }
+    if (entries.count != 0) {
+        [self setupCardStatistics];
+    }
+}
 #pragma mark - Setup card statistics
 
-
-// TODO: Complete this method
-// If we want longest streak the current method doesn't work
 - (void)setupCardStatistics {
-    NSArray *entries = ((ODDGraphViewController *)self.graphs[0]).entries;
-    NSRange longestStreaks[5] = { NSMakeRange(0, 0),
-        NSMakeRange(0, 0),
-        NSMakeRange(0, 0),
-        NSMakeRange(0, 0),
-        NSMakeRange(0, 0) };
+    NSArray *entries = self.currentEntries;
     uint totalCounts[5] = { 0, 0, 0, 0, 0 };
-    NSUInteger lastRating = [((ODDHappynessEntry *)entries[0]).happyness.rating integerValue],
-    currentCount = 1,
-    index = 0;
+    NSUInteger index = 0;
     for (ODDHappynessEntry *entry in entries) {
-        NSUInteger rating = [entry.happyness.rating integerValue];
+        NSUInteger rating = [entry.happyness.value integerValue];
         totalCounts[rating - 1]  +=  1;
-        if (rating == lastRating) {
-            currentCount += 1;
-        } else {
-            if (currentCount >= longestStreaks[rating - 1].length) {
-                longestStreaks[rating - 1].location = index - currentCount;
-                longestStreaks[rating - 1].length = currentCount - 1;
-            }
-            currentCount = 1;
-        }
-        lastRating = [entry.happyness.rating integerValue];
         index++;
     }
-    
-    NSMutableArray *totalCountArray = [[NSMutableArray alloc] initWithCapacity:5],
-                *longestStreakArray = [[NSMutableArray alloc] initWithCapacity:5];
-    NSString *countString, *streakString, *firstDate, *lastDate;
-    ODDHappynessEntry *firstEntry, *lastEntry;
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"M/d"];
+    NSMutableArray *totalCountArray = [[NSMutableArray alloc] initWithCapacity:5];
+    NSString *countString;
     for (NSUInteger i = 0; i < 5; i++) {
-        countString = [NSString stringWithFormat:@"Total Count:\n%d", totalCounts[i]];
+        countString = [NSString stringWithFormat:@"%0.2f%%",
+                       100 * (totalCounts[i] / (double)[entries count])];
         totalCountArray[i] = countString;
-        firstEntry = (ODDHappynessEntry *)entries[longestStreaks[i].location];
-        lastEntry = (ODDHappynessEntry *)entries[longestStreaks[i].location +
-                                                 longestStreaks[i].length];
-        firstDate = [dateFormatter stringFromDate:firstEntry.date];
-        lastDate = [dateFormatter stringFromDate:lastEntry.date];
-        if (totalCounts[i] == 0) {
-            streakString = @"Longest Streak:\tNone";
-        } else {
-            streakString = [NSString stringWithFormat:@"Longest Streak:\n%@ - %@", firstDate, lastDate];
-        }
-        longestStreakArray[i] = streakString;
     }
     
     self.cards.cardOccurences = totalCountArray;
-    self.cards.longestStreak = longestStreakArray;
+
+    [self.cards reloadCollectionData];
 }
 
 @end

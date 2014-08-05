@@ -55,6 +55,8 @@
 
 #pragma mark - View Setup
 - (void)viewDidLoad {
+    [super viewDidLoad];
+    self.screenName = @"Calendar";
     self.view.frame = CGRectMake(0,
                                  0,
                                  self.view.frame.size.width,
@@ -71,12 +73,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    [self.currentCalendar reload];
+    [self.calendarCardController resortAndReload];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Calendar"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
-
-    [self.currentCalendar reload];
-    [self.calendarCardController resortAndReload];
 }
 
 
