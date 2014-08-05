@@ -79,7 +79,7 @@
     }
 
     // Testing purposes, 500 random data for previous days
-    for (int i = 1; i <= 100; i++) {
+    /* for (int i = 1; i <= 100; i++) {
         NSNumber *value; //= [NSNumber numberWithInt:arc4random_uniform(5) + 1];
         if (i <= 7) {
             value = [NSNumber numberWithInt:arc4random_uniform(3) + 3];
@@ -146,7 +146,7 @@
     // Root View Controller
     ODDMainViewController *mainvc = [[ODDMainViewController alloc] initWithScrollViewController:rvc bottomViewController:brvc];
 
-    ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
+    // ODDWelcomeScreenViewController *welcomeScreen = [[ODDWelcomeScreenViewController alloc] initWithMainController:mainvc];
 
     // Uncomment when iOS8 comes out
     /* if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
