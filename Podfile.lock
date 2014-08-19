@@ -1,57 +1,19 @@
 PODS:
-  - ChuzzleKit (1.0.4)
-  - GoogleAnalytics-iOS-SDK (3.0.3c)
   - JBChartView (2.5.5)
   - MagicalRecord (2.3.0-beta.3):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.3.0-beta.3)
   - ODDPolynomial (0.4.0)
-  - OMGHTTPURLRQ (1.1.4):
-    - ChuzzleKit
-    - OMGHTTPURLRQ/RQ
-    - OMGHTTPURLRQ/UserAgent
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/RQ (1.1.4):
-    - ChuzzleKit
-    - OMGHTTPURLRQ/UserAgent
-  - OMGHTTPURLRQ/UserAgent (1.1.4):
-    - ChuzzleKit
-    - OMGHTTPURLRQ/UserAgent
   - pop (1.0.6)
-  - PromiseKit (0.9.14.1):
-    - PromiseKit/defaults
-  - PromiseKit/base (0.9.14.1)
-  - PromiseKit/defaults (0.9.14.1):
-    - PromiseKit/Foundation
-    - PromiseKit/timing
-    - PromiseKit/UIAnimation
-    - PromiseKit/UIKit
-  - PromiseKit/Foundation (0.9.14.1):
-    - ChuzzleKit
-    - OMGHTTPURLRQ
-    - PromiseKit/base
-  - PromiseKit/private (0.9.14.1)
-  - PromiseKit/timing (0.9.14.1):
-    - PromiseKit/base
-  - PromiseKit/UIAnimation (0.9.14.1):
-    - PromiseKit/base
-    - PromiseKit/private
-  - PromiseKit/UIKit (0.9.14.1):
-    - PromiseKit/base
-    - PromiseKit/private
-  - SBJson4 (4.0.1)
   - SSFlatDatePicker (0.9.0)
   - TimesSquare (1.0.2)
   - XYPieChart (0.2)
 
 DEPENDENCIES:
-  - GoogleAnalytics-iOS-SDK (= 3.0.3c)
   - JBChartView (~> 2.5.5)
   - MagicalRecord (from `https://github.com/magicalpanda/MagicalRecord.git`)
   - ODDPolynomial (from `https://github.com/jjojohjohn/ODDPolynomial.git`)
   - pop (from `https://github.com/facebook/pop.git`)
-  - PromiseKit
-  - SBJson4 (~> 4.0.0)
   - SSFlatDatePicker (from `https://github.com/mattchiang777/FlatDatePicker.git`)
   - TimesSquare (from `https://github.com/jjojohjohn/objc-TimesSquare.git`)
   - XYPieChart (from `https://github.com/xyfeng/XYPieChart.git`)
@@ -71,15 +33,10 @@ EXTERNAL SOURCES:
     :git: https://github.com/xyfeng/XYPieChart.git
 
 SPEC CHECKSUMS:
-  ChuzzleKit: b47a96cb59dfb0b972cd539b8cc1e66c97b20f42
-  GoogleAnalytics-iOS-SDK: 4377a29aa3e039030df30fd5c6075baeed3c916c
   JBChartView: 666486d81dd16fa0cfac7bc32b4b70d6c52e7162
   MagicalRecord: 23dfe0350eab4767cc1ce7d247af4e4cd54ee72c
   ODDPolynomial: 1c6d0cf1a4e484f4cffca298bd8775b48108c5ab
-  OMGHTTPURLRQ: ca928b53ae60cb4cc078d8f7201f4f647f435351
   pop: 6df6021f2f4efd89ee1c8c49a753296859ad5ac6
-  PromiseKit: 01e7b585706a5c676c585cc40fa1abf8b336de92
-  SBJson4: 321a266881e0e1830c5d2cae0beedf14d97da08b
   SSFlatDatePicker: 367da658974bb13c2498ab7847750d6cdb2c17c7
   TimesSquare: 5d1a173a0e8e9889c64a8654fdf494c719b938f7
   XYPieChart: 17fa4ce063f09cf60716ff6974cfb5930bdc6afd

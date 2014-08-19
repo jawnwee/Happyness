@@ -17,13 +17,13 @@
 
 @interface ODDManyGraphsViewController () <ODDGraphViewControllerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIButton *up;
 @property (nonatomic, strong) IBOutlet UIButton *down;
-@property (nonatomic, strong) UILabel *titleOfGraph;
-@property (nonatomic, strong) NSArray *graphs;
+@property (nonatomic, strong) IBOutlet UIButton *up;
 @property (nonatomic, strong) NSArray *currentEntries;
-@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) NSArray *graphs;
 @property (nonatomic, strong) NSDictionary* colors;
+@property (nonatomic, strong) UILabel *titleOfGraph;
+@property (nonatomic, strong) UIView *headerView;
 @property NSInteger currentGraph;
 
 @end

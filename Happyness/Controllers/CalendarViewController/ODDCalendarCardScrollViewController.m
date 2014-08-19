@@ -15,10 +15,10 @@
 
 @interface ODDCalendarCardScrollViewController () <UIViewControllerTransitioningDelegate>
 
+@property (nonatomic, strong) NSDateFormatter *monthDateFormatter;
 @property (nonatomic, strong) NSMutableArray *entries;
 @property (nonatomic, strong) NSMutableArray *headers;
 @property (nonatomic, strong) NSMutableDictionary *data;
-@property (nonatomic, strong) NSDateFormatter *monthDateFormatter;
 @property (nonatomic, strong) ODDCalendarCardCollectionViewCell *selectedCell;
 
 @end

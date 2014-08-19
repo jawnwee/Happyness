@@ -19,13 +19,13 @@
 @interface ODDFeedbackViewController () <ODDSelectionCardScrollViewControllerDelegate,
                                          UIAlertViewDelegate, UIViewControllerTransitioningDelegate>
 
+
+@property (nonatomic, strong) NSDictionary *colorDictionary;
 @property (nonatomic, strong) NSMutableArray *slices;
 @property (nonatomic, strong) UILabel *feedbackLabel;
-@property (nonatomic, strong) NSDictionary *colorDictionary;
-@property (strong, nonatomic) UIView *noteContainerView;
-@property (strong, nonatomic) UIButton *clearAllButton;
 @property (strong, nonatomic) ODDNote *note;
-
+@property (strong, nonatomic) UIButton *clearAllButton;
+@property (strong, nonatomic) UIView *noteContainerView;
 @end
 
 @implementation ODDFeedbackViewController
@@ -203,7 +203,9 @@
 }
 
 - (void)setUpFeedbackView {
-    CGRect imageRect = CGRectMake(0, 0, self.view.frame.size.width / 1.7, self.view.frame.size.width / 1.7);
+    CGRect imageRect = CGRectMake(0, 0,
+                                  self.view.frame.size.width / 1.7,
+                                  self.view.frame.size.width / 1.7);
     UIImageView *centerImage = [[UIImageView alloc] initWithFrame:imageRect];
     [centerImage setImage:[UIImage imageNamed:@"feedbackCircle.png"]];
     CGPoint adjustedCenter = self.view.center;
@@ -235,7 +237,7 @@
     NSString *text;
 
     if (count == 0) {
-        text = @"Hi! How are you today? Select how you're feeling below and get Happy!";
+        text = @"Hi! Select how you're feeling below once per day and get happy!";
     } else if (count == 1) {
         text = @"Hey, welcome back! We hope you're getting happier!";
     } else {

@@ -26,17 +26,17 @@
                                                 ODDCalendarCardScrollViewControllerDelegate,
                                                 UIViewControllerTransitioningDelegate >
 
-@property (nonatomic, strong)  UIView *calendarHeader;
+//@property (nonatomic, weak) IBOutlet UILabel *year;
 @property (nonatomic, strong)  UILabel *month;
 @property (nonatomic, strong)  UILabel *monthYear;
-//@property (nonatomic, weak) IBOutlet UILabel *year;
-@property (nonatomic, strong) UIButton *increaseMonthButton;
-@property (nonatomic, strong) UIButton *decreaseMonthButton;
+@property (nonatomic, strong)  UIView *calendarHeader;
 @property (nonatomic, strong) NSDate *dayOneInCurrentMonth;
 @property (nonatomic, strong) NSDate *lastDayInCurrentMonth;
 @property (nonatomic, strong) NSDate *selectedDate;
 @property (nonatomic, strong) ODDCalendarCardScrollViewController *calendarCardController;
 @property (nonatomic, strong) ODDCalendarView *currentCalendar;
+@property (nonatomic, strong) UIButton *decreaseMonthButton;
+@property (nonatomic, strong) UIButton *increaseMonthButton;
 
 @end
 

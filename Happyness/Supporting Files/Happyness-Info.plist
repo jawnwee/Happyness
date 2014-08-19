@@ -27,7 +27,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Regular.ttf</string>
-		<string>Raleway-Regular.otf</string>
 		<string>Nunito-Bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>

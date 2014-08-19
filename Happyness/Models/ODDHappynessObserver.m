@@ -8,7 +8,6 @@
 
 #import <Parse/Parse.h>
 #import <SystemConfiguration/SystemConfiguration.h>
-#import "SBJson4.h"
 #import "ODDHappynessObserver.h"
 #import "ODDHappynessEntryStore.h"
 #import "ODDHappynessEntry.h"

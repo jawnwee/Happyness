@@ -18,9 +18,7 @@
 		C419C821195D89CD008AE325 /* GraphTabUnselected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C811195D89CD008AE325 /* GraphTabUnselected60@2x.png */; };
 		C419C822195D89CD008AE325 /* SettingsTabSelected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C812195D89CD008AE325 /* SettingsTabSelected60.png */; };
 		C419C823195D89CD008AE325 /* SettingsTabSelected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C813195D89CD008AE325 /* SettingsTabSelected60@2x.png */; };
-		C419C824195D89CD008AE325 /* SettingsTabUnselected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C814195D89CD008AE325 /* SettingsTabUnselected60.png */; };
 		C419C825195D89CD008AE325 /* SettingsTabUnselected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C815195D89CD008AE325 /* SettingsTabUnselected60@2x.png */; };
-		C419C826195D89CD008AE325 /* TodayTabSelected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C816195D89CD008AE325 /* TodayTabSelected60.png */; };
 		C419C827195D89CD008AE325 /* TodayTabSelected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C817195D89CD008AE325 /* TodayTabSelected60@2x.png */; };
 		C419C828195D89CD008AE325 /* TodayTabUnselected60.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C818195D89CD008AE325 /* TodayTabUnselected60.png */; };
 		C419C829195D89CD008AE325 /* TodayTabUnselected60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C419C819195D89CD008AE325 /* TodayTabUnselected60@2x.png */; };
@@ -59,7 +57,6 @@
 		D13F4C5C194F6A68003873B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5B194F6A68003873B0 /* Foundation.framework */; };
 		D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */; };
 		D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D13F4C5F194F6A68003873B0 /* UIKit.framework */; };
-		D13F4C66194F6A68003873B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C64194F6A68003873B0 /* InfoPlist.strings */; };
 		D13F4C68194F6A68003873B0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C67194F6A68003873B0 /* main.m */; };
 		D13F4C6C194F6A68003873B0 /* ODDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D13F4C6B194F6A68003873B0 /* ODDAppDelegate.m */; };
 		D13F4C6E194F6A68003873B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13F4C6D194F6A68003873B0 /* Images.xcassets */; };
@@ -130,7 +127,6 @@
 		EB7103F0198834AE00108813 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7103EF198834AE00108813 /* Social.framework */; };
 		EB7103F2198834BB00108813 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7103F1198834BB00108813 /* Accounts.framework */; };
 		EB7103F61988449900108813 /* feedbackQuotations.json in Resources */ = {isa = PBXBuildFile; fileRef = EB7103F51988449900108813 /* feedbackQuotations.json */; };
-		EB7103F8198861DB00108813 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7103DF1988331300108813 /* Parse.framework */; };
 		EB8031F9198D596F00703A1E /* quotationCards.json in Resources */ = {isa = PBXBuildFile; fileRef = EB8031F8198D596F00703A1E /* quotationCards.json */; };
 		EB8031FD198F436200703A1E /* ODDTutorialHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB8031FC198F436200703A1E /* ODDTutorialHeaderView.m */; };
 		EB8031FF198F78F800703A1E /* TouchButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB8031FE198F78F800703A1E /* TouchButton@2x.png */; };
@@ -139,7 +135,6 @@
 		EB835DBA19709228002C0A20 /* oddLook_calendar_card_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB835DB519709228002C0A20 /* oddLook_calendar_card_3@2x.png */; };
 		EB835DBB19709228002C0A20 /* oddLook_calendar_card_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB835DB619709228002C0A20 /* oddLook_calendar_card_4@2x.png */; };
 		EB835DBC19709228002C0A20 /* oddLook_calendar_card_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EB835DB719709228002C0A20 /* oddLook_calendar_card_5@2x.png */; };
-		EB835DC31970A220002C0A20 /* Raleway-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EB835DC01970A220002C0A20 /* Raleway-Regular.otf */; };
 		EB835DC61970B6DE002C0A20 /* ODDCalendarTabImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB835DC51970B6DE002C0A20 /* ODDCalendarTabImageView.m */; };
 		EB844E421974524F00D8C546 /* ODDSelectionCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EB844E411974524F00D8C546 /* ODDSelectionCardCollectionViewCell.m */; };
 		EB844E451974584200D8C546 /* ODDSelectionCardScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB844E441974584200D8C546 /* ODDSelectionCardScrollViewController.m */; };
@@ -153,9 +148,10 @@
 		EB94C41D196B5ED40090B466 /* ODDMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EB94C41C196B5ED40090B466 /* ODDMainViewController.m */; };
 		EB99473A195AA99C0095DA5B /* ODDCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = EB994739195AA99C0095DA5B /* ODDCalendarView.m */; };
 		EBACA5091969127C00DBB69A /* ODDOverallCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBACA5081969127C00DBB69A /* ODDOverallCalendarViewController.m */; };
-		EBC420401991859A00318187 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC4203F1991859A00318187 /* libGoogleAnalyticsServices.a */; };
 		EBC42042199185D900318187 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC42041199185D900318187 /* libPods.a */; };
-		EBC4204419918F3C00318187 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC4204319918F3C00318187 /* FacebookSDK.framework */; };
+		EBC420451992B6F200318187 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC4204319918F3C00318187 /* FacebookSDK.framework */; };
+		EBC420461992B75400318187 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7103DF1988331300108813 /* Parse.framework */; };
+		EBC420481992B99400318187 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC420471992B99400318187 /* libGoogleAnalyticsServices.a */; };
 		EBCFE226196E51A4003D97E7 /* ODDCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCFE225196E51A4003D97E7 /* ODDCardCollectionViewCell.m */; };
 		EBCFE229196E543E003D97E7 /* ODDCalendarCardScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCFE228196E543E003D97E7 /* ODDCalendarCardScrollViewController.m */; };
 		EBCFE22C196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EBCFE22B196E64E3003D97E7 /* ODDCalendarCardCollectionViewCell.m */; };
@@ -388,9 +384,19 @@
 		EB994739195AA99C0095DA5B /* ODDCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCalendarView.m; sourceTree = "<group>"; };
 		EBACA5071969127C00DBB69A /* ODDOverallCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDOverallCalendarViewController.h; sourceTree = "<group>"; };
 		EBACA5081969127C00DBB69A /* ODDOverallCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDOverallCalendarViewController.m; sourceTree = "<group>"; };
-		EBC4203F1991859A00318187 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		EBC42041199185D900318187 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		EBC4204319918F3C00318187 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		EBC420471992B99400318187 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		EBC4204A1992B9D100318187 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		EBC4204B1992B9D100318187 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		EBC4204C1992B9D100318187 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		EBC4204D1992B9D100318187 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		EBC4204E1992B9D100318187 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		EBC4204F1992B9D100318187 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		EBC420501992B9D100318187 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		EBC420511992B9D100318187 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		EBC420521992B9D100318187 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		EBC420531992B9D100318187 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		EBCFE224196E51A4003D97E7 /* ODDCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCardCollectionViewCell.h; sourceTree = "<group>"; };
 		EBCFE225196E51A4003D97E7 /* ODDCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDCardCollectionViewCell.m; sourceTree = "<group>"; };
 		EBCFE227196E543E003D97E7 /* ODDCalendarCardScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDCalendarCardScrollViewController.h; sourceTree = "<group>"; };
@@ -408,21 +414,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EBC420461992B75400318187 /* Parse.framework in Frameworks */,
+				EBC420451992B6F200318187 /* FacebookSDK.framework in Frameworks */,
 				EBC42042199185D900318187 /* libPods.a in Frameworks */,
-				EBC4204419918F3C00318187 /* FacebookSDK.framework in Frameworks */,
 				EB7103F2198834BB00108813 /* Accounts.framework in Frameworks */,
 				EB7103F0198834AE00108813 /* Social.framework in Frameworks */,
-				EBC420401991859A00318187 /* libGoogleAnalyticsServices.a in Frameworks */,
 				EB17CC7D197B863D0007C440 /* SystemConfiguration.framework in Frameworks */,
 				EB7103EC1988335200108813 /* Security.framework in Frameworks */,
 				EB7103EA1988334C00108813 /* QuartzCore.framework in Frameworks */,
 				EB7103E81988334600108813 /* MobileCoreServices.framework in Frameworks */,
 				EB7103E61988333E00108813 /* CoreLocation.framework in Frameworks */,
-				EB7103F8198861DB00108813 /* Parse.framework in Frameworks */,
 				EB7103E41988333500108813 /* CFNetwork.framework in Frameworks */,
 				EB7103E21988332B00108813 /* AudioToolbox.framework in Frameworks */,
 				EB17CC81197B8A630007C440 /* libsqlite3.dylib in Frameworks */,
 				EB17CC7F197B86430007C440 /* libz.dylib in Frameworks */,
+				EBC420481992B99400318187 /* libGoogleAnalyticsServices.a in Frameworks */,
 				D13F4C5E194F6A68003873B0 /* CoreGraphics.framework in Frameworks */,
 				EBD8A8271978E2A40079B641 /* Crashlytics.framework in Frameworks */,
 				D13F4C60194F6A68003873B0 /* UIKit.framework in Frameworks */,
@@ -583,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				D13F4C61194F6A68003873B0 /* Happyness */,
+				EBC420491992B9B200318187 /* Google Analytics */,
 				D13F4C7A194F6A69003873B0 /* HappynessTests */,
 				D13F4C5A194F6A68003873B0 /* Frameworks */,
 				D13F4C59194F6A68003873B0 /* Products */,
@@ -602,6 +609,7 @@
 		D13F4C5A194F6A68003873B0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EBC420471992B99400318187 /* libGoogleAnalyticsServices.a */,
 				EBC42041199185D900318187 /* libPods.a */,
 				EBC4204319918F3C00318187 /* FacebookSDK.framework */,
 				EB7103F1198834BB00108813 /* Accounts.framework */,
@@ -616,7 +624,6 @@
 				EB7103DF1988331300108813 /* Parse.framework */,
 				EB17CC7E197B86430007C440 /* libz.dylib */,
 				EB17CC7C197B863D0007C440 /* SystemConfiguration.framework */,
-				EBC4203F1991859A00318187 /* libGoogleAnalyticsServices.a */,
 				EBD8A8261978E2A40079B641 /* Crashlytics.framework */,
 				D13F4C5B194F6A68003873B0 /* Foundation.framework */,
 				D13F4C5D194F6A68003873B0 /* CoreGraphics.framework */,
@@ -918,6 +925,24 @@
 			path = FeedBackViews;
 			sourceTree = "<group>";
 		};
+		EBC420491992B9B200318187 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				EBC4204A1992B9D100318187 /* GAI.h */,
+				EBC4204B1992B9D100318187 /* GAIDictionaryBuilder.h */,
+				EBC4204C1992B9D100318187 /* GAIEcommerceFields.h */,
+				EBC4204D1992B9D100318187 /* GAIEcommerceProduct.h */,
+				EBC4204E1992B9D100318187 /* GAIEcommerceProductAction.h */,
+				EBC4204F1992B9D100318187 /* GAIEcommercePromotion.h */,
+				EBC420501992B9D100318187 /* GAIFields.h */,
+				EBC420511992B9D100318187 /* GAILogger.h */,
+				EBC420521992B9D100318187 /* GAITrackedViewController.h */,
+				EBC420531992B9D100318187 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
+			path = Happyness;
+			sourceTree = "<group>";
+		};
 		EBC8C0C2195C17A200CC1A1E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1074,10 +1099,6 @@
 				C419C83D195DA45D008AE325 /* Happyness_4.png in Resources */,
 				EB4258C9198184EA00FAD45B /* change_happyness@2x.png in Resources */,
 				EB7103F61988449900108813 /* feedbackQuotations.json in Resources */,
-				EB835DC31970A220002C0A20 /* Raleway-Regular.otf in Resources */,
-				D13F4C66194F6A68003873B0 /* InfoPlist.strings in Resources */,
-				C419C824195D89CD008AE325 /* SettingsTabUnselected60.png in Resources */,
-				C419C826195D89CD008AE325 /* TodayTabSelected60.png in Resources */,
 				C419C827195D89CD008AE325 /* TodayTabSelected60@2x.png in Resources */,
 				EB4258BF1980B90300FAD45B /* clear_note@2x.png in Resources */,
 				EB5854541983A62F00022465 /* welcome_page_3.png in Resources */,
@@ -1378,7 +1399,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.08",
@@ -1409,7 +1430,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Happyness/Supporting Files/Happyness-Prefix.pch";
 				INFOPLIST_FILE = "Happyness/Supporting Files/Happyness-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/GoogleAnalyticsServicesiOS_3.08",
