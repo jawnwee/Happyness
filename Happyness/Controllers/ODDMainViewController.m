@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 OddLook. All rights reserved.
 //
 
-// #import <Parse/Parse.h>
+#import <Parse/Parse.h>
 #import "ODDMainViewController.h"
 #import "ODDBottomRootViewController.h"
 #import "ODDRootViewController.h"
@@ -40,7 +40,7 @@
     [self setupSubviews];
 
     // Uncomment to track user data
-    // [self updateUserDataInParse];
+    [self updateUserDataInParse];
 }
 
 - (void)setupSubviews {
@@ -59,7 +59,7 @@
 }
 
 
-/* - (void)updateUserDataInParse {
+- (void)updateUserDataInParse {
     PFQuery *query = [PFQuery queryWithClassName:@"HappynessUsers"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         NSString *deviceID = [self currentDevice];
@@ -94,6 +94,6 @@
 - (NSString *)currentDevice {
     NSString *uniqueIdentifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     return uniqueIdentifier;
-} */
+}
 
 @end
